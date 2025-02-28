@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Parkinsans } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
   title: "Omakatse",
@@ -27,8 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} ${parkinsans.variable} antialiased`}
+        className={`${openSans.variable} ${parkinsans.variable} antialiased mt-20 px-20`}
       >
+        <NavBar />
         {children}
       </body>
     </html>
