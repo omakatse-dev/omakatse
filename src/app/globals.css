@@ -3,6 +3,27 @@
 @theme {
   --font-open-sans: 'Open Sans', sans-serif;
   --font-parkinsans: 'Parkinsans', sans-serif;
+
+  --color-yellow: #FFC400;
+  --color-blue: #40AED7;
+  --color-pink: #EE807F;
+  --color-orange: #FF6309;
+  --color-green: #61C9A8;
+
+  --color-yellow-pastel: #FFF6DC;
+  --color-blue-pastel: #E4F8FF;
+  --color-pink-pastel: #FFE9E9;
+  --color-orange-pastel: #FFDFCC;
+  --color-green-pastel: #D7FFF2;
+
+  --color-white: #FFFFFF;
+  --color-gray-50: #FDFAF4;
+  --color-gray-200: #E4DFD1;
+  --color-gray-300: #CEC9BC;
+  --color-gray-400: #B8A9A1;
+  --color-gray-500: #968A84;
+  --color-gray-800: #59504C;
+  --color-black: #2C2420;
 }
 
 h1 {

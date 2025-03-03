@@ -25,7 +25,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="flex justify-between bg-yellow-300 py-4 px-8 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
+    <div className="flex justify-between bg-yellow py-4 px-8 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
       <div>Logo</div>
       <div className="flex items-center gap-x-8">
         {links.map((link) => (
