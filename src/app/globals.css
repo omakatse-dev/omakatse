@@ -30,7 +30,7 @@ h1 {
   @apply font-parkinsans text-4xl;
 }
 :root {
-  font: 16px var(--font-open-sans);
+  font: 1rem var(--font-open-sans);
 }
 
 body {
