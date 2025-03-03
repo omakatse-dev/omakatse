@@ -1,5 +1,11 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import {
+  ShoppingCartIcon,
+  MagnifyingGlassIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
 export default function NavBar() {
   const links = [
@@ -25,8 +31,8 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="flex justify-between bg-yellow py-4 px-8 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
-      <div>Logo</div>
+    <div className="flex justify-between bg-yellow py-3 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
+      <Image src="/assets/omakatsehorizontalblack.svg" alt="Logo" width={120} height={120} />
       <div className="flex items-center gap-x-8">
         {links.map((link) => (
           <Link href={link.url} key={link.name}>
@@ -34,9 +40,15 @@ export default function NavBar() {
           </Link>
         ))}
         <button>Build your box now</button>
-        <button>Search</button>
-        <button>Profile</button>
-        <button>Cart</button>
+        <button>
+          <MagnifyingGlassIcon className="h-4 w-4 stroke-black stroke-[2]" />
+        </button>
+        <button>
+          <UserIcon className="h-4 w-4 stroke-black stroke-[2]" />
+        </button>
+        <button>
+          <ShoppingCartIcon className="h-4 w-4 stroke-black stroke-[2]" />
+        </button>
       </div>
     </div>
   );
