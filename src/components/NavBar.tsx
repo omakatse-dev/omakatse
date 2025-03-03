@@ -31,7 +31,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="flex justify-between bg-yellow py-3 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
+    <div className="flex justify-between bg-yellow py-4 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
 
     <Link href="/">
       <Image
@@ -43,26 +43,26 @@ export default function NavBar() {
       />
     </Link>
 
-      <div className="flex items-center gap-x-8 text-xs font-open-sans font-semibold">
+      <div className="flex items-center gap-x-10 font-open-sans font-semibold">
         {links.map((link) => (
           <Link href={link.url} key={link.name}>
             {link.name}
           </Link>
         ))}
 
-        <button className="bg-white rounded-full h-8 font-open-sans font-semibold text-[10px] flex items-center justify-center px-8 outline-1 outline-black">
+        <button className="bg-white rounded-full h-8 font-open-sans font-semibold flex items-center justify-center px-8 py-4 outline-1 outline-black">
           Build your box now
         </button>
 
-        <div className="flex gap-4">
+        <div className="flex gap-5">
           <button>
-            <MagnifyingGlassIcon className="h-4 w-4 stroke-black stroke-[2]" />
+            <MagnifyingGlassIcon className="h-6 w-6 stroke-black stroke-[2]" />
           </button>
           <button>
-            <UserIcon className="h-4 w-4 stroke-black stroke-[2]" />
+            <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
           </button>
           <button>
-            <ShoppingCartIcon className="h-4 w-4 stroke-black stroke-[2]" />
+            <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
           </button>
         </div>
 
