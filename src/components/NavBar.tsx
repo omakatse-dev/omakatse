@@ -37,8 +37,8 @@ export default function NavBar() {
       <Image
         src="/assets/omakatsehorizontalblack.svg"
         alt="Logo"
-        width={120}
-        height={120}
+        width={192}
+        height={52}
         className="cursor-pointer"
       />
     </Link>
@@ -50,7 +50,7 @@ export default function NavBar() {
           </Link>
         ))}
 
-        <button className="bg-white rounded-full h-8 font-open-sans font-semibold flex items-center justify-center px-8 py-4 outline-1 outline-black">
+        <button className="bg-white rounded-full font-open-sans font-semibold flex items-center justify-center px-8 py-4 outline-1 outline-black">
           Build your box now
         </button>
 

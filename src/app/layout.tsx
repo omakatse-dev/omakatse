@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} ${parkinsans.variable} antialiased mt-20 px-20`}
+        className={`${openSans.variable} ${parkinsans.variable} antialiased mt-36 px-20`}
       >
         <NavBar />
         {children}
