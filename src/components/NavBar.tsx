@@ -33,7 +33,15 @@ export default function NavBar() {
   return (
     <div className="flex justify-between bg-yellow py-3 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
 
-      <Image src="/assets/omakatsehorizontalblack.svg" alt="Logo" width={120} height={120} />
+    <Link href="/">
+      <Image
+        src="/assets/omakatsehorizontalblack.svg"
+        alt="Logo"
+        width={120}
+        height={120}
+        className="cursor-pointer"
+      />
+    </Link>
 
       <div className="flex items-center gap-x-8 text-xs font-open-sans font-semibold">
         {links.map((link) => (
