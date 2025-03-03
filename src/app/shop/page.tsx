@@ -1,7 +1,19 @@
-import React from 'react'
+import { getStoreFront } from "../utils/APIs";
 
-export default function page() {
+import React from "react";
+import { ProductInterface } from "../utils/Interfaces";
+
+export default async function Page() {
+  const items = await getStoreFront();
+  console.log(items);
   return (
-    <div>page</div>
-  )
+    <div>
+      <h1>Products</h1>
+      <ul>
+        {items.map((item: ProductInterface) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
