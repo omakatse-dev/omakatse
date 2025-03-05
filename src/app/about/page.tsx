@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../../components/common/Button'
+import Link from 'next/link'
 
 export default function page() {
   return (
@@ -73,9 +74,11 @@ export default function page() {
       <div className="bg-gray-50 py-20 px-16">
         <div className="bg-gray-300 rounded-4xl py-28 px-44 flex flex-col justify-center gap-6">
           <h3 className="text-gray-800 text-center"> Join our team </h3>
-          <p className="text-black text-center bodyLG mb-8"> We do the best for cats, cat parents and our planet. No egos. No shortcuts. No compromises. </p>
+          <p className="text-black text-center bodyLG mb-4"> We do the best for cats, cat parents and our planet. No egos. No shortcuts. No compromises. </p>
           <div className="flex justify-center">
-          <Button variant="primary" buttonContent="Contact Us"/>
+            <Link href="/contact">
+            <Button variant="primary" buttonContent="Contact Us"/>
+            </Link>
           </div>
         </div>
       </div>
