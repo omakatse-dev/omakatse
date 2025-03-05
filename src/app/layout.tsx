@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans, Parkinsans } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Omakatse",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -26,12 +26,50 @@
   --color-black: #2C2420;
 }
 
-h1 {
-  @apply font-parkinsans text-4xl;
-}
 :root {
   font: 1rem var(--font-open-sans);
 }
 
+h1 {
+  @apply font-parkinsans text-4xl sm:text-7xl font-bold leading-[1.1];
+}
+
+h2 {
+  @apply font-parkinsans text-[32] sm:text-5xl font-bold leading-[1.2];
+}
+
+h3 {
+  @apply font-parkinsans text-[28] sm:text-[32] font-bold leading-[1.2];
+}
+
+h4 {
+  @apply font-parkinsans text-[xl] sm:text-2xl font-bold leading-[1.4];
+}
+
+.bodyXL {
+  @apply text-lg sm:text-xl
+}
+
+.bodyLG {
+  @apply text-base sm:text-lg
+}
+
+.bodyMD {
+  @apply text-sm sm:text-base
+}
+
+.bodySM {
+  @apply text-xs sm:text-sm
+}
+
+.bodyXS {
+  @apply text-[10] sm:text-xs
+}
+
+.bodyButton {
+  @apply text-sm sm:text-base font-semibold
+}
+
 body {
+
 }
