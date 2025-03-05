@@ -95,9 +95,9 @@ export default function Footer() {
         <div className="flex flex-row">
             <div className="w-1/3">
                 <p className="bodyLG text-gray-500 mb-4"> Shop </p>
-                <div className="bodySM text-white flex flex-col text-left gap-6">
+                <div className="bodySM text-white flex flex-col text-left">
                 {shoplinks.map((link) => (
-                    <Link href={link.url} key={link.name}>
+                    <Link href={link.url} key={link.name} className="py-2">
                         {link.name}
                     </Link>
                 ))}
@@ -105,16 +105,16 @@ export default function Footer() {
             </div>
             <div className="w-1/3">
                 <p className="bodyLG text-gray-500 mb-4"> Support </p>
-                <div className="bodySM text-white flex flex-col text-left gap-6">
+                <div className="bodySM text-white flex flex-col text-left">
                 {supportlinks.map((link) => (
-                    <Link href={link.url} key={link.name}>
+                    <Link href={link.url} key={link.name} className="py-2">
                         {link.name}
                     </Link>
                 ))}
                 </div>
             </div>
             <div className="text-white w-1/3">
-                <p className="bodyMD mb-4"> Subscribe </p>
+                <p className="bodyMD mb-4 font-semibold"> Subscribe </p>
                 <p className="bodyMD mb-6"> Join our newsletter to stay up to date on features and releases.</p>
                 <div className="flex flex-row mb-4">
                     <input 
@@ -130,7 +130,7 @@ export default function Footer() {
             </div>
         </div>
 
-        <div className="border-t border-white flex flex-row justify-center text-white gap-6 pt-8">
+        <div className="border-t border-white flex flex-row justify-center bodySM text-white gap-6 pt-8">
             <p>© 2025 Omaktse. All rights reserved.</p>
             <p>Privacy Policy</p>
             <p>Terms of Service</p>
