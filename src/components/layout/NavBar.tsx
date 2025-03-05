@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import Button from "../common/Button";
 import {
   ShoppingCartIcon,
   MagnifyingGlassIcon,
@@ -50,9 +51,7 @@ export default function NavBar() {
           </Link>
         ))}
 
-        <button className="bg-white rounded-full font-open-sans font-semibold flex items-center justify-center px-8 py-4 outline-1 outline-black">
-          Build your box now
-        </button>
+        <Button variant="secondary" buttonContent="Build your box now"></Button>
 
         <div className="flex gap-5">
           <button>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import FacebookIcon from "../../icons/Facebook.svg"
 import InstagramIcon from "../../icons/Instagram.svg"
 import XIcon from "../../icons/X.svg"
+import Button from "../common/Button"
 import {
 
 } from "@heroicons/react/24/outline";
@@ -122,9 +123,7 @@ export default function Footer() {
                     placeholder="Enter your email" 
                     className="border-b mr-4 focus:outline-none w-full"
                     />
-                    <button className="bg-white text-black rounded-full bodyButton items-center justify-center py-4 px-10 outline-1 outline-black">
-                    Subscribe
-                    </button>
+                    <Button variant="primary" buttonContent="Subscribe"></Button>
                 </div>
                 <p className="bodyXS"> By subscribing you agree to with our Privacy Policy and provide consent to receive updates from our company.</p>
             </div>

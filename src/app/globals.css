@@ -47,27 +47,27 @@ h4 {
 }
 
 .bodyXL {
-  @apply text-lg sm:text-xl
+  @apply text-lg sm:text-xl leading-[1.5]
 }
 
 .bodyLG {
-  @apply text-base sm:text-lg
+  @apply text-base sm:text-lg leading-[1.5]
 }
 
 .bodyMD {
-  @apply text-sm sm:text-base
+  @apply text-sm sm:text-base leading-[1.5]
 }
 
 .bodySM {
-  @apply text-xs sm:text-sm
+  @apply text-xs sm:text-sm leading-[1.5]
 }
 
 .bodyXS {
-  @apply text-[10] sm:text-xs
+  @apply text-[10] sm:text-xs leading-[1.5]
 }
 
 .bodyButton {
-  @apply text-sm sm:text-base font-semibold
+  @apply text-sm sm:text-base font-semibold leading-[1.5]
 }
 
 body {
