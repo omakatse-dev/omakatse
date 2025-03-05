@@ -29,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} ${parkinsans.variable} antialiased mt-36 px-20`}
+        className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden`}
       >
         <NavBar />
+        <div className="mt-32">
         {children}
+        </div>
         <Footer />
       </body>
     </html>
