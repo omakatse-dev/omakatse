@@ -45,3 +45,44 @@ export const getProductsByCollection = async (collectionID: string) => {
   const { data } = await storefrontClient.request(productQuery);
   return data.collection.products;
 }
+export const getSellingPlans = async () => {
+
+  const query = `{
+    collection(id: "gid://shopify/Collection/441616957699") {
+      title
+      products(first: 100) {
+        edges {
+          node {
+            id
+            title
+            sellingPlanGroups(first: 10) {
+              edges {
+                node {
+                  id
+                  name
+                  sellingPlans(first: 10) {
+                    edges {
+                      node {
+                        id
+                        name
+                        description
+                        billingPolicy {
+                          ... on SellingPlanRecurringBillingPolicy {
+                            interval
+                            intervalCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }`
+  const { data } = await storefrontClient.request(query);
+  return data
+}
