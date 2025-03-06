@@ -86,3 +86,19 @@ export const getSellingPlans = async () => {
   const { data } = await storefrontClient.request(query);
   return data
 }
+
+
+const _ =` {
+  products(first: 3) {
+    edges {
+      node {
+        id
+        title
+        description
+        metafield(namespace:"custom", key:"details"){
+          value
+        }
+      }
+    }
+  }
+}`
