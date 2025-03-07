@@ -2,9 +2,11 @@ import React from "react";
 
 export default function CardButton({
   children,
+  className,
   active,
 }: {
   children: React.ReactNode;
+  className?: string;
   active?: boolean;
 }) {
   return (
@@ -18,7 +20,7 @@ export default function CardButton({
             }
           : {}
       }
-      className={`px-5 border bg-white rounded-2xl aspect-square`}
+      className={`px-5 py-8 border-primary bg-white rounded-2xl aspect-square ${className}`}
     >
       {children}
     </button>

@@ -32,7 +32,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="flex justify-between bg-yellow py-4 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2">
+    <div className="flex justify-between bg-yellow py-4 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
       <Link href="/">
         <Image
           src="/assets/omakatsehorizontalblack.svg"
@@ -50,7 +50,7 @@ export default function NavBar() {
           </Link>
         ))}
 
-        <Button variant="secondary">Build your box now</Button>
+        <Button variant="primary">Build your box now</Button>
 
         <div className="flex gap-5">
           <button>
