@@ -2,7 +2,9 @@ export default function Home() {
   return (
     <div className="">
       <h1>home page</h1>
-      <b>this is the home page</b>
+      <h2>home page</h2>
+      <h3>home page</h3>
+      <h4>home page</h4>
     </div>
   );
 }
