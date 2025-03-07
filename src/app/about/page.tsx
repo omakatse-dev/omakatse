@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function page() {
   return (
-    <div className="w-full">
+    <div className="w-full mt-32">
       <div className="py-4 px-12">
         <div className="bg-yellow-pastel rounded-3xl w-full py-32 pl-20 pr-160">
           <div className="">
@@ -12,10 +12,7 @@ export default function page() {
             <h1 className="mb-10">
               Let&apos;s explore the real flavors of Japan together.
             </h1>
-            <Button
-              variant="primary"
-              buttonContent="Build your box now"
-            ></Button>
+            <Button>Build your box now</Button>
           </div>
         </div>
       </div>
@@ -25,19 +22,19 @@ export default function page() {
           <h4 className="text-yellow"> Our Founder </h4>
           <h3 className="text-black">
             {" "}
-            Omakatse&apos;s founder, Tee, is a second generation immigrant that grew
-            up in Canada.
+            Omakatse&apos;s founder, Tee, is a second generation immigrant that
+            grew up in Canada.
           </h3>
           <p className="bodyMD">
-            While growing up with her family&apos;s restaurant, an abandoned black
-            cat started visiting them daily. As the family was leaving on the
-            last day of the restaurant, the same black cat chased them down the
-            street. Seeing this, the family took her in, joining the family dog,
-            Casper, and that began a journey into cat rescuing for Tee that is
-            still going on 20 years later today. The black cat had four
+            While growing up with her family&apos;s restaurant, an abandoned
+            black cat started visiting them daily. As the family was leaving on
+            the last day of the restaurant, the same black cat chased them down
+            the street. Seeing this, the family took her in, joining the family
+            dog, Casper, and that began a journey into cat rescuing for Tee that
+            is still going on 20 years later today. The black cat had four
             children, two of which are still alive and well back in Canada at
-            the ripe age of 20. They were later joined by the family&apos;s second
-            dog, Oscar.
+            the ripe age of 20. They were later joined by the family&apos;s
+            second dog, Oscar.
           </p>
         </div>
         <div className="bg-gray-700 rounded-4xl w-720 h-120">image</div>
@@ -119,7 +116,7 @@ export default function page() {
             platforms, allowing you to learn what they think of our offerings
             directly.
           </p>
-          <Button variant="primary" buttonContent="Build your box now" />
+          <Button variant="primary">Build your box now</Button>
         </div>
         <div className="bg-gray-700 rounded-4xl w-720 h-120">image</div>
       </div>
@@ -134,7 +131,7 @@ export default function page() {
           </p>
           <div className="flex justify-center">
             <Link href="/contact">
-              <Button variant="primary" buttonContent="Contact Us" />
+              <Button variant="primary">Contact us now</Button>
             </Link>
           </div>
         </div>

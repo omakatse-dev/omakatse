@@ -70,6 +70,13 @@ h4 {
   @apply text-sm sm:text-base font-semibold leading-[1.5]
 }
 
+.border {
+  @apply border border-gray-200
+}
+.border-secondary{
+  @apply border border-gray-400
+}
+
 body {
 
 }

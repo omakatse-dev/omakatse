@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden`}
       >
         <NavBar />
-        <div className="flex justify-center mt-32">
+        <div className="flex justify-center">
         {children}
         </div>
         <Footer />
