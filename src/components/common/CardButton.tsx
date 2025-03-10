@@ -4,13 +4,20 @@ export default function CardButton({
   children,
   className,
   active,
+  onClick,
+  disabled = false,
 }: {
   children: React.ReactNode;
   className?: string;
   active?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
 }) {
   return (
     <button
+      onClick={onClick}
+      type="button"
+      disabled={disabled}
       style={
         active
           ? {
@@ -20,7 +27,9 @@ export default function CardButton({
             }
           : {}
       }
-      className={`px-5 py-8 border-primary bg-white rounded-2xl aspect-square ${className}`}
+      className={`px-5 py-8 border-primary rounded-2xl aspect-square ${className} ${
+        disabled ? "bg-gray-200" : "bg-white cursor-pointer"
+      }`}
     >
       {children}
     </button>

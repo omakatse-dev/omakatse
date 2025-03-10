@@ -16,6 +16,7 @@ export default function PillButton({
   return (
     <button
       onClick={onClick}
+      type="button"
       className={`px-10 py-3 rounded-full cursor-pointer ${
         error ? "border-red border" : "border-primary"
       } ${active && "bg-blue-light"} ${className}`}

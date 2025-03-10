@@ -5,45 +5,42 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-
-const people = [
-  { id: 1, name: "None (No treats or snacks)" },
-  { id: 2, name: "A few (less than daily)" },
-  { id: 3, name: "Sometimes (1-3 daily)" },
-  { id: 4, name: "Often (4+ daily)" },
-];
 
 function Selector({
+  value,
+  onChange,
   placeholder,
   className,
+  options,
 }: {
+  value: { id: number; name: string } | null;
+  onChange: (option: { id: number; name: string }) => void;
   placeholder: string;
   className?: string;
+  options: { id: number; name: string }[];
 }) {
-  const [selectedPerson, setSelectedPerson] = useState<{
-    id: number;
-    name: string;
-  } | null>(null);
-
   return (
     <div className={className}>
-      <Listbox value={selectedPerson} onChange={setSelectedPerson}>
-        <ListboxButton className="border-primary rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center text-gray-500">
-          {selectedPerson ? selectedPerson.name : placeholder}
+      <Listbox value={value} onChange={onChange}>
+        <ListboxButton
+          className={`border-primary rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center ${
+            value ? "text-black" : "text-gray-500"
+          }`}
+        >
+          {value ? value.name : placeholder}
           <ChevronDownIcon className="w-6 text-black" />
         </ListboxButton>
         <ListboxOptions
-          anchor="bottom"
-          className="rounded-2xl border-primary bg-white mt-2 w-[var(--button-width)]"
+          className="rounded-2xl border-primary bg-white z-20 w-[var(--button-width)]"
+          anchor={{ to: "bottom start", gap: "8px" }}
         >
-          {people.map((person) => (
+          {options.map((option) => (
             <ListboxOption
-              key={person.id}
-              value={person}
-              className="data-[focus]:bg-gray-200 p-5 cursor-pointer"
+              key={option.id}
+              value={option}
+              className="data-[focus]:bg-gray-200 data-[focus]:rounded-2xl p-5 cursor-pointer"
             >
-              {person.name}
+              {option.name}
             </ListboxOption>
           ))}
         </ListboxOptions>

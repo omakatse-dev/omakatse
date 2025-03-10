@@ -1,10 +1,17 @@
 import React from "react";
 import Card from "../common/Card";
-import Selector from "../common/Selector";
+// import Selector from "../common/Selector";
 import Textfield from "../common/Textfield";
 import TreatPreferenceSelector from "./TreatPreferenceSelector";
 
 export default function TreatPreferenceCard() {
+  // const options = [
+  //   { id: 1, name: "None (No treats or snacks)" },
+  //   { id: 2, name: "A few (less than daily)" },
+  //   { id: 3, name: "Sometimes (1-3 daily)" },
+  //   { id: 4, name: "Often (4+ daily)" },
+  // ];
+
   return (
     <Card>
       <div className="flex flex-col">
@@ -14,7 +21,11 @@ export default function TreatPreferenceCard() {
           <div className="bodyMD mt-8 text-gray-800">
             How often does Bella get treats?
           </div>
-          <Selector placeholder="Treats frequency" className="w-full mt-2" />
+          {/* <Selector
+            options={options}
+            placeholder="Treats frequency"
+            className="w-full mt-2"
+          /> */}
         </div>
         <TreatPreferenceSelector />
         <div className="bodyMD mt-8 text-gray-800">
