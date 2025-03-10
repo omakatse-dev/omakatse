@@ -16,6 +16,10 @@
   --color-orange-pastel: #FFDFCC;
   --color-green-pastel: #D7FFF2;
 
+  --color-blue-light: #A7E0F5;
+  --color-yellow-light: #FFEFB6;
+  --color-red: #ED0131;
+
   --color-white: #FFFFFF;
   --color-gray-50: #FDFAF4;
   --color-gray-200: #E4DFD1;
@@ -63,12 +67,34 @@ h4 {
 }
 
 .bodyXS {
-  @apply text-[10] sm:text-xs leading-[1.5]
+  @apply text-[0.625rem] sm:text-xs leading-[1.5]
 }
 
 .bodyButton {
   @apply text-sm sm:text-base font-semibold leading-[1.5]
 }
+
+.border-primary {
+  @apply border border-gray-200
+}
+.border-secondary{
+  @apply border border-gray-400
+}
+
+/* styles.css */
+.yellow-shadow {
+  @apply drop-shadow-[5px_5px_0px_rgba(255,196,0,1)];
+}
+.blue-shadow {
+  @apply drop-shadow-[5px_5px_0px_rgba(64,174,215,1)];
+}
+.green-shadow {
+  @apply drop-shadow-[5px_5px_0px_rgba(97,201,168,1)];
+}
+.pink-shadow {
+  @apply drop-shadow-[5px_5px_0px_rgba(238,128,127,1)];
+}
+
 
 body {
 
