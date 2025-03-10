@@ -29,9 +29,9 @@ function Selector({
   return (
     <div className={className}>
       <Listbox value={selectedPerson} onChange={setSelectedPerson}>
-        <ListboxButton className="border-primary rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center">
+        <ListboxButton className="border-primary rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center text-gray-500">
           {selectedPerson ? selectedPerson.name : placeholder}
-          <ChevronDownIcon className="w-6" />
+          <ChevronDownIcon className="w-6 text-black" />
         </ListboxButton>
         <ListboxOptions
           anchor="bottom"
