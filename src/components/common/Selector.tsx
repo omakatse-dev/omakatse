@@ -13,11 +13,11 @@ function Selector({
   className,
   options,
 }: {
-  value: { id: number; name: string } | null;
-  onChange: (option: { id: number; name: string }) => void;
+  value: { id: number; name: string; frequency?: string } | null;
+  onChange: (option: { id: number; name: string; frequency?: string }) => void;
   placeholder: string;
   className?: string;
-  options: { id: number; name: string }[];
+  options: { id: number; name: string; frequency?: string }[];
 }) {
   return (
     <div className={className}>

@@ -1,8 +1,10 @@
 import { Checkbox } from "@headlessui/react";
 
-export default function OMCheckbox({ className }: { className?: string }) {
+export default function OMCheckbox({ checked, onChange, className }: { checked: boolean, onChange: () => void, className?: string }) {
   return (
     <Checkbox
+      checked={checked}
+      onChange={onChange}
       className={`group block size-4 rounded border bg-white data-[checked]:bg-black ${className}`}
     >
       {/* Checkmark icon */}

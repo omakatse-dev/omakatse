@@ -1,7 +1,7 @@
 import React from "react";
 import OMCheckbox from "../common/OMCheckbox";
 
-export default function TreatPreferenceSelector() {
+export default function TreatPreferenceSelector({ preferences, onChange }: { preferences: string[], onChange: (preferences: string[]) => void }) {
   const PREFERENCES = [
     "Dry treats",
     "Crunchy treats",
@@ -17,7 +17,7 @@ export default function TreatPreferenceSelector() {
       <div className="flex flex-col gap-2 mt-2">
         {PREFERENCES.map((preference) => (
           <div key={preference} className="flex items-center gap-2">
-            <OMCheckbox />
+            <OMCheckbox checked={preferences.includes(preference)} onChange={() => onChange(preferences.includes(preference) ? preferences.filter(p => p !== preference) : [...preferences, preference])} />
             {preference}
           </div>
         ))}

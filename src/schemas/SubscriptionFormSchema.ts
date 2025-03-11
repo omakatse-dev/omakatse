@@ -3,6 +3,7 @@ import {z} from "zod";
 const petTreatFrequencySchema = z.object({
   frequency: z.enum(["none", "a few", "sometimes", "often"]),
   preferences: z.array(z.string()).default([]),
+  comments: z.string().optional(),
 })
 
 const petPreferenceSchema = z.object({
