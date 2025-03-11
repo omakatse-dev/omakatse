@@ -12,7 +12,7 @@ export default function NavBar() {
   const links = [
     {
       name: "Subscription",
-      url: "/subscribe",
+      url: "/subscribe/step-1",
     },
     {
       name: "Shop",

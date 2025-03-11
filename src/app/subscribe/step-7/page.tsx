@@ -1,14 +1,27 @@
 "use client";
 
 import Button from "@/components/common/Button";
-import Card from "@/components/common/Card";
-import Selector from "@/components/common/Selector";
 import ProgressBar from "@/components/subscription/ProgressBar";
+import TreatPreferenceCard from "@/components/subscription/TreatPreferenceCard";
+import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
+import { z } from "zod";
+
+const treatPreferenceSchema = subscriptionFormSchema.pick({
+  catsDetails: true,
+  dogsDetails: true,
+});
+
+export type TreatPreferenceSchema = z.infer<typeof treatPreferenceSchema>;
 
 export default function SubscriptionStepSevenPage() {
   const router = useRouter();
+  const cats = useSubscriptionFormStore(state => state.catsDetails) || [];
+  const dogs = useSubscriptionFormStore(state => state.dogsDetails) || [];
+
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={7} totalSteps={9} />
@@ -18,24 +31,24 @@ export default function SubscriptionStepSevenPage() {
           Let us know anything we need to pay special attention to!
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-8 w-full max-w-3xl">
-        <Card>
-          <div className="flex flex-col">
-            <div className="w-8 h-8 rounded-full bg-amber-300 mb-2 self-center" />
-            <h4 className="self-center">Bella</h4>
-            <div>
-              <div className="bodyMD mt-8 text-gray-800">
-                How often does Bella get treats?
-              </div>
-              <Selector placeholder="Treats frequency" className="w-full mt-2" />
-            </div>
-          </div>
-        </Card>
-        <Card variant="blue">Dog 1</Card>
-        <Card variant="green">Dog 1</Card>
-        <Card variant="pink">Dog 1</Card>
+      <div className="grid grid-cols-2 gap-8 w-full max-w-3xl mx-auto">
+        {cats.map((cat, idx) => (
+          <TreatPreferenceCard
+            key={cat.name}
+            petType="catsDetails"
+            petIndex={idx}
+            name={cat.name}
+          />
+        ))}
+        {dogs.map((dog, idx) => (
+          <TreatPreferenceCard
+            key={dog.name}
+            petType="dogsDetails"
+            petIndex={idx}
+            name={dog.name}
+          />
+        ))}
       </div>
-
       <div className="flex gap-5">
         <Button
           onClick={() => router.push("/subscribe/step-6")}

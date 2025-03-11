@@ -5,6 +5,7 @@ interface ButtonProps {
   className?: string;
   variant?: "primary" | "secondary";
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
 export default function Button({
@@ -12,10 +13,12 @@ export default function Button({
   variant = "primary",
   className,
   onClick,
+  type = "button",
 }: ButtonProps) {
   return (
     <div>
       <button
+        type={type}
         onClick={onClick}
         className={`flex justify-center align-middle py-2.5 sm:py-4 px-10 outline-1 bodyButton rounded-full text-black outline-black transition-all cursor-pointer
                 ${
