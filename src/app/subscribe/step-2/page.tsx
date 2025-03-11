@@ -29,17 +29,9 @@ export default function SubscriptionStepTwoPage() {
     formState: { errors },
   } = useForm<PetCountSchema>({
     resolver: zodResolver(petCountSchema),
-    defaultValues: {
-      dogCount: 0,
-      catCount: 0,
-    },
   });
 
-  const setData = useSubscriptionFormStore((state) => state.setData);
-
-  const onSubmit = (data: PetCountSchema) => {
-    setData(data);
-    console.log("here", data);
+  const onSubmit = () => {
     router.push("/subscribe/step-3");
   };
 

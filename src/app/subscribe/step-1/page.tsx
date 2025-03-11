@@ -34,6 +34,7 @@ export default function SubscriptionStepOnePage() {
   const setData = useSubscriptionFormStore((state) => state.setData);
 
   const onSubmit = (data: PetTypeSchema) => {
+    console.log('step 1 data', data)
     setData(data);
     router.push("/subscribe/step-2");
   };
