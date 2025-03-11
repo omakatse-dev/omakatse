@@ -27,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="no-scrollbar">
       <body
-        className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden`}
+        className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden bg-gray-50`}
       >
         <NavBar />
         <div className="flex justify-center">

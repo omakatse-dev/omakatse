@@ -12,20 +12,21 @@ function Selector({
   placeholder,
   className,
   options,
+  buttonStyles,
 }: {
   value: { id: number; name: string; frequency?: string } | null;
   onChange: (option: { id: number; name: string; frequency?: string }) => void;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
   options: { id: number; name: string; frequency?: string }[];
+  buttonStyles?: string;
 }) {
   return (
     <div className={className}>
       <Listbox value={value} onChange={onChange}>
         <ListboxButton
-          className={`border-primary rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center ${
-            value ? "text-black" : "text-gray-500"
-          }`}
+          className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center ${value ? "text-black" : "text-gray-500"
+            } ${buttonStyles}`}
         >
           {value ? value.name : placeholder}
           <ChevronDownIcon className="w-6 text-black" />

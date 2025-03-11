@@ -95,7 +95,14 @@ h4 {
   @apply drop-shadow-[5px_5px_0px_rgba(238,128,127,1)];
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-body {
-
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
+

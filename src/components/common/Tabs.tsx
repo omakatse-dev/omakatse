@@ -4,14 +4,16 @@ export default function Tabs({
   tabs,
   selectedTab,
   onChange,
+  className,
 }: {
   tabs: string[];
   selectedTab: string;
   onChange: (tab: string) => void;
+  className?: string;
 }) {
   const activeStyles = "bg-yellow border border-black mb-1";
   return (
-    <div className={`bg-gray-200 rounded-full px-8 py-3 flex gap-5 font-semibold`}>
+    <div className={`bg-gray-200 rounded-full px-8 py-3 flex gap-5 font-semibold ${className}`}>
       {tabs.map((tab) => (
         <div
           key={tab}

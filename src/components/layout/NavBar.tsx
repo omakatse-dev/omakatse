@@ -32,7 +32,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="flex justify-between bg-yellow py-4 px-6 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
+    <div className="flex justify-between bg-yellow py-4 px-6 rounded-full fixed top-4 w-full max-w-7xl left-1/2 -translate-x-1/2 z-10">
       <Link href="/">
         <Image
           src="/assets/omakatsehorizontalblack.svg"
