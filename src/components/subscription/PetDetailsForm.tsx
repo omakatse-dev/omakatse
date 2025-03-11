@@ -51,8 +51,11 @@ export default function PetDetailsForm({
   const setData = useSubscriptionFormStore((state) => state.setData);
 
   const submitHandler = (data: InitialPetDetailsSchema) => {
+    console.log("HERE", data);
+
     const formattedData = {
       ...data,
+      type: petType,
       size: "just right" as "just right" | "skinny" | "chubby",
       allergies: { true: false, allergies: [] },
       preferences: { true: false, preferences: [] },
@@ -61,10 +64,28 @@ export default function PetDetailsForm({
         preferences: [],
       },
     };
-    const prevData = useSubscriptionFormStore.getState().petDetails;
-    const newData = [...(prevData || []), formattedData];
-    setData({ petDetails: newData });
+    const prevPets =
+      petType === "Cat"
+        ? useSubscriptionFormStore.getState().catsDetails
+        : useSubscriptionFormStore.getState().dogsDetails;
+
+    let newPets = [];
+    if (prevPets?.[idx]) {
+      // Update existing pet
+      newPets = prevPets?.map((pet, i) => (i === idx ? formattedData : pet));
+      console.log("updating pet", newPets);
+    } else {
+      // Add new pet
+      newPets = [...(prevPets || []), formattedData];
+    }
+    if (petType === "Cat") {
+      setData({ catsDetails: newPets });
+    } else {
+      setData({ dogsDetails: newPets });
+    }
   };
+
+  //TODO maybe a diff handler for onBlur that does not validate errors but still saves to zustand
 
   return (
     <Card>

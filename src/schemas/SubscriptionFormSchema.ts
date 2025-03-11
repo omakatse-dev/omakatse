@@ -17,6 +17,7 @@ const petAllergiesSchema = z.object({
 
 export const petDetailsSchema = z.object({
   name: z.string().nonempty(),
+  type: z.enum(["Dog", "Cat"]),
   breed: z.string().nonempty(),
   gender: z.enum(["Boy", "Girl"]),
   birthdayYear: z.number().int().min(1).max(2025),
@@ -31,7 +32,8 @@ export const subscriptionFormSchema = z.object({
   petType: z.enum(["dog", "cat", "both"]),
   catCount: z.number().int().min(0).max(4),
   dogCount: z.number().int().min(0).max(4),
-  petDetails: z.array(petDetailsSchema),
+  dogsDetails: z.array(petDetailsSchema),
+  catsDetails: z.array(petDetailsSchema),
   boxSize: z.enum(["small", "large"]),
   duration: z.enum(["trial", "3", "6", "12"]),
 })
