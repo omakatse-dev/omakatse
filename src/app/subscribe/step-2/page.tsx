@@ -27,8 +27,13 @@ export default function SubscriptionStepTwoPage() {
     control,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm<PetCountSchema>({
     resolver: zodResolver(petCountSchema),
+    defaultValues: {
+      catCount: useSubscriptionFormStore.getState().catCount || 0,
+      dogCount: useSubscriptionFormStore.getState().dogCount || 0
+    }
   });
 
   const onSubmit = () => {

@@ -11,7 +11,7 @@ import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import catSpecies from "../../data/Cats.json";
 import dogSpecies from "../../data/Dogs.json";
 
-const initialPetDetailsSchema = petDetailsSchema.pick({
+export const initialPetDetailsSchema = petDetailsSchema.pick({
   name: true,
   breed: true,
   gender: true,
@@ -37,6 +37,13 @@ export default function PetDetailsForm({
     name: (i + 1).toString(),
   }));
 
+  // Get stored data for this specific pet
+  const storedData = useSubscriptionFormStore((state) => 
+    petType === "Cat" 
+      ? state.catsDetails?.[idx] 
+      : state.dogsDetails?.[idx]
+  );
+
   const {
     control,
     handleSubmit,
@@ -44,15 +51,17 @@ export default function PetDetailsForm({
   } = useForm<InitialPetDetailsSchema>({
     resolver: zodResolver(initialPetDetailsSchema),
     defaultValues: {
-      name: "",
+      name: storedData?.name || "",
+      breed: storedData?.breed || "",
+      gender: storedData?.gender,
+      birthdayYear: storedData?.birthdayYear,
+      birthdayMonth: storedData?.birthdayMonth,
     },
   });
 
   const setData = useSubscriptionFormStore((state) => state.setData);
 
   const submitHandler = (data: InitialPetDetailsSchema) => {
-    console.log("HERE", data);
-
     const formattedData = {
       ...data,
       type: petType,
@@ -73,7 +82,6 @@ export default function PetDetailsForm({
     if (prevPets?.[idx]) {
       // Update existing pet
       newPets = prevPets?.map((pet, i) => (i === idx ? formattedData : pet));
-      console.log("updating pet", newPets);
     } else {
       // Add new pet
       newPets = [...(prevPets || []), formattedData];
