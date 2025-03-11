@@ -1,39 +1,80 @@
 import React from "react";
 import Card from "../common/Card";
 import Tag from "../common/Tag";
+import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
+import { z } from "zod";
+type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
-export default function PetDetailsCard() {
+export default function PetDetailsCard({ details }: { details: PetDetailsSchema }) {
+
+  const numberToMonth = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+  }
+
+  const sizeMapping = {
+    skinny: "Skinny",
+    'just right': "Just Right",
+    chubby: "Chubby",
+  }
   return (
     <Card>
       <div className="flex flex-col">
         <div className="self-center flex flex-col items-center">
           <div className="w-8 h-8 rounded-full bg-amber-300" />
-          <h4>Bella</h4>
+          <h4>{details.name}</h4>
         </div>
         <div className="mt-8 flex flex-col gap-4">
           <div className="bodyMD text-gray-800">
-            <span>Her details:</span>
+            <span>{details.gender === "Girl" ? "Her" : "His"} details:</span>
             <div className="flex flex-wrap gap-2 mt-1">
-              <Tag>Girl</Tag>
-              <Tag>Maine Coon</Tag>
-              <Tag>Jan 2020</Tag>
-              <Tag>Jan 2020</Tag>
-              <Tag>Jan 2020</Tag>
-              <Tag>Jan 2020</Tag>
+              <Tag>{details.gender}</Tag>
+              <Tag>{details.breed}</Tag>
+              <Tag>{numberToMonth[details.birthdayMonth as keyof typeof numberToMonth]} {details.birthdayYear}</Tag>
+              <Tag>{sizeMapping[details.size as keyof typeof sizeMapping]}</Tag>
             </div>
           </div>
           <div className="bodyMD text-gray-800">
-            <span>Her details:</span>
+            <span>{details.gender === "Girl" ? "She" : "He"} is allergic to:</span>
             <div className="flex flex-wrap gap-2 mt-1">
-              <Tag>Girl</Tag>
-              <Tag>Maine Coon</Tag>
-              <Tag>Jan 2020</Tag>
-              <Tag>Jan 2020</Tag>
-              <Tag>Jan 2020</Tag>
+              {details.allergies.true ? details.allergies.allergies.map((allergy) => (<Tag key={allergy}>{allergy}</Tag>)) : <Tag>NA</Tag>}
+            </div>
+          </div>
+          <div className="bodyMD text-gray-800">
+            <span>{details.gender === "Girl" ? "She" : "He"} likes:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {details.preferences.true ? details.preferences.preferences.map((pref) => (<Tag key={pref}>{pref}</Tag>)) : <Tag>NA</Tag>}
+            </div>
+          </div>
+          <div className="bodyMD text-gray-800">
+            <span>Treat frequency:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
               <Tag>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                placerat sollicitudin euismod. Aenean vestibulum
+                {details.treatFrequency.frequency}
               </Tag>
+            </div>
+          </div>
+          <div className="bodyMD text-gray-800">
+            <span>Treat preferences:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {details.treatFrequency.preferences.length > 0 ? details.treatFrequency.preferences.map((pref) => (<Tag key={pref}>{pref}</Tag>)) : <Tag>NA</Tag>}
+            </div>
+          </div>
+
+          <div className="bodyMD text-gray-800">
+            <span>Additional comments:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {details.treatFrequency.comments ? <Tag>{details.treatFrequency.comments}</Tag> : <Tag>None</Tag>}
             </div>
           </div>
         </div>
