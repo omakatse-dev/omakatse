@@ -3,9 +3,8 @@ import CardButton from "../common/CardButton";
 import Input from "../common/Input";
 import PillButton from "../common/PillButton";
 import Card from "../common/Card";
-import { Control, Controller } from "react-hook-form";
-import { AllergySchema } from "@/app/subscribe/step-5/page";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
+import { ClientPageRoot } from "next/dist/client/components/client-page";
 
 const ALLERGIES = [
   "Beef",
@@ -18,11 +17,10 @@ const ALLERGIES = [
 
 interface Props {
   name: string;
-  control: Control<AllergySchema>;
   fieldName: `catsDetails.${number}.allergies` | `dogsDetails.${number}.allergies`;
 }
 
-export default function AllergySelector({ name, control, fieldName }: Props) {
+export default function AllergySelector({ name, fieldName }: Props) {
   // Get the pet's current allergies directly from Zustand
   const [petType, petIndex] = fieldName.split('.') as ['catsDetails' | 'dogsDetails', string];
   const petDetails = useSubscriptionFormStore(state => state[petType]?.[Number(petIndex)]);
@@ -86,6 +84,7 @@ export default function AllergySelector({ name, control, fieldName }: Props) {
             className="w-full mt-2"
             value={allergiesData.allergies.filter(a => !ALLERGIES.includes(a as any)).join(", ")}
             onChange={(e) => {
+              console.log("firing")
               const otherAllergies = e.target.value
                 .split(",")
                 .map(a => a.trim())

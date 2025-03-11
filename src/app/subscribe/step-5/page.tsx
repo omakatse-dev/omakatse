@@ -12,7 +12,6 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ClientPageRoot } from "next/dist/client/components/client-page";
 
 const allergySchema = subscriptionFormSchema.pick({
   catsDetails: true,
@@ -23,13 +22,10 @@ export type AllergySchema = z.infer<typeof allergySchema>;
 
 export default function SubscriptionStepFivePage() {
   const router = useRouter();
-  const setData = useSubscriptionFormStore((state) => state.setData);
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
-  console.log(cats, dogs)
 
   const {
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm<AllergySchema>({
@@ -60,7 +56,6 @@ export default function SubscriptionStepFivePage() {
           <AllergenSelector
             key={idx}
             name={cat.name}
-            control={control}
             fieldName={`catsDetails.${idx}.allergies`}
           />
         ))}
@@ -68,7 +63,6 @@ export default function SubscriptionStepFivePage() {
           <AllergenSelector
             key={idx}
             name={dog.name}
-            control={control}
             fieldName={`dogsDetails.${idx}.allergies`}
           />
         ))}
