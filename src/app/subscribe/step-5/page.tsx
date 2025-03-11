@@ -5,11 +5,46 @@ import Card from "@/components/common/Card";
 import PillButton from "@/components/common/PillButton";
 import AllergenSelector from "@/components/subscription/AllergySelector";
 import ProgressBar from "@/components/subscription/ProgressBar";
+import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
+import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { ClientPageRoot } from "next/dist/client/components/client-page";
+
+const allergySchema = subscriptionFormSchema.pick({
+  catsDetails: true,
+  dogsDetails: true,
+});
+
+export type AllergySchema = z.infer<typeof allergySchema>;
 
 export default function SubscriptionStepFivePage() {
   const router = useRouter();
+  const setData = useSubscriptionFormStore((state) => state.setData);
+  const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
+  const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
+  console.log(cats, dogs)
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AllergySchema>({
+    resolver: zodResolver(allergySchema),
+    defaultValues: {
+      catsDetails: cats,
+      dogsDetails: dogs
+    },
+    mode: "onChange"
+  });
+
+  const onSubmit = () => {
+    router.push("/subscribe/step-6");
+  };
+
   return (
     <div className="w-full pt-32 pb-20 bg-pink-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={5} totalSteps={9} />
@@ -19,33 +54,35 @@ export default function SubscriptionStepFivePage() {
           Products containing these allergens will be removed from the box
         </div>
       </div>
-      <div className="flex flex-col gap-8 w-full max-w-3xl">
-        <Card>
-          <div className="flex flex-col items-center">
-            <div className="w-8 h-8 rounded-full bg-amber-300 mb-2" />
-            <h4>Bella</h4>
-            <div className="bodyMD mt-8">Does Bella have any allergies?</div>
-            <div className="flex gap-4 mt-2 mb-8">
-              <PillButton>Yes</PillButton>
-              <PillButton>No</PillButton>
-            </div>
-            <AllergenSelector />
-          </div>
-        </Card>
-        <Card variant="blue">Dog 1</Card>
-        <Card variant="green">Dog 1</Card>
-        <Card variant="pink">Dog 1</Card>
-      </div>
-
-      <div className="flex gap-5">
-        <Button
-          onClick={() => router.push("/subscribe/step-4")}
-          variant="secondary"
-        >
-          Previous
-        </Button>
-        <Button onClick={() => router.push("/subscribe/step-6")}>Next</Button>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-3xl items-center">
+        {(errors.catsDetails || errors.dogsDetails) && <div className="text-red bodyMD">Please select allergies for all pets</div>}
+        {cats.map((cat, idx) => (
+          <AllergenSelector
+            key={idx}
+            name={cat.name}
+            control={control}
+            fieldName={`catsDetails.${idx}.allergies`}
+          />
+        ))}
+        {dogs.map((dog, idx) => (
+          <AllergenSelector
+            key={idx}
+            name={dog.name}
+            control={control}
+            fieldName={`dogsDetails.${idx}.allergies`}
+          />
+        ))}
+        <div className="flex gap-5">
+          <Button
+            onClick={() => router.push("/subscribe/step-4")}
+            variant="secondary"
+            type="button"
+          >
+            Previous
+          </Button>
+          <Button type="submit">Next</Button>
+        </div>
+      </form>
     </div>
   );
 }
