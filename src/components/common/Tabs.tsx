@@ -3,11 +3,11 @@ import React from "react";
 export default function Tabs({
   tabs,
   selectedTab,
-  setSelectedTab,
+  onChange,
 }: {
   tabs: string[];
   selectedTab: string;
-  setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (tab: string) => void;
 }) {
   const activeStyles = "bg-yellow border border-black mb-1";
   return (
@@ -18,7 +18,7 @@ export default function Tabs({
           className={`px-10 py-4 rounded-full cursor-pointer ${
             tab === selectedTab && activeStyles
           }`}
-          onClick={() => setSelectedTab(tab)}
+          onClick={() => onChange(tab)}
           style={
             selectedTab === tab
               ? {
