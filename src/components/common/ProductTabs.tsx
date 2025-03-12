@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Tabs({
+export default function ProductTabs({
   tabs,
   selectedTab,
   onChange,
@@ -13,19 +13,17 @@ export default function Tabs({
 }) {
   const activeStyles = "bg-yellow border border-black mb-1";
   return (
-    <div className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}>
+    <div className={`${className} flex gap-4 bodyMD`}>
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`px-6 sm:px-10 py-4 rounded-full cursor-pointer ${
+          className={`px-4 py-2 rounded-xl cursor-pointer ${
             tab === selectedTab && activeStyles
           }`}
           onClick={() => onChange(tab)}
           style={
             selectedTab === tab
               ? {
-                  boxShadow:
-                    "5px 5px 0px rgba(253,250,244,1), 6.5px 6.5px 0px rgba(0,0,0,1)",
                   border: "1px solid black",
                 }
               : {}

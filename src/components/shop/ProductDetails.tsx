@@ -1,9 +1,24 @@
-import React from 'react'
+"use client"
 
-export default function ProductDetails() {
+import React from 'react'
+import { useState } from 'react'
+import ProductTabs from '../common/ProductTabs'
+
+export default function ProductDetails({ productID }: {
+  productID: String
+}) {
+
+  const [selectedTab, setSelectedTab] = useState("Small Box");
+
   return (
     <div>
-      test
+      {productID}
+      <ProductTabs
+        tabs={["Option one", "Option two", "Option three"]}
+        selectedTab={selectedTab}
+        onChange={setSelectedTab}
+        className=""
+      />
     </div>
   )
 }
