@@ -1,0 +1,374 @@
+[
+  {
+    "id": 0,
+    "name": "Abyssinian"
+  },
+  {
+    "id": 1,
+    "name": "Aegean"
+  },
+  {
+    "id": 2,
+    "name": "American Bobtail"
+  },
+  {
+    "id": 3,
+    "name": "American Curl"
+  },
+  {
+    "id": 4,
+    "name": "American Shorthair"
+  },
+  {
+    "id": 5,
+    "name": "American Wirehair"
+  },
+  {
+    "id": 6,
+    "name": "Arabian Mau"
+  },
+  {
+    "id": 7,
+    "name": "Asian"
+  },
+  {
+    "id": 8,
+    "name": "Australian Mist"
+  },
+  {
+    "id": 9,
+    "name": "Balinese"
+  },
+  {
+    "id": 10,
+    "name": "Bengal"
+  },
+  {
+    "id": 11,
+    "name": "Birman"
+  },
+  {
+    "id": 12,
+    "name": "Bombay"
+  },
+  {
+    "id": 13,
+    "name": "Brazilian Shorthair"
+  },
+  {
+    "id": 14,
+    "name": "British Shorthair"
+  },
+  {
+    "id": 15,
+    "name": "Burmese"
+  },
+  {
+    "id": 16,
+    "name": "Burmilla"
+  },
+  {
+    "id": 17,
+    "name": "California Spangled"
+  },
+  {
+    "id": 18,
+    "name": "Cashmere"
+  },
+  {
+    "id": 19,
+    "name": "Chantilly-Tiffany"
+  },
+  {
+    "id": 20,
+    "name": "Chartreux"
+  },
+  {
+    "id": 21,
+    "name": "Chausie"
+  },
+  {
+    "id": 22,
+    "name": "Colorpoint Shorthair"
+  },
+  {
+    "id": 23,
+    "name": "Cornish Rex"
+  },
+  {
+    "id": 24,
+    "name": "Cymric"
+  },
+  {
+    "id": 25,
+    "name": "Cyprus"
+  },
+  {
+    "id": 26,
+    "name": "Devon Rex"
+  },
+  {
+    "id": 27,
+    "name": "Donskoy"
+  },
+  {
+    "id": 28,
+    "name": "Dragon Li"
+  },
+  {
+    "id": 29,
+    "name": "Egyptian Mau"
+  },
+  {
+    "id": 30,
+    "name": "European Shorthair"
+  },
+  {
+    "id": 31,
+    "name": "Exotic Longhair"
+  },
+  {
+    "id": 32,
+    "name": "Exotic Shorthair"
+  },
+  {
+    "id": 33,
+    "name": "Foldex"
+  },
+  {
+    "id": 34,
+    "name": "Foreign White"
+  },
+  {
+    "id": 35,
+    "name": "German Rex"
+  },
+  {
+    "id": 36,
+    "name": "Havana Brown"
+  },
+  {
+    "id": 37,
+    "name": "Highlander"
+  },
+  {
+    "id": 38,
+    "name": "Himalayan"
+  },
+  {
+    "id": 39,
+    "name": "Isle of Man Longhair"
+  },
+  {
+    "id": 40,
+    "name": "Isle of Man Shorthair"
+  },
+  {
+    "id": 41,
+    "name": "Japanese Bobtail"
+  },
+  {
+    "id": 42,
+    "name": "Javanese"
+  },
+  {
+    "id": 43,
+    "name": "Jianzhou"
+  },
+  {
+    "id": 44,
+    "name": "Kanaani"
+  },
+  {
+    "id": 45,
+    "name": "Khao Manee"
+  },
+  {
+    "id": 46,
+    "name": "Korat"
+  },
+  {
+    "id": 47,
+    "name": "Korn Ja"
+  },
+  {
+    "id": 48,
+    "name": "Kurilian Bobtail"
+  },
+  {
+    "id": 49,
+    "name": "LaPerm"
+  },
+  {
+    "id": 50,
+    "name": "Lykoi"
+  },
+  {
+    "id": 51,
+    "name": "Maine Coon"
+  },
+  {
+    "id": 52,
+    "name": "Manx"
+  },
+  {
+    "id": 53,
+    "name": "Mekong Bobtail"
+  },
+  {
+    "id": 54,
+    "name": "Mexican Hairless"
+  },
+  {
+    "id": 55,
+    "name": "Minskin"
+  },
+  {
+    "id": 56,
+    "name": "Minuet"
+  },
+  {
+    "id": 57,
+    "name": "Munchkin"
+  },
+  {
+    "id": 58,
+    "name": "Nebelung"
+  },
+  {
+    "id": 59,
+    "name": "Ocicat"
+  },
+  {
+    "id": 60,
+    "name": "Ojos Azules"
+  },
+  {
+    "id": 61,
+    "name": "Oriental Bicolour"
+  },
+  {
+    "id": 62,
+    "name": "Oriental Longhair"
+  },
+  {
+    "id": 63,
+    "name": "Oriental Shorthair"
+  },
+  {
+    "id": 64,
+    "name": "Persian"
+  },
+  {
+    "id": 65,
+    "name": "Peterbald"
+  },
+  {
+    "id": 66,
+    "name": "Pixie-bob"
+  },
+  {
+    "id": 67,
+    "name": "Ragamuffin"
+  },
+  {
+    "id": 68,
+    "name": "Ragdoll"
+  },
+  {
+    "id": 69,
+    "name": "Russian Blue"
+  },
+  {
+    "id": 70,
+    "name": "Russian White, Black, and Tabby"
+  },
+  {
+    "id": 71,
+    "name": "Savannah"
+  },
+  {
+    "id": 72,
+    "name": "Scottish Fold"
+  },
+  {
+    "id": 73,
+    "name": "Selkirk Rex"
+  },
+  {
+    "id": 74,
+    "name": "Serengeti"
+  },
+  {
+    "id": 75,
+    "name": "Siamese"
+  },
+  {
+    "id": 76,
+    "name": "Siberian"
+  },
+  {
+    "id": 77,
+    "name": "Singapura"
+  },
+  {
+    "id": 78,
+    "name": "Snowshoe"
+  },
+  {
+    "id": 79,
+    "name": "Sokoke"
+  },
+  {
+    "id": 80,
+    "name": "Somali"
+  },
+  {
+    "id": 81,
+    "name": "Sphynx"
+  },
+  {
+    "id": 82,
+    "name": "Suphalak"
+  },
+  {
+    "id": 83,
+    "name": "Thai"
+  },
+  {
+    "id": 84,
+    "name": "Tonkinese"
+  },
+  {
+    "id": 85,
+    "name": "Toybob"
+  },
+  {
+    "id": 86,
+    "name": "Toyger"
+  },
+  {
+    "id": 87,
+    "name": "Turkish Angora"
+  },
+  {
+    "id": 88,
+    "name": "Turkish Van"
+  },
+  {
+    "id": 89,
+    "name": "Turkish Vankedisi"
+  },
+  {
+    "id": 90,
+    "name": "Ukrainian Levkoy"
+  },
+  {
+    "id": 91,
+    "name": "York Chocolate"
+  },
+  {
+    "id": 92,
+    "name": "Other"
+  }
+]

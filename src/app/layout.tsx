@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans, Parkinsans } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Omakatse",
@@ -26,12 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="no-scrollbar">
       <body
-        className={`${openSans.variable} ${parkinsans.variable} antialiased mt-20 px-20`}
+        className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden bg-gray-50`}
       >
         <NavBar />
+        <div className="flex justify-center">
         {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
