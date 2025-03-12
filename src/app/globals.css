@@ -43,7 +43,7 @@ h2 {
 }
 
 h3 {
-  @apply font-parkinsans text-[1.75rem] sm:text-[2rem] font-bold leading-[1.2];
+  @apply font-parkinsans text-[1.75rem] sm:text-[2rem] leading-[1.2];
 }
 
 h4 {

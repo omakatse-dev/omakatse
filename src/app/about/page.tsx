@@ -1,23 +1,23 @@
 import React from "react";
 import Button from "../../components/common/Button";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function page() {
   return (
-    <div className="w-full mt-32">
-      <div className="py-4 px-12">
-        <div className="bg-yellow-pastel rounded-3xl w-full py-32 pl-20 pr-160">
-          <div className="">
-            <h3 className="mb-5 text-gray-500">Who we are</h3>
-            <h1 className="mb-10">
-              Let&apos;s explore the real flavors of Japan together.
-            </h1>
-            <Button>Build your box now</Button>
-          </div>
+    <div className="w-screen mt-32 px-8 lg:px-24">
+
+      <div className="bg-yellow-pastel rounded-3xl px-8 py-16 lg:px-16 lg:py-32">
+        <div className="lg:pr-108">
+          <h3 className="mb-5 text-gray-500">Who we are</h3>
+          <h1 className="mb-10">
+            Let&apos;s explore the real flavors of Japan together.
+          </h1>
+          <Button>Build your box now</Button>
         </div>
       </div>
 
-      <div className="bg-gray-100 py-20 px-16 flex flex-row gap-20">
+      <div className="bg-white-100 py-10 lg:py-20 flex flex-col lg:flex-row gap-8 lg:gap-20">
         <div className="flex flex-col gap-5">
           <h4 className="text-yellow"> Our Founder </h4>
           <h3 className="text-black">
@@ -37,11 +37,10 @@ export default function page() {
             second dog, Oscar.
           </p>
         </div>
-        <div className="bg-gray-700 rounded-4xl w-720 h-120">image</div>
+        <div className="bg-gray-700 rounded-4xl h-80 lg:w-600"></div>
       </div>
 
-      <div className="bg-gray-50 py-20 px-16 flex flex-row gap-20">
-        <div className="bg-gray-700 rounded-4xl w-720 h-100">image</div>
+      <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row-reverse gap-10 lg:gap-20">
         <div className="flex flex-col gap-5">
           <h4 className="text-yellow"> XXXX </h4>
           <h3 className="text-black"> XXXX </h3>
@@ -60,9 +59,10 @@ export default function page() {
             trap & release, fostering and rescue work.
           </p>
         </div>
+        <div className="bg-gray-700 rounded-4xl h-80 lg:w-600"></div>
       </div>
 
-      <div className="bg-gray-100 py-20 px-16 flex flex-row gap-20">
+      <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
         <div className="flex flex-col gap-5">
           <h4 className="text-yellow"> XXXX </h4>
           <h3 className="text-black">
@@ -81,12 +81,19 @@ export default function page() {
             directly from Japan, Tee hopes to spread this philosophy in the UAE.
           </p>
         </div>
-        <div className="bg-gray-700 rounded-4xl w-720 h-120">image</div>
+        <div className="bg-gray-700 rounded-4xl h-80 lg:w-600"></div>
       </div>
 
-      <div className="bg-gray-50 py-20 px-30">
-        <div className="bg-yellow rounded-4xl py-28 px-44 flex flex-col gap-10">
-          <h4 className="text-gray-500 text-center"> Our Mission </h4>
+
+        <div className="flex flex-col relative bg-yellow rounded-4xl my-10 lg:mx-20 px-5 lg:px-40 py-20 lg:py-40 gap-4 lg:gap-10">
+          <Image
+            src="/assets/kumo_white.svg"
+            alt="Kumo White"
+            width={136.5} 
+            height={121} 
+            className="absolute lg:w-58 h-auto -top-7 -left-3.5 lg:-left-16 lg:-top-8"
+          />
+          <h4 className="text-white text-center"> Our Mission </h4>
           <h3 className="text-black text-center">
             {" "}
             At Omakatse Pets, we believe that every cat and dog deserves a
@@ -100,10 +107,17 @@ export default function page() {
             local pet adoption events, all to help those who need it the most!
             Thank you for your support, and happy shopping!
           </p>
+          <Image
+            src="/assets/kumo_black.svg"
+            alt="Kumo White"
+            width={136.5}
+            height={121} 
+            className="absolute lg:w-58 h-auto -bottom-24 -right-10 lg:-bottom-24 lg:-right-26"
+          />
         </div>
-      </div>
 
-      <div className="bg-gray-100 py-20 px-30 flex flex-row gap-20">
+
+      <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
         <div className="flex flex-col gap-5">
           <h4 className="text-yellow"> Our CEOs </h4>
           <h3 className="text-black"> Meet Toby & Olly</h3>
@@ -118,11 +132,10 @@ export default function page() {
           </p>
           <Button variant="primary">Build your box now</Button>
         </div>
-        <div className="bg-gray-700 rounded-4xl w-720 h-120">image</div>
+        <div className="bg-gray-700 rounded-4xl h-80 lg:w-600"></div>
       </div>
 
-      <div className="bg-gray-50 py-20 px-16">
-        <div className="bg-gray-300 rounded-4xl py-28 px-44 flex flex-col justify-center gap-6">
+      <div className="bg-gray-300 rounded-4xl my-15 lg:my-20 px-8 py-16 lg:px-16 lg:py-32 flex flex-col justify-center gap-6">
           <h3 className="text-gray-800 text-center"> Join our team </h3>
           <p className="text-black text-center bodyLG mb-4">
             {" "}
@@ -131,11 +144,10 @@ export default function page() {
           </p>
           <div className="flex justify-center">
             <Link href="/contact">
-              <Button variant="primary">Contact us now</Button>
+              <Button className="w-full" variant="primary">Contact Us</Button>
             </Link>
           </div>
         </div>
-      </div>
     </div>
   );
 }

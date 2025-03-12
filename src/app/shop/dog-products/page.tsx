@@ -56,7 +56,7 @@ export default function page() {
                 </div>
                 <div className='bg-amber-500 w-12 h-12' />
             </div>
-            <Tabs tabs={TABS} selectedTab={selectedTab} onChange={setSelectedTab} className="w-fit self-center mt-10" />
+            <Tabs tabs={TABS} selectedTab={selectedTab} onChange={setSelectedTab} className="w-fit self-center mt-10 bg-gray-200" />
             <SortDropDown className="mt-4" options={SORTING_OPTIONS} selectedOption={selectedSortingOption} onChange={setSelectedSortingOption} />
             <div className='mt-10 flex flex-row gap-12'>
                 <FilterTab filters={FILTERS} selectedFilter={selectedFilter} onChange={setSelectedFilter} />

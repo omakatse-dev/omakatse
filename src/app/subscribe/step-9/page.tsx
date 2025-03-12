@@ -63,6 +63,7 @@ export default function SubscriptionStepNinePage() {
         tabs={["Small Box", "Large Box"]}
         selectedTab={boxSize === "small" ? "Small Box" : "Large Box"}
         onChange={(tab) => handleSelectBox(tab)}
+        className="bg-gray-200"
       />
       <TipCard />
       <SubscriptionOptions
