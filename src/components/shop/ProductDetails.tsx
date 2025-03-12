@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { useState } from 'react'
+import Link from 'next/link'
 import ProductTabs from '../common/ProductTabs'
 import ColorTabs from '../common/ColorTabs'
 
@@ -9,25 +10,19 @@ export default function ProductDetails({ productID }: {
   productID: String
 }) {
 
-  const [selectedTab, setSelectedTab] = useState("Small Box");
+  const [selectedTab, setSelectedTab] = useState("Option One");
   const [selectedColor, setSelectedColor] = useState("40AED7");
 
 
   return (
-    <div>
-      {productID}
-      <ProductTabs
-        tabs={["Option one", "Option two", "Option three"]}
-        selectedTab={selectedTab}
-        onChange={setSelectedTab}
-        className=""
-      />
-      <ColorTabs
-        tabs={["40AED7", "EE807F"]}
-        selectedTab={selectedColor}
-        onChange={setSelectedColor}
-        className=""
-      />
+    <div className="px-12 pt-10 pb-20">
+
+      <div className="flex bodyButton gap-4">
+        <Link href ="/">Home</Link>
+        <b>/</b>
+        <Link href ="/shop/cat-products">All Products</Link>
+      </div>
+
     </div>
   )
 }
