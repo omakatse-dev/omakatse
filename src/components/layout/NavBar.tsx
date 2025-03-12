@@ -45,11 +45,11 @@ export default function NavBar() {
       </div>
 
       <div className="hidden xl:flex items-center gap-x-8 font-open-sans font-semibold">
-        <Link href="/subscribe" className="flex gap-1">
+        <Link href="/shop/cat-products" className="flex gap-1">
           Cat
           <ChevronDownIcon className="h-6 w-6 stroke-black stroke-[2]" />
         </Link>
-        <Link href="/subscribe" className="flex gap-1">
+        <Link href="/shop/cat-products" className="flex gap-1">
           Dog
           <ChevronDownIcon className="h-6 w-6 stroke-black stroke-[2]" />
         </Link>
