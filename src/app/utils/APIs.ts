@@ -39,15 +39,11 @@ export const getProductsByCollection = async (
           value
           key
         }
-<<<<<<< HEAD
     products(
       first: 100,
       sortKey: ${sortBy || "PRICE"},
       reverse: ${reverse || false}
     ) {
-=======
-    products(first: 100) {
->>>>>>> main
       edges {
         node {
           id
@@ -81,20 +77,12 @@ export const getProductsByCollection = async (
 
   const res = await storefrontClient.request(productQuery);
   return {
-<<<<<<< HEAD
     products: res.data.collection.products.edges.map(
       (edge: ProductEdgeInterface) => edge.node
     ),
     categories: JSON.parse(res.data.collection.metafield.value),
   };
 };
-=======
-    products: res.data.collection.products.edges.map((edge: ProductEdgeInterface) => edge.node),
-    categories: JSON.parse(res.data.collection.metafield.value)
-  }
-}
-export const getSellingPlans = async () => {
->>>>>>> main
 
 export const getProductsBySearch = async (
   searchKey: string,
@@ -166,23 +154,3 @@ export const getSellingPlans = async () => {
   const { data } = await storefrontClient.request(query);
   return data;
 };
-
-<<<<<<< HEAD
-=======
-
->>>>>>> main
-const _ = ` {
-  products(first: 3) {
-    edges {
-      node {
-        id
-        title
-        description
-        metafield(namespace: "custom", key: "tags") {
-          value
-          key
-        }
-      }
-    }
-  }
-} `;
