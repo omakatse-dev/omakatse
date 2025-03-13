@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+export type SortOption = 'CREATED' | 'BEST_SELLING' | 'PRICE';
+
+
+=======
+>>>>>>> main
 type PriceRange = {
     minVariantPrice: {
         amount: number;
@@ -21,3 +27,15 @@ export type ShopfrontProduct = {
     tags: string[];
     metafields: Metafield[];
 }
+<<<<<<< HEAD
+
+export type ProductSearchResultType = {
+    id: string;
+    title: string;
+    priceRange: PriceRange;
+    featuredImage: {
+        url: string;
+    };
+}
+=======
+>>>>>>> main

@@ -1,29 +1,27 @@
-import React from "react";
-import { ArrowsUpDownIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
   Listbox,
   ListboxButton,
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
-export default function SortDropDown({
-  className,
+export default function SubCategoryDropdown({
   options,
   selectedOption,
   onChange,
+  className,
 }: {
-  className?: string;
   options: string[];
   selectedOption: string;
   onChange: (option: string) => void;
+  className?: string;
 }) {
   return (
-    <div className={`w-full flex justify-end items-center gap-2 ${className}`}>
-      <ArrowsUpDownIcon className="w-6 text-black" />
-      Sort By:
+    <div className={className}>
       <Listbox value={selectedOption} onChange={onChange}>
-        <ListboxButton className="rounded-full px-4 py-3 w-56 sm:w-64 bg-white cursor-pointer flex flex-row justify-between items-center border border-black">
+        <ListboxButton className="rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center border border-black">
           {selectedOption}
           <ChevronDownIcon className="w-6 text-black" />
         </ListboxButton>

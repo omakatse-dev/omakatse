@@ -1,20 +1,29 @@
-import { getProductsByCollection, getStoreFront } from "../utils/APIs";
+import SearchShopfront from "@/components/shop/SearchShopfront";
+import { getProductsBySearch } from "../utils/APIs";
+import { SortOption } from "@/types/Types";
 
-import React from "react";
-import { ProductInterface } from "../utils/Interfaces";
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { searchKey: string; sort: string };
+}) {
+  const { searchKey, sort } = await searchParams;
 
-export default async function Page() {
-  const items = await getStoreFront();
-  const test = await getProductsByCollection("441616957699")
-  console.log(test);
-  return (
-    <div>
-      <h1>Products</h1>
-      <ul>
-        {items.map((item: ProductInterface) => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
-    </div>
+  const sortingMap: Record<string, string> = {
+    "New Arrivals": "CREATED_AT",
+    "Best Selling": "BEST_SELLING",
+    "Price: Low to High": "PRICE",
+    "Price: High to Low": "PRICE",
+  } as const;
+
+  const defaultSort = "New Arrivals";
+  const selectedSort = sort || defaultSort;
+
+  const products = await getProductsBySearch(
+    searchKey,
+    sortingMap[selectedSort] as SortOption,
+    selectedSort === "Price: High to Low"
   );
+
+  return <SearchShopfront searchKey={searchKey} products={products} />;
 }

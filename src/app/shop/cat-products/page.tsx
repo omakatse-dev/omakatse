@@ -1,9 +1,39 @@
 import { getProductsByCollection } from '@/app/utils/APIs';
-import CatProducts from '@/components/shop/CatProducts';
+import Shopfront from '@/components/shop/Shopfront';
+import { SortOption } from '@/types/Types';
 
-export default async function page() {
-    const { products, categories } = await getProductsByCollection("441832374531")
+interface PageProps {
+    searchParams: {
+        sort?: string;
+        filter?: string;
+        tab?: string;
+    }
+}
+
+export default async function Page({ searchParams }: PageProps) {
+    const { sort } = await searchParams;
+
+    const sortingMap: Record<string, string> = {
+        "New Arrivals": "CREATED",
+        "Best Selling": "BEST_SELLING",
+        "Price: Low to High": "PRICE",
+        "Price: High to Low": "PRICE",
+    } as const;
+
+    const defaultSort = "New Arrivals";
+    const selectedSort = sort || defaultSort;
+
+    const { products, categories } = await getProductsByCollection(
+        "441832374531",
+        sortingMap[selectedSort as keyof typeof sortingMap] as SortOption,
+        selectedSort === 'Price: High to Low'
+    );
+
     return (
-        <CatProducts products={products} categories={categories} />
-    )
+        <Shopfront
+            products={products}
+            categories={categories}
+            petType="Cat"
+        />
+    );
 }
