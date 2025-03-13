@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import ProductTitle from './ProductPage/ProductTitle'
 import Image from 'next/image'
+import ProductDescription from './ProductPage/ProductDescription'
 
 
 export default function ProductDetails({ productID }: {
@@ -33,7 +34,7 @@ export default function ProductDetails({ productID }: {
             <div className="bg-gray-500 rounded-xl w-7/8 aspect-square"/>
           </div>
           <div>
-            <div className="bodyLG">Description</div>
+              <ProductDescription productID={productID}/>
           </div>
         </div>
 
