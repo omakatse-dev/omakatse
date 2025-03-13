@@ -6,9 +6,9 @@ export default function ProductDescription({ productID }: {
   }) {
   return (
     <div className="mx-auto w-full flex flex-col gap-10">
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG text-black py-4">
                 Description
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
@@ -19,9 +19,9 @@ export default function ProductDescription({ productID }: {
             </DisclosurePanel>
         </Disclosure>
 
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG text-black py-4">
                 Ingredients
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
@@ -32,9 +32,9 @@ export default function ProductDescription({ productID }: {
             </DisclosurePanel>
         </Disclosure>
 
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG text-black py-4">
                 Benefits
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
@@ -45,9 +45,9 @@ export default function ProductDescription({ productID }: {
             </DisclosurePanel>
         </Disclosure>
 
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG text-black py-4">
                 Instructions
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
@@ -58,9 +58,9 @@ export default function ProductDescription({ productID }: {
             </DisclosurePanel>
         </Disclosure>
 
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG text-black py-4">
                 Dimension
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
@@ -71,9 +71,9 @@ export default function ProductDescription({ productID }: {
             </DisclosurePanel>
         </Disclosure>
 
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={true}>
+        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
             <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG font-semibold text-black py-4">
+            <span className="bodyLG  text-black py-4">
                 Material
             </span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />

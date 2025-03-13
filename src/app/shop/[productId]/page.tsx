@@ -4,9 +4,8 @@ export default async function ProductPage({ params }: { params: { productId: str
     const { productId } = await params;
 
     return (
-        <div className='mt-32'>
+        <div className='mt-32 h-full'>
             <ProductDetails productID={productId}/>
-            
         </div>
     )
 } 

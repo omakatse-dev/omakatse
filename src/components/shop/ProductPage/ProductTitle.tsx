@@ -9,8 +9,9 @@ import ProductTabs from '../../common/ProductTabs'
 import ColorTabs from '../../common/ColorTabs'
 import CounterButton from '@/components/common/CounterButton'
 
-export default function ProductTitle({ productID }: {
-  productID: String
+export default function ProductTitle({ className, productID }: {
+  productID: String,
+  className?: String
 }) {
 
   const [selectedVariant, setSelectedVariant] = useState("Option One");
@@ -20,14 +21,14 @@ export default function ProductTitle({ productID }: {
 
 
   return (
-    <div className="flex flex-col w-1/2 bg-gray-50">
+    <div className={`flex flex-col w-1/2 bg-gray-50 ${className}`}>
             
         <div className="flex flex-row justify-between mb-2">
           <div>
             <Tag children="New" className="bg-yellow mb-2"></Tag>
             <b className="bodyXL text-gray-800 font-normal">FLF</b>
           </div>
-            <Image src="/assets/CatIcon.svg" alt="Cat Icon" width={24} height={24} className="m-2"/>
+            <Image src="/assets/CatIcon.svg" alt="Cat Icon" width={24} height={24} className="bg-white rounded-full aspect-square h-10 w-10 p-2"/>
         </div>
 
         <div className="flex flex-col gap-8">
@@ -65,7 +66,7 @@ export default function ProductTitle({ productID }: {
                 </div>
             </div>
 
-            <div className="flex flex-row gap-4 bg-amber-400 w-full">
+            <div className="flex flex-row gap-4 w-full">
                 <CounterButton/>
                 <Button variant="primary" className="">Add to Cart - AED 55</Button>
             </div>

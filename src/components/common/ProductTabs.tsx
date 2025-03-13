@@ -17,17 +17,10 @@ export default function ProductTabs({
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`px-4 py-2 rounded-xl cursor-pointer ${
+          className={`px-4 py-2 rounded-xl cursor-pointer border-1 ${
             tab === selectedTab && activeStyles
           }`}
           onClick={() => onChange(tab)}
-          style={
-            selectedTab === tab
-              ? {
-                  border: "1px solid black",
-                }
-              : {}
-          }
         >
           {tab}
         </div>

@@ -1,11 +1,8 @@
-"use client"
-
 import React from 'react'
-import { useState } from 'react'
 import Link from 'next/link'
 import ProductTitle from './ProductPage/ProductTitle'
-import Image from 'next/image'
 import ProductDescription from './ProductPage/ProductDescription'
+import ProductImages from './ProductPage/ProductImages'
 
 
 export default function ProductDetails({ productID }: {
@@ -13,32 +10,24 @@ export default function ProductDetails({ productID }: {
 }) {
 
   return (
-    <div className="flex flex-col px-12 pt-10 pb-20 w-screen bg-green-200">
+    <div className="flex flex-col px-12 pt-10 pb-20 w-screen h-fit">
 
-      <div className="flex bodyButton gap-4 self-start">
-        <Link href ="/">Home</Link>
-        <b>/</b>
-        <Link href ="/shop/cat-products">All Products</Link>
+      <div className="flex bodyButton gap-4">
+        <Link href ="/" className="font-normal">Home</Link>
+        <b className="font-normal">/</b>
+        <Link href ="/shop/cat-products" className="font-normal">All Products</Link>
       </div>
 
-      <div className="pt-10 pb-15 flex flex-row gap-25 w-full">
+      <div className="pt-10 pb-15 flex gap-25 w-full">
 
-        <div className="flex flex-col gap-15 w-1/2 bg-blue-200">
-          <div className="flex flex-row gap-5 w-full">
-            <div className="flex flex-col gap-5 w-1/8">
-              <div className="bg-gray-500 aspect-square rounded-xl w-full"/>
-              <div className="bg-gray-500 aspect-square rounded-xl w-full"/>
-              <div className="bg-gray-500 aspect-square rounded-xl w-full"/>
-              <div className="bg-gray-500 aspect-square rounded-xl w-full"/>
-            </div>
-            <div className="bg-gray-500 rounded-xl w-7/8 aspect-square"/>
-          </div>
+        <div className="flex flex-col gap-15 w-1/2">
+          <ProductImages productID={productID}/>
           <div>
               <ProductDescription productID={productID}/>
           </div>
         </div>
 
-        <ProductTitle productID={productID}/>
+        <ProductTitle className="sticky top-30 h-fit" productID={productID}/>
 
       </div>
 
