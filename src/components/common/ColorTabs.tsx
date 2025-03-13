@@ -21,7 +21,7 @@ export default function ColorTabs({
           }`}
           onClick={() => onChange(tab)}
           style={{
-            backgroundColor: `#${tab}`,
+            backgroundColor: `${tab}`,
           }}
         ></div>
       ))}

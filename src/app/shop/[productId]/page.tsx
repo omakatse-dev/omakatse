@@ -6,6 +6,7 @@ export default async function ProductPage({ params }: { params: { productId: str
     return (
         <div className='mt-32'>
             <ProductDetails productID={productId}/>
+            
         </div>
     )
 } 
