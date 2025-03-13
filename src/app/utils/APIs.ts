@@ -117,18 +117,41 @@ export const getSellingPlans = async () => {
 }
 
 
-const _ = ` {
-  products(first: 3) {
-    edges {
-      node {
-        id
-        title
-        description
-        metafield(namespace: "custom", key: "tags") {
-          value
-          key
+export const getProductDetailsByID = async (productID: string) => {
+
+  const productQuery = `{
+    product(id: "gid://shopify/Product/8925327851779") {
+      title
+      description
+      options {
+        name
+        values
+      }
+      variants(first: 10) {
+        nodes {
+          id
+          price {
+          amount,
+          currencyCode
+          }
         }
       }
     }
+  }`;
+
+  const res = await storefrontClient.request(productQuery);
+  console.log(res);
+  
+  return {
+    // productDetails: res.data.products
+    /* 
+    Variant Name
+    > Variant Choices 
+    Possible combinations (CANT FIND YET)
+    > Respective prices
+    */
   }
-}`
+
+  
+}
+
