@@ -1,36 +1,28 @@
-import React from 'react'
-import Link from 'next/link'
-import ProductTitle from './ProductPage/ProductTitle'
-import ProductDescription from './ProductPage/ProductDescription'
-import ProductImages from './ProductPage/ProductImages'
+import React from "react";
+import Link from "next/link";
+import ProductTitle from "./ProductPage/ProductTitle";
+import ProductDescription from "./ProductPage/ProductDescription";
+import ProductImages from "./ProductPage/ProductImages";
+import { ProductDetailsType } from "@/types/Types";
 
-
-export default function ProductDetails({ productID }: {
-  productID: String
+export default function ProductDetails({
+  product,
+}: {
+  product: ProductDetailsType;
 }) {
 
   return (
-    <div className="flex flex-col px-12 pt-10 pb-20 w-screen h-fit">
-
-      <div className="flex bodyButton gap-4">
-        <Link href ="/" className="font-normal">Home</Link>
-        <b className="font-normal">/</b>
-        <Link href ="/shop/cat-products" className="font-normal">All Products</Link>
-      </div>
-
+    <div className="flex flex-col pt-10 pb-20 w-screen max-w-7xl mt-32">
       <div className="pt-10 pb-15 flex gap-25 w-full">
-
         <div className="flex flex-col gap-15 w-1/2">
-          <ProductImages productID={productID}/>
+          <ProductImages images={product.images} />
           <div>
-              <ProductDescription productID={productID}/>
+            <ProductDescription description={product.metafield.value} />
           </div>
         </div>
 
-        <ProductTitle className="sticky top-30 h-fit" productID={productID}/>
-
+        <ProductTitle className="sticky top-52 h-fit" details={product} />
       </div>
-
     </div>
-  )
+  );
 }

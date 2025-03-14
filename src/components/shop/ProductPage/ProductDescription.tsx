@@ -1,90 +1,34 @@
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function ProductDescription({ productID }: {
-    productID: String
-  }) {
+export default function ProductDescription({
+  description,
+}: {
+  description: string;
+}) {
+  const descriptionObject = JSON.parse(description);
   return (
     <div className="mx-auto w-full flex flex-col gap-10">
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">
-                Description
-            </span>
+      {Object.keys(descriptionObject).map((key: string) => (
+        <Disclosure
+          as="div"
+          key={key}
+          className="p- border-t-1 border-black"
+          defaultOpen={false}
+        >
+          <DisclosureButton className="group flex w-full items-center justify-between">
+            <span className="bodyLG text-black py-4">{key}</span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
+          </DisclosureButton>
+          <DisclosurePanel className="bodyMD font-normal">
+            {descriptionObject[key]}
+          </DisclosurePanel>
         </Disclosure>
-
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">
-                Ingredients
-            </span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
-        </Disclosure>
-
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">
-                Benefits
-            </span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
-        </Disclosure>
-
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">
-                Instructions
-            </span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
-        </Disclosure>
-
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">
-                Dimension
-            </span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
-        </Disclosure>
-
-        <Disclosure as="div" className="p- border-t-1 border-black" defaultOpen={false}>
-            <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG  text-black py-4">
-                Material
-            </span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180" />
-
-            </DisclosureButton>
-            <DisclosurePanel className="bodyMD font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
-            </DisclosurePanel>
-        </Disclosure>
-        
-
+      ))}
     </div>
-  )
+  );
 }

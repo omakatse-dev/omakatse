@@ -2,7 +2,6 @@ import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import { LATEST_API_VERSION } from "@shopify/shopify-api";
 import { ProductEdgeInterface } from "./Interfaces";
 
-
 const storefrontClient = createStorefrontApiClient({
   storeDomain: process.env.NEXT_PUBLIC_API_URL || "",
   apiVersion: LATEST_API_VERSION,
@@ -10,7 +9,6 @@ const storefrontClient = createStorefrontApiClient({
 });
 
 export const getStoreFront = async () => {
-
   const productQuery = `{
       products(first: 3) {
         edges {
@@ -25,10 +23,9 @@ export const getStoreFront = async () => {
 
   const { data } = await storefrontClient.request(productQuery);
   return data.products.edges.map((edge: ProductEdgeInterface) => edge.node);
-}
+};
 
 export const getProductsByCollection = async (collectionID: string) => {
-
   const productQuery = `{
   collection(id: "gid://shopify/Collection/${collectionID}") {
     title
@@ -70,12 +67,13 @@ export const getProductsByCollection = async (collectionID: string) => {
 
   const res = await storefrontClient.request(productQuery);
   return {
-    products: res.data.collection.products.edges.map((edge: ProductEdgeInterface) => edge.node),
-    categories: JSON.parse(res.data.collection.metafield.value)
-  }
-}
+    products: res.data.collection.products.edges.map(
+      (edge: ProductEdgeInterface) => edge.node
+    ),
+    categories: JSON.parse(res.data.collection.metafield.value),
+  };
+};
 export const getSellingPlans = async () => {
-
   const query = `{
     collection(id: "gid://shopify/Collection/441616957699") {
       title
@@ -111,47 +109,49 @@ export const getSellingPlans = async () => {
         }
       }
     }
-  }`
+  }`;
   const { data } = await storefrontClient.request(query);
-  return data
-}
-
+  return data;
+};
 
 export const getProductDetailsByID = async (productID: string) => {
-
   const productQuery = `{
-    product(id: "gid://shopify/Product/8925327851779") {
-      title
-      description
-      options {
+  product(id: "gid://shopify/Product/${productID}") {
+    title
+    tags
+    description
+    options {
+      name
+      optionValues {
         name
-        values
       }
-      variants(first: 10) {
-        nodes {
-          id
-          price {
-          amount,
-          currencyCode
-          }
+    }
+    variants(first: 50) {
+      nodes {
+        price {
+          amount
+        }
+        compareAtPrice {
+          amount
+        }
+        quantityAvailable
+        selectedOptions {
+          name
+          value
         }
       }
     }
-  }`;
+    images(first: 5) {
+      nodes {
+        url
+      }
+    }
+    metafield(key: "details", namespace: "custom") {
+      key
+      value
+    }
+  }}`;
 
   const res = await storefrontClient.request(productQuery);
-  console.log(res);
-  
-  return {
-    // productDetails: res.data.products
-    /* 
-    Variant Name
-    > Variant Choices 
-    Possible combinations (CANT FIND YET)
-    > Respective prices
-    */
-  }
-
-  
-}
-
+  return res.data.product;
+};

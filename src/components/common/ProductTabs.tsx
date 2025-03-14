@@ -1,12 +1,12 @@
 import React from "react";
-
+import { OptionValue } from "@/types/Types";
 export default function ProductTabs({
   tabs,
   selectedTab,
   onChange,
   className,
 }: {
-  tabs: string[];
+  tabs: OptionValue[];
   selectedTab: string;
   onChange: (tab: string) => void;
   className?: string;
@@ -16,13 +16,13 @@ export default function ProductTabs({
     <div className={`${className} flex gap-4 bodyMD`}>
       {tabs.map((tab) => (
         <div
-          key={tab}
+          key={tab.name}
           className={`px-4 py-2 rounded-xl cursor-pointer border-1 ${
-            tab === selectedTab && activeStyles
+            tab.name === selectedTab && activeStyles
           }`}
-          onClick={() => onChange(tab)}
+          onClick={() => onChange(tab.name)}
         >
-          {tab}
+          {tab.name}
         </div>
       ))}
     </div>
