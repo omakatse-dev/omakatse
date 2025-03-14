@@ -1,6 +1,7 @@
 import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import { LATEST_API_VERSION } from "@shopify/shopify-api";
 import { ProductEdgeInterface } from "./Interfaces";
+import { SortOption } from "@/types/Types";
 
 const storefrontClient = createStorefrontApiClient({
   storeDomain: process.env.NEXT_PUBLIC_API_URL || "",
@@ -25,7 +26,11 @@ export const getStoreFront = async () => {
   return data.products.edges.map((edge: ProductEdgeInterface) => edge.node);
 };
 
-export const getProductsByCollection = async (collectionID: string) => {
+export const getProductsByCollection = async (
+  collectionID: string,
+  sortBy?: SortOption,
+  reverse?: boolean
+) => {
   const productQuery = `{
   collection(id: "gid://shopify/Collection/${collectionID}") {
     title
@@ -33,7 +38,11 @@ export const getProductsByCollection = async (collectionID: string) => {
           value
           key
         }
-    products(first: 100) {
+    products(
+      first: 100,
+      sortKey: ${sortBy || "PRICE"},
+      reverse: ${reverse || false}
+    ) {
       edges {
         node {
           id
@@ -73,26 +82,57 @@ export const getProductsByCollection = async (collectionID: string) => {
     categories: JSON.parse(res.data.collection.metafield.value),
   };
 };
-export const getSellingPlans = async () => {
+
+export const getProductsBySearch = async (
+  searchKey: string,
+  sortBy?: SortOption,
+  reverse?: boolean
+) => {
   const query = `{
-    collection(id: "gid://shopify/Collection/441616957699") {
-      title
-      products(first: 100) {
+    products(query: "${searchKey}", 
+      first: 10, 
+      sortKey: ${sortBy || "PRICE"},
+      reverse: ${reverse || false}) {
         edges {
           node {
             id
             title
-            sellingPlanGroups(first: 10) {
+            tags
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            featuredImage {
+              url
+            }
+          }
+        }
+    }
+  }`;
+  const res = await storefrontClient.request(query);
+  return res.data.products.edges.map((edge: ProductEdgeInterface) => edge.node);
+};
+export const getSellingPlans = async () => {
+  const query = `{
+      collection(id: "gid://shopify/Collection/441616957699") {
+        title
+        products(first: 100) {
+        edges {
+          node {
+              id
+              title
+              sellingPlanGroups(first: 10) {
               edges {
                 node {
-                  id
-                  name
-                  sellingPlans(first: 10) {
+                    id
+                    name
+                    sellingPlans(first: 10) {
                     edges {
                       node {
-                        id
-                        name
-                        description
+                          id
+                          name
+                          description
                         billingPolicy {
                           ... on SellingPlanRecurringBillingPolicy {
                             interval

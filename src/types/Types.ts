@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+export type SortOption = 'CREATED' | 'BEST_SELLING' | 'PRICE';
+
+
+=======
+>>>>>>> main
 type PriceRange = {
   minVariantPrice: {
     amount: number;
@@ -52,6 +58,7 @@ type VariantNodes = {
     price: {
       amount: string;
     };
+<<<<<<< HEAD
     compareAtPrice: {
       amount: string;
     };
@@ -64,3 +71,21 @@ type SelectedOption = {
   name: string;
   value: string;
 };
+=======
+    priceRange: PriceRange;
+    tags: string[];
+    metafields: Metafield[];
+}
+<<<<<<< HEAD
+
+export type ProductSearchResultType = {
+    id: string;
+    title: string;
+    priceRange: PriceRange;
+    featuredImage: {
+        url: string;
+    };
+}
+=======
+>>>>>>> main
+>>>>>>> main

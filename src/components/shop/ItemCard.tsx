@@ -18,7 +18,7 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
       )}
       <img
         src={product.featuredImage.url}
-        className="w-full h-64 bg-gray-200 rounded-lg object-contain"
+        className="w-full aspect-square bg-gray-200 rounded-2xl object-cover border-primary"
       />
       <div className="bodyLG text-black font-semibold mt-4">
         {product.title}
