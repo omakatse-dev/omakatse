@@ -8,5 +8,6 @@ export default async function ProductPage({
 }) {
   const { productId } = await params;
   const product = await getProductDetailsByID(productId);
+  console.log(product.collections.nodes[0].products.nodes)
   return <ProductDetails product={product} />;
 }

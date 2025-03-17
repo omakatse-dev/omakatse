@@ -161,6 +161,24 @@ export const getProductDetailsByID = async (productID: string) => {
     title
     tags
     description
+    collections(first: 1) {
+      nodes {
+        products(first: 4, sortKey: BEST_SELLING) {
+          nodes {
+            id
+            title
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            featuredImage {
+              url
+            }
+          }
+        }
+      }
+    }
     options {
       name
       optionValues {
