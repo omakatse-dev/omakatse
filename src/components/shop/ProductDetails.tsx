@@ -10,8 +10,8 @@ export default function ProductDetails({
   product: ProductDetailsType;
 }) {
   return (
-    <div className="flex flex-col pt-0 md:pt-10 pb-20 w-screen max-w-7xl mt-32">
-      <div className="pt-0 md:pt-10 pb-15 flex md:flex-row flex-col gap-8 md:gap-25 w-full">
+    <div className="flex flex-col md:pt-10 pb-20 w-screen max-w-7xl mt-32 ">
+      <div className="md:pt-10 pb-15 flex md:flex-row flex-col gap-8 md:gap-25 w-full">
         <div className="flex flex-col gap-15 md:w-1/2">
           <ProductImages images={product.images} />
           {product.metafield && (

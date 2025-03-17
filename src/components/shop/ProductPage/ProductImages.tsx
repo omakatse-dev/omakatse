@@ -47,11 +47,11 @@ export default function ProductImages({
       </div>
 
       {/* Main Image - Clickable */}
-      <button onClick={openModal} className="md:w-7/8">
+      <button onClick={openModal} className="md:w-7/8 mx-6">
         <Image
           src={images.nodes[selectedIndex].url}
           alt="product"
-          className="bg-white rounded-xl w-7/8 aspect-square border-primary justify-self-center p-12"
+          className="bg-white rounded-xl md:w-7/8 aspect-square border-primary justify-self-center p-12"
           width={516}
           height={516}
         />
