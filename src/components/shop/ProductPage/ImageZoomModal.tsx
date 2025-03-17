@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react";
 import Modal from "react-modal";
 import Image from "next/image";
-import { ChevronRightIcon, ChevronLeftIcon, XMarkIcon
- } from "@heroicons/react/24/outline";
- 
+import { ChevronRightIcon, ChevronLeftIcon, XMarkIcon } from "@heroicons/react/24/outline";
+
 interface ImageZoomModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -24,14 +23,24 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     images,
     selectedIndex,
     setSelectedIndex
-}) => {     
+}) => {
     const [zoom, setZoom] = useState(1); // 1 = normal, 2 = zoomed
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const handleImageClick = () => {
-        setZoom((prevZoom) => (prevZoom === 1 ? 2 : 1));
-        if (zoom === 2) {
-            setPosition({ x: 0, y: 0 }); 
-        }
+    const [transformOrigin, setTransformOrigin] = useState("center center");
+    const imageRef = useRef<HTMLDivElement | null>(null);
+
+    const handleImageClick = (event: React.MouseEvent) => {
+        if (!imageRef.current) return;
+
+        const { left, top, width, height } = imageRef.current.getBoundingClientRect();
+        const clickX = event.clientX - left; 
+        const clickY = event.clientY - top;
+
+        // Convert to percentage for `transform-origin`
+        const percentX = (clickX / width) * 100;
+        const percentY = (clickY / height) * 100;
+
+        setTransformOrigin(`${percentX}% ${percentY}%`);
+        setZoom((prevZoom) => (prevZoom === 1 ? 3 : 1)); 
     };
 
     return (
@@ -45,41 +54,45 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
             {/* Close Button */}
             <button
                 onClick={onClose}
-                className="absolute top-10 right-6 bg-white p-2 border-black border-1 rounded-full"
+                className="z-102 absolute top-14 right-6 bg-white p-2 border-black border-1 rounded-full"
             >
                 <XMarkIcon className="size-5" />
             </button>
 
             <div className="relative max-w-3xl w-full flex flex-col items-center z-[101]">
-
                 <button
                     onClick={onPrev}
-                    className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full"
-                    >
+                    className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10"
+                >
                     <ChevronLeftIcon className="size-6" />
                 </button>
-                
+
+                {/* Fixed Container */}
+                <div
+                    ref={imageRef}
+                    className="border-2 border-gray-200 rounded-lg w-[600px] h-[600px] overflow-hidden flex items-center justify-center cursor-pointer"
+                    onClick={handleImageClick}
+                >
+                    <Image
+                        src={imageUrl}
+                        alt="full-size product"
+                        width={600}
+                        height={600}
+                        className="rounded-lg transition-transform duration-300 p-16 bg-white"
+                        style={{
+                            transform: `scale(${zoom})`,
+                            transformOrigin: transformOrigin,
+                            cursor: zoom === 1 ? "zoom-in" : "zoom-out"
+                        }}
+                    />
+                </div>
+
                 <button
                     onClick={onNext}
-                    className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full"
-                    >
+                    className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10"
+                >
                     <ChevronRightIcon className="size-6" />
                 </button>
-
-                <Image
-                    src={imageUrl}
-                    alt="full-size product"
-                    width={600}
-                    height={600}
-                    onClick={handleImageClick}
-                    className="rounded-lg h-auto object-contain border-2 border-gray-200 p-12 bg-white transition-transform"
-                    style={{
-                        transform: `scale(${zoom})`,
-                        transformOrigin: "center",
-                        cursor: zoom === 1 ? "zoom-in" : "grab"
-                    }}
-                />
-
             </div>
 
             {/* Thumbnail Row */}
@@ -89,16 +102,10 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
                         key={index}
                         onClick={() => setSelectedIndex(index)}
                         className={`border-2 p-1 rounded-md ${
-                            selectedIndex === index ? "border-white" : "border-transparent"
+                            selectedIndex === index ? "border-gray-300" : "border-transparent"
                         }`}
                     >
-                        <Image
-                            src={img}
-                            alt="thumbnail"
-                            width={60}
-                            height={60}
-                            className="rounded-md"
-                        />
+                        <Image src={img} alt="thumbnail" width={60} height={60} className="rounded-md" />
                     </button>
                 )) || <p className="text-white">No images available</p>}
             </div>

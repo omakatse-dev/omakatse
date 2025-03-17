@@ -31,7 +31,7 @@ export default function ProductImages({
           <button
             key={image.url}
             onClick={() => setSelectedIndex(index)}
-            className={`border-2 rounded-xl bg-white ${
+            className={`rounded-xl bg-white ${
               selectedIndex === index ? "border-primary" : "border-transparent"
             }`}
           >
@@ -40,7 +40,7 @@ export default function ProductImages({
               alt="product"
               width={80}
               height={80}
-              className="rounded-xl border-primary p-1"
+              className="rounded-lg border-primary p-2"
             />
           </button>
         ))}
