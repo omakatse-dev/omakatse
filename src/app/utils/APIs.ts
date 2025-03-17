@@ -161,6 +161,24 @@ export const getProductDetailsByID = async (productID: string) => {
     title
     tags
     description
+    collections(first: 1) {
+      nodes {
+        products(first: 4, sortKey: BEST_SELLING) {
+          nodes {
+            id
+            title
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            featuredImage {
+              url
+            }
+          }
+        }
+      }
+    }
     options {
       name
       optionValues {
@@ -169,6 +187,7 @@ export const getProductDetailsByID = async (productID: string) => {
     }
     variants(first: 50) {
       nodes {
+        id
         price {
           amount
         }
@@ -195,4 +214,58 @@ export const getProductDetailsByID = async (productID: string) => {
 
   const res = await storefrontClient.request(productQuery);
   return res.data.product;
+};
+
+export const createCart = async (
+  lines: { merchandiseId: string; quantity: number }[]
+) => {
+  const cartQuery = `
+  mutation createCart($lines: [CartLineInput!]) {
+    cartCreate(
+      input: {
+        lines: $lines
+      }
+    ) {
+      cart {
+        id
+        checkoutUrl
+        totalQuantity
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+        }
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  image {
+                    url
+                  }
+                  product {
+                    title
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }`;
+
+  const res = await storefrontClient.request(cartQuery, {
+    variables: { lines },
+  });
+  return res.data.cartCreate.cart;
 };

@@ -4,6 +4,7 @@ import FreeShippingTracker from "./FreeShippingTracker";
 import { useCartStore } from "@/stores/cartStore";
 import RegularCartItem from "./RegularCartItem";
 import { formatPrice } from "@/utils/Utils";
+import { createCart } from "@/app/utils/APIs";
 export default function Cart({
   isOpen,
   handleClose,
@@ -13,6 +14,18 @@ export default function Cart({
 }) {
   const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
+  const cartItems = useCartStore((state) => state.items);
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  const createCartHandler = async () => {
+    const formattedItems = cartItems.map((item) => ({
+      merchandiseId: item.id,
+      quantity: item.quantity,
+    }));
+    const res = await createCart(formattedItems);
+    window.open(res.checkoutUrl, "_blank");
+    clearCart();
+  };
 
   return (
     <>
@@ -58,6 +71,7 @@ export default function Cart({
           <Button
             className="w-full mt-3 py-4"
             disabled={regularCartItems.length === 0}
+            onClick={createCartHandler}
           >
             Checkout - AED {formatPrice(totalPrice.toString())}
           </Button>

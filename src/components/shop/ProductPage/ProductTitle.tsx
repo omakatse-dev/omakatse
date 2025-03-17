@@ -64,7 +64,7 @@ export default function ProductTitle({
       changeQuantity(item, item.quantity + quantity);
     } else {
       addItem({
-        id: details.id,
+        id: selectedVariant?.id || "", //this is the variant id
         name: details.title,
         price: selectedVariant?.price.amount || "",
         compareAtPrice: selectedVariant?.compareAtPrice?.amount || "",
