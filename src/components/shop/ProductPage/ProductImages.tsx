@@ -31,7 +31,7 @@ export default function ProductImages({
           <button
             key={image.url}
             onClick={() => setSelectedIndex(index)}
-            className={`border-2 p-1 rounded-xl ${
+            className={`border-2 rounded-xl bg-white ${
               selectedIndex === index ? "border-primary" : "border-transparent"
             }`}
           >
@@ -40,18 +40,18 @@ export default function ProductImages({
               alt="product"
               width={80}
               height={80}
-              className="rounded-xl border-primary p-2"
+              className="rounded-xl border-primary p-1"
             />
           </button>
         ))}
       </div>
 
       {/* Main Image - Clickable */}
-      <button onClick={openModal} className="md:w-7/8 mx-6">
+      <button onClick={openModal} className="md:w-7/8 mx-6 md:mx-0">
         <Image
           src={images.nodes[selectedIndex].url}
           alt="product"
-          className="bg-white rounded-xl md:w-7/8 aspect-square border-primary justify-self-center p-12"
+          className="bg-white rounded-xl md:w-full aspect-square border-primary justify-self-center p-12"
           width={516}
           height={516}
         />
