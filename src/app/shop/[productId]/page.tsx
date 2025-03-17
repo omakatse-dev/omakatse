@@ -1,5 +1,6 @@
 import { getProductDetailsByID } from "@/app/utils/APIs";
-import ProductDetails from "@/components/shop/ProductDetails";
+import ProductDetails from "@/components/shop/ProductPage/ProductDetails";
+import OtherProducts from "@/components/shop/ProductPage/OtherProducts";
 
 export default async function ProductPage({
   params,
@@ -8,6 +9,14 @@ export default async function ProductPage({
 }) {
   const { productId } = await params;
   const product = await getProductDetailsByID(productId);
-  console.log(product.collections.nodes[0].products.nodes)
-  return <ProductDetails product={product} />;
+  const relatedProducts = product.collections.nodes[0].products.nodes.filter(
+    (p: { id: string }) => p.id !== product.id
+  );
+  console.log(relatedProducts);
+  return (
+    <div className="w-screen">
+    <ProductDetails product={product} />
+    <OtherProducts products={relatedProducts} />
+    </div>
+  );
 }
