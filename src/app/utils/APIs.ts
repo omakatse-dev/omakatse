@@ -163,7 +163,7 @@ export const getProductDetailsByID = async (productID: string) => {
     description
     collections(first: 1) {
       nodes {
-        products(first: 4, sortKey: BEST_SELLING) {
+        products(first: 5, sortKey: BEST_SELLING) {
           nodes {
             id
             title
