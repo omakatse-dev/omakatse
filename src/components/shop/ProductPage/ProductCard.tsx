@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: {
@@ -16,9 +17,14 @@ interface ProductCardProps {
   };
 }
 
+const getProductNumericID = (productId: string): string => {
+  return productId.split("/").pop() || ""; // Extracts the last part after '/' which is the numeric ID
+};
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const numericID = getProductNumericID(product.id); 
   return (
-    <div className="">
+    <Link href={`/shop/${numericID}`}>
       <Image
         src={product.featuredImage.url}
         alt={product.title}
@@ -28,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       />
       <h3 className="bodyLG mb-2">{product.title}</h3>
       <p className="bodyMD">${product.priceRange.minVariantPrice.amount}</p>
-    </div>
+    </Link>
   );
 };
 
