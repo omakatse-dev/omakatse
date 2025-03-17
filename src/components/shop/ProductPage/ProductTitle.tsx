@@ -150,7 +150,7 @@ export default function ProductTitle({
               count={quantity}
               setCount={setQuantity}
             />
-            <Button className="flex items-center h-16" onClick={addToCartHandler}>
+            <Button className="flex items-center h-16 w-full" onClick={addToCartHandler}>
               Add to Cart - AED{" "}
               {formatPrice(
                 (Number(selectedVariant?.price.amount) * quantity).toString()
