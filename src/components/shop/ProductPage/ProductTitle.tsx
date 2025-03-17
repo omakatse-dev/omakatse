@@ -10,6 +10,8 @@ import ProductTabs from "../../common/ProductTabs";
 import ColorTabs from "../../common/ColorTabs";
 import CounterButton from "@/components/common/CounterButton";
 import { formatPrice } from "@/utils/Utils";
+import { useCartStore } from "@/stores/cartStore";
+import { useUIStore } from "@/stores/uiStore";
 
 export default function ProductTitle({
   details,
@@ -25,8 +27,11 @@ export default function ProductTitle({
     };
   });
 
+  const { openCart } = useUIStore();
+
   //an array of selected options
   const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
+  const [quantity, setQuantity] = useState(1);
 
   const handleSelectOption = (option: number, value: string) => {
     const newSelectedOptions = [...selectedOptions];
@@ -48,6 +53,28 @@ export default function ProductTitle({
       )
     );
   });
+  const addItem = useCartStore((state) => state.addItem);
+  const changeQuantity = useCartStore((state) => state.changeQuantity);
+  const addToCartHandler = () => {
+    // if item is already in cart, update the quantity
+    const item = useCartStore
+      .getState()
+      .items.find((item) => item.id === details.id);
+    if (item) {
+      changeQuantity(item, item.quantity + quantity);
+    } else {
+      addItem({
+        id: details.id,
+        name: details.title,
+        price: selectedVariant?.price.amount || "",
+        compareAtPrice: selectedVariant?.compareAtPrice?.amount || "",
+        quantity: quantity,
+        image: details.images.nodes[0].url,
+        options: selectedOptions,
+      });
+    }
+    openCart();
+  };
 
   return (
     <div className={`flex flex-col w-1/2 bg-gray-50 ${className}`}>
@@ -72,24 +99,15 @@ export default function ProductTitle({
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <h3 className="font-bold">{details.title}</h3>
+
           <div className="bodyXL flex gap-2">
+            <div>AED {formatPrice(details.variants.nodes[0].price.amount)}</div>
             {details.variants.nodes[0].compareAtPrice && (
-              <div>
-                {details.variants.nodes[0].compareAtPrice.amount &&
-                  "AED " +
-                    formatPrice(
-                      details.variants.nodes[0].compareAtPrice.amount
-                    )}
+              <div className="line-through text-gray-500">
+                {"AED " +
+                  formatPrice(details.variants.nodes[0].compareAtPrice.amount)}
               </div>
             )}
-            <div
-              className={`${
-                details.variants.nodes[0].compareAtPrice &&
-                "line-through text-gray-500"
-              }`}
-            >
-              AED {formatPrice(details.variants.nodes[0].price.amount)}
-            </div>
           </div>
 
           <b className="bodySM font-light"> (4.5 stars) 10 reviews</b>
@@ -126,9 +144,17 @@ export default function ProductTitle({
         {selectedVariant?.quantityAvailable &&
         selectedVariant?.quantityAvailable > 0 ? (
           <div className="flex flex-row gap-4 w-full">
-            <CounterButton min={1} max={selectedVariant?.quantityAvailable} />
-            <Button variant="primary" className="">
-              Add to Cart - AED {formatPrice(selectedVariant?.price.amount)}
+            <CounterButton
+              min={1}
+              max={selectedVariant?.quantityAvailable}
+              count={quantity}
+              setCount={setQuantity}
+            />
+            <Button className="flex items-center" onClick={addToCartHandler}>
+              Add to Cart - AED{" "}
+              {formatPrice(
+                (Number(selectedVariant?.price.amount) * quantity).toString()
+              )}
             </Button>
           </div>
         ) : (

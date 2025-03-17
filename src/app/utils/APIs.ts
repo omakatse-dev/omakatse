@@ -157,6 +157,7 @@ export const getSellingPlans = async () => {
 export const getProductDetailsByID = async (productID: string) => {
   const productQuery = `{
   product(id: "gid://shopify/Product/${productID}") {
+    id
     title
     tags
     description

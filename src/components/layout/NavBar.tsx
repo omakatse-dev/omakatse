@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import React from "react";
@@ -14,6 +14,8 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import SearchDropdown from "./Search/SearchDropdown";
+import Cart from "./Cart/Cart";
+import { useUIStore } from '@/stores/uiStore';
 
 export default function NavBar() {
   const links = [
@@ -33,10 +35,11 @@ export default function NavBar() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const { isCartOpen, openCart, closeCart } = useUIStore();
+
   return (
     <>
       <div className="flex justify-between bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
-
         <div className="xl:hidden flex justify-center gap-3">
           <button onClick={() => setIsOpen((prev) => !prev)}>
             <Bars3Icon className="h-6 w-6 stroke-black stroke-[2]" />
@@ -75,33 +78,34 @@ export default function NavBar() {
         <div className="hidden xl:flex gap-8">
           <Button variant="primary">Build your box now</Button>
           <div className="flex gap-5">
-            <button className="cursor-pointer" onClick={() => (setShowSearchDropdown((prev) => !prev))}>
+            <button
+              className="cursor-pointer"
+              onClick={() => setShowSearchDropdown((prev) => !prev)}
+            >
               <MagnifyingGlassIcon className="h-6 w-6 stroke-black stroke-[2]" />
             </button>
             <button>
               <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
             </button>
-            <button>
+            <button onClick={openCart} className="cursor-pointer">
               <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
             </button>
           </div>
         </div>
 
         <div className="xl:hidden flex">
-          <button>
+          <button onClick={openCart} className="cursor-pointer">
             <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
           </button>
         </div>
-
       </div>
 
-      <MobileMenu
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Cart isOpen={isCartOpen} handleClose={closeCart} />
+      <SearchDropdown
+        isOpen={showSearchDropdown}
+        handleClose={() => setShowSearchDropdown(false)}
       />
-      <SearchDropdown isOpen={showSearchDropdown} handleClose={() => setShowSearchDropdown(false)} />
-
     </>
-
   );
 }
