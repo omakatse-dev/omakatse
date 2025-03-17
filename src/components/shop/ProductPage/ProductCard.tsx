@@ -17,12 +17,8 @@ interface ProductCardProps {
   };
 }
 
-const getProductNumericID = (productId: string): string => {
-  return productId.split("/").pop() || ""; // Extracts the last part after '/' which is the numeric ID
-};
-
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const numericID = getProductNumericID(product.id); 
+  const numericID = product.id.split("/").pop();
   return (
     <Link href={`/shop/${numericID}`}>
       <Image

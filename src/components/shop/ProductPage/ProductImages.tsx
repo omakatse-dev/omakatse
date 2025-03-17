@@ -16,10 +16,10 @@ export default function ProductImages({
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const nextImage = () => 
+  const nextImage = () =>
     setSelectedIndex((prevIndex) => (prevIndex + 1) % images.nodes.length);
 
-  const prevImage = () => 
+  const prevImage = () =>
     setSelectedIndex((prevIndex) =>
       prevIndex === 0 ? images.nodes.length - 1 : prevIndex - 1
     );

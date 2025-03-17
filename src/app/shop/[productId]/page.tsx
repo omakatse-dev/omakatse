@@ -15,8 +15,8 @@ export default async function ProductPage({
   console.log(relatedProducts);
   return (
     <div className="w-screen">
-    <ProductDetails product={product} />
-    <OtherProducts products={relatedProducts} />
+      <ProductDetails product={product} />
+      <OtherProducts products={relatedProducts} />
     </div>
   );
 }

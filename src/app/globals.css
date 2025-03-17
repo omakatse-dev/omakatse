@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --font-open-sans: 'Open Sans', sans-serif;
-  --font-parkinsans: 'Parkinsans', sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-parkinsans: "Parkinsans", sans-serif;
 
-  --color-yellow: #FFC400;
-  --color-blue: #40AED7;
-  --color-pink: #EE807F;
-  --color-orange: #FF6309;
-  --color-green: #61C9A8;
+  --color-yellow: #ffc400;
+  --color-blue: #40aed7;
+  --color-pink: #ee807f;
+  --color-orange: #ff6309;
+  --color-green: #61c9a8;
 
-  --color-yellow-pastel: #FFF6DC;
-  --color-blue-pastel: #E4F8FF;
-  --color-pink-pastel: #FFE9E9;
-  --color-orange-pastel: #FFDFCC;
-  --color-green-pastel: #D7FFF2;
+  --color-yellow-pastel: #fff6dc;
+  --color-blue-pastel: #e4f8ff;
+  --color-pink-pastel: #ffe9e9;
+  --color-orange-pastel: #ffdfcc;
+  --color-green-pastel: #d7fff2;
 
-  --color-blue-light: #A7E0F5;
-  --color-yellow-light: #FFEFB6;
-  --color-red: #ED0131;
+  --color-blue-light: #a7e0f5;
+  --color-yellow-light: #ffefb6;
+  --color-red: #ed0131;
 
-  --color-white: #FFFFFF;
-  --color-gray-50: #FDFAF4;
-  --color-gray-200: #E4DFD1;
-  --color-gray-300: #CEC9BC;
-  --color-gray-400: #B8A9A1;
-  --color-gray-500: #968A84;
-  --color-gray-800: #59504C;
-  --color-black: #2C2420;
+  --color-white: #ffffff;
+  --color-gray-50: #fdfaf4;
+  --color-gray-200: #e4dfd1;
+  --color-gray-300: #cec9bc;
+  --color-gray-400: #b8a9a1;
+  --color-gray-500: #968a84;
+  --color-gray-800: #59504c;
+  --color-black: #2c2420;
 }
 
 :root {
@@ -51,34 +51,34 @@ h4 {
 }
 
 .bodyXL {
-  @apply text-lg sm:text-xl leading-[1.5]
+  @apply text-lg sm:text-xl leading-[1.5];
 }
 
 .bodyLG {
-  @apply text-base sm:text-lg leading-[1.5]
+  @apply text-base sm:text-lg leading-[1.5];
 }
 
 .bodyMD {
-  @apply text-sm sm:text-base leading-[1.5]
+  @apply text-sm sm:text-base leading-[1.5];
 }
 
 .bodySM {
-  @apply text-xs sm:text-sm leading-[1.5]
+  @apply text-xs sm:text-sm leading-[1.5];
 }
 
 .bodyXS {
-  @apply text-[0.625rem] sm:text-xs leading-[1.5]
+  @apply text-[0.625rem] sm:text-xs leading-[1.5];
 }
 
 .bodyButton {
-  @apply text-sm sm:text-base font-semibold leading-[1.5]
+  @apply text-sm sm:text-base font-semibold leading-[1.5];
 }
 
 .border-primary {
-  @apply border border-gray-200
+  @apply border border-gray-200;
 }
-.border-secondary{
-  @apply border border-gray-400
+.border-secondary {
+  @apply border border-gray-400;
 }
 
 /* styles.css */
@@ -101,8 +101,7 @@ h4 {
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
-
