@@ -8,17 +8,19 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 export default function ProductDescription({
   description,
+  className,
 }: {
   description: string;
+  className?: string;
 }) {
   const descriptionObject = JSON.parse(description);
   return (
-    <div className="mx-auto w-full flex flex-col gap-10">
-      {Object.keys(descriptionObject).map((key: string) => (
+    <div className={`mx-auto w-full flex flex-col ${className}`}>
+    {Object.keys(descriptionObject).map((key: string) => (
         <Disclosure
           as="div"
           key={key}
-          className="p- border-t-1 border-black"
+          className="border-t-1 border-black"
           defaultOpen={false}
         >
           <DisclosureButton className="group flex w-full items-center justify-between">
