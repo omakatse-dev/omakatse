@@ -15,8 +15,8 @@ import {
 } from "@heroicons/react/24/outline";
 import SearchDropdown from "./Search/SearchDropdown";
 import Cart from "./Cart/Cart";
-import { useUIStore } from '@/stores/uiStore';
-
+import { useUIStore } from "@/stores/uiStore";
+import { useCartStore } from "@/stores/cartStore";
 export default function NavBar() {
   const links = [
     {
@@ -36,6 +36,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const { isCartOpen, openCart, closeCart } = useUIStore();
+  const cartItems = useCartStore((state) => state.items);
 
   return (
     <>
@@ -87,15 +88,21 @@ export default function NavBar() {
             <button>
               <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
             </button>
-            <button onClick={openCart} className="cursor-pointer">
+            <button onClick={openCart} className="cursor-pointer relative">
               <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
+              {cartItems.length > 0 && (
+                <div className="absolute top-4 right-0 bg-red-500 rounded-full w-3 h-3" />
+              )}
             </button>
           </div>
         </div>
 
         <div className="xl:hidden flex">
-          <button onClick={openCart} className="cursor-pointer">
+          <button onClick={openCart} className="cursor-pointer relative">
             <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
+            {cartItems.length > 0 && (
+              <div className="absolute top-2 -right-1 bg-red-500 rounded-full w-3 h-3" />
+            )}
           </button>
         </div>
       </div>

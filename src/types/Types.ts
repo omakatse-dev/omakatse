@@ -52,6 +52,7 @@ export type OptionValue = {
 
 type VariantNodes = {
   nodes: {
+    id: string;
     price: {
       amount: string;
     };
