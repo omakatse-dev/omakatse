@@ -4,7 +4,6 @@ import Input from "../common/Input";
 import PillButton from "../common/PillButton";
 import Card from "../common/Card";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
-import { ClientPageRoot } from "next/dist/client/components/client-page";
 
 const ALLERGIES = [
   "Beef",
@@ -14,6 +13,12 @@ const ALLERGIES = [
   "Lamb",
   "Seafood",
 ] as const;
+
+type StandardAllergy = typeof ALLERGIES[number];
+type AllergyData = {
+  true: boolean;
+  allergies: (StandardAllergy | string)[];
+};
 
 interface Props {
   name: string;
@@ -27,7 +32,7 @@ export default function AllergySelector({ name, fieldName }: Props) {
   const setData = useSubscriptionFormStore(state => state.setData);
 
   // Use the actual data from the store
-  const allergiesData = petDetails?.allergies || { true: false, allergies: [] };
+  const allergiesData: AllergyData = petDetails?.allergies || { true: false, allergies: [] };
 
   const updateAllergies = (newAllergies: typeof allergiesData) => {
     const pets = useSubscriptionFormStore.getState()[petType] || [];
@@ -82,15 +87,20 @@ export default function AllergySelector({ name, fieldName }: Props) {
           <Input
             placeholder="Enter any other allergies"
             className="w-full mt-2"
-            value={allergiesData.allergies.filter(a => !ALLERGIES.includes(a as any)).join(", ")}
+            value={allergiesData.allergies
+              .filter((allergy): allergy is string => 
+                !ALLERGIES.includes(allergy as StandardAllergy)
+              )
+              .join(", ")}
             onChange={(e) => {
-              console.log("firing")
               const otherAllergies = e.target.value
                 .split(",")
                 .map(a => a.trim())
                 .filter(Boolean);
               const standardAllergies = allergiesData.allergies
-                .filter(a => ALLERGIES.includes(a as any));
+                .filter((a): a is StandardAllergy => 
+                  ALLERGIES.includes(a as StandardAllergy)
+                );
               updateAllergies({
                 ...allergiesData,
                 allergies: [...standardAllergies, ...otherAllergies]

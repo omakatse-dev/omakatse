@@ -1,5 +1,3 @@
-import React from "react";
-import Link from "next/link";
 import ProductTitle from "./ProductPage/ProductTitle";
 import ProductDescription from "./ProductPage/ProductDescription";
 import ProductImages from "./ProductPage/ProductImages";

@@ -2,6 +2,7 @@ import { ShopfrontProduct } from "@/types/Types";
 import React from "react";
 import Tag from "../common/Tag";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ItemCard({ product }: { product: ShopfrontProduct }) {
   const id = product.id.split("/").pop();
@@ -16,9 +17,12 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
           {product.tags[0]}
         </Tag>
       )}
-      <img
+      <Image
         src={product.featuredImage.url}
+        alt={product.title}
         className="w-full aspect-square bg-gray-200 rounded-2xl object-cover border-primary"
+        width={100}
+        height={100}
       />
       <div className="bodyLG text-black font-semibold mt-4">
         {product.title}

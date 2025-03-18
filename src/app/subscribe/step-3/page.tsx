@@ -9,8 +9,6 @@ import { useRouter } from "next/navigation";
 export default function SubscriptionStepThreePage() {
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount) || 0;
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount) || 0;
-  const storedCats = useSubscriptionFormStore((state) => state.catsDetails);
-  const storedDogs = useSubscriptionFormStore((state) => state.dogsDetails);
 
   const router = useRouter();
 

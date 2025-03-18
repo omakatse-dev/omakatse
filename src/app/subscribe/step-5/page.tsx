@@ -1,13 +1,10 @@
 "use client";
 
 import Button from "@/components/common/Button";
-import Card from "@/components/common/Card";
-import PillButton from "@/components/common/PillButton";
 import AllergenSelector from "@/components/subscription/AllergySelector";
 import ProgressBar from "@/components/subscription/ProgressBar";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

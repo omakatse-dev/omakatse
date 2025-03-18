@@ -8,7 +8,6 @@ import ItemsGrid from "@/components/shop/ItemsGrid";
 import useQueryParams from "@/hooks/useQueryParams";
 import { ShopfrontProduct } from "@/types/Types";
 import MobileTabs from "../common/MobileTabs";
-import Selector from "../common/Selector";
 import SubCategoryDropdown from "./SubCategoryDropdown";
 import { ArrowsUpDownIcon } from "@heroicons/react/24/outline";
 import MobileSortSideBar from "./MobileSortSideBar";
@@ -55,15 +54,15 @@ export default function Shopfront({
 
   useEffect(() => {
     setQueryParam("tab", selectedTab);
-  }, [selectedTab]);
+  }, [selectedTab, setQueryParam]);
 
   useEffect(() => {
     setQueryParam("filter", selectedFilter);
-  }, [selectedFilter]);
+  }, [selectedFilter, setQueryParam]);
 
   useEffect(() => {
     setQueryParam("sort", selectedSortingOption);
-  }, [selectedSortingOption]);
+  }, [selectedSortingOption, setQueryParam]);
 
   const filteredProducts = products.filter((product) => {
     return (

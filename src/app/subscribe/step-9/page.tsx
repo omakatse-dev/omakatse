@@ -3,7 +3,7 @@
 import Button from "@/components/common/Button";
 import Tabs from "@/components/common/Tabs";
 import ProgressBar from "@/components/subscription/ProgressBar";
-import SubscriptionOptions from "@/components/subscription/SubscriptionOptions";
+// import SubscriptionOptions from "@/components/subscription/SubscriptionOptions";
 import TipCard from "@/components/subscription/TipCard";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
-import { useEffect } from 'react';
 
 const subscriptionSchema = subscriptionFormSchema.pick({
   boxSize: true,
@@ -26,19 +25,14 @@ export default function SubscriptionStepNinePage() {
   const storedBoxSize = useSubscriptionFormStore((state) => state.boxSize);
   const storedDuration = useSubscriptionFormStore((state) => state.duration);
 
-  const {
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors }
-  } = useForm<SubscriptionSchema>({
-    resolver: zodResolver(subscriptionSchema),
-    defaultValues: {
-      boxSize: storedBoxSize || "small",
-      duration: storedDuration || "trial"
-    }
-  });
+  const { handleSubmit, watch, setValue } =
+    useForm<SubscriptionSchema>({
+      resolver: zodResolver(subscriptionSchema),
+      defaultValues: {
+        boxSize: storedBoxSize || "small",
+        duration: storedDuration || "trial",
+      },
+    });
 
   const boxSize = watch("boxSize");
 
@@ -48,9 +42,9 @@ export default function SubscriptionStepNinePage() {
   };
 
   const handleSelectBox = (value: string) => {
-    setValue("boxSize", value === "Small Box" ? "small" : "large")
-    setData({ boxSize: value === "Small Box" ? "small" : "large" })
-  }
+    setValue("boxSize", value === "Small Box" ? "small" : "large");
+    setData({ boxSize: value === "Small Box" ? "small" : "large" });
+  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
@@ -66,10 +60,7 @@ export default function SubscriptionStepNinePage() {
         className="bg-gray-200"
       />
       <TipCard />
-      <SubscriptionOptions
-        control={control}
-        name="duration"
-      />
+      {/* <SubscriptionOptions control={control} name="duration" /> */}
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex gap-5">
         <Button

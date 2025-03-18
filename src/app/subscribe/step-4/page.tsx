@@ -6,7 +6,6 @@ import SizeSelector from "@/components/subscription/SizeSelector";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClientPageRoot } from "next/dist/client/components/client-page";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

@@ -15,7 +15,7 @@ export default function useQueryParams() {
         const params = new URLSearchParams(searchParams);
         params.set(key, value);
         router.push(`?${params.toString()}`);
-    }, [searchParams]);
+    }, [searchParams, router]);
 
     return { getQueryParam, setQueryParam };
 }

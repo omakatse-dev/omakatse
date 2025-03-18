@@ -27,7 +27,6 @@ export default function SubscriptionStepTwoPage() {
     control,
     handleSubmit,
     formState: { errors },
-    setValue
   } = useForm<PetCountSchema>({
     resolver: zodResolver(petCountSchema),
     defaultValues: {
