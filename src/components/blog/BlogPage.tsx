@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
-import blogData from "../../data/blogData.json"; // Your blog data import
+import blogData from "../../data/blogData.json";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -13,16 +13,16 @@ import {
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [blogsPerPage, setBlogsPerPage] = useState(3);
+  const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  // To handle window resizing
   const handleResize = () => {
     if (window.innerWidth >= 768) {
       setBlogsPerPage(9);
     } else {
       setBlogsPerPage(3);
     }
+    setSearchQuery("");
   };
 
   useEffect(() => {
@@ -55,20 +55,18 @@ export default function Page() {
   // Slice the filtered blogData to show only the blogs for the current page
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  // Calculate the total number of pages
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
 
-  // Handle page change
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <div className="bg-gray-500 h-120 rounded-4xl mb-8" />
       <div className="flex flex-row justify-center">
         <div className="hidden">Category selection</div>
-        <div className="">
+        <div className="w-full">
           {/* Search Bar */}
           <div className="flex flex-row justify-center">
             <div className="hidden md:flex mb-8 w-80 rounded-full bg-white items-center p-2 border-gray-200 border-1 h-auto">
@@ -83,7 +81,7 @@ export default function Page() {
               <MagnifyingGlassIcon className="h-6 mx-2" />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row md:gap-32">
+          <div className="flex flex-col md:flex-row md:gap-32 w-full">
             {/* Category Selector */}
             <SelectCategory
               categories={categories}
@@ -92,10 +90,11 @@ export default function Page() {
             />
 
             {/* Blog Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
               {currentBlogs.map((blog) => (
                 <BlogCard key={blog.id} blogData={blog} />
               ))}
+                {(currentBlogs.length === 0) && <div>no blogs found</div>}
             </div>
           </div>
 
