@@ -1,0 +1,86 @@
+[
+    {
+      "id": "1",
+      "category": "Technology",
+      "duration": "5",
+      "title": "The Future of Artificial Intelligence",
+      "description": "Explore how AI is transforming industries, from healthcare to transportation, and what the future holds."
+    },
+    {
+      "id": "2",
+      "category": "Health",
+      "duration": "7",
+      "title": "5 Ways to Boost Your Mental Health",
+      "description": "Learn simple and effective strategies for improving mental health, reducing stress, and enhancing overall well-being."
+    },
+    {
+      "id": "3",
+      "category": "Lifestyle",
+      "duration": "6",
+      "title": "How to Live a Sustainable Life",
+      "description": "A guide to adopting a more sustainable lifestyle, from reducing waste to choosing eco-friendly products."
+    },
+    {
+      "id": "4",
+      "category": "Finance",
+      "duration": "8",
+      "title": "Investing 101: A Beginner's Guide",
+      "description": "A comprehensive introduction to investing, covering the basics of stocks, bonds, and mutual funds."
+    },
+    {
+      "id": "5",
+      "category": "Food",
+      "duration": "4",
+      "title": "The Best Vegan Recipes for Beginners",
+      "description": "A collection of simple and delicious vegan recipes that anyone can make, whether you're new to plant-based eating or not."
+    },
+    {
+      "id": "6",
+      "category": "Travel",
+      "duration": "6",
+      "title": "Top 10 Travel Destinations for 2023",
+      "description": "Get inspired with a list of must-visit travel spots around the world for your next adventure in 2023."
+    },
+    {
+      "id": "7",
+      "category": "Education",
+      "duration": "5",
+      "title": "How to Stay Motivated While Learning Online",
+      "description": "Discover tips and techniques for maintaining focus and motivation while taking online courses."
+    },
+    {
+      "id": "8",
+      "category": "Technology",
+      "duration": "7",
+      "title": "The Rise of Blockchain Technology",
+      "description": "Blockchain is revolutionizing industries beyond cryptocurrencies. Learn how it's being applied in various sectors."
+    },
+    {
+      "id": "9",
+      "category": "Lifestyle",
+      "duration": "6",
+      "title": "How to Build a Morning Routine for Success",
+      "description": "Creating a successful morning routine can set the tone for your entire day. Here's how to get started."
+    },
+    {
+      "id": "10",
+      "category": "Finance",
+      "duration": "10",
+      "title": "Personal Finance: How to Build a Budget that Works",
+      "description": "Master the art of budgeting with this step-by-step guide to personal finance and saving money."
+    },
+    {
+      "id": "11",
+      "category": "Health",
+      "duration": "9",
+      "title": "How to Stay Fit While Working From Home",
+      "description": "Tips and exercises to keep your body active and healthy while working from the comfort of your own home."
+    },
+    {
+      "id": "12",
+      "category": "Food",
+      "duration": "5",
+      "title": "The Ultimate Guide to Meal Prepping",
+      "description": "Save time and eat healthier with meal prepping. Learn how to plan, cook, and store meals for the week."
+    }
+  ]
