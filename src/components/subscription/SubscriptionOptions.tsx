@@ -1,8 +1,5 @@
-import React from "react";
 import CardButton from "../common/CardButton";
 import { Control, Controller, ControllerRenderProps } from "react-hook-form";
-import { TreatPreferenceSchema } from "@/app/subscribe/step-7/page";
-import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 
 const OPTIONS = [
   {
@@ -31,21 +28,32 @@ const OPTIONS = [
   },
 ] as const;
 
+type OptionValue = typeof OPTIONS[number]['value'];
+
+interface SubscriptionFormData {
+  subscriptionType: OptionValue;
+  // ... other form fields
+}
+
 interface Props {
-  control: Control<any>;
-  name: string;
+  control: Control<SubscriptionFormData>;
+  name: keyof SubscriptionFormData;
 }
 
 export default function SubscriptionOptions({ control, name }: Props) {
-  const setData = useSubscriptionFormStore((state) => state.setData);
+  // const setData = useSubscriptionFormStore((state) => state.setData);
 
-  const handleSelectOption = (value: string, field: ControllerRenderProps<any, string>) => {
+  const handleSelectOption = (
+    value: OptionValue, 
+    field: ControllerRenderProps<SubscriptionFormData, keyof SubscriptionFormData>
+  ) => {
     field.onChange(value);
-    const newData = {
-      [field.name]: value,
-    };
-    setData(newData);
+    // const newData = {
+    //   [field.name]: value,
+    // };
+    // setData(newData);
   }
+
   return (
     <Controller
       control={control}

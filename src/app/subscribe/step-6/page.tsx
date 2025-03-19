@@ -23,16 +23,13 @@ export default function SubscriptionStepSixPage() {
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const router = useRouter();
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PreferenceSchema>({
+  const { handleSubmit } = useForm<PreferenceSchema>({
     resolver: zodResolver(preferenceSchema),
     defaultValues: {
       catsDetails: cats,
-      dogsDetails: dogs
+      dogsDetails: dogs,
     },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const onSubmit = () => {
@@ -48,10 +45,27 @@ export default function SubscriptionStepSixPage() {
           We will curate the selection based on what your cats like
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-8 w-full max-w-3xl">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col items-center gap-8 w-full max-w-3xl"
+      >
         <div className="flex flex-col gap-8 w-full max-w-3xl">
-          {cats.map((cat, idx) => <FoodPreferenceSelector key={cat.name} name={cat.name} petType="catsDetails" petIndex={idx} />)}
-          {dogs.map((dog, idx) => <FoodPreferenceSelector key={dog.name} name={dog.name} petType="dogsDetails" petIndex={idx} />)}
+          {cats.map((cat, idx) => (
+            <FoodPreferenceSelector
+              key={cat.name}
+              name={cat.name}
+              petType="catsDetails"
+              petIndex={idx}
+            />
+          ))}
+          {dogs.map((dog, idx) => (
+            <FoodPreferenceSelector
+              key={dog.name}
+              name={dog.name}
+              petType="dogsDetails"
+              petIndex={idx}
+            />
+          ))}
         </div>
 
         <div className="flex gap-5">

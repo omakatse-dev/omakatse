@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchInput from "./SearchInput";
 import { getProductsBySearch } from "@/app/utils/APIs";
-import { ProductSearchResultType } from "@/types/Types";
+import { ShopfrontProduct } from "@/types/Types";
 import ProductSearchResult from "./ProductSearchResult";
 
 export default function SearchDropdown({
@@ -12,9 +12,7 @@ export default function SearchDropdown({
   isOpen: boolean;
 }) {
   const [searchKey, setSearchKey] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<ProductSearchResultType[]>(
-    []
-  );
+  const [searchResults, setSearchResults] = useState<ShopfrontProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -51,7 +49,11 @@ export default function SearchDropdown({
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <SearchInput value={searchKey} onChange={setSearchKey} handleClose={handleClose} />
+        <SearchInput
+          value={searchKey}
+          onChange={setSearchKey}
+          handleClose={handleClose}
+        />
         {isLoading && <div>Searching...</div>}
         <div className="flex flex-col divide-y divide-gray-200 w-full mt-8">
           {searchResults.map((product) => (

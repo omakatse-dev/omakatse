@@ -5,17 +5,15 @@ import ProgressBar from "@/components/subscription/ProgressBar";
 import TreatPreferenceCard from "@/components/subscription/TreatPreferenceCard";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 
-const treatPreferenceSchema = subscriptionFormSchema.pick({
+const _treatPreferenceSchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
 });
 
-export type TreatPreferenceSchema = z.infer<typeof treatPreferenceSchema>;
+export type TreatPreferenceSchema = z.infer<typeof _treatPreferenceSchema>;
 
 export default function SubscriptionStepSevenPage() {
   const router = useRouter();

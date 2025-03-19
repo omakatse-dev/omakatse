@@ -18,7 +18,7 @@ export default function ProductTitle({
   className,
 }: {
   details: ProductDetailsType;
-  className?: String;
+  className?: string;
 }) {
   const defaultOptions = details.options.map((option) => {
     return {

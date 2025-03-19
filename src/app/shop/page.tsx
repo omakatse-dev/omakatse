@@ -5,7 +5,7 @@ import { SortOption } from "@/types/Types";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { searchKey: string; sort: string };
+  searchParams: Promise<{ searchKey: string; sort?: string }>;
 }) {
   const { searchKey, sort } = await searchParams;
 

@@ -5,7 +5,7 @@ import OtherProducts from "@/components/shop/ProductPage/OtherProducts";
 export default async function ProductPage({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }) {
   const { productId } = await params;
   const product = await getProductDetailsByID(productId);

@@ -1,35 +1,31 @@
-import { getProductsByCollection } from '@/app/utils/APIs'
-import Shopfront from '@/components/shop/Shopfront'
-import { SortOption } from '@/types/Types';
+import { getProductsByCollection } from "@/app/utils/APIs";
+import Shopfront from "@/components/shop/Shopfront";
+import { SortOption } from "@/types/Types";
 
-interface PageProps {
-    searchParams: {
-        sort?: string;
-        filter?: string;
-        tab?: string;
-    }
-}
+export default async function DogProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sort?: string; filter?: string; tab?: string }>;
+}) {
+  const { sort } = await searchParams;
 
-export default async function DogProductsPage({ searchParams }: PageProps) {
-    const { sort } = await searchParams;
+  const sortingMap: Record<string, string> = {
+    "New Arrivals": "CREATED",
+    "Best Selling": "BEST_SELLING",
+    "Price: Low to High": "PRICE",
+    "Price: High to Low": "PRICE",
+  } as const;
 
-    const sortingMap: Record<string, string> = {
-        "New Arrivals": "CREATED",
-        "Best Selling": "BEST_SELLING",
-        "Price: Low to High": "PRICE",
-        "Price: High to Low": "PRICE",
-    } as const;
+  const defaultSort = "New Arrivals";
+  const selectedSort = sort || defaultSort;
 
-    const defaultSort = "New Arrivals";
-    const selectedSort = sort || defaultSort;
+  const { products, categories } = await getProductsByCollection(
+    "442294960387",
+    sortingMap[selectedSort as keyof typeof sortingMap] as SortOption,
+    selectedSort === "Price: High to Low"
+  );
 
-    const { products, categories } = await getProductsByCollection(
-        "442294960387",
-        sortingMap[selectedSort as keyof typeof sortingMap] as SortOption,
-        selectedSort === 'Price: High to Low'
-    );
-
-    return (
-        <Shopfront products={products} categories={categories} petType="Dog" />
-    )
+  return (
+    <Shopfront products={products} categories={categories} petType="Dog" />
+  );
 }

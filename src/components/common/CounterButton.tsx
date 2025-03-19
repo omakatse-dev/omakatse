@@ -14,7 +14,9 @@ export default function CounterButton({
   setCount: (count: number) => void;
 }) {
   return (
-    <div className="flex flex-row border-1 rounded-[2rem] w-60 h-16 justify-between items-center px-5">
+    <div
+      className={`flex flex-row border-1 rounded-[2rem] w-44 h-16 justify-between items-center px-5 ${className}`}
+    >
       <button
         onClick={() => setCount(count === min ? count : count - 1)}
         className="text-black text-5xl font-light cursor-pointer"
