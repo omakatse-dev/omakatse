@@ -7,7 +7,6 @@ import blogData from "../../data/blogData.json";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 
 export default function Page() {
@@ -67,20 +66,6 @@ export default function Page() {
       <div className="flex flex-row justify-center">
         <div className="hidden">Category selection</div>
         <div className="w-full">
-          {/* Search Bar */}
-          <div className="flex flex-row justify-center">
-            <div className="hidden md:flex mb-8 w-80 rounded-full bg-white items-center p-2 border-gray-200 border-1 h-auto">
-              {/* Search input */}
-              <input
-                type="text"
-                placeholder="Search for blog"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="p-2 w-full outline-none"
-              />
-              <MagnifyingGlassIcon className="h-6 mx-2" />
-            </div>
-          </div>
           <div className="flex flex-col md:flex-row md:gap-32 w-full">
             {/* Category Selector */}
             <SelectCategory
@@ -94,7 +79,7 @@ export default function Page() {
               {currentBlogs.map((blog) => (
                 <BlogCard key={blog.id} blogData={blog} />
               ))}
-                {(currentBlogs.length === 0) && <div>no blogs found</div>}
+              {currentBlogs.length === 0 && <div>no blogs found</div>}
             </div>
           </div>
 

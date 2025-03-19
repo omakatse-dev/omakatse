@@ -1,5 +1,5 @@
 import React from "react";
-import BlogPage from "@/components/blog/BlogPage";
+import BlogPage from "@/components/blog/BlogCardPage";
 
 export default function page() {
   return (

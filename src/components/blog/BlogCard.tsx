@@ -1,6 +1,7 @@
 import React from 'react';
 import Tag from '../common/Tag';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface BlogCardProps {
   blogData: {
@@ -22,10 +23,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ blogData }) => {
       <h4 className="mb-2">{blogData.title}</h4>
       <p className="bodyMD mb-6">{blogData.description}</p>
       <div>
-        <button className="flex flex-row gap-2 items-center">
-          <p className="bodyButton">Read more</p>
-          <ChevronRightIcon className="h-6" />
-        </button>
+        <Link href={`/blog/${blogData.id}`} passHref>
+          <button className="flex flex-row gap-2 items-center">
+            <p className="bodyButton">Read more</p>
+            <ChevronRightIcon className="h-6" />
+          </button>
+        </Link>
       </div>
     </div>
   );
