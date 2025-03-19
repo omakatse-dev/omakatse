@@ -1,12 +1,18 @@
 import React from 'react';
 
-// interface BlogDetails {
-//     id: string;
-//     category: string;
-//     duration: string;
-//     title: string;
-//     description: string;
-//   }
+/* interface BlogDetails {
+    id: string;
+    category: string;
+    title: string;
+    summary: string;
+    edited_date: ?
+    posted_date: ?
+    duration: int (number of minutes read in string)
+    author: string 
+    image: string (url)
+    description: rich text 
+  }
+*/
 
 export default async function BlogPage({
     params,
