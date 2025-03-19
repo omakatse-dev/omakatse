@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '@/components/common/Button'
 import Tabs from '@/components/common/Tabs'
+import PricingCard from './PricingCard';
 
 function ChooseYourPlan() {
 
@@ -20,38 +21,31 @@ function ChooseYourPlan() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 w-full">
-          <div className="flex bg-gray-50 rounded-[2.5rem] flex-col gap-5 text-center px-5 py-8 lg:w-1/4">
-            <h4>Trial</h4>
-            <div className="flex flex-col">
-              <h1>40</h1>
-              <h3 className="text-gray-500">AED/mo</h3>
-            </div>
-            <b className="bodyLG font-normal">to just try your first box</b>
-          </div>
-          <div className="flex bg-gray-50 rounded-[2.5rem] flex-col gap-5 text-center px-5 py-8 lg:w-1/4">
-            <h4>3 Months</h4>
-            <div className="flex flex-col">
-              <h1>35</h1>
-              <h3 className="text-gray-500">AED/mo</h3>
-            </div>
-            <b className="bodyLG font-normal">save AED 20</b>
-          </div>
-          <div className="flex bg-gray-50 rounded-[2.5rem] flex-col gap-5 text-center px-5 py-8 lg:w-1/4">
-            <h4>6 months</h4>
-            <div className="flex flex-col">
-              <h1>30</h1>
-              <h3 className="text-gray-500">AED/mo</h3>
-            </div>
-            <b className="bodyLG font-normal">Super savings, save AED 40</b>
-          </div>
-          <div className="flex bg-yellow-light rounded-[2.5rem] flex-col gap-5 text-center px-5 py-8 lg:w-1/4">
-            <h4>12 Months</h4>
-            <div className="flex flex-col">
-              <h1>25</h1>
-              <h3 className="text-gray-500">AED/mo</h3>
-            </div>
-            <b className="bodyLG font-normal">Super savings, save AED 80</b>
-          </div>
+          <PricingCard
+            title="Trial"
+            price={40}
+            durationText="AED/mo"
+            savingsText="to just try your first box"
+          />
+          <PricingCard
+            title="3 Months"
+            price={35}
+            durationText="AED/mo"
+            savingsText="save compared to trial"
+          />
+          <PricingCard
+            title="6 Months"
+            price={30}
+            durationText="AED/mo"
+            savingsText="save even more!"
+          />
+          <PricingCard
+            title="12 Months"
+            price={25}
+            durationText="AED/mo"
+            savingsText="best value, highest savings"
+            highlight
+          />
         </div>
 
         <div className="w-full">

@@ -11,7 +11,7 @@ export default function ProductTabs({
   onChange: (tab: string) => void;
   className?: string;
 }) {
-  const activeStyles = "bg-yellow border border-black mb-1";
+  const activeStyles = "bg-yellow border border-black";
   return (
     <div className={`${className} flex gap-4 bodyMD`}>
       {tabs.map((tab) => (

@@ -77,7 +77,7 @@ export default function ProductTitle({
   };
 
   return (
-    <div className={`flex flex-col w-1/2 bg-gray-50 ${className}`}>
+    <div className={`flex flex-col px-8 md:p-0 md:w-1/2 ${className}`}>
       <div className="flex flex-row justify-between mb-2">
         <div>
           {details.tags.length > 0 && (
@@ -143,14 +143,17 @@ export default function ProductTitle({
 
         {selectedVariant?.quantityAvailable &&
         selectedVariant?.quantityAvailable > 0 ? (
-          <div className="flex flex-row gap-4 w-full">
+          <div className="flex flex-col md:flex-row gap-4 w-full">
             <CounterButton
               min={1}
               max={selectedVariant?.quantityAvailable}
               count={quantity}
               setCount={setQuantity}
             />
-            <Button className="flex items-center" onClick={addToCartHandler}>
+            <Button
+              className="flex items-center h-16 w-full"
+              onClick={addToCartHandler}
+            >
               Add to Cart - AED{" "}
               {formatPrice(
                 (Number(selectedVariant?.price.amount) * quantity).toString()
