@@ -9,10 +9,8 @@ import {
 
 interface ImageZoomModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  closeModalHandler: () => void;
   imageUrl: string;
-  onNext: () => void;
-  onPrev: () => void;
   images: string[];
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
@@ -20,10 +18,8 @@ interface ImageZoomModalProps {
 
 const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
   isOpen,
-  onClose,
+  closeModalHandler,
   imageUrl,
-  onNext,
-  onPrev,
   images,
   selectedIndex,
   setSelectedIndex,
@@ -48,26 +44,35 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     setZoom((prevZoom) => (prevZoom === 1 ? 3 : 1));
   };
 
+  const nextImage = () => {
+    setSelectedIndex((selectedIndex + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setSelectedIndex(selectedIndex === 0 ? images.length - 1 : selectedIndex - 1);
+  };
+
+
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
-      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-50 z-[100]"
+      onRequestClose={closeModalHandler}
+      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-50 z-[10]"
       overlayClassName="fixed inset-0 z-[100]"
       ariaHideApp={false}
     >
       {/* Close Button */}
       <button
-        onClick={onClose}
-        className="z-102 absolute top-14 right-6 bg-white p-2 border-black border-1 rounded-full"
+        onClick={closeModalHandler}
+        className="z-200 absolute top-14 right-6 bg-white p-2 border-black border-1 rounded-full cursor-pointer"
       >
         <XMarkIcon className="size-5" />
       </button>
 
       <div className="relative max-w-3xl w-full flex flex-col items-center z-[101]">
         <button
-          onClick={onPrev}
-          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10"
+          onClick={prevImage}
+          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
         >
           <ChevronLeftIcon className="size-6" />
         </button>
@@ -93,8 +98,8 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
         </div>
 
         <button
-          onClick={onNext}
-          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10"
+          onClick={nextImage}
+          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
         >
           <ChevronRightIcon className="size-6" />
         </button>
@@ -106,7 +111,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
           <button
             key={index}
             onClick={() => setSelectedIndex(index)}
-            className={`border-2 p-1 rounded-md ${
+            className={`border-2 p-1 rounded-md cursor-pointer ${
               selectedIndex === index ? "border-gray-300" : "border-transparent"
             }`}
           >

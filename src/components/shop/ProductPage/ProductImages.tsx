@@ -16,14 +16,6 @@ export default function ProductImages({
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const nextImage = () =>
-    setSelectedIndex((prevIndex) => (prevIndex + 1) % images.nodes.length);
-
-  const prevImage = () =>
-    setSelectedIndex((prevIndex) =>
-      prevIndex === 0 ? images.nodes.length - 1 : prevIndex - 1
-    );
-
   return (
     <div className="flex md:flex-row flex-col-reverse gap-5 w-full md:px-0">
       <div className="flex md:flex-col flex-row gap-5 md:w-1/8 md:justify-start justify-center mx-8 md:mx-0 border-b-1 md:border-b-0 pb-8 md:pb-0">
@@ -60,10 +52,8 @@ export default function ProductImages({
       {/* Fullscreen Modal */}
       <ImageZoomModal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        closeModalHandler={closeModal}
         imageUrl={images.nodes[selectedIndex].url}
-        onNext={nextImage}
-        onPrev={prevImage}
         images={images.nodes.map((node) => node.url)}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
