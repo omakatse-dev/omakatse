@@ -11,6 +11,8 @@ export default async function Page() {
   const BlogPosts = await fetchBlogPosts();
 
   console.log(BlogPosts);
+  console.log(BlogPosts[0].description);
+  console.log(BlogPosts[0].imageHeader);
 
   return (
     <div className="w-full mt-32 md:mt-42 mx-8 md:mx-20">
