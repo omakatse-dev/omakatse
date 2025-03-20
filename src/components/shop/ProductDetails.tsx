@@ -1,12 +1,14 @@
 import ProductTitle from "./ProductPage/ProductTitle";
 import ProductDescription from "./ProductPage/ProductDescription";
 import ProductImages from "./ProductPage/ProductImages";
-import { ProductDetailsType } from "@/types/Types";
-
+import { ProductDetailsType, Review } from "@/types/Types";
+import ReviewsCard from "./ProductPage/ReviewsSection";
 export default function ProductDetails({
   product,
+  reviews,
 }: {
   product: ProductDetailsType;
+  reviews: Review[];
 }) {
   return (
     <div className="flex flex-col pt-10 pb-20 w-screen max-w-7xl mt-32">
@@ -19,6 +21,7 @@ export default function ProductDetails({
         </div>
         <ProductTitle className="sticky top-52 h-fit" details={product} />
       </div>
+      <ReviewsCard reviews={reviews} />
     </div>
   );
 }

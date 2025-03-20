@@ -1,13 +1,24 @@
 import { Textarea } from "@headlessui/react";
-import React from "react";
+import React, { forwardRef } from "react";
 
-export default function Textfield({ placeholder, value, onChange }: { placeholder?: string, value?: string, onChange?: (value: string) => void }) {
+const Textfield = forwardRef<
+  HTMLTextAreaElement,
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    error?: boolean;
+  }
+>(({ placeholder, className, error = false, ...props }, ref) => {
   return (
     <Textarea
-      className="resize-none bg-white border-primary rounded-2xl mt-2 py-4 px-5"
+      ref={ref}
+      className={`resize-none bg-white border-primary rounded-2xl mt-2 py-4 px-5 ${className} ${
+        error ? "border-red" : ""
+      }`}
       placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange?.(e.target.value)}
+      {...props}
     />
   );
-}
+});
+
+Textfield.displayName = "Textfield";
+
+export default Textfield;

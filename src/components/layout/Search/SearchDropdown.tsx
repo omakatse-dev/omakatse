@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchInput from "./SearchInput";
-import { getProductsBySearch } from "@/app/utils/APIs";
+import { getProductsBySearch } from "@/utils/APIs";
 import { ShopfrontProduct } from "@/types/Types";
 import ProductSearchResult from "./ProductSearchResult";
 

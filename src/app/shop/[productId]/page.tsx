@@ -1,6 +1,6 @@
-import { getProductDetailsByID } from "@/app/utils/APIs";
 import ProductDetails from "@/components/shop/ProductPage/ProductDetails";
 import OtherProducts from "@/components/shop/ProductPage/OtherProducts";
+import { getProductDetailsByID } from "@/utils/APIs";
 
 export default async function ProductPage({
   params,

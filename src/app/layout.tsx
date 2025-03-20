@@ -3,6 +3,7 @@ import { Open_Sans, Parkinsans } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export const metadata: Metadata = {
   title: "Omakatse",
@@ -28,15 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="no-scrollbar">
-      <body
-        className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden bg-gray-50`}
-      >
-        <div className="flex justify-center">
-        {children}
-        <NavBar />
-        </div>
-        <Footer />
-      </body>
+      <UserProvider>
+        <body
+          className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden bg-gray-50`}
+        >
+          <NavBar />
+          <div className="flex justify-center">{children}</div>
+          <Footer />
+        </body>
+      </UserProvider>
     </html>
   );
 }
