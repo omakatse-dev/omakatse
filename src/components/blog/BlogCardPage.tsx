@@ -4,16 +4,35 @@ import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
 import blogData from "../../data/blogData.json";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ChainModifiers, EntryFields, Entry } from "contentful";
 
-export default function Page() {
+export type BlogPostType = {
+  contentTypeId: "blogPost";
+  fields: {
+    blogId: EntryFields.Integer;
+    categoryTag: EntryFields.Symbol;
+    title: EntryFields.Text;
+    editedDate: EntryFields.Date;
+    postedDate: EntryFields.Date;
+    readDuration: EntryFields.Integer;
+    author: EntryFields.Text;
+    imageHeader: EntryFields.AssetLink;
+    description: EntryFields.RichText;
+    summary: EntryFields.Text;
+  };
+};
+
+export default function Page({
+  blogs,
+}: {
+  blogs: Entry<BlogPostType, ChainModifiers, string>[];
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  console.log(blogs);
 
   const handleResize = () => {
     if (window.innerWidth >= 768) {
