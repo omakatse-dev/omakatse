@@ -18,9 +18,8 @@ const getUserProfileData = async (): Promise<Claims> => {
 
 export default async function AccountHistoryPage() {
   const user = await getUserProfileData();
-
   const pastOrders = await getOrdersByEmail(user.email);
-  console.log(pastOrders);
+
   return (
     <div>
       <MobilePastOrders pastOrders={pastOrders ?? []} />

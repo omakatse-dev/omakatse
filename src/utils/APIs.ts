@@ -5,6 +5,7 @@ import { LATEST_API_VERSION } from "@shopify/shopify-api";
 import { createAdminApiClient } from "@shopify/admin-api-client";
 import { ProductEdgeInterface } from "./Interfaces";
 import { CreateReviewPayload, SortOption } from "@/types/Types";
+import { ContactFormData } from "@/components/contact/ContactForm";
 
 const storefrontClient = createStorefrontApiClient({
   storeDomain: process.env.NEXT_PUBLIC_API_URL || "",
@@ -288,12 +289,13 @@ export const getReviewByProductID = async (productID: string) => {
 };
 
 export const createReview = async (payload: CreateReviewPayload) => {
-  const res = await fetch(REVIEW_WORKER_ENDPOINT, {
+  await fetch(REVIEW_WORKER_ENDPOINT, {
     method: "POST",
     body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
-  const data = await res.json();
-  return data;
 };
 
 export const getFulfilledOrdersByEmail = async (email: string) => {
@@ -415,4 +417,14 @@ export const getReviewsByAuthor = async (email: string) => {
   const res = await fetch(REVIEW_WORKER_ENDPOINT + "?email=" + email);
   const data = await res.json();
   return data;
+};
+
+export const sendContactForm = async (payload: ContactFormData) => {
+  const CONTACT_FORM_ENDPOINT = process.env.CONTACT_FORM_ENDPOINT || "";
+  const res = await fetch(CONTACT_FORM_ENDPOINT, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  // const res = await data.json();
+  return res.ok;
 };

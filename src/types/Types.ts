@@ -80,6 +80,7 @@ export type Review = {
   title: string;
   body: string;
   image: string | null;
+  productId: string;
 };
 
 export type ReviewSummary = {

@@ -59,7 +59,7 @@ export default function ReviewForm() {
     const reviewPayload = {
       author: data.name,
       email: user?.email,
-      productId: productId,
+      productId: productId.split("/").pop(),
       id: data.lineItemId || "",
       product: productName,
       price: price,
