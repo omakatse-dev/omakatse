@@ -14,7 +14,7 @@ export default function AccountProfilePage() {
   return (
     <div className="w-full flex flex-col">
       <h3 className="font-bold">Account Details</h3>
-      <a href="/api/auth/logout">Logout</a>
+      {/* <a href="/api/auth/logout">Logout</a> */}
       <div className="bodyMD text-gray-500 mt-6">Email</div>
       {isLoading && <div>Loading...</div>}
       <div className="bodyMD">{user?.email}</div>
