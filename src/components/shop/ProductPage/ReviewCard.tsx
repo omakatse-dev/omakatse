@@ -1,13 +1,13 @@
 import { Review } from "@/types/Types";
 import { StarIcon } from "@heroicons/react/20/solid";
-import dayjs from "dayjs";
+import Image from "next/image";
 
 export default function ReviewCard({ review }: { review: Review }) {
   const rating = review.rating;
   const fullStars = Math.floor(rating);
   const partialFill = rating % 1;
 
-  console.log(review.pictures);
+  // console.log(review.pictures);
 
   return (
     <div className="bg-white rounded-2xl p-6 w-full">
@@ -31,13 +31,14 @@ export default function ReviewCard({ review }: { review: Review }) {
             </div>
           ))}
         </div>
-        <div className="bodySM">
-          {dayjs(review.created_at).format("DD/MM/YYYY")}
-        </div>
+        <div className="bodySM">{review.date}</div>
       </div>
-      <div className="mt-2 bodyXL">{review.reviewer.name}</div>
+      <div className="mt-2 bodyXL">{review.author}</div>
       <h4 className="mt-6">{review.title}</h4>
       <div className="bodyMD mt-3">{review.body}</div>
+      {review.image && (
+        <Image src={review.image} alt={review.title} width={100} height={100} className="w-full rounded-xl mt-6" />
+      )}
     </div>
   );
 }

@@ -13,16 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createReview } from "@/utils/APIs";
 import { useState } from "react";
 import ReviewCompletedModal from "./ReviewCompletedModal";
-
-// type ReviewFormData = {
-//   name: string;
-//   email: string;
-//   title: string;
-//   review: string;
-//   rating: number;
-//   image: string | null;
-//   lineItemId: string;
-// };
+import dayjs from "dayjs";
 
 const schema = z.object({
   rating: z.number().min(1, "Please rate this product"),
@@ -39,6 +30,10 @@ export default function ReviewForm() {
   const { user } = useUser();
   const searchParams = useSearchParams();
   const lineItemId = searchParams.get("id") || "";
+  const productName = searchParams.get("productName") || "";
+  const productId = searchParams.get("productId") || "";
+
+  const price = searchParams.get("price") || "";
   const [isUploadingReview, setIsUploadingReview] = useState(false);
   const [isReviewSubmitted, setIsReviewSubmitted] = useState(false);
   const {
@@ -58,26 +53,31 @@ export default function ReviewForm() {
   const rating = watch("rating");
 
   const onSubmit = async (data: ReviewFormData) => {
-    console.log(data);
-    // TODO: submit reivew on judge.me
+    // console.log(data);
+
     setIsUploadingReview(true);
     const reviewPayload = {
-      name: data.name,
-      email: user?.email || "",
-      title: data.title,
-      rating: data.rating,
-      body: data.review,
+      author: data.name,
+      email: user?.email,
+      productId: productId,
       id: data.lineItemId || "",
-      shop_domain: "ii4nnv-1i.myshopify.com",
-      platform: "shopify",
-      picture_urls: [data.image || ""],
-      // shop_domain: process.env.NEXT_PUBLIC_JUDGE_SHOP_DOMAIN || "",
+      product: productName,
+      price: price,
+      date: dayjs().format("DD/MM/YYYY"),
+      rating: data.rating,
+      title: data.title,
+      body: data.review,
+      image: data.image,
     };
-
-    const res = await createReview(reviewPayload);
-    console.log(res);
-    setIsUploadingReview(false);
-    setIsReviewSubmitted(true);
+    try {
+      await createReview(reviewPayload);
+      setIsUploadingReview(false);
+      setIsReviewSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      setIsUploadingReview(false);
+      alert("Error submitting review, please try again later.");
+    }
   };
 
   return (

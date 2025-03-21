@@ -18,6 +18,8 @@ const adminClient = createAdminApiClient({
   accessToken: process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || "",
 });
 
+const REVIEW_WORKER_ENDPOINT = process.env.REVIEW_WORKER_ENDPOINT || "";
+
 export const getStoreFront = async () => {
   const productQuery = `{
       products(first: 3) {
@@ -280,28 +282,24 @@ export const createCart = async (
 };
 
 export const getReviewByProductID = async (productID: string) => {
-  // TODO: call get review endpoint
-  console.log(productID);
-  return [];
-  // const res = await fetch(
-  //   `https://api.judge.me/api/v1/reviews?shop_domain=${process.env.NEXT_PUBLIC_JUDGE_SHOP_DOMAIN}&api_token=${process.env.JUDGE_API_KEY}`
-  // );
-  // const data = await res.json();
-  // return data.reviews.filter(
-  //   (review: Review) =>
-  //     review.product_external_id.toString() === productID && review.published
-  // );
+  const res = await fetch(REVIEW_WORKER_ENDPOINT + "?product_id=" + productID);
+  const data = await res.json();
+  return data;
 };
 
 export const createReview = async (payload: CreateReviewPayload) => {
-  // TODO: call create review endpoint
-  console.log(payload);
+  const res = await fetch(REVIEW_WORKER_ENDPOINT, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  return data;
 };
 
 export const getFulfilledOrdersByEmail = async (email: string) => {
   const query = `
   #graphql
-    query GetCustomerByEmail($email: String!) {
+    query GetCustomerOderByEmail($email: String!) {
       customers(first: 1, query: $email) {
         edges {
           node {
@@ -321,6 +319,9 @@ export const getFulfilledOrdersByEmail = async (email: string) => {
                             name
                             variant {
                               price
+                              product {
+                                id
+                              }
                             }
                           }
                         }
@@ -373,5 +374,45 @@ export const uploadReviewImage = async (
     throw new Error("Error uploading image" + data.msg);
   }
 
+  return data;
+};
+
+export const getOrdersByEmail = async (email: string) => {
+  const query = `
+    #graphql
+    query GetPastOrdersByEmail($email: String!) {
+      customers(first: 1, query: $email) {
+        edges {
+          node {
+            id
+            orders(first: 100) {
+              nodes {
+                id
+                createdAt
+                displayFulfillmentStatus
+                netPaymentSet {
+                  shopMoney {
+                    amount
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`;
+
+  const res = await adminClient.request(query, {
+    variables: {
+      email: email,
+    },
+  });
+
+  return res.data?.customers.edges[0].node.orders.nodes;
+};
+
+export const getReviewsByAuthor = async (email: string) => {
+  const res = await fetch(REVIEW_WORKER_ENDPOINT + "?email=" + email);
+  const data = await res.json();
   return data;
 };
