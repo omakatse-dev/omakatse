@@ -1,0 +1,64 @@
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+
+export type CartItemType = {
+  id: string;
+  name: string;
+  price: string;
+  compareAtPrice: string;
+  quantity: number;
+  image: string;
+  options: {
+    name: string;
+    value: string;
+  }[];
+};
+
+type CartState = {
+  items: CartItemType[];
+  totalPrice: number;
+  addItem: (item: CartItemType) => void;
+  removeItem: (item: CartItemType) => void;
+  clearCart: () => void;
+  changeQuantity: (item: CartItemType, newQuantity: number) => void;
+};
+
+export const useCartStore = create<CartState>()(
+  persist(
+    (set) => ({
+      items: [],
+      totalPrice: 0,
+      addItem: (item: CartItemType) =>
+        set((state) => ({
+          items: [...state.items, item],
+          totalPrice: state.totalPrice + Number(item.price) * item.quantity,
+        })),
+      removeItem: (item: CartItemType) =>
+        set((state) => ({
+          items: state.items.filter((i) => i.id !== item.id),
+          totalPrice: state.totalPrice - Number(item.price) * item.quantity,
+        })),
+      changeQuantity: (item: CartItemType, newQuantity: number) => {
+        console.log("HERE", item)
+        set((state) => ({
+          items: state.items.map((i) =>
+            i.id === item.id ? { ...i, quantity: newQuantity } : i
+          ),
+          totalPrice:
+            state.totalPrice -
+            Number(item.price) * item.quantity +
+            Number(item.price) * newQuantity,
+        }));
+      },
+      clearCart: () =>
+        set({
+          items: [],
+          totalPrice: 0,
+        }),
+    }),
+    {
+      name: "cart-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
