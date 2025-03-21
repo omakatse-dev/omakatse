@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 import WriteReviewCard from "@/components/account/reviews/WriteReviewCard";
 import { Review } from "@/types/Types";

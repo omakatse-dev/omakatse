@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 import ProductDetails from "@/components/shop/ProductPage/ProductDetails";
 import OtherProducts from "@/components/shop/ProductPage/OtherProducts";

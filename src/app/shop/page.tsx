@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 import SearchShopfront from "@/components/shop/SearchShopfront";
 import { getProductsBySearch } from "../../utils/APIs";
