@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getProductsByCollection } from "@/utils/APIs";
 import Shopfront from "@/components/shop/Shopfront";
 import { SortOption } from "@/types/Types";

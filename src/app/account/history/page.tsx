@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getOrdersByEmail } from "@/utils/APIs";
 
 import { Claims, getSession } from "@auth0/nextjs-auth0";

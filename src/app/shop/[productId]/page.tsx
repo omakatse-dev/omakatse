@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import ProductDetails from "@/components/shop/ProductPage/ProductDetails";
 import OtherProducts from "@/components/shop/ProductPage/OtherProducts";
 import { getProductDetailsByID } from "@/utils/APIs";

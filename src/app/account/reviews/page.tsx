@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import WriteReviewCard from "@/components/account/reviews/WriteReviewCard";
 import { Review } from "@/types/Types";
 import { getFulfilledOrdersByEmail, getReviewsByAuthor } from "@/utils/APIs";

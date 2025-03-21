@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import SearchShopfront from "@/components/shop/SearchShopfront";
 import { getProductsBySearch } from "../../utils/APIs";
 import { SortOption } from "@/types/Types";
