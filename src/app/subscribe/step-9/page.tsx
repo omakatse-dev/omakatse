@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
-
+import { useCartStore } from "@/stores/cartStore";
 const subscriptionSchema = subscriptionFormSchema.pick({
   boxSize: true,
   duration: true,
@@ -25,20 +25,29 @@ export default function SubscriptionStepNinePage() {
   const storedBoxSize = useSubscriptionFormStore((state) => state.boxSize);
   const storedDuration = useSubscriptionFormStore((state) => state.duration);
 
-  const { handleSubmit, watch, setValue } =
-    useForm<SubscriptionSchema>({
-      resolver: zodResolver(subscriptionSchema),
-      defaultValues: {
-        boxSize: storedBoxSize || "small",
-        duration: storedDuration || "trial",
-      },
-    });
+  const { handleSubmit, watch, setValue } = useForm<SubscriptionSchema>({
+    resolver: zodResolver(subscriptionSchema),
+    defaultValues: {
+      boxSize: storedBoxSize || "small",
+      duration: storedDuration || "trial",
+    },
+  });
 
   const boxSize = watch("boxSize");
-
+  const addItem = useCartStore((state) => state.addItem);
   const onSubmit = (data: SubscriptionSchema) => {
     setData(data);
-    router.push("/cart");
+    //TODO need to find a way to add the notes to the item
+    addItem({
+      id: "gid://shopify/ProductVariant/46670734328067", //this is the variant id
+      name: "Subscription Box",
+      price: "100",
+      compareAtPrice: "",
+      quantity: 1,
+      image: "https://images.omakatsepets.com/subscription-box-small.png",
+      options: [],
+    });
+    console.log("here");
   };
 
   const handleSelectBox = (value: string) => {

@@ -17,11 +17,28 @@ export default function Cart({
   const cartItems = useCartStore((state) => state.items);
 
   const createCartHandler = async () => {
-    const formattedItems = cartItems.map((item) => ({
+    const subscriptionItems = cartItems.filter((item) =>
+      item.name.includes("Subscription")
+    );
+    const regularItems = cartItems.filter(
+      (item) => !item.name.includes("Subscription")
+    );
+    const formattedRegularItems = regularItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
     }));
-    const res = await createCart(formattedItems);
+
+    // TODO select the right selling plan based on duration
+    // TODO add notes to the item
+    // TODO schedule contract over notification
+    const formattedSubscriptionItems = subscriptionItems.map((item) => ({
+      merchandiseId: item.id,
+      quantity: item.quantity,
+      sellingPlanId: "gid://shopify/SellingPlan/10796859651",
+    }));
+    const res = await createCart(
+      formattedRegularItems.concat(formattedSubscriptionItems)
+    );
     localStorage.setItem("cartId", res.id);
     window.open(res.checkoutUrl);
   };
@@ -72,7 +89,7 @@ export default function Cart({
             disabled={regularCartItems.length === 0}
             onClick={createCartHandler}
           >
-            Checkout - AED {formatPrice(totalPrice.toString())}
+            Checkout - AED {formatPrice(totalPrice?.toString() || "0")}
           </Button>
         </div>
       </div>

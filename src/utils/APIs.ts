@@ -277,7 +277,7 @@ export const createCart = async (
   }`;
 
   const res = await storefrontClient.request(cartQuery, {
-    variables: { lines },
+    variables: { lines, note: "This si a test note" },
   });
   return res.data.cartCreate.cart;
 };
