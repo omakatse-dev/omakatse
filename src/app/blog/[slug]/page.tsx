@@ -10,6 +10,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Document, BLOCKS } from "@contentful/rich-text-types";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Asset } from "contentful";
+import ScrollProgressCircle from "@/components/common/ScrollProgressCircle";
 
 export type BlogPostType = {
   contentTypeId: "blogPost";
@@ -100,6 +101,10 @@ export default async function BlogPage({
           Go back
         </div>
       </Link>
+
+      <div>
+        <ScrollProgressCircle/>
+      </div>
 
       <div className="flex flex-col gap-3">
         <Tag className="w-fit">{blog.fields.categoryTag.toString()}</Tag>
