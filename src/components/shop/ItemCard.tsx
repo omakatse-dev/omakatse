@@ -3,6 +3,7 @@ import React from "react";
 import Tag from "../common/Tag";
 import Link from "next/link";
 import Image from "next/image";
+import { formatPrice } from "@/utils/Utils";
 
 export default function ItemCard({ product }: { product: ShopfrontProduct }) {
   const id = product.id.split("/").pop();
@@ -28,7 +29,7 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
         {product.title}
       </div>
       <div className="bodyMD text-black mt-2">
-        AED {product.priceRange.minVariantPrice.amount}
+        AED {formatPrice(product.priceRange.minVariantPrice.amount)}
       </div>
     </Link>
   );

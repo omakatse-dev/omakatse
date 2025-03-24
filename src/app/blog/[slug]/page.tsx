@@ -77,9 +77,10 @@ const options = {
 export default async function BlogPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const blog = await getBlogBySlug(params.slug);
+  const { slug } = await params
+  const blog = await getBlogBySlug(slug);
   console.log(blog);
 
   if (!blog) {
