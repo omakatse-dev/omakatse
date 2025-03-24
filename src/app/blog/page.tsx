@@ -1,6 +1,6 @@
 import React from "react";
 import BlogPage from "@/components/blog/BlogCardPage";
-import { getAllBlogPosts } from "../utils/contentfulAPI";
+import { getAllBlogPosts } from "@/utils/contentfulAPI";
 
 // async function fetchBlogPosts() {
 //   const blogPosts: = await getAllBlogPosts();
