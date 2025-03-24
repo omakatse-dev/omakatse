@@ -39,8 +39,9 @@ export default function Cart({
     const res = await createCart(
       formattedRegularItems.concat(formattedSubscriptionItems)
     );
+    console.log(res.id);
     localStorage.setItem("cartId", res.id);
-    window.open(res.checkoutUrl);
+    window.location.href = res.checkoutUrl;
   };
 
   return (

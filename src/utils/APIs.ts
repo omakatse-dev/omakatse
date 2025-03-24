@@ -432,14 +432,15 @@ export const sendContactForm = async (payload: ContactFormData) => {
 export const getCartById = async (cartId: string) => {
   const query = `
   #graphql
-  query GetCartById($cartId: ID!) {
-    cart(id: $cartId) {
+  query GetCartById($id: ID!) {
+    cart(id: $id) {
       id
+      totalQuantity
     }
   }`;
-  const res = await adminClient.request(query, {
+  const res = await storefrontClient.request(query, {
     variables: {
-      cartId: cartId,
+      id: cartId,
     },
   });
   return res.data;
