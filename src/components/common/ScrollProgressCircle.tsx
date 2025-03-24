@@ -14,7 +14,7 @@ export default function ScrollProgressCircle() {
 
   const styles = buildStyles({
     pathColor: "#ffc400",
-    trailColor: "#696969",
+    trailColor: "#FFFFFF",
     backgroundColor: "#FFFFFF",
   });
 
