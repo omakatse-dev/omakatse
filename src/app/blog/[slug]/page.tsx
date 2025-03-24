@@ -40,9 +40,9 @@ const options = {
       <div className="bodyLG">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-          <div className="flex justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full">
-            <div className="bodyMD">{children}</div>         
-          </div>
+      <div className="flex justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full">
+        <div className="bodyMD">{children}</div>
+      </div>
     ),
     [BLOCKS.OL_LIST]: (_: any, children: React.ReactNode) => (
       <ol className="list-decimal ml-4">{children}</ol>

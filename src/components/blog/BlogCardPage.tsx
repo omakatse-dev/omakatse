@@ -19,7 +19,7 @@ export type BlogPostType = {
     imageHeader: EntryFields.AssetLink;
     description: EntryFields.RichText;
     summary: EntryFields.Text;
-    slug: EntryFields.Text
+    slug: EntryFields.Text;
   };
 };
 
@@ -54,15 +54,20 @@ export default function Page({
   }, []);
 
   // Get unique categories from contentful, adding "All" as a category
-  const categories = ["All", ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString()))];
+  const categories = [
+    "All",
+    ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString())),
+  ];
 
   // Filter blogData based on the search query and selected category
   const filteredBlogs = blogs.filter((blog) => {
-    const matchesSearchQuery = blog.fields.title.toString()
+    const matchesSearchQuery = blog.fields.title
+      .toString()
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "All" || blog.fields.categoryTag.toString() === selectedCategory;
+      selectedCategory === "All" ||
+      blog.fields.categoryTag.toString() === selectedCategory;
     return matchesSearchQuery && matchesCategory;
   });
 

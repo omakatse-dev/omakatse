@@ -1,7 +1,7 @@
-import React from 'react';
-import Tag from '../common/Tag';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+import React from "react";
+import Tag from "../common/Tag";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { EntryFields, Entry } from "contentful";
 
 export type BlogPostType = {
@@ -17,7 +17,7 @@ export type BlogPostType = {
     imageHeader: EntryFields.AssetLink;
     description: EntryFields.RichText;
     summary: EntryFields.Text;
-    slug: EntryFields.Text
+    slug: EntryFields.Text;
   };
 };
 
@@ -31,7 +31,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
     <div className="rounded-xl border-1 border-gray-400 flex flex-col p-8">
       <div className="flex flex-row gap-4 mb-4">
         <Tag>{blog.fields.categoryTag.toString()}</Tag>
-        <p className="bodySM text-gray-500 flex items-center">{blog.fields.readDuration.toString()} min read</p>
+        <p className="bodySM text-gray-500 flex items-center">
+          {blog.fields.readDuration.toString()} min read
+        </p>
       </div>
       <h4 className="mb-2">{blog.fields.title.toString()}</h4>
       <p className="bodyMD mb-6">{blog.fields.summary.toString()}</p>
@@ -45,6 +47,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       </div>
     </div>
   );
-}
+};
 
 export default BlogCard;

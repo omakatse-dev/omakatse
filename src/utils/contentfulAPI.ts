@@ -22,11 +22,12 @@ export const getAllBlogPosts = async (): Promise<
 export const getBlogBySlug = async (
   slug: string
 ): Promise<Entry<BlogPostType> | null> => {
-  const query: { content_type: string; "fields.slug": string; limit: number } = {
-    content_type: "blogPost",
-    "fields.slug": slug,
-    limit: 1,
-  };
+  const query: { content_type: string; "fields.slug": string; limit: number } =
+    {
+      content_type: "blogPost",
+      "fields.slug": slug,
+      limit: 1,
+    };
 
   const res = await client.getEntries<BlogPostType>(query);
   return res.items.length > 0 ? res.items[0] : null;
