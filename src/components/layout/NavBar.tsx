@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Button from "../common/Button";
 import MobileMenu from "./MobileMenu";
@@ -18,6 +18,7 @@ import Cart from "./Cart/Cart";
 import { useUIStore } from "@/stores/uiStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { getCartById } from "@/utils/APIs";
 
 export default function NavBar() {
   const { user } = useUser();
@@ -40,6 +41,22 @@ export default function NavBar() {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const { isCartOpen, openCart, closeCart } = useUIStore();
   const cartItems = useCartStore((state) => state.items);
+
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  useEffect(() => {
+    const checkCartStatus = async () => {
+      const cartId = localStorage.getItem("cartId");
+      if (cartId) {
+        const res = await getCartById(cartId);
+        localStorage.removeItem("cartId");
+        if (!res) {
+          clearCart();
+        }
+      }
+    };
+    checkCartStatus();
+  }, []);
 
   return (
     <>

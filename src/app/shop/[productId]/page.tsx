@@ -17,7 +17,6 @@ export default async function ProductPage({
     (p: { id: string }) => p.id !== product.id
   );
   const reviews = await getReviewByProductID(productId);
-  console.log(reviews);
   return (
     <div className="w-screen flex flex-col items-center">
       <ProductDetails product={product} />

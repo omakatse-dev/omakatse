@@ -15,7 +15,6 @@ export default function Cart({
   const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
   const cartItems = useCartStore((state) => state.items);
-  const clearCart = useCartStore((state) => state.clearCart);
 
   const createCartHandler = async () => {
     const formattedItems = cartItems.map((item) => ({
@@ -23,9 +22,8 @@ export default function Cart({
       quantity: item.quantity,
     }));
     const res = await createCart(formattedItems);
-    window.open(res.checkoutUrl, "_blank");
-    //TODO this should only be done once the payment goes through
-    clearCart();
+    localStorage.setItem("cartId", res.id);
+    window.open(res.checkoutUrl);
   };
 
   return (

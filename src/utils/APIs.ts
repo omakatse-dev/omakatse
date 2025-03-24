@@ -428,3 +428,19 @@ export const sendContactForm = async (payload: ContactFormData) => {
   // const res = await data.json();
   return res.ok;
 };
+
+export const getCartById = async (cartId: string) => {
+  const query = `
+  #graphql
+  query GetCartById($cartId: ID!) {
+    cart(id: $cartId) {
+      id
+    }
+  }`;
+  const res = await adminClient.request(query, {
+    variables: {
+      cartId: cartId,
+    },
+  });
+  return res.data;
+};
