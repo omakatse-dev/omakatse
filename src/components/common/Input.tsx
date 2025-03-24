@@ -1,29 +1,23 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export default function Input({
-  placeholder = "",
-  className,
-  error = false,
-  value,
-  onBlur,
-  onChange,
-}: {
-  placeholder?: string;
-  className?: string;
-  error?: boolean;
-  value?: string;
-  onBlur?: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
+const Input = forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    error?: boolean;
+  }
+>(({ placeholder = "", className, error = false, ...props }, ref) => {
   return (
     <input
-      onBlur={onBlur}
-      value={value}
-      onChange={onChange}
-      className={`rounded-full py-3 px-5 focus:outline-black ${className} ${
+      ref={ref}
+      className={`rounded-full py-3 px-5 focus:outline-black bg-white ${className} ${
         error ? "border border-red" : "border"
       }`}
       placeholder={placeholder}
+      {...props}
     />
   );
-}
+});
+
+Input.displayName = "Input";
+
+export default Input;

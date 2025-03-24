@@ -68,3 +68,29 @@ type SelectedOption = {
   name: string;
   value: string;
 };
+
+export type Review = {
+  author: string;
+  id: string;
+  product: string;
+  price: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  date: string;
+  rating: number;
+  title: string;
+  body: string;
+  image: string | null;
+  productId: string;
+};
+
+export type ReviewSummary = {
+  rating: number;
+  totalReviews: number;
+  fiveStarCount: number;
+  fourStarCount: number;
+  threeStarCount: number;
+  twoStarCount: number;
+  oneStarCount: number;
+};
+
+export type CreateReviewPayload = Partial<Review>;
