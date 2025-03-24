@@ -37,7 +37,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       <p className="bodyMD mb-6">{blog.fields.summary.toString()}</p>
       <div>
         <Link href={`/blog/${blog.fields.slug}`} passHref>
-          <div className="inline-flex gap-2 items-center cursor-pointer bodyButton">
+          <div className="inline-flex flex-row gap-2 items-center cursor-pointer bodyButton">
             Read more
             <ChevronRightIcon className="h-6" />
           </div>
