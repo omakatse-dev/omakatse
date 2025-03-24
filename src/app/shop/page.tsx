@@ -1,5 +1,7 @@
+export const runtime = "nodejs";
+
 import SearchShopfront from "@/components/shop/SearchShopfront";
-import { getProductsBySearch } from "../utils/APIs";
+import { getProductsBySearch } from "../../utils/APIs";
 import { SortOption } from "@/types/Types";
 
 export default async function Page({

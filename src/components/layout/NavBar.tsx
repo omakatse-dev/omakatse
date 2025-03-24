@@ -17,7 +17,10 @@ import SearchDropdown from "./Search/SearchDropdown";
 import Cart from "./Cart/Cart";
 import { useUIStore } from "@/stores/uiStore";
 import { useCartStore } from "@/stores/cartStore";
+import { useUser } from "@auth0/nextjs-auth0/client";
+
 export default function NavBar() {
+  const { user } = useUser();
   const links = [
     {
       name: "About Us",
@@ -85,9 +88,16 @@ export default function NavBar() {
             >
               <MagnifyingGlassIcon className="h-6 w-6 stroke-black stroke-[2]" />
             </button>
-            <button>
+            <a
+              href={
+                user
+                  ? "/account/profile"
+                  : "/api/auth/login?returnTo=/account/profile"
+              }
+              className="flex items-center"
+            >
               <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
-            </button>
+            </a>
             <button onClick={openCart} className="cursor-pointer relative">
               <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
               {cartItems.length > 0 && (

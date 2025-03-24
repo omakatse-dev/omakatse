@@ -68,7 +68,7 @@ export default function TreatPreferenceCard({ name, petType, petIndex }: Props) 
           value={treatFrequency.comments || ""}
           onChange={(e) => updateTreatFrequency({
             ...treatFrequency,
-            comments: e
+            comments: e.target.value
           })}
         />
       </div>

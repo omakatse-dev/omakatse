@@ -1,4 +1,6 @@
-import { getProductsByCollection } from "@/app/utils/APIs";
+export const runtime = "nodejs";
+
+import { getProductsByCollection } from "@/utils/APIs";
 import Shopfront from "@/components/shop/Shopfront";
 import { SortOption } from "@/types/Types";
 

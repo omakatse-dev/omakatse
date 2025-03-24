@@ -4,7 +4,7 @@ import FreeShippingTracker from "./FreeShippingTracker";
 import { useCartStore } from "@/stores/cartStore";
 import RegularCartItem from "./RegularCartItem";
 import { formatPrice } from "@/utils/Utils";
-import { createCart } from "@/app/utils/APIs";
+import { createCart } from "@/utils/APIs";
 export default function Cart({
   isOpen,
   handleClose,
@@ -24,6 +24,7 @@ export default function Cart({
     }));
     const res = await createCart(formattedItems);
     window.open(res.checkoutUrl, "_blank");
+    //TODO this should only be done once the payment goes through
     clearCart();
   };
 
