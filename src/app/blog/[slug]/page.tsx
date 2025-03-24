@@ -1,29 +1,108 @@
 import React from 'react';
+import { EntryFields } from 'contentful';
+import { getBlogBySlug } from '../../../utils/contentfulAPI';
+import Tag from '@/components/common/Tag';
+import dayjs from 'dayjs';
+import Image from 'next/image';
+import Link from 'next/link';
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { Asset } from 'contentful';
 
-/* interface BlogDetails {
-    id: string;
-    category: string;
-    title: string;
-    summary: string;
-    edited_date: ?
-    posted_date: ?
-    duration: int (number of minutes read in string)
-    author: string 
-    image: string (url)
-    description: rich text 
-  }
-*/
+export type BlogPostType = {
+  contentTypeId: "blogPost";
+  fields: {
+    blogId: EntryFields.Integer;
+    categoryTag: EntryFields.Symbol;
+    title: EntryFields.Text;
+    editedDate: EntryFields.Date;
+    postedDate: EntryFields.Date;
+    readDuration: EntryFields.Integer;
+    author: EntryFields.Text;
+    imageHeader: EntryFields.AssetLink;
+    description: EntryFields.RichText;
+    summary: EntryFields.Text;
+    slug: EntryFields.Text;
+  };
+};
+
+// const options = {
+//   renderNode: {
+//     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+//         return (
+//           <Image 
+//             src={`https:${node.fields.imageHeader.fields.file.url}`}
+//             alt="image not found"
+//             width="100"
+//             height="100"
+//           />
+//         );
+//     }
+//   }
+// }
 
 export default async function BlogPage({
-    params,
-  }: {
-    params: Promise<{ slug: string }>;
-  }) {
-    const { slug } = await params;
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const blog = await getBlogBySlug(params.slug);
+  console.log(blog)
+
+  if (!blog) {
+    return <div className="text-center mt-32">Blog post not found</div>;
+  }
+
+  const imageHeader = (blog.fields.imageHeader as unknown as Asset).fields.file?.url;
+  const imageTitle = (blog?.fields.imageHeader as unknown as Asset).fields.title;
+  const description = blog.fields.description as unknown as Document;
+
   return (
-    <div className="flex justify-center items-center w-full mt-32 p-8 flex-col">
-      <h1>This is blog {slug}</h1>
-      <div className="bg-gray-600 w-full md:w-1/2 h-80 rounded-4xl" />
+    <div className="flex flex-col mt-32 w-full px-8 py-2 gap-8">
+
+    <Link href="/blog">
+      <div className="inline-flex items-center py-2 cursor-pointer font-semibold">
+        <ChevronLeftIcon className="h-6 w-6 mr-2" />
+        Go back
+      </div>
+    </Link>
+
+      <div className="flex flex-col gap-3">
+        <Tag className="w-fit">{blog.fields.categoryTag.toString()}</Tag>
+        <h2>{blog.fields.title.toString()}</h2>
+        <div>
+        <div className="flex flex-row gap-2">
+          <p className="bodySM text-gray-800">Edited: {dayjs(blog.fields.editedDate.toString()).format('MMM D, YYYY')}</p>
+          <p className="text-gray-200">|</p>
+          <p className="bodySM text-gray-800">Posted: {dayjs(blog.fields.postedDate.toString()).format('MMM D, YYYY')}</p>
+          <p className="text-gray-200">|</p>
+          <p className="bodySM text-gray-800">{blog.fields.readDuration.toString()} mins read</p>
+        </div>
+        <p className="bodySM text-gray-800 font-semibold">Written by {blog.fields.author.toString()}</p>
+        </div>
+        </div>
+
+        <div className="flex flex-col gap-2 items-center">
+          <Image
+            src={`https:${imageHeader}`}
+            alt="Image Header"
+            width={400}
+            height={100} 
+            className="rounded-xl"
+          />
+          <div className="bodyMD">Source:
+            <Link href={`https:${imageHeader}`} className="ml-1 underline text-blue-500">{imageTitle?.toString()}</Link>
+          </div>
+
+        </div>
+          {documentToReactComponents(description)}
+        <div>
+          
+        </div>
+
+
+
     </div>
   );
 }

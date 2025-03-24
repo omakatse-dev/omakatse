@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
-import blogData from "../../data/blogData.json";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChainModifiers, EntryFields, Entry } from "contentful";
 
@@ -20,6 +19,7 @@ export type BlogPostType = {
     imageHeader: EntryFields.AssetLink;
     description: EntryFields.RichText;
     summary: EntryFields.Text;
+    slug: EntryFields.Text
   };
 };
 
@@ -32,7 +32,7 @@ export default function Page({
   const [searchQuery, setSearchQuery] = useState("");
   const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  console.log(blogs);
+  console.log(blogs[0].fields.slug);
 
   const handleResize = () => {
     if (window.innerWidth >= 768) {
@@ -53,16 +53,16 @@ export default function Page({
     };
   }, []);
 
-  // Get unique categories from blogData, adding "All" as a category
-  const categories = ["All", ...new Set(blogData.map((blog) => blog.category))];
+  // Get unique categories from contentful, adding "All" as a category
+  const categories = ["All", ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString()))];
 
   // Filter blogData based on the search query and selected category
-  const filteredBlogs = blogData.filter((blog) => {
-    const matchesSearchQuery = blog.title
+  const filteredBlogs = blogs.filter((blog) => {
+    const matchesSearchQuery = blog.fields.title.toString()
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "All" || blog.category === selectedCategory;
+      selectedCategory === "All" || blog.fields.categoryTag.toString() === selectedCategory;
     return matchesSearchQuery && matchesCategory;
   });
 
@@ -96,7 +96,7 @@ export default function Page({
             {/* Blog Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
               {currentBlogs.map((blog) => (
-                <BlogCard key={blog.id} blogData={blog} />
+                <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
               ))}
               {currentBlogs.length === 0 && <div>no blogs found</div>}
             </div>
