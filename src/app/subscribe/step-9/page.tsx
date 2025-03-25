@@ -6,13 +6,25 @@ import PlanSelector from "@/components/subscription/PlanSelector";
 import ProgressBar from "@/components/subscription/ProgressBar";
 import TipCard from "@/components/subscription/TipCard";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 export default function SubscriptionStepNinePage() {
   const router = useRouter();
 
   const [boxSize, setBoxSize] = useState<string>("Small Box");
   const [selectedPlan, setSelectedPlan] = useState<string>("12 months");
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">

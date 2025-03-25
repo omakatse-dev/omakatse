@@ -7,7 +7,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,6 +23,9 @@ export default function SubscriptionStepSixPage() {
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const [showError, setShowError] = useState(false);
   const router = useRouter();
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
 
   useForm<PreferenceSchema>({
     resolver: zodResolver(preferenceSchema),
@@ -38,6 +41,16 @@ export default function SubscriptionStepSixPage() {
     }
     router.push("/subscribe/step-7");
   };
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
+  
   return (
     <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={6} totalSteps={9} className="max-w-sm" />

@@ -7,7 +7,7 @@ import PetDetailsForm, {
 import ProgressBar from "@/components/subscription/ProgressBar";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SubscriptionStepThreePage() {
   const storedDogCount =
@@ -16,6 +16,7 @@ export default function SubscriptionStepThreePage() {
     useSubscriptionFormStore((state) => state.catCount) || 0;
   const catsDetails = useSubscriptionFormStore((state) => state.catsDetails);
   const dogsDetails = useSubscriptionFormStore((state) => state.dogsDetails);
+  const petType = useSubscriptionFormStore((state) => state.petType);
   const [showError, setShowError] = useState(false);
 
   const router = useRouter();
@@ -50,6 +51,15 @@ export default function SubscriptionStepThreePage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">

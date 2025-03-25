@@ -5,13 +5,25 @@ import PetDetailsCard from "@/components/subscription/PetDetailsCard";
 import ProgressBar from "@/components/subscription/ProgressBar";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function SubscriptionStepEightPage() {
   const router = useRouter();
 
   const cats = useSubscriptionFormStore(state => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore(state => state.dogsDetails) || [];
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">

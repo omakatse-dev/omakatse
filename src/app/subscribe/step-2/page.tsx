@@ -11,6 +11,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useEffect } from "react";
 
 const petCountSchema = subscriptionFormSchema.pick({
   dogCount: true,
@@ -22,6 +23,12 @@ export type PetCountSchema = z.infer<typeof petCountSchema>;
 export default function SubscriptionStepTwoPage() {
   const router = useRouter();
   const petType = useSubscriptionFormStore((state) => state.petType);
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+  }, [petType, router]);
 
   const {
     control,

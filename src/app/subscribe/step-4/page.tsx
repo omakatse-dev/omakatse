@@ -7,7 +7,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -24,6 +24,10 @@ export default function SubscriptionStepFourPage() {
   const dogCount = useSubscriptionFormStore((state) => state.dogCount) || 0;
   const cats = useSubscriptionFormStore((state) => state.catsDetails);
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails);
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
+  
   const [showError, setShowError] = useState(false);
 
   const { control } = useForm<PetDetailsSchema>({
@@ -42,6 +46,15 @@ export default function SubscriptionStepFourPage() {
     }
     router.push("/subscribe/step-5");
   };
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">

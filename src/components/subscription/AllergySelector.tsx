@@ -65,7 +65,7 @@ export default function AllergySelector({ name, fieldName }: Props) {
       <div className="bodyMD mt-8">Does {name} have any allergies?</div>
       <div className="flex gap-4 mt-2 mb-8">
         <PillButton
-          active={allergiesData?.true === true}
+        active={allergiesData?.true === true}
           onClick={() => {
             updateAllergies({ true: true, allergies: [] });
             setShowError(true); // Show error when Yes is selected

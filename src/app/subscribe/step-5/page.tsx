@@ -9,7 +9,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const allergySchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
@@ -21,6 +21,9 @@ export default function SubscriptionStepFivePage() {
   const router = useRouter();
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const [showError, setShowError] = useState(false);
 
   useForm<AllergySchema>({
@@ -37,6 +40,15 @@ export default function SubscriptionStepFivePage() {
     }
     router.push("/subscribe/step-6");
   };
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-pink-pastel flex flex-col items-center gap-8">

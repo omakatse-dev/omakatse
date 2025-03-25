@@ -7,7 +7,7 @@ import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const _treatPreferenceSchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
@@ -20,6 +20,9 @@ export default function SubscriptionStepSevenPage() {
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
   const [showError, setShowError] = useState(false);
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
 
   const submitHandler = () => {
     const catTreats = cats.every((cat) => cat.treatFrequency);
@@ -30,6 +33,15 @@ export default function SubscriptionStepSevenPage() {
     }
     router.push("/subscribe/step-8");
   };
+
+  useEffect(() => {
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (!storedDogCount || !storedCatCount) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType]);  
 
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
