@@ -22,33 +22,20 @@ export default function SubscriptionStepFivePage() {
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AllergySchema>({
+  useForm<AllergySchema>({
     resolver: zodResolver(allergySchema),
-    defaultValues: {
-      catsDetails: cats,
-      dogsDetails: dogs
-    },
-    mode: "onChange"
   });
-
-  const onSubmit = () => {
-    router.push("/subscribe/step-6");
-  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-pink-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={5} totalSteps={9} />
+      <ProgressBar currentStep={5} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>What are your pets&apos; allergies?</h3>
         <div className="text-gray-800 bodyLG">
           Products containing these allergens will be removed from the box
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-3xl items-center">
-        {(errors.catsDetails || errors.dogsDetails) && <div className="text-red bodyMD">Please select allergies for all pets</div>}
+      <form className="flex flex-col gap-8 w-full max-w-3xl items-center">
         {cats.map((cat, idx) => (
           <AllergenSelector
             key={idx}
@@ -71,7 +58,7 @@ export default function SubscriptionStepFivePage() {
           >
             Previous
           </Button>
-          <Button type="submit">Next</Button>
+          <Button onClick={() => router.push("/subscribe/step-6")}>Next</Button>
         </div>
       </form>
     </div>

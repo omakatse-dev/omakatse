@@ -23,32 +23,24 @@ export default function SubscriptionStepSixPage() {
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const router = useRouter();
 
-  const { handleSubmit } = useForm<PreferenceSchema>({
+  useForm<PreferenceSchema>({
     resolver: zodResolver(preferenceSchema),
-    defaultValues: {
-      catsDetails: cats,
-      dogsDetails: dogs,
-    },
-    mode: "onChange",
   });
 
-  const onSubmit = () => {
-    router.push("/subscribe/step-7");
-  };
+  // const onSubmit = () => {
+  //   router.push("/subscribe/step-7");
+  // };
 
   return (
     <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={6} totalSteps={9} />
+      <ProgressBar currentStep={6} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>What do your pets like to eat?</h3>
         <div className="text-gray-800 bodyLG">
           We will curate the selection based on what your cats like
         </div>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center gap-8 w-full max-w-3xl"
-      >
+      <form className="flex flex-col items-center gap-8 w-full max-w-3xl">
         <div className="flex flex-col gap-8 w-full max-w-3xl">
           {cats.map((cat, idx) => (
             <FoodPreferenceSelector
@@ -75,7 +67,7 @@ export default function SubscriptionStepSixPage() {
           >
             Previous
           </Button>
-          <Button type="submit">Next</Button>
+          <Button onClick={() => router.push("/subscribe/step-7")}>Next</Button>
         </div>
       </form>
     </div>

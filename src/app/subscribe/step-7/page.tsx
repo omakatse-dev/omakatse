@@ -22,7 +22,7 @@ export default function SubscriptionStepSevenPage() {
 
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={7} totalSteps={9} />
+      <ProgressBar currentStep={7} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>Fill in any treats and additional information</h3>
         <div className="text-gray-800 bodyLG">

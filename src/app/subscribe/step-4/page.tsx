@@ -26,35 +26,26 @@ export default function SubscriptionStepFourPage() {
 
   const {
     control,
-    handleSubmit,
     formState: { errors },
   } = useForm<PetDetailsSchema>({
     resolver: zodResolver(petDetailsSchema),
     defaultValues: useSubscriptionFormStore.getState(),
     values: {
       catsDetails: cats || [],
-      dogsDetails: dogs || []
-    }
+      dogsDetails: dogs || [],
+    },
   });
-
-  const submitHandler = (data: PetDetailsSchema) => {
-    useSubscriptionFormStore.getState().setData(data);
-    router.push("/subscribe/step-5");
-  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={4} totalSteps={9} />
+      <ProgressBar currentStep={4} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>What are your pets&apos; sizes?</h3>
         <div className="text-gray-800 bodyLG">
           We will curate apparel based on your pets&apos; sizes
         </div>
       </div>
-      <form
-        className="flex flex-col gap-8 items-center"
-        onSubmit={handleSubmit(submitHandler)}
-      >
+      <form className="flex flex-col gap-8 items-center">
         {(errors.catsDetails || errors.dogsDetails) && (
           <div className="bodyMD text-red">
             {errors.dogsDetails?.message || errors.catsDetails?.message}
@@ -85,7 +76,7 @@ export default function SubscriptionStepFourPage() {
           >
             Previous
           </Button>
-          <Button type="submit">Next</Button>
+          <Button onClick={() => router.push("/subscribe/step-5")}>Next</Button>
         </div>
       </form>
     </div>
