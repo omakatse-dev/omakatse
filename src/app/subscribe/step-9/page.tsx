@@ -2,76 +2,38 @@
 
 import Button from "@/components/common/Button";
 import Tabs from "@/components/common/Tabs";
+import PlanSelector from "@/components/subscription/PlanSelector";
 import ProgressBar from "@/components/subscription/ProgressBar";
-// import SubscriptionOptions from "@/components/subscription/SubscriptionOptions";
 import TipCard from "@/components/subscription/TipCard";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
-import { z } from "zod";
-import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
-import { useCartStore } from "@/stores/cartStore";
-const subscriptionSchema = subscriptionFormSchema.pick({
-  boxSize: true,
-  duration: true,
-});
-
-type SubscriptionSchema = z.infer<typeof subscriptionSchema>;
+import { useState } from "react";
 
 export default function SubscriptionStepNinePage() {
   const router = useRouter();
-  const setData = useSubscriptionFormStore((state) => state.setData);
-  const storedBoxSize = useSubscriptionFormStore((state) => state.boxSize);
-  const storedDuration = useSubscriptionFormStore((state) => state.duration);
-  const addItem = useCartStore((state) => state.addItem);
 
-  const { handleSubmit, watch, setValue } = useForm<SubscriptionSchema>({
-    resolver: zodResolver(subscriptionSchema),
-    defaultValues: {
-      boxSize: storedBoxSize || "small",
-      duration: storedDuration || "trial",
-    },
-  });
-
-  const boxSize = watch("boxSize");
-  const onSubmit = (data: SubscriptionSchema) => {
-    setData(data);
-    //TODO need to find a way to add the notes to the item
-    addItem({
-      id: "gid://shopify/ProductVariant/46680266211587", //this is the variant id
-      name: "Subscription Box",
-      price: "0",
-      compareAtPrice: "",
-      quantity: 1,
-      image: "https://images.omakatsepets.com/subscription-box-small.png",
-      options: [],
-    });
-    console.log("here");
-  };
-
-  const handleSelectBox = (value: string) => {
-    setValue("boxSize", value === "Small Box" ? "small" : "large");
-    setData({ boxSize: value === "Small Box" ? "small" : "large" });
-  };
+  const [boxSize, setBoxSize] = useState<string>("Small Box");
+  const [selectedPlan, setSelectedPlan] = useState<string>("12 months");
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={9} totalSteps={9} />
+      <ProgressBar currentStep={9} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>Choose your plan</h3>
         <div>For subscriptions, your box will be delivered to you monthly.</div>
       </div>
       <Tabs
         tabs={["Small Box", "Large Box"]}
-        selectedTab={boxSize === "small" ? "Small Box" : "Large Box"}
-        onChange={(tab) => handleSelectBox(tab)}
+        selectedTab={boxSize}
+        onChange={(tab) => setBoxSize(tab)}
         className="bg-gray-200"
       />
       <TipCard />
-      {/* <SubscriptionOptions control={control} name="duration" /> */}
+      <PlanSelector
+        selectedPlan={selectedPlan}
+        setSelectedPlan={setSelectedPlan}
+      />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex gap-5">
+      <div className="flex gap-5">
         <Button
           onClick={() => router.push("/subscribe/step-8")}
           variant="secondary"
@@ -79,8 +41,8 @@ export default function SubscriptionStepNinePage() {
         >
           Previous
         </Button>
-        <Button type="submit">Add to cart</Button>
-      </form>
+        <Button>Add to cart</Button>
+      </div>
     </div>
   );
 }
