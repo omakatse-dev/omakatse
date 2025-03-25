@@ -15,7 +15,7 @@ export default function SubscriptionStepEightPage() {
 
   return (
     <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={8} totalSteps={9} />
+      <ProgressBar currentStep={8} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
         <h3>Review your pets&apos; details</h3>
       </div>

@@ -7,11 +7,21 @@ import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 
 interface Props {
   name: string;
-  petType: 'catsDetails' | 'dogsDetails';
+  petType: "catsDetails" | "dogsDetails";
   petIndex: number;
 }
 
-export default function TreatPreferenceCard({ name, petType, petIndex }: Props) {
+type TreatFrequencyData = {
+  frequency: "none" | "a few" | "sometimes" | "often";
+  preferences: string[];
+  comments?: string;
+};
+
+export default function TreatPreferenceCard({
+  name,
+  petType,
+  petIndex,
+}: Props) {
   const options = [
     { id: 0, name: "None (No treats or snacks)", frequency: "none" },
     { id: 1, name: "A few (less than daily)", frequency: "a few" },
@@ -19,16 +29,21 @@ export default function TreatPreferenceCard({ name, petType, petIndex }: Props) 
     { id: 3, name: "Often (4+ daily)", frequency: "often" },
   ];
 
-  const petDetails = useSubscriptionFormStore(state => state[petType]?.[Number(petIndex)]);
-  const treatFrequency = petDetails?.treatFrequency || { frequency: "none", preferences: [] };
-  const setData = useSubscriptionFormStore(state => state.setData);
+  const petDetails = useSubscriptionFormStore(
+    (state) => state[petType]?.[Number(petIndex)]
+  );
+  const treatFrequency = petDetails?.treatFrequency;
+  const setData = useSubscriptionFormStore((state) => state.setData);
 
-  const updateTreatFrequency = (newTreatFrequency: typeof treatFrequency) => {
+  const updateTreatFrequency = (newData: Partial<TreatFrequencyData>) => {
     const pets = useSubscriptionFormStore.getState()[petType] || [];
     const newPets = [...pets];
     newPets[Number(petIndex)] = {
       ...pets[Number(petIndex)],
-      treatFrequency: newTreatFrequency
+      treatFrequency: {
+        ...petDetails?.treatFrequency,
+        ...newData,
+      } as TreatFrequencyData,
     };
     setData({ [petType]: newPets });
   };
@@ -46,30 +61,44 @@ export default function TreatPreferenceCard({ name, petType, petIndex }: Props) 
             options={options}
             placeholder="Treats frequency"
             className="w-full mt-2"
-            value={options.find(opt => opt.frequency === treatFrequency.frequency) || null}
-            onChange={(option) => updateTreatFrequency({
-              ...treatFrequency,
-              frequency: option.frequency as "none" | "a few" | "sometimes" | "often"
-            })}
+            value={
+              options.find(
+                (opt) => opt.frequency === treatFrequency?.frequency
+              ) || null
+            }
+            onChange={(option) =>
+              updateTreatFrequency({
+                preferences: [],
+                frequency: option.frequency as
+                  | "none"
+                  | "a few"
+                  | "sometimes"
+                  | "often",
+              })
+            }
           />
         </div>
         <TreatPreferenceSelector
-          preferences={treatFrequency.preferences}
-          onChange={(preferences) => updateTreatFrequency({
-            ...treatFrequency,
-            preferences
-          })}
+          preferences={treatFrequency?.preferences || []}
+          onChange={(preferences) =>
+            updateTreatFrequency({
+              ...treatFrequency,
+              preferences,
+            })
+          }
         />
         <div className="bodyMD mt-8 text-gray-800">
           Additional comments (optional)
         </div>
         <Textfield
           placeholder="Enter any additional comments"
-          value={treatFrequency.comments || ""}
-          onChange={(e) => updateTreatFrequency({
-            ...treatFrequency,
-            comments: e.target.value
-          })}
+          value={treatFrequency?.comments || ""}
+          onChange={(e) =>
+            updateTreatFrequency({
+              ...treatFrequency,
+              comments: e.target.value,
+            })
+          }
         />
       </div>
     </Card>

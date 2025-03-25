@@ -162,7 +162,10 @@ export default function PetDetailsForm({
                       (species) => species.name === field.value
                     ) || null
                   }
-                  onChange={(option) => field.onChange(option.name)}
+                  onChange={(option) => {
+                    field.onChange(option.name);
+                    saveFieldToStore("breed", option.name);
+                  }}
                 />
               )}
             />
@@ -188,7 +191,10 @@ export default function PetDetailsForm({
                         (year) => year.name === field.value?.toString()
                       ) || null
                     }
-                    onChange={(option) => field.onChange(Number(option.name))}
+                    onChange={(option) => {
+                      field.onChange(Number(option.name));
+                      saveFieldToStore("birthdayYear", Number(option.name));
+                    }}
                   />
                 )}
               />
@@ -205,7 +211,10 @@ export default function PetDetailsForm({
                     value={
                       months.find((month) => month.id === field.value) || null
                     }
-                    onChange={(option) => field.onChange(Number(option.name))}
+                    onChange={(option) => {
+                      field.onChange(Number(option.name));
+                      saveFieldToStore("birthdayMonth", Number(option.name));
+                    }}
                   />
                 )}
               />
