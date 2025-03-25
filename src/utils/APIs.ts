@@ -412,7 +412,7 @@ export const getOrdersByEmail = async (email: string) => {
     },
   });
 
-  return res.data?.customers.edges[0].node.orders.nodes;
+  return res.data?.customers.edges[0]?.node.orders.nodes;
 };
 
 export const getReviewsByAuthor = async (email: string) => {
