@@ -7,7 +7,7 @@ import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useRouter } from "next/navigation";
 import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
-
+import { useState } from "react";
 const _treatPreferenceSchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
@@ -17,14 +17,27 @@ export type TreatPreferenceSchema = z.infer<typeof _treatPreferenceSchema>;
 
 export default function SubscriptionStepSevenPage() {
   const router = useRouter();
-  const cats = useSubscriptionFormStore(state => state.catsDetails) || [];
-  const dogs = useSubscriptionFormStore(state => state.dogsDetails) || [];
+  const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
+  const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
+  const [showError, setShowError] = useState(false);
+
+  const submitHandler = () => {
+    const catTreats = cats.every((cat) => cat.treatFrequency);
+    const dogTreats = dogs.every((dog) => dog.treatFrequency);
+    if (!catTreats || !dogTreats) {
+      setShowError(true);
+      return;
+    }
+    router.push("/subscribe/step-8");
+  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={7} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>Fill in any treats and additional information</h3>
+        <h3 className="font-bold">
+          Fill in any treats and additional information
+        </h3>
         <div className="text-gray-800 bodyLG">
           Let us know anything we need to pay special attention to!
         </div>
@@ -54,8 +67,13 @@ export default function SubscriptionStepSevenPage() {
         >
           Previous
         </Button>
-        <Button onClick={() => router.push("/subscribe/step-8")}>Next</Button>
+        <Button onClick={submitHandler}>Next</Button>
       </div>
+      {showError && (
+        <div className="bodyMD text-red">
+          Please fill in all required fields for each pet before proceeding
+        </div>
+      )}
     </div>
   );
 }

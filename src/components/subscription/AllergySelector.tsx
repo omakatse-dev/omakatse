@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardButton from "../common/CardButton";
 import Input from "../common/Input";
 import PillButton from "../common/PillButton";
@@ -41,7 +41,10 @@ export default function AllergySelector({ name, fieldName }: Props) {
   // Use the actual data from the store, but don't provide defaults
   const allergiesData = petDetails?.allergies;
 
+  const [showError, setShowError] = useState(false);
+
   const updateAllergies = (newAllergies: AllergyData) => {
+    setShowError(false); // Reset error when making changes
     const pets = useSubscriptionFormStore.getState()[petType] || [];
     const newPets = [...pets];
     newPets[Number(petIndex)] = {
@@ -51,6 +54,10 @@ export default function AllergySelector({ name, fieldName }: Props) {
     setData({ [petType]: newPets });
   };
 
+  // Check if allergies are selected when Yes is chosen
+  const hasValidAllergies = !allergiesData?.true || 
+    (allergiesData.true && allergiesData.allergies.length > 0);
+
   return (
     <Card className="flex flex-col items-center w-full">
       <div className="w-8 h-8 rounded-full bg-amber-300 mb-2" />
@@ -59,7 +66,10 @@ export default function AllergySelector({ name, fieldName }: Props) {
       <div className="flex gap-4 mt-2 mb-8">
         <PillButton
           active={allergiesData?.true === true}
-          onClick={() => updateAllergies({ true: true, allergies: [] })}
+          onClick={() => {
+            updateAllergies({ true: true, allergies: [] });
+            setShowError(true); // Show error when Yes is selected
+          }}
         >
           Yes
         </PillButton>
@@ -71,7 +81,10 @@ export default function AllergySelector({ name, fieldName }: Props) {
         </PillButton>
       </div>
       {allergiesData?.true && (
-        <div>
+        <>
+          {showError && !hasValidAllergies && (
+            <p className="text-red-500 mb-4">Please select at least one allergy</p>
+          )}
           <div className="grid grid-cols-3 gap-6">
             {ALLERGIES.map((allergy) => (
               <CardButton
@@ -115,7 +128,7 @@ export default function AllergySelector({ name, fieldName }: Props) {
               });
             }}
           />
-        </div>
+        </>
       )}
     </Card>
   );

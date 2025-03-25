@@ -22,7 +22,7 @@ function ChooseYourPlan() {
 
         <div className="flex flex-col lg:flex-row gap-8 w-full">
           <PricingCard
-            title="Trial"
+            title="1 Month"
             price={40}
             durationText="AED/mo"
             savingsText="to just try your first box"

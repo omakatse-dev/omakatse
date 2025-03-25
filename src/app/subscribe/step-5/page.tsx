@@ -9,7 +9,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { useState } from "react";
 const allergySchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
@@ -21,16 +21,28 @@ export default function SubscriptionStepFivePage() {
   const router = useRouter();
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
+  const [showError, setShowError] = useState(false);
 
   useForm<AllergySchema>({
     resolver: zodResolver(allergySchema),
   });
 
+  const submitHandler = () => {
+    //check if preferences are filled
+    const catAllergies = cats.every((cat) => cat.allergies);
+    const dogAllergies = dogs.every((dog) => dog.allergies);
+    if (!catAllergies || !dogAllergies) {
+      setShowError(true);
+      return;
+    }
+    router.push("/subscribe/step-6");
+  };
+
   return (
     <div className="w-full pt-32 pb-20 bg-pink-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={5} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>What are your pets&apos; allergies?</h3>
+        <h3 className="font-bold">What are your pets&apos; allergies?</h3>
         <div className="text-gray-800 bodyLG">
           Products containing these allergens will be removed from the box
         </div>
@@ -58,8 +70,13 @@ export default function SubscriptionStepFivePage() {
           >
             Previous
           </Button>
-          <Button onClick={() => router.push("/subscribe/step-6")}>Next</Button>
+          <Button onClick={submitHandler}>Next</Button>
         </div>
+        {showError && (
+          <div className="bodyMD text-red">
+            Please fill in all required fields for each pet before proceeding
+          </div>
+        )}
       </form>
     </div>
   );

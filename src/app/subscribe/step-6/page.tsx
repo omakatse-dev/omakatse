@@ -7,7 +7,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -21,21 +21,28 @@ export type PreferenceSchema = z.infer<typeof preferenceSchema>;
 export default function SubscriptionStepSixPage() {
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
+  const [showError, setShowError] = useState(false);
   const router = useRouter();
 
   useForm<PreferenceSchema>({
     resolver: zodResolver(preferenceSchema),
   });
 
-  // const onSubmit = () => {
-  //   router.push("/subscribe/step-7");
-  // };
-
+  const submitHandler = () => {
+    //check if preferences are filled
+    const catPreferences = cats.every((cat) => cat.preferences);
+    const dogPreferences = dogs.every((dog) => dog.preferences);
+    if (!catPreferences || !dogPreferences) {
+      setShowError(true);
+      return;
+    }
+    router.push("/subscribe/step-7");
+  };
   return (
     <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={6} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>What do your pets like to eat?</h3>
+        <h3 className="font-bold">What do your pets like to eat?</h3>
         <div className="text-gray-800 bodyLG">
           We will curate the selection based on what your cats like
         </div>
@@ -67,8 +74,13 @@ export default function SubscriptionStepSixPage() {
           >
             Previous
           </Button>
-          <Button onClick={() => router.push("/subscribe/step-7")}>Next</Button>
+          <Button onClick={submitHandler}>Next</Button>
         </div>
+        {showError && (
+          <div className="bodyMD text-red">
+            Please fill in all required fields for each pet before proceeding
+          </div>
+        )}
       </form>
     </div>
   );

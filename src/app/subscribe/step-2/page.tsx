@@ -30,14 +30,14 @@ export default function SubscriptionStepTwoPage() {
   } = useForm<PetCountSchema>({
     resolver: zodResolver(petCountSchema),
     defaultValues: {
-      catCount: useSubscriptionFormStore.getState().catCount || 0,
-      dogCount: useSubscriptionFormStore.getState().dogCount || 0,
+      catCount: useSubscriptionFormStore.getState().catCount,
+      dogCount: useSubscriptionFormStore.getState().dogCount,
     },
   });
 
   const setData = useSubscriptionFormStore((state) => state.setData);
 
-  const onSubmit = () => {
+  const onSubmit = (data: PetCountSchema) => {
     // reduce cat details array if cat count is longer than array
     const catCount = useSubscriptionFormStore.getState().catCount;
     const catDetails = useSubscriptionFormStore.getState().catsDetails;
@@ -58,6 +58,8 @@ export default function SubscriptionStepTwoPage() {
         });
       }
     }
+
+    setData(data);
 
     router.push("/subscribe/step-3");
   };

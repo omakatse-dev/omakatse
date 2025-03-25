@@ -18,7 +18,7 @@ export default function SubscriptionStepNinePage() {
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={9} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>Choose your plan</h3>
+        <h3 className="font-bold">Choose your plan</h3>
         <div>For subscriptions, your box will be delivered to you monthly.</div>
       </div>
       <Tabs

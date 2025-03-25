@@ -7,6 +7,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,32 +24,38 @@ export default function SubscriptionStepFourPage() {
   const dogCount = useSubscriptionFormStore((state) => state.dogCount) || 0;
   const cats = useSubscriptionFormStore((state) => state.catsDetails);
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails);
+  const [showError, setShowError] = useState(false);
 
-  const {
-    control,
-    formState: { errors },
-  } = useForm<PetDetailsSchema>({
+  const { control } = useForm<PetDetailsSchema>({
     resolver: zodResolver(petDetailsSchema),
     defaultValues: useSubscriptionFormStore.getState(),
-    values: {
-      catsDetails: cats || [],
-      dogsDetails: dogs || [],
-    },
   });
+
+  const submitHandler = () => {
+    const allPetsHaveSize =
+      cats?.every((cat) => cat.size) && dogs?.every((dog) => dog.size);
+
+    if (!allPetsHaveSize) {
+      setShowError(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    router.push("/subscribe/step-5");
+  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={4} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>What are your pets&apos; sizes?</h3>
+        <h3 className="font-bold">What are your pets&apos; sizes?</h3>
         <div className="text-gray-800 bodyLG">
           We will curate apparel based on your pets&apos; sizes
         </div>
       </div>
-      <form className="flex flex-col gap-8 items-center">
-        {(errors.catsDetails || errors.dogsDetails) && (
+      <form className="flex flex-col gap-8 items-center w-full">
+        {showError && (
           <div className="bodyMD text-red">
-            {errors.dogsDetails?.message || errors.catsDetails?.message}
+            Please fill in all required fields for each pet before proceeding
           </div>
         )}
         {Array.from({ length: catCount }).map((_, idx) => (
@@ -71,12 +78,13 @@ export default function SubscriptionStepFourPage() {
         ))}
         <div className="flex gap-5">
           <Button
+            type="button"
             onClick={() => router.push("/subscribe/step-3")}
             variant="secondary"
           >
             Previous
           </Button>
-          <Button onClick={() => router.push("/subscribe/step-5")}>Next</Button>
+          <Button onClick={submitHandler}>Next</Button>
         </div>
       </form>
     </div>
