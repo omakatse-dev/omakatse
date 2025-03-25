@@ -17,13 +17,36 @@ export default function Cart({
   const cartItems = useCartStore((state) => state.items);
 
   const createCartHandler = async () => {
-    const formattedItems = cartItems.map((item) => ({
+    const subscriptionItems = cartItems.filter((item) =>
+      item.name.includes("Subscription")
+    );
+    const regularItems = cartItems.filter(
+      (item) => !item.name.includes("Subscription")
+    );
+    const formattedRegularItems = regularItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
     }));
-    const res = await createCart(formattedItems);
-    localStorage.setItem("cartId", res.id);
-    window.open(res.checkoutUrl);
+
+    // TODO select the right selling plan based on duration
+    // TODO add notes to the item
+    // TODO schedule contract over notification
+    const formattedSubscriptionItems = subscriptionItems.map((item) => ({
+      merchandiseId: item.id,
+      quantity: item.quantity,
+      sellingPlanId: "gid://shopify/SellingPlan/10796859651",
+    }));
+    console.log(formattedSubscriptionItems)
+    try {
+      const res = await createCart(
+        formattedRegularItems.concat(formattedSubscriptionItems)
+      );
+      console.log(res);
+      localStorage.setItem("cartId", res.id);
+      window.location.href = res.checkoutUrl;
+    } catch (error) {
+      console.log("something went wrong creating cart", error);
+    }
   };
 
   return (
