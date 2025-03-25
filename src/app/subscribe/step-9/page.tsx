@@ -35,7 +35,6 @@ export default function SubscriptionStepNinePage() {
   });
 
   const boxSize = watch("boxSize");
-  const addItem = useCartStore((state) => state.addItem);
   const onSubmit = (data: SubscriptionSchema) => {
     setData(data);
     //TODO need to find a way to add the notes to the item
