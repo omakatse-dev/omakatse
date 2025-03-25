@@ -14,7 +14,7 @@ export default function SubscriptionStepThreePage() {
 
   return (
     <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={3} totalSteps={9} />
+      <ProgressBar currentStep={3} totalSteps={9} className="max-w-sm" />
       <h3>Fill in your pets&apos; details</h3>
       <div className="flex flex-col gap-8">
         {Array.from({ length: storedCatCount }).map((_, idx) => (

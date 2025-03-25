@@ -2,14 +2,16 @@ export default function ProgressBar({
   currentStep,
   totalSteps,
   showSteps = true,
+  className,
 }: {
   currentStep: number;
   totalSteps: number;
   showSteps?: boolean;
+  className?: string;
 }) {
   const fill = Number(((currentStep / totalSteps) * 100).toFixed(0));
   return (
-    <div className="flex flex-col items-center w-full gap-2">
+    <div className={`flex flex-col items-center w-full gap-2 ${className}`}>
       {showSteps && (
         <div>
           Step {currentStep} of {totalSteps}

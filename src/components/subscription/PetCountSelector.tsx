@@ -34,7 +34,7 @@ export default function PetCountSelector({
       control={control}
       render={({ field }) => (
         <>
-          <h3>How many {petType}s do you have?</h3>
+          <h3 className="font-bold">How many {petType}s do you have?</h3>
           <div className="flex flex-row gap-8">
             <CardButton
               active={field.value === 1}

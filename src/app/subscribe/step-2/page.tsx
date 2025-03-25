@@ -31,17 +31,40 @@ export default function SubscriptionStepTwoPage() {
     resolver: zodResolver(petCountSchema),
     defaultValues: {
       catCount: useSubscriptionFormStore.getState().catCount || 0,
-      dogCount: useSubscriptionFormStore.getState().dogCount || 0
-    }
+      dogCount: useSubscriptionFormStore.getState().dogCount || 0,
+    },
   });
 
+  const setData = useSubscriptionFormStore((state) => state.setData);
+
   const onSubmit = () => {
+    // reduce cat details array if cat count is longer than array
+    const catCount = useSubscriptionFormStore.getState().catCount;
+    const catDetails = useSubscriptionFormStore.getState().catsDetails;
+    if (catCount && catDetails) {
+      if (catCount < catDetails.length) {
+        setData({
+          catsDetails: catDetails.slice(0, catCount),
+        });
+      }
+    }
+
+    const dogCount = useSubscriptionFormStore.getState().dogCount;
+    const dogDetails = useSubscriptionFormStore.getState().dogsDetails;
+    if (dogCount && dogDetails) {
+      if (dogCount < dogDetails.length) {
+        setData({
+          dogsDetails: dogDetails.slice(0, dogCount),
+        });
+      }
+    }
+
     router.push("/subscribe/step-3");
   };
 
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={2} totalSteps={9} />
+      <ProgressBar currentStep={2} totalSteps={9} className="max-w-sm" />
       <form
         className="flex flex-col items-center gap-8"
         onSubmit={handleSubmit(onSubmit)}
