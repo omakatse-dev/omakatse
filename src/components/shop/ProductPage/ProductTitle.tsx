@@ -57,9 +57,12 @@ export default function ProductTitle({
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
+    console.log(selectedVariant);
+    const items = useCartStore.getState().items;
+    console.log(items);
     const item = useCartStore
       .getState()
-      .items.find((item) => item.id === details.id);
+      .items.find((item) => item.id === selectedVariant?.id);
     if (item) {
       changeQuantity(item, item.quantity + quantity);
     } else {

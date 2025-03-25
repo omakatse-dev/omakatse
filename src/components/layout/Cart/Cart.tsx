@@ -36,12 +36,17 @@ export default function Cart({
       quantity: item.quantity,
       sellingPlanId: "gid://shopify/SellingPlan/10796859651",
     }));
-    const res = await createCart(
-      formattedRegularItems.concat(formattedSubscriptionItems)
-    );
-    console.log(res.id);
-    localStorage.setItem("cartId", res.id);
-    window.location.href = res.checkoutUrl;
+    console.log(formattedSubscriptionItems)
+    try {
+      const res = await createCart(
+        formattedRegularItems.concat(formattedSubscriptionItems)
+      );
+      console.log(res);
+      localStorage.setItem("cartId", res.id);
+      window.location.href = res.checkoutUrl;
+    } catch (error) {
+      console.log("something went wrong creating cart", error);
+    }
   };
 
   return (

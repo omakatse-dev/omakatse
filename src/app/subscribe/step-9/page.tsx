@@ -24,6 +24,7 @@ export default function SubscriptionStepNinePage() {
   const setData = useSubscriptionFormStore((state) => state.setData);
   const storedBoxSize = useSubscriptionFormStore((state) => state.boxSize);
   const storedDuration = useSubscriptionFormStore((state) => state.duration);
+  const addItem = useCartStore((state) => state.addItem);
 
   const { handleSubmit, watch, setValue } = useForm<SubscriptionSchema>({
     resolver: zodResolver(subscriptionSchema),
@@ -39,9 +40,9 @@ export default function SubscriptionStepNinePage() {
     setData(data);
     //TODO need to find a way to add the notes to the item
     addItem({
-      id: "gid://shopify/ProductVariant/46670734328067", //this is the variant id
+      id: "gid://shopify/ProductVariant/46680266211587", //this is the variant id
       name: "Subscription Box",
-      price: "100",
+      price: "0",
       compareAtPrice: "",
       quantity: 1,
       image: "https://images.omakatsepets.com/subscription-box-small.png",

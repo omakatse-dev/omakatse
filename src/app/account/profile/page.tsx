@@ -1,7 +1,7 @@
 "use client";
 
-// import { getAccessToken } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
+// import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export default function AccountProfilePage() {
   const { user, isLoading } = useUser();

@@ -231,6 +231,7 @@ export const getProductDetailsByID = async (productID: string) => {
 export const createCart = async (
   lines: { merchandiseId: string; quantity: number }[]
 ) => {
+  console.log("lines", lines);
   const cartQuery = `
   mutation createCart($lines: [CartLineInput!]) {
     cartCreate(
@@ -279,6 +280,7 @@ export const createCart = async (
   const res = await storefrontClient.request(cartQuery, {
     variables: { lines, note: "This si a test note" },
   });
+  console.log(res);
   return res.data.cartCreate.cart;
 };
 
@@ -344,7 +346,7 @@ export const getFulfilledOrdersByEmail = async (email: string) => {
     },
   });
 
-  return res.data?.customers.edges[0].node.orders.edges
+  return res.data?.customers.edges[0]?.node.orders.edges
     .flatMap((order) => order.node.fulfillments)
     .flatMap((fulfillment) =>
       fulfillment.fulfillmentLineItems.edges.map((edge) => edge.node.lineItem)
@@ -410,7 +412,7 @@ export const getOrdersByEmail = async (email: string) => {
     },
   });
 
-  return res.data?.customers.edges[0].node.orders.nodes;
+  return res.data?.customers.edges[0]?.node.orders.nodes;
 };
 
 export const getReviewsByAuthor = async (email: string) => {
@@ -443,5 +445,22 @@ export const getCartById = async (cartId: string) => {
       id: cartId,
     },
   });
+  return res.data;
+};
+
+export const getContracts = async () => {
+  const query = `
+    #graphql
+    query MyQuery {
+    subscriptionContracts(first: 1) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }`;
+  const res = await adminClient.request(query);
+  console.log(res);
   return res.data;
 };

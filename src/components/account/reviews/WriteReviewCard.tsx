@@ -31,7 +31,7 @@ export default function WriteReviewCard({
   };
 
   const [showReviewModal, setShowReviewModal] = useState(false);
-  console.log(details.variant);
+
 
   return (
     <div className="flex w-full max-w-4xl items-center justify-between gap-8 first:pb-8 not-first:py-8">
