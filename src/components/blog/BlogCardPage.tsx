@@ -29,7 +29,6 @@ export default function Page({
   blogs: Entry<BlogPostType, ChainModifiers, string>[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
   const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   console.log(blogs[0].fields.slug);
@@ -40,7 +39,6 @@ export default function Page({
     } else {
       setBlogsPerPage(3);
     }
-    setSearchQuery("");
   };
 
   useEffect(() => {
@@ -61,14 +59,10 @@ export default function Page({
 
   // Filter blogData based on the search query and selected category
   const filteredBlogs = blogs.filter((blog) => {
-    const matchesSearchQuery = blog.fields.title
-      .toString()
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
     const matchesCategory =
       selectedCategory === "All" ||
       blog.fields.categoryTag.toString() === selectedCategory;
-    return matchesSearchQuery && matchesCategory;
+    return matchesCategory;
   });
 
   // Calculate the index of the first and last blog on the current page
