@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EntryFields, Entry, ChainModifiers } from "contentful";
+import ScrollUpButton from "../common/ScrollUpButton";
 
 export type faqType = {
   contentTypeId: "faq";
@@ -29,6 +30,7 @@ export default function Page({
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
+    scrollToTop();
   };
 
   const categories = [
@@ -52,10 +54,17 @@ export default function Page({
         return acc;
     }, {});
 
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth", // Smooth scrolling
+        });
+      };
+
   return (
     <div className="flex flex-col items-center w-full">
       {/* Category Selector */}
-      <Disclosure as="div" className="relative w-full md:hidden z-10">
+      <Disclosure as="div" className="w-full z-1 sticky top-28 md:top-32">
         {({ open }) => (
           <>
             <DisclosureButton className="w-full text-left py-3 px-5 rounded-full border-1 bg-white bodyMD flex justify-between">
@@ -131,6 +140,7 @@ export default function Page({
           </div>
         ))}
       </div>
+      <ScrollUpButton/>
     </div>
   );
 }
