@@ -51,7 +51,7 @@ const options = {
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       console.log("NODE:", node);
       return (
-        <div className="flex flex-col gap-2 items-center py-8">
+        <div className="flex flex-col gap-2 items-center py-8 w-fit self-center">
           <Image
             src={`https:${node.data.target.fields.file.url}`}
             alt="Description Image"
@@ -60,7 +60,7 @@ const options = {
             className="rounded-xl self-center"
           />
           {node.data.target.fields.description && (
-            <div className="bodyMD">
+            <div className="bodyMD self-start">
               Source:
               <Link
                 href={node.data.target.fields.description.toString()}
@@ -107,6 +107,7 @@ export default async function BlogPage({
         </div>
       </Link>
 
+      {/* Back button for desktop */}
       <div>
         <ScrollProgressCircle />
       </div>
@@ -136,7 +137,7 @@ export default async function BlogPage({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-2 items-center w-fit self-center">
         <Image
           src={`https:${imageHeader}`}
           alt="Header Image"
@@ -145,7 +146,7 @@ export default async function BlogPage({
           className="rounded-xl"
         />
         {imageHeaderDescription && (
-          <div className="bodyMD">
+          <div className="bodyMD self-start">
             Source:
             <Link
               href={imageHeaderDescription.toString()}
