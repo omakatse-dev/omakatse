@@ -36,7 +36,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
         </p>
       </div>
       <h4 className="mb-2">{blog.fields.title.toString()}</h4>
-      <p className="bodyMD mb-6">{blog.fields.summary.toString()}</p>
+      <p className="bodyMD mb-6 line-clamp-3 ">{blog.fields.summary.toString()}</p>
       <div>
         <Link href={`/blog/${blog.fields.slug}`} passHref>
           <div className="inline-flex flex-row gap-2 items-center cursor-pointer bodyButton">

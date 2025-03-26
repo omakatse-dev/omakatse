@@ -21,6 +21,7 @@
     "@shopify/admin-api-client": "^1.0.7",
     "@shopify/shopify-api": "^11.10.0",
     "@shopify/storefront-api-client": "^1.0.5",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "contentful": "^11.5.9",
     "dayjs": "^1.11.13",
     "lottie-react": "^2.4.1",
