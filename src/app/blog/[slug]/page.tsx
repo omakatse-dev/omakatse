@@ -80,11 +80,11 @@ export default async function BlogPage({
   params,
   searchParams,
 }: {
-  params: { slug: string };
-  searchParams: { preview: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ preview: string }>;
 }) {
-  const { slug } = params;
-  const preview = searchParams.preview === "true"; // Check if preview mode is enabled
+  const { slug } = await params;
+  const { preview } = await searchParams; // Check if preview mode is enabled
 
   const blog = await getBlogBySlug(slug, preview);
   console.log("Preview mode:", preview);

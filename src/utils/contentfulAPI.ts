@@ -26,7 +26,7 @@ export const getAllBlogPosts = async (): Promise<
 
 export const getBlogBySlug = async (
   slug: string,
-  preview: boolean = false
+  preview: string
 ): Promise<Entry<BlogPostType> | null> => {
   const query: { content_type: string; "fields.slug": string; limit: number } =
     {
