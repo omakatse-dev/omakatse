@@ -6,6 +6,12 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!;
 const client = createClient({
   space: spaceId,
   accessToken: accessToken,
+  host: "cdn.contentful.com",
+});
+const previewClient = createClient({
+  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_TOKEN!,
+  host: "preview.contentful.com",
 });
 
 export const getAllBlogPosts = async (): Promise<
@@ -19,7 +25,8 @@ export const getAllBlogPosts = async (): Promise<
 };
 
 export const getBlogBySlug = async (
-  slug: string
+  slug: string,
+  preview: boolean = false
 ): Promise<Entry<BlogPostType> | null> => {
   const query: { content_type: string; "fields.slug": string; limit: number } =
     {
@@ -28,6 +35,11 @@ export const getBlogBySlug = async (
       limit: 1,
     };
 
-  const res = await client.getEntries<BlogPostType>(query);
+  // If we're in preview mode, use the Preview API client
+  const res = preview
+    ? await previewClient.getEntries<BlogPostType>(query) // Preview API
+    : await client.getEntries<BlogPostType>(query); // Delivery API
+
+  // Return the first blog post found or null if not found
   return res.items.length > 0 ? res.items[0] : null;
 };
