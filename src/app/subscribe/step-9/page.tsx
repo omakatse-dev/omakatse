@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useCartStore } from "@/stores/cartStore";
+import { getSubscriptionPlan } from "@/utils/APIs";
 export default function SubscriptionStepNinePage() {
   const router = useRouter();
 
@@ -33,7 +34,7 @@ export default function SubscriptionStepNinePage() {
       router.push("/subscribe/step-2");
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     //TODO need to find a way to add the notes to the item
     addItem({
       id: "gid://shopify/ProductVariant/46680266211587", //this is the variant id
@@ -45,7 +46,10 @@ export default function SubscriptionStepNinePage() {
       options: [],
     });
     console.log("here");
+    const test = await getSubscriptionPlan();
+    console.log(test)
   };
+
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">

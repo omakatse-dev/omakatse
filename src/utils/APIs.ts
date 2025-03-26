@@ -6,6 +6,7 @@ import { createAdminApiClient } from "@shopify/admin-api-client";
 import { ProductEdgeInterface } from "./Interfaces";
 import { CreateReviewPayload, SortOption } from "@/types/Types";
 import { ContactFormData } from "@/components/contact/ContactForm";
+// import { shopifyApi } from "@shopify/shopify-api";
 
 const storefrontClient = createStorefrontApiClient({
   storeDomain: process.env.NEXT_PUBLIC_API_URL || "",
@@ -18,6 +19,15 @@ const adminClient = createAdminApiClient({
   apiVersion: LATEST_API_VERSION,
   accessToken: process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || "",
 });
+
+// const shopify = shopifyApi({
+//   apiKey: process.env.SHOPIFY_SUBSCRIPTIONS_API_KEY || "",
+//   apiSecretKey: process.env.SHOPIFY_SUBSCRIPTIONS_API_SECRET || "",
+//   scopes: ["read_customers", "write_customers"],
+//   hostName: process.env.NEXT_PUBLIC_API_URL || "",
+//   apiVersion: LATEST_API_VERSION,
+//   isEmbeddedApp: false,
+// });
 
 const REVIEW_WORKER_ENDPOINT = process.env.REVIEW_WORKER_ENDPOINT || "";
 
@@ -451,16 +461,45 @@ export const getCartById = async (cartId: string) => {
 export const getContracts = async () => {
   const query = `
     #graphql
-    query MyQuery {
-    subscriptionContracts(first: 1) {
-      edges {
-        node {
-          id
+    query ShopName {
+      customer(id: "gid://shopify/Customer/8131211788547") {
+        id
+        subscriptionContracts(first: 10) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+    }`;
+  const res = await adminClient.request(query);
+  console.log(res.errors?.graphQLErrors);
+  return res.data;
+};
+
+export const getSubscriptionPlan = async () => {
+  const query = `
+    query GetSellingPLan {
+    product(id: "gid://shopify/Product/8944976658691") {
+      sellingPlanGroups(first: 5) {
+        edges {
+          node {
+            appName
+            sellingPlans(first: 5) {
+              edges {
+                node {
+                  id
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
   }`;
-  const res = await adminClient.request(query);
-  console.log(res);
+  const res = await storefrontClient.request(query);
+  console.log(res.errors);
   return res.data;
 };

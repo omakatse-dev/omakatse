@@ -34,9 +34,9 @@ export default function Cart({
     const formattedSubscriptionItems = subscriptionItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
-      sellingPlanId: "gid://shopify/SellingPlan/2851799299",
+      sellingPlanId: "gid://shopify/SellingPlan/10819797251",
     }));
-    console.log(formattedSubscriptionItems)
+    console.log(formattedSubscriptionItems);
     try {
       const res = await createCart(
         formattedRegularItems.concat(formattedSubscriptionItems)
