@@ -6,22 +6,41 @@ import { useState } from "react";
 
 export default function PageSelector() {
   const pathname = usePathname();
-  const pages = ["profile", "reviews", "history"];
+
+  const pages = [
+    {
+      label: "Profile",
+      href: "profile",
+    },
+    {
+      label: "Reviews",
+      href: "reviews",
+    },
+    {
+      label: "History",
+      href: "history",
+    },
+    {
+      label: "My Subscriptions",
+      href: "subscriptions",
+    },
+  ];
+
   const [selectedPage, setSelectedPage] = useState(pathname.split("/")[2]);
   return (
-    <div className="hidden sm:flex flex-col gap-3 bodyMD sticky top-28 sm:top-36">
+    <div className="hidden text-nowrap sm:flex flex-col gap-3 bodyMD sticky top-28 sm:top-36">
       {pages.map((page) => (
         <Link
-          key={page}
-          onClick={() => setSelectedPage(page)}
-          href={`/account/${page}`}
+          key={page.label}
+          onClick={() => setSelectedPage(page.href)}
+          href={`/account/${page.href}`}
           className={`${
-            selectedPage === page
+            selectedPage === page.href
               ? "text-black font-bold underline underline-offset-4"
               : "text-gray-800"
           }`}
         >
-          {page.charAt(0).toUpperCase() + page.slice(1)}
+          {page.label}
         </Link>
       ))}
     </div>
