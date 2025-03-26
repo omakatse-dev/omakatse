@@ -3,8 +3,6 @@ import { createClient, EntryCollection, Entry } from "contentful";
 
 const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!;
-console.log(spaceId);
-console.log(accessToken);
 const client = createClient({
   space: spaceId,
   accessToken: accessToken,

@@ -59,15 +59,17 @@ const options = {
             height={100}
             className="rounded-xl self-center"
           />
-          <div className="bodyMD">
-            Source:
-            <Link
-              href={`https:${node.data.target.fields.file.url}`}
-              className="ml-1 underline text-blue-500"
-            >
-              {node.data.target.fields.title.toString()}
-            </Link>
-          </div>
+          {node.data.target.fields.description && (
+            <div className="bodyMD">
+              Source:
+              <Link
+                href={node.data.target.fields.description.toString()}
+                className="ml-1 underline text-blue-500"
+              >
+                {node.data.target.fields.title.toString()}
+              </Link>
+            </div>
+          )}
         </div>
       );
     },
@@ -79,7 +81,7 @@ export default async function BlogPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
+  const { slug } = await params;
   const blog = await getBlogBySlug(slug);
   console.log(blog);
 
@@ -104,7 +106,7 @@ export default async function BlogPage({
       </Link>
 
       <div>
-        <ScrollProgressCircle/>
+        <ScrollProgressCircle />
       </div>
 
       <div className="flex flex-col gap-3">
@@ -140,15 +142,17 @@ export default async function BlogPage({
           height={100}
           className="rounded-xl"
         />
-        <div className="bodyMD">
-          Source:
-          <Link
-            href={`https:${imageHeader}`}
-            className="ml-1 underline text-blue-500"
-          >
-            {imageTitle?.toString()}
-          </Link>
-        </div>
+        {
+          <div className="bodyMD">
+            Source:
+            <Link
+              href={`https:${imageHeader}`}
+              className="ml-1 underline text-blue-500"
+            >
+              {imageTitle?.toString()}
+            </Link>
+          </div>
+        }
       </div>
       {documentToReactComponents(description, options)}
       <div></div>
