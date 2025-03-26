@@ -44,27 +44,33 @@ export default function Page({
       faq.fields.category.toString() === selectedCategory;
     return matchesCategory;
   });
-    // Group FAQs by category
-    const groupedFaqs = filteredFaqs.reduce((acc: Record<string, Entry<faqType>[]>, faq) => {
-        const category = faq.fields.category;
-        if (!acc[category.toString()]) {
+  // Group FAQs by category
+  const groupedFaqs = filteredFaqs.reduce(
+    (acc: Record<string, Entry<faqType>[]>, faq) => {
+      const category = faq.fields.category;
+      if (!acc[category.toString()]) {
         acc[category.toString()] = [];
-        }
-        acc[category.toString()].push(faq);
-        return acc;
-    }, {});
+      }
+      acc[category.toString()].push(faq);
+      return acc;
+    },
+    {}
+  );
 
-    const scrollToTop = () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth", // Smooth scrolling
-        });
-      };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scrolling
+    });
+  };
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full md:px-64">
       {/* Category Selector */}
-      <Disclosure as="div" className="w-full z-1 sticky top-28 md:top-32">
+      <Disclosure
+        as="div"
+        className="w-full md:w-72 z-1 sticky top-28 md:top-32"
+      >
         {({ open }) => (
           <>
             <DisclosureButton className="w-full text-left py-3 px-5 rounded-full border-1 bg-white bodyMD flex justify-between">
@@ -104,17 +110,25 @@ export default function Page({
       {/* FAQ List */}
       <div className="mt-6 mb-32 w-full flex flex-col gap-8">
         {Object.entries(groupedFaqs).map(([category, faqList]) => (
-          <div key={category} className="flex flex-col justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full">
-
+          <div
+            key={category}
+            className="flex flex-col justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full"
+          >
             <p className="bodyXL text-gray-500 mb-4">{category}</p>
 
             {/* Render all FAQs for the category */}
             {faqList.map((faq, index) => (
-              <Disclosure key={index} as="div" className="border-t-1 border-gray-200">
+              <Disclosure
+                key={index}
+                as="div"
+                className="border-t-1 border-gray-200"
+              >
                 {({ open }) => (
                   <>
                     <DisclosureButton className="group flex w-full items-center justify-between py-4 text-left">
-                      <span className="bodyLG text-black">{faq.fields.question.toString()}</span>
+                      <span className="bodyLG text-black">
+                        {faq.fields.question.toString()}
+                      </span>
                       <ChevronDownIcon
                         className={`size-8 transition-all text-[#2C2420] ${
                           open ? "rotate-180" : ""
@@ -139,8 +153,8 @@ export default function Page({
             ))}
           </div>
         ))}
+        <ScrollUpButton className="fixed bottom-6 right-10" />
       </div>
-      <ScrollUpButton/>
     </div>
   );
 }

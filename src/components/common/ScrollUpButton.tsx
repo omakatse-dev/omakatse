@@ -1,11 +1,7 @@
 import React from "react";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 
-export default function ScrollUpButton({
-    className,
-}: {
-    className?: string;
-}) {
+export default function ScrollUpButton({ className }: { className?: string }) {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -16,7 +12,7 @@ export default function ScrollUpButton({
     <div>
       <button
         onClick={scrollToTop}
-        className={`${className} p-4 rounded-full bg-yellow shadow-xl"`}
+        className={`${className} p-4 rounded-full bg-yellow shadow-xl`}
       >
         <ArrowUpIcon className="w-6" />
       </button>
