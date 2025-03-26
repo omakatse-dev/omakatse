@@ -79,7 +79,7 @@ export default function Footer() {
     },
     {
       name: "FAQs",
-      url: "/about",
+      url: "/faqs",
     },
     {
       name: "Contact Us",

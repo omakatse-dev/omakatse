@@ -1,3 +1,4 @@
+import { faqType } from "@/app/faqs/page";
 import { BlogPostType } from "@/components/blog/BlogCardPage";
 import { createClient, EntryCollection, Entry } from "contentful";
 
@@ -19,6 +20,16 @@ export const getAllBlogPosts = async (): Promise<
 > => {
   const res = await client.getEntries<BlogPostType>({
     content_type: "blogPost",
+  });
+
+  return res;
+};
+
+export const getAllFaqs = async (): Promise<
+  EntryCollection<faqType>
+> => {
+  const res = await client.getEntries<faqType>({
+    content_type: "faq",
   });
 
   return res;
