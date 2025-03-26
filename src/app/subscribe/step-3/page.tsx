@@ -17,6 +17,7 @@ export default function SubscriptionStepThreePage() {
   const catsDetails = useSubscriptionFormStore((state) => state.catsDetails);
   const dogsDetails = useSubscriptionFormStore((state) => state.dogsDetails);
   const petType = useSubscriptionFormStore((state) => state.petType);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
   const [showError, setShowError] = useState(false);
 
   const router = useRouter();
@@ -53,13 +54,18 @@ export default function SubscriptionStepThreePage() {
   };
 
   useEffect(() => {
+    if (!hydrated) return;
     if (!petType) {
       router.push("/subscribe/step-1");
     }
-    if (!storedDogCount || !storedCatCount) {
+    if (
+      (!storedDogCount && petType === "dog") ||
+      (!storedCatCount && petType === "cat") ||
+      (!storedDogCount && !storedCatCount && petType === "both")
+    ) {
       router.push("/subscribe/step-2");
     }
-  }, [router, storedDogCount, storedCatCount, petType]);
+  }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">

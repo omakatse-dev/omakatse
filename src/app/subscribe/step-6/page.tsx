@@ -26,6 +26,7 @@ export default function SubscriptionStepSixPage() {
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
 
   useForm<PreferenceSchema>({
     resolver: zodResolver(preferenceSchema),
@@ -43,13 +44,18 @@ export default function SubscriptionStepSixPage() {
   };
 
   useEffect(() => {
+    if (!hydrated) return;
     if (!petType) {
       router.push("/subscribe/step-1");
     }
-    if (!storedDogCount || !storedCatCount) {
+    if (
+      (!storedDogCount && petType === "dog") ||
+      (!storedCatCount && petType === "cat") ||
+      (!storedDogCount && !storedCatCount && petType === "both")
+    ) {
       router.push("/subscribe/step-2");
     }
-  }, [router, storedDogCount, storedCatCount, petType]);
+  }, [router, storedDogCount, storedCatCount, petType, hydrated]);
   
   return (
     <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">

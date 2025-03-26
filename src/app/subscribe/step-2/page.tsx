@@ -23,12 +23,14 @@ export type PetCountSchema = z.infer<typeof petCountSchema>;
 export default function SubscriptionStepTwoPage() {
   const router = useRouter();
   const petType = useSubscriptionFormStore((state) => state.petType);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
 
   useEffect(() => {
+    if (!hydrated) return;
     if (!petType) {
       router.push("/subscribe/step-1");
     }
-  }, [petType, router]);
+  }, [petType, router, hydrated]);
 
   const {
     control,
@@ -67,7 +69,6 @@ export default function SubscriptionStepTwoPage() {
     }
 
     setData(data);
-
     router.push("/subscribe/step-3");
   };
 

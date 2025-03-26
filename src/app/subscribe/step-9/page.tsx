@@ -8,6 +8,7 @@ import TipCard from "@/components/subscription/TipCard";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
+import { useCartStore } from "@/stores/cartStore";
 export default function SubscriptionStepNinePage() {
   const router = useRouter();
 
@@ -16,15 +17,35 @@ export default function SubscriptionStepNinePage() {
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
-
+  const addItem = useCartStore((state) => state.addItem);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
   useEffect(() => {
+    if (!hydrated) return;
+
     if (!petType) {
       router.push("/subscribe/step-1");
     }
-    if (!storedDogCount || !storedCatCount) {
+    if (
+      (!storedDogCount && petType === "dog") ||
+      (!storedCatCount && petType === "cat") ||
+      (!storedDogCount && !storedCatCount && petType === "both")
+    ) {
       router.push("/subscribe/step-2");
     }
-  }, [router, storedDogCount, storedCatCount, petType]);
+  }, [router, storedDogCount, storedCatCount, petType, hydrated]);
+  const addToCartHandler = () => {
+    //TODO need to find a way to add the notes to the item
+    addItem({
+      id: "gid://shopify/ProductVariant/46680266211587", //this is the variant id
+      name: "Subscription Box",
+      price: "0",
+      compareAtPrice: "",
+      quantity: 1,
+      image: "https://images.omakatsepets.com/subscription-box-small.png",
+      options: [],
+    });
+    console.log("here");
+  };
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
@@ -53,7 +74,7 @@ export default function SubscriptionStepNinePage() {
         >
           Previous
         </Button>
-        <Button>Add to cart</Button>
+        <Button onClick={addToCartHandler}>Add to cart</Button>
       </div>
     </div>
   );

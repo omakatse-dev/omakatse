@@ -27,7 +27,8 @@ export default function SubscriptionStepFourPage() {
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
-  
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
+
   const [showError, setShowError] = useState(false);
 
   const { control } = useForm<PetDetailsSchema>({
@@ -37,7 +38,11 @@ export default function SubscriptionStepFourPage() {
 
   const submitHandler = () => {
     const allPetsHaveSize =
-      cats?.every((cat) => cat.size) && dogs?.every((dog) => dog.size);
+      (petType === "both" &&
+        cats?.every((cat) => cat.size) &&
+        dogs?.every((dog) => dog.size)) ||
+      (petType === "dog" && dogs?.every((dog) => dog.size)) ||
+      (petType === "cat" && cats?.every((cat) => cat.size));
 
     if (!allPetsHaveSize) {
       setShowError(true);
@@ -48,13 +53,18 @@ export default function SubscriptionStepFourPage() {
   };
 
   useEffect(() => {
+    if (!hydrated) return;
     if (!petType) {
       router.push("/subscribe/step-1");
     }
-    if (!storedDogCount || !storedCatCount) {
+    if (
+      (!storedDogCount && petType === "dog") ||
+      (!storedCatCount && petType === "cat") ||
+      (!storedDogCount && !storedCatCount && petType === "both")
+    ) {
       router.push("/subscribe/step-2");
     }
-  }, [router, storedDogCount, storedCatCount, petType]);
+  }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
     <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
