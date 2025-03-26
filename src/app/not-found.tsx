@@ -1,17 +1,16 @@
+"use client"
 import Link from "next/link";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Button from "@/components/common/Button";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
+import AnimationData from "../assets/lotties/404.json";
 
 export default function NotFound() {
   return (
     <div className="my-52 flex flex-col gap-8">
-      <Image
-        src="/assets/Animated_404.svg"
-        alt="404 Not Found"
-        width={309}
-        height={229}
-        className=""
-      />
+      <Lottie animationData={AnimationData} loop={true}/>
       <div className="flex flex-col gap-3 items-center">
         <h1>404</h1>
         <div className="bodyMD">Oops, meow meow meow</div>
