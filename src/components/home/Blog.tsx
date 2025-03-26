@@ -1,23 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import BlogCard from '../blog/BlogCard';
-import Button from '../common/Button';
-import Link from 'next/link';
-import blogData from '../../data/blogData.json';
+"use client";
+import React, { useState, useEffect } from "react";
+import BlogCard from "../blog/BlogCard";
+import Button from "../common/Button";
+import Link from "next/link";
+import { getAllBlogPosts } from "@/utils/contentfulAPI";
+import { EntryFields, Entry } from "contentful";
 
-interface Blog {
-  id: string;
-  category: string;
-  duration: string;
-  title: string;
-  description: string;
-}
+export type BlogPostType = {
+  contentTypeId: "blogPost";
+  fields: {
+    blogId: EntryFields.Integer;
+    categoryTag: EntryFields.Symbol;
+    title: EntryFields.Text;
+    editedDate: EntryFields.Date;
+    postedDate: EntryFields.Date;
+    readDuration: EntryFields.Integer;
+    author: EntryFields.Text;
+    imageHeader: EntryFields.AssetLink;
+    description: EntryFields.RichText;
+    summary: EntryFields.Text;
+    slug: EntryFields.Text;
+  };
+};
 
 function Blog() {
-  const [currentBlogs, setCurrentBlogs] = useState<Blog[]>([]);
+  const [currentBlogs, setCurrentBlogs] = useState<Entry<BlogPostType>[]>([]);
 
   useEffect(() => {
-    const firstThreeBlogs = blogData.slice(0, 3);
-    setCurrentBlogs(firstThreeBlogs);
+    const fetchBlogs = async () => {
+      const res = await getAllBlogPosts();
+      const firstThree = res.items.slice(0, 3);
+      setCurrentBlogs(firstThree);
+    };
+
+    fetchBlogs();
   }, []);
 
   return (
@@ -27,7 +43,7 @@ function Blog() {
       <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
           {currentBlogs.map((blog) => (
-            <BlogCard key={blog.id} blogData={blog} />
+            <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
           ))}
           {currentBlogs.length === 0 && <div>No blogs found</div>}
         </div>

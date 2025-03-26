@@ -2,7 +2,7 @@ export type SortOption = "CREATED" | "BEST_SELLING" | "PRICE";
 
 type PriceRange = {
   minVariantPrice: {
-    amount: number;
+    amount: string;
   };
 };
 
