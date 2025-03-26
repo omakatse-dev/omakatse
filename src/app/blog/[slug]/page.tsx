@@ -91,8 +91,10 @@ export default async function BlogPage({
 
   const imageHeader = (blog.fields.imageHeader as unknown as Asset).fields.file
     ?.url;
-  const imageTitle = (blog?.fields.imageHeader as unknown as Asset).fields
+  const imageHeaderTitle = (blog?.fields.imageHeader as unknown as Asset).fields
     .title;
+  const imageHeaderDescription = (blog?.fields.imageHeader as unknown as Asset)
+    .fields.description;
   const description = blog.fields.description as unknown as Document;
 
   return (
@@ -142,17 +144,17 @@ export default async function BlogPage({
           height={100}
           className="rounded-xl"
         />
-        {
+        {imageHeaderDescription && (
           <div className="bodyMD">
             Source:
             <Link
-              href={`https:${imageHeader}`}
+              href={imageHeaderDescription.toString()}
               className="ml-1 underline text-blue-500"
             >
-              {imageTitle?.toString()}
+              {imageHeaderTitle?.toString()}
             </Link>
           </div>
-        }
+        )}
       </div>
       {documentToReactComponents(description, options)}
       <div></div>
