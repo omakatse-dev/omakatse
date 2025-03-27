@@ -64,7 +64,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
       {/* Close Button */}
       <button
         onClick={closeModalHandler}
-        className="z-200 absolute top-14 right-6 bg-white p-2 border-black border-1 rounded-full cursor-pointer"
+        className="z-200 absolute top-14 right-6 bg-white p-2 border-primary border-1 rounded-full cursor-pointer"
       >
         <XMarkIcon className="size-5" />
       </button>

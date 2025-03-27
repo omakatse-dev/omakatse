@@ -23,7 +23,7 @@ export default function CardButton({
           ? {
               boxShadow:
                 "5px 5px 0px rgba(255,196,0,1), 6.5px 6.5px 0px rgba(0,0,0,1)",
-              border: "1px solid black",
+              border: "1px solid primary",
             }
           : {}
       }

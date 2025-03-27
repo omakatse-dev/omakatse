@@ -20,7 +20,7 @@ export default function ProductDescription({
         <Disclosure
           as="div"
           key={key}
-          className="border-t-1 border-black"
+          className="border-t-1 border-primary"
           defaultOpen={false}
         >
           <DisclosureButton className="group flex w-full items-center justify-between">

@@ -39,7 +39,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
     >
       <div className="flex justify-between pb-8 border-b-1 border-white">
         <button onClick={() => setIsOpen((prev) => !prev)}>
-          <XMarkIcon className="h-6 w-6 stroke-black stroke-[2]" />
+          <XMarkIcon className="h-6 w-6 stroke-primary stroke-[2]" />
         </button>
         <Link
           onClick={() => setIsOpen((prev) => !prev)}
@@ -55,7 +55,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
           />
         </Link>
         <button className="pr-2">
-          <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
+          <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
         </button>
       </div>
 
@@ -66,7 +66,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
           className="flex gap-1 items-center"
         >
           Shop
-          <ChevronDownIcon className="h-6 w-6 stroke-black stroke-[2]" />
+          <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
         </Link>
         {links.map((link) => (
           <Link
@@ -85,7 +85,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
           href="/account/profile"
           className="flex gap-3 items-center"
         >
-          <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
+          <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
           <p>Account</p>
         </Link>
       </div>

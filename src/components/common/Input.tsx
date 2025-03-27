@@ -9,7 +9,7 @@ const Input = forwardRef<
   return (
     <input
       ref={ref}
-      className={`rounded-full py-3 px-5 focus:outline-black bg-white ${className} ${
+      className={`rounded-full py-3 px-5 focus:outline-primary bg-white ${className} ${
         error ? "border border-red" : "border"
       }`}
       placeholder={placeholder}

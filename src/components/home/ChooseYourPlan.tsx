@@ -22,28 +22,28 @@ function ChooseYourPlan() {
 
         <div className="flex flex-col lg:flex-row gap-8 w-full">
           <PricingCard
-            title="Trial"
+            title="1 month"
             price={40}
             durationText="AED/mo"
-            savingsText="to just try your first box"
+            savingsText="Try us, no commitment"
           />
           <PricingCard
             title="3 Months"
             price={35}
             durationText="AED/mo"
-            savingsText="save compared to trial"
+            savingsText="save AED 20"
           />
           <PricingCard
             title="6 Months"
             price={30}
             durationText="AED/mo"
-            savingsText="save even more!"
+            savingsText="save AED 40"
           />
           <PricingCard
             title="12 Months"
             price={25}
             durationText="AED/mo"
-            savingsText="best value, highest savings"
+            savingsText="Super savings, save AED 80"
             highlight
           />
         </div>

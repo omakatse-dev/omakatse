@@ -28,7 +28,7 @@ export default function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`flex justify-center py-2.5 sm:py-4 px-10 outline-1 bodyButton rounded-full text-primary border-black transition-all cursor-pointer h-11 md:h-13 items-center
+      className={`flex justify-center py-2.5 sm:py-4 px-10 outline-1 bodyButton rounded-full text-primary border-primary transition-all cursor-pointer h-11 md:h-13 items-center
       ${variant === "primary" ? primaryStyles : secondaryStyles} ${className}`}
     >
       {children}

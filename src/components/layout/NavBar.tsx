@@ -63,21 +63,21 @@ export default function NavBar() {
       <div className="flex justify-between bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full fixed top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
         <div className="xl:hidden flex justify-center gap-3">
           <button onClick={() => setIsOpen((prev) => !prev)}>
-            <Bars3Icon className="h-6 w-6 stroke-black stroke-[2]" />
+            <Bars3Icon className="h-6 w-6 stroke-primary stroke-[2]" />
           </button>
           <button onClick={() => setShowSearchDropdown((prev) => !prev)}>
-            <MagnifyingGlassIcon className="h-6 w-6 stroke-black stroke-[2]" />
+            <MagnifyingGlassIcon className="h-6 w-6 stroke-primary stroke-[2]" />
           </button>
         </div>
 
         <div className="hidden xl:flex items-center gap-x-8 font-open-sans font-semibold">
           <Link href="/shop/cat-products" className="flex gap-1">
             Cat
-            <ChevronDownIcon className="h-6 w-6 stroke-black stroke-[2]" />
+            <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
           </Link>
           <Link href="/shop/dog-products" className="flex gap-1">
             Dog
-            <ChevronDownIcon className="h-6 w-6 stroke-black stroke-[2]" />
+            <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
           </Link>
           {links.map((link) => (
             <Link href={link.url} key={link.name}>
@@ -103,7 +103,7 @@ export default function NavBar() {
               className="cursor-pointer"
               onClick={() => setShowSearchDropdown((prev) => !prev)}
             >
-              <MagnifyingGlassIcon className="h-6 w-6 stroke-black stroke-[2]" />
+              <MagnifyingGlassIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             </button>
             <a
               href={
@@ -113,10 +113,10 @@ export default function NavBar() {
               }
               className="flex items-center"
             >
-              <UserIcon className="h-6 w-6 stroke-black stroke-[2]" />
+              <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             </a>
             <button onClick={openCart} className="cursor-pointer relative">
-              <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
+              <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
               {cartItems.length > 0 && (
                 <div className="absolute top-4 right-0 bg-red-500 rounded-full w-3 h-3" />
               )}
@@ -126,7 +126,7 @@ export default function NavBar() {
 
         <div className="xl:hidden flex">
           <button onClick={openCart} className="cursor-pointer relative">
-            <ShoppingCartIcon className="h-6 w-6 stroke-black stroke-[2]" />
+            <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             {cartItems.length > 0 && (
               <div className="absolute top-2 -right-1 bg-red-500 rounded-full w-3 h-3" />
             )}

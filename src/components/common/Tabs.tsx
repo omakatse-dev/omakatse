@@ -11,7 +11,7 @@ export default function Tabs({
   onChange: (tab: string) => void;
   className?: string;
 }) {
-  const activeStyles = "bg-yellow border border-black mb-1";
+  const activeStyles = "bg-yellow border border-primary mb-1";
   return (
     <div className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}>
       {tabs.map((tab) => (
