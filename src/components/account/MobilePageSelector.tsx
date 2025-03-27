@@ -40,7 +40,7 @@ export default function MobilePageSelector() {
 
   const router = useRouter();
   return (
-    <div className="sm:hidden">
+    <div className="lg:hidden">
       <Listbox value={selectedPage} onChange={setSelectedPage}>
         <ListboxButton
           className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer border flex flex-row justify-between items-center ${

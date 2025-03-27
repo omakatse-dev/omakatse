@@ -50,12 +50,12 @@ export default function PetProfileForm({
       className="flex flex-col gap-8 w-full mt-8 bodyMD"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex justify-between w-full gap-6">
-        <div className="w-1/2 flex flex-col gap-2">
+      <div className="flex flex-col lg:flex-row justify-between w-full gap-6">
+        <div className="w-full lg:w-1/2 flex flex-col gap-2">
           <div>Name</div>
           <Input className="w-full border-primary" {...register("name")} />
         </div>
-        <div className="w-1/2 flex flex-col gap-2">
+        <div className="w-full lg:w-1/2 flex flex-col gap-2">
           <div>Gender</div>
           <Controller
             name="gender"
@@ -85,8 +85,8 @@ export default function PetProfileForm({
           />
         </div>
       </div>
-      <div className="flex justify-between w-full gap-6">
-        <div className="w-1/2 flex flex-col gap-2">
+      <div className="flex flex-col lg:flex-row justify-between w-full gap-6">
+        <div className="w-full lg:w-1/2 flex flex-col gap-2">
           <div>Breed</div>
           <Controller
             name="breed"
@@ -111,7 +111,7 @@ export default function PetProfileForm({
             )}
           />
         </div>
-        <div className="w-1/2 flex flex-col gap-2">
+        <div className="w-full lg:w-1/2 flex flex-col gap-2">
           <div>Birthday</div>
           <div className="flex gap-3">
             {/* Year Selector */}
@@ -163,7 +163,7 @@ export default function PetProfileForm({
             name="size"
             control={control}
             render={({ field }) => (
-              <div className="flex gap-8">
+              <div className="flex flex-col sm:flex-row gap-8">
                 <CardButton
                   active={field.value === "skinny"}
                   onClick={() => field.onChange("skinny")}
@@ -201,12 +201,14 @@ export default function PetProfileForm({
                 <PillButton
                   active={field.value.true}
                   onClick={() => field.onChange({ allergies: [], true: true })}
+                  className="w-full lg:w-auto"
                 >
                   Yes
                 </PillButton>
                 <PillButton
                   active={field.value.true === false}
                   onClick={() => field.onChange({ allergies: [], true: false })}
+                  className="w-full lg:w-auto"
                 >
                   No
                 </PillButton>
@@ -217,7 +219,7 @@ export default function PetProfileForm({
                   <div className="mt-6">
                     {existingDetails.name} is allergic to:
                   </div>
-                  <div className="grid grid-cols-4 gap-4 mt-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-3">
                     {ALLERGIES.map((allergy) => (
                       <CardButton
                         key={allergy}
@@ -275,6 +277,7 @@ export default function PetProfileForm({
                   onClick={() =>
                     field.onChange({ preferences: [], true: true })
                   }
+                  className="w-full lg:w-auto"
                 >
                   Yes
                 </PillButton>
@@ -283,6 +286,7 @@ export default function PetProfileForm({
                   onClick={() =>
                     field.onChange({ preferences: [], true: false })
                   }
+                  className="w-full lg:w-auto"
                 >
                   No
                 </PillButton>
@@ -291,7 +295,7 @@ export default function PetProfileForm({
               {field.value.true && (
                 <>
                   <div className="mt-6">{existingDetails.name} prefers:</div>
-                  <div className="grid grid-cols-4 gap-4 mt-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-3">
                     {ALLERGIES.map((preference) => (
                       <CardButton
                         key={preference}
@@ -352,7 +356,7 @@ export default function PetProfileForm({
               <div className="flex flex-col gap-6">
                 <Selector
                   {...field}
-                  className="border-primary rounded-full w-1/2 mt-2"
+                  className="border-primary rounded-full w-full sm:w-1/2 mt-2"
                   options={treatFrequencies}
                   value={
                     treatFrequencies.find(
