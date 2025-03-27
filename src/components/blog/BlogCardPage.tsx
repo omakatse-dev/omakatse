@@ -117,7 +117,7 @@ export default function Page({
                 onClick={() => handlePageChange(index + 1)}
                 className={`px-2 py-2 mx-2 rounded-md ${
                   currentPage === index + 1
-                    ? "text-black font-bold"
+                    ? "text-primary font-bold"
                     : "text-gray-800"
                 }`}
               >

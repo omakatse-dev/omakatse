@@ -17,7 +17,7 @@ export default function PageSelector() {
           href={`/account/${page}`}
           className={`${
             selectedPage === page
-              ? "text-black font-bold underline underline-offset-4"
+              ? "text-primary font-bold underline underline-offset-4"
               : "text-gray-800"
           }`}
         >

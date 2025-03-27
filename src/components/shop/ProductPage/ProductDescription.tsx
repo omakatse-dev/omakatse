@@ -24,7 +24,7 @@ export default function ProductDescription({
           defaultOpen={false}
         >
           <DisclosureButton className="group flex w-full items-center justify-between">
-            <span className="bodyLG text-black py-4">{key}</span>
+            <span className="bodyLG text-primary py-4">{key}</span>
             <ChevronDownIcon className="size-8 group-data-[open]:rotate-180 transition-all" />
           </DisclosureButton>
           <Transition

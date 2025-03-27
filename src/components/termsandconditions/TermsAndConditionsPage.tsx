@@ -23,10 +23,10 @@ const options = {
       <p className="bodyMD mb-8 text-gray-800">{children}</p>
     ),
     [BLOCKS.HEADING_1]: (_: any, children: React.ReactNode) => (
-      <h4 className="mb-6 text-black">{children}</h4>
+      <h4 className="mb-6 text-primary">{children}</h4>
     ),
     [BLOCKS.HEADING_2]: (_: any, children: React.ReactNode) => (
-      <div className="bodyLG mb-3 text-black">{children}</div>
+      <div className="bodyLG mb-3 text-primary">{children}</div>
     ),
     [BLOCKS.OL_LIST]: (_: any, children: React.ReactNode) => (
       <ol className="list-decimal ml-4">{children}</ol>

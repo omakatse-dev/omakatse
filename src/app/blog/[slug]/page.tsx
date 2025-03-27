@@ -88,7 +88,7 @@ export default async function BlogPage({
   const blog = await getBlogBySlug(slug, preview);
 
   if (!blog) {
-    return <div className="text-center mt-32">Blog post not found</div>;
+    return <div className="text-center mt-32 text-primary">Blog post not found</div>;
   }
 
   const imageHeader = (blog.fields.imageHeader as unknown as Asset).fields.file

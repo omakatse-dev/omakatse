@@ -72,7 +72,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
       <div className="relative max-w-3xl w-full flex flex-col items-center z-[101]">
         <button
           onClick={prevImage}
-          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
+          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-primary bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
         >
           <ChevronLeftIcon className="size-6" />
         </button>
@@ -99,7 +99,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
 
         <button
           onClick={nextImage}
-          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
+          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-primary bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
         >
           <ChevronRightIcon className="size-6" />
         </button>

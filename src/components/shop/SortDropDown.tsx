@@ -20,12 +20,12 @@ export default function SortDropDown({
 }) {
   return (
     <div className={`w-full flex justify-end items-center gap-2 ${className}`}>
-      <ArrowsUpDownIcon className="w-6 text-black" />
+      <ArrowsUpDownIcon className="w-6 text-primary" />
       Sort By:
       <Listbox value={selectedOption} onChange={onChange}>
         <ListboxButton className="rounded-full px-4 py-3 w-56 sm:w-64 bg-white cursor-pointer flex flex-row justify-between items-center border border-black">
           {selectedOption}
-          <ChevronDownIcon className="w-6 text-black" />
+          <ChevronDownIcon className="w-6 text-primary" />
         </ListboxButton>
         <ListboxOptions
           className="rounded-2xl border border-black bg-white z-20 w-[var(--button-width)]"

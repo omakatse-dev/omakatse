@@ -22,11 +22,11 @@ export default function MobilePageSelector() {
       <Listbox value={selectedPage} onChange={setSelectedPage}>
         <ListboxButton
           className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer border flex flex-row justify-between items-center ${
-            selectedPage ? "text-black" : "text-gray-500"
+            selectedPage ? "text-primary" : "text-gray-500"
           }`}
         >
           {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)}
-          <ChevronDownIcon className="w-6 text-black" />
+          <ChevronDownIcon className="w-6 text-primary" />
         </ListboxButton>
         <ListboxOptions
           className="rounded-2xl border bg-white z-20 w-[var(--button-width)]"

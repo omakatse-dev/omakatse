@@ -15,7 +15,7 @@ export default function page() {
           <ChevronLeftIcon className="w-6" />
           Go Back
         </Link>
-        <h3 className="font-bold self-center sm:self-start">Write a review</h3>
+        <h3 className="font-bold self-center sm:self-start text-primary">Write a review</h3>
         <ReviewItemSummary />
         <ReviewForm />
       </div>

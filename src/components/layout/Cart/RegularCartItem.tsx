@@ -17,7 +17,7 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
     <div className="w-full flex flex-row gap-5">
       <div className="relative h-fit w-16 bg-white rounded-lg">
         <XCircleIcon
-          className="w-6 absolute -top-2 -left-2 text-black fill-white cursor-pointer"
+          className="w-6 absolute -top-2 -left-2 text-primary fill-white cursor-pointer"
           onClick={handleRemoveItem}
         />
         <Image

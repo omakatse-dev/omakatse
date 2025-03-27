@@ -126,7 +126,7 @@ export default function Page({
                 {({ open }) => (
                   <>
                     <DisclosureButton className="group flex w-full items-center justify-between py-4 text-left">
-                      <span className="bodyLG text-black">
+                      <span className="bodyLG text-primary">
                         {faq.fields.question.toString()}
                       </span>
                       <ChevronDownIcon

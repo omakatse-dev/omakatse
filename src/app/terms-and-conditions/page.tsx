@@ -26,7 +26,7 @@ export default async function Page({
       {termsAndConditions ? (
         <TermsAndConditionsPage tac={termsAndConditions} />
       ) : (
-        <p>Terms and Conditions data is not available.</p>
+        <p className="text-primary">Terms and Conditions data is not available.</p>
       )}
     </div>
   );
