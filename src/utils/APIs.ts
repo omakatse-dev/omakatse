@@ -503,3 +503,81 @@ export const getSubscriptionPlan = async () => {
   console.log(res.errors);
   return res.data;
 };
+
+export const editShippingAddress = async (
+  id: string,
+  addresses: {
+    address1: string;
+    address2: string;
+    city: string;
+    country: string;
+    phone: string;
+  }[]
+) => {
+  const query = `
+    mutation UpdateCustomerAddress($id: ID!, $addresses: [MailingAddressInput!]!) {
+    customerUpdate(input: {id: $id, addresses: $addresses}) {
+      customer {
+        id
+        addresses {
+          id
+          address1
+          address2
+          country
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }`;
+
+  const res = await adminClient.request(query, {
+    variables: {
+      id: id,
+      addresses: [addresses],
+    },
+  });
+
+  //example address
+  // {
+  //   "address1": "Unit N801A Level 8 Emirates Financial Towers",
+  //   "address2": "Al Sukuk Street 45444",
+  //   "city": "Dubai",
+  //   "country": "United Arab Emirates"
+  // }
+  console.log(res.errors?.graphQLErrors);
+  return res.data;
+};
+
+export const getCustomerShippingDetails = async (email: string) => {
+  console.log(email);
+  const query = `
+    query CustomerShippingAddress($email: String) {
+      customers(first: 1, query: $email) {
+        edges {
+          node {
+            id
+            defaultAddress {
+              address1
+              address2
+              city
+              firstName
+              lastName
+              phone
+              province
+              country
+            }
+          }
+        }
+      }
+    }`;
+  const res = await adminClient.request(query, {
+    variables: {
+      email: email,
+    },
+  });
+  // console.log(res.errors);
+  return res.data?.customers.edges[0];
+};
