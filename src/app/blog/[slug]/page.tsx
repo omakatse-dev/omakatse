@@ -49,7 +49,6 @@ const options = {
       <ol className="list-decimal ml-4">{children}</ol>
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-      console.log("NODE:", node);
       return (
         <div className="flex flex-col gap-2 items-center py-8 w-fit self-center">
           <Image
@@ -87,8 +86,6 @@ export default async function BlogPage({
   const { preview } = await searchParams; // Check if preview mode is enabled
 
   const blog = await getBlogBySlug(slug, preview);
-  console.log("Preview mode:", preview);
-  console.log(blog);
 
   if (!blog) {
     return <div className="text-center mt-32">Blog post not found</div>;
@@ -163,7 +160,6 @@ export default async function BlogPage({
         )}
       </div>
       {documentToReactComponents(description, options)}
-      <div></div>
     </div>
   );
 }

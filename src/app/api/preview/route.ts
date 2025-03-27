@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   // Check for a valid slug
   if (!slug) {
     return NextResponse.json(
-      { message: "Invalid secret or slug" },
+      { message: "Invalid slug" },
       { status: 401 }
     );
   }

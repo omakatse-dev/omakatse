@@ -31,7 +31,6 @@ export default function Page({
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  console.log(blogs[0].fields.slug);
 
   const handleResize = () => {
     if (window.innerWidth >= 768) {

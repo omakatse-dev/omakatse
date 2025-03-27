@@ -1,4 +1,6 @@
+import { faqType } from "@/app/faqs/page";
 import { BlogPostType } from "@/components/blog/BlogCardPage";
+import { TermsAndConditionsType } from "@/app/terms-and-conditions/page";
 import { createClient, EntryCollection, Entry } from "contentful";
 
 const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!;
@@ -41,5 +43,27 @@ export const getBlogBySlug = async (
     : await client.getEntries<BlogPostType>(query); // Delivery API
 
   // Return the first blog post found or null if not found
+  return res.items.length > 0 ? res.items[0] : null;
+};
+
+export const getAllFaqs = async (): Promise<EntryCollection<faqType>> => {
+  const res = await client.getEntries<faqType>({
+    content_type: "faq",
+  });
+
+  return res;
+};
+
+export const getTermsAndConditions = async (
+  preview: string
+): Promise<Entry<TermsAndConditionsType> | null> => {
+  const res = preview
+    ? await previewClient.getEntries<TermsAndConditionsType>({
+        content_type: "termsAndConditions",
+      })
+    : await client.getEntries<TermsAndConditionsType>({
+        content_type: "termsAndConditions",
+      });
+
   return res.items.length > 0 ? res.items[0] : null;
 };
