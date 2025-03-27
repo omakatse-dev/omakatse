@@ -35,11 +35,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
           {blog.fields.readDuration.toString()} min read
         </p>
       </div>
-      <h4 className="mb-2">{blog.fields.title.toString()}</h4>
-      <p className="bodyMD mb-6 line-clamp-3 ">{blog.fields.summary.toString()}</p>
+      <h4 className="mb-2 text-primary">{blog.fields.title.toString()}</h4>
+      <p className="bodyMD mb-6 line-clamp-3 text-gray-800">{blog.fields.summary.toString()}</p>
       <div>
         <Link href={`/blog/${blog.fields.slug}`} passHref>
-          <div className="inline-flex flex-row gap-2 items-center cursor-pointer bodyButton">
+          <div className="inline-flex flex-row gap-2 items-center cursor-pointer bodyButton text-primary">
             Read more
             <ChevronRightIcon className="h-6" />
           </div>

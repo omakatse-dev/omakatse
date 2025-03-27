@@ -32,17 +32,17 @@ export type BlogPostType = {
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_: any, children: React.ReactNode) => (
-      <p className="bodyMD">{children}</p>
+      <p className="bodyMD text-gray-800 mb-8">{children}</p>
     ),
     [BLOCKS.HEADING_1]: (_: any, children: React.ReactNode) => (
-      <h4>{children}</h4>
+      <h4 className="text-primary mb-6">{children}</h4>
     ),
     [BLOCKS.HEADING_2]: (_: any, children: React.ReactNode) => (
-      <div className="bodyLG">{children}</div>
+      <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full">
-        <div className="bodyMD">{children}</div>
+      <div className="flex justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full mb-8">
+        <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
     [BLOCKS.OL_LIST]: (_: any, children: React.ReactNode) => (
@@ -159,7 +159,9 @@ export default async function BlogPage({
           </div>
         )}
       </div>
+      <div className="mb-32">
       {documentToReactComponents(description, options)}
+      </div>
     </div>
   );
 }

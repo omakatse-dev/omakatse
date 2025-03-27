@@ -9,7 +9,7 @@ function ChooseYourPlan() {
 
   return (
       <div className="bg-gray-200 flex flex-col px-6 lg:px-12 py-15 lg:py-20 gap-8 lg:gap-10 items-center">
-        <h2 className="text-center">Choose your plan</h2>
+        <h2 className="text-center text-primary">Choose your plan</h2>
 
         <div className="rounded-[2.5rem] p-3">
           <Tabs

@@ -21,12 +21,12 @@ const PricingCard: React.FC<PricingCardProps> = ({
         highlight ? 'bg-yellow-light' : 'bg-gray-50'
       }`}
     >
-      <h4>{title}</h4>
+      <h4 className="text-primary">{title}</h4>
       <div className="flex flex-col">
         <h1>{price}</h1>
         <h3 className="text-gray-500">{durationText}</h3>
       </div>
-      <b className="bodyLG font-normal">{savingsText}</b>
+      <b className="bodyLG font-normal text-gray-800">{savingsText}</b>
     </div>
   );
 };

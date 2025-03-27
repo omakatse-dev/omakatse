@@ -11,8 +11,8 @@ export default function Home() {
     <div className="pt-32">
       <div className="px-6 py-5 lg:px-18 flex flex-col-reverse text-center lg:flex-row lg:justify-between">
         <div className="lg:text-left">
-          <h1 className="mb-3 lg:mb-5">A one-stop subscription service</h1>
-          <h3 className="mb-5 lg:mb-10 font-normal">
+          <h1 className="mb-3 lg:mb-5 text-primary">A one-stop subscription service</h1>
+          <h3 className="mb-5 lg:mb-10 font-normal text-primary">
             tailored for your furry family members
           </h3>
           <Button variant="primary" className="w-full lg:w-fit">
