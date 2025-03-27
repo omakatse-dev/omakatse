@@ -46,9 +46,7 @@ export const getBlogBySlug = async (
   return res.items.length > 0 ? res.items[0] : null;
 };
 
-export const getAllFaqs = async (): Promise<
-  EntryCollection<faqType>
-> => {
+export const getAllFaqs = async (): Promise<EntryCollection<faqType>> => {
   const res = await client.getEntries<faqType>({
     content_type: "faq",
   });
@@ -56,12 +54,16 @@ export const getAllFaqs = async (): Promise<
   return res;
 };
 
-export const getTermsAndConditions = async (): Promise<
-  Entry<TermsAndConditionsType> | null
-> => {
-  const res = await client.getEntries<TermsAndConditionsType>({
-    content_type: "termsAndConditions",
-  });
+export const getTermsAndConditions = async (
+  preview: string
+): Promise<Entry<TermsAndConditionsType> | null> => {
+  const res = preview
+    ? await previewClient.getEntries<TermsAndConditionsType>({
+        content_type: "termsAndConditions",
+      })
+    : await client.getEntries<TermsAndConditionsType>({
+        content_type: "termsAndConditions",
+      });
 
   return res.items.length > 0 ? res.items[0] : null;
 };
