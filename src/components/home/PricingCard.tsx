@@ -17,7 +17,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col gap-5 text-center px-5 py-8 rounded-[2.5rem] lg:w-1/4 ${
+      className={`flex flex-col gap-5 text-center px-5 py-8 md:rounded-[2rem] rounded-[1.25rem] lg:w-1/4 ${
         highlight ? 'bg-yellow-light' : 'bg-gray-50'
       }`}
     >

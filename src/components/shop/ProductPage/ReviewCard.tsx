@@ -10,7 +10,7 @@ export default function ReviewCard({ review }: { review: Review }) {
   // console.log(review.pictures);
 
   return (
-    <div className="bg-white rounded-2xl p-6 w-full">
+    <div className="bg-white rounded-xl md:rounded-[1.25rem] p-6 w-full">
       <div className="flex items-center justify-between">
         <div className="flex">
           {[...Array(5)].map((_, index) => (

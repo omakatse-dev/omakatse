@@ -14,7 +14,7 @@ function HowItWorks() {
           <div className="bg-white rounded-full h-20 w-20 flex items-center justify-center text-pink text-3xl border-1 border-gray-200 font-parkinsans absolute font-bold -top-10 left-1/2 -translate-x-1/2 z-1">
             1
           </div>
-          <div className="bg-gray-50 rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
+          <div className="bg-gray-50 md:rounded-[2rem] rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
             <Image
               src="/assets/kumo_details.svg"
               width={272}
@@ -34,7 +34,7 @@ function HowItWorks() {
           <div className="bg-white rounded-full h-20 w-20 flex items-center justify-center text-pink text-3xl border-1 border-gray-200 font-parkinsans absolute font-bold -top-10 left-1/2 -translate-x-1/2 z-1">
             2
           </div>
-          <div className="bg-gray-50 rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
+          <div className="bg-gray-50 md:rounded-[2rem] rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
             <Image
               src="/assets/kumo_customise.svg"
               width={272}
@@ -52,7 +52,7 @@ function HowItWorks() {
           <div className="bg-white rounded-full h-20 w-20 flex items-center justify-center text-pink text-3xl border-1 border-gray-200 font-parkinsans absolute font-bold -top-10 left-1/2 -translate-x-1/2 z-1">
             3
           </div>
-          <div className="bg-gray-50 rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
+          <div className="bg-gray-50 md:rounded-[2rem] rounded-[1.25rem] px-10 py-20 flex flex-col gap-5 text-center items-center drop-shadow-[8px_8px_0px_rgba(238,128,127,1)] lg:h-full">
             <Image
               src="/assets/kumo_delivery.svg"
               width={272}
