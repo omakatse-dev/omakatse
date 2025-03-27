@@ -56,12 +56,12 @@ export const getAllFaqs = async (): Promise<
   return res;
 };
 
-export const getAllTermsAndConditions = async (): Promise<
-  EntryCollection<TermsAndConditionsType>
+export const getTermsAndConditions = async (): Promise<
+  Entry<TermsAndConditionsType> | null
 > => {
   const res = await client.getEntries<TermsAndConditionsType>({
     content_type: "termsAndConditions",
   });
 
-  return res;
+  return res.items.length > 0 ? res.items[0] : null;
 };

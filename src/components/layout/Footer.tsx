@@ -75,7 +75,7 @@ export default function Footer() {
     },
     {
       name: "Terms of Service",
-      url: "/about",
+      url: "/termsandconditions",
     },
     {
       name: "FAQs",

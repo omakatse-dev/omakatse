@@ -163,7 +163,6 @@ export default async function BlogPage({
         )}
       </div>
       {documentToReactComponents(description, options)}
-      <div></div>
     </div>
   );
 }
