@@ -28,7 +28,7 @@ export default async function AccountReviewsPage() {
 
   return (
     <div>
-      <h2 className="hidden sm:block">Reviews</h2>
+      <h2 className="hidden lg:block">Reviews</h2>
       <div className="flex flex-col divide-y divide-gray-200 max-w-7xl sm:mt-10">
         {regularItems?.length > 0 ? (
           regularItems?.map((item) => (
