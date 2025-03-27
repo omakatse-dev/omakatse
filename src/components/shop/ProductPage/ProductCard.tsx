@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { formatPrice } from "@/utils/Utils";
 
 interface ProductCardProps {
   product: {
@@ -29,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         className="border-gray-200 rounded-lg p-4 bg-white w-full aspect-square object-fit mb-4"
       />
       <h3 className="bodyLG mb-2">{product.title}</h3>
-      <p className="bodyMD">${product.priceRange.minVariantPrice.amount}</p>
+      <p className="bodyMD">AED {formatPrice(product.priceRange.minVariantPrice.amount)}</p>
     </Link>
   );
 };
