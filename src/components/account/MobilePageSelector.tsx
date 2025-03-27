@@ -22,12 +22,16 @@ export default function MobilePageSelector() {
       href: "reviews",
     },
     {
-      label: "History",
+      label: "Payment History",
       href: "history",
     },
     {
       label: "My Subscriptions",
       href: "subscriptions",
+    },
+    {
+      label: "Pet Profiles",
+      href: "pet-profiles",
     },
   ];
   const [selectedPage, setSelectedPage] = useState(
