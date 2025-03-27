@@ -21,6 +21,8 @@ export const initialPetDetailsSchema = petDetailsSchema.pick({
 
 export type InitialPetDetailsSchema = z.infer<typeof initialPetDetailsSchema>;
 
+type PetDetails = z.infer<typeof petDetailsSchema>;
+
 export default function PetDetailsForm({
   petType,
   idx,
@@ -38,15 +40,12 @@ export default function PetDetailsForm({
   }));
 
   // Get stored data for this specific pet
-  const storedData = useSubscriptionFormStore((state) => 
-    petType === "Cat" 
-      ? state.catsDetails?.[idx] 
-      : state.dogsDetails?.[idx]
+  const storedData = useSubscriptionFormStore((state) =>
+    petType === "Cat" ? state.catsDetails?.[idx] : state.dogsDetails?.[idx]
   );
 
   const {
     control,
-    handleSubmit,
     formState: { errors },
   } = useForm<InitialPetDetailsSchema>({
     resolver: zodResolver(initialPetDetailsSchema),
@@ -61,47 +60,31 @@ export default function PetDetailsForm({
 
   const setData = useSubscriptionFormStore((state) => state.setData);
 
-  const submitHandler = (data: InitialPetDetailsSchema) => {
-    const formattedData = {
-      ...data,
-      type: petType,
-      size: "just right" as "just right" | "skinny" | "chubby",
-      allergies: { true: false, allergies: [] },
-      preferences: { true: false, preferences: [] },
-      treatFrequency: {
-        frequency: "none" as "none" | "a few" | "sometimes" | "often",
-        preferences: [],
-      },
-    };
+  const saveFieldToStore = (
+    fieldName: keyof InitialPetDetailsSchema,
+    value: string | number
+  ) => {
     const prevPets =
       petType === "Cat"
         ? useSubscriptionFormStore.getState().catsDetails
         : useSubscriptionFormStore.getState().dogsDetails;
 
-    let newPets = [];
-    if (prevPets?.[idx]) {
-      // Update existing pet
-      newPets = prevPets?.map((pet, i) => (i === idx ? formattedData : pet));
-    } else {
-      // Add new pet
-      newPets = [...(prevPets || []), formattedData];
+    const newPets = [...(prevPets || [])] as Partial<PetDetails>[];
+    if (!newPets[idx]) {
+      newPets[idx] = {} as Partial<PetDetails>;
     }
+    newPets[idx] = { ...newPets[idx], [fieldName]: value };
+
     if (petType === "Cat") {
-      setData({ catsDetails: newPets });
+      setData({ catsDetails: newPets as PetDetails[] });
     } else {
-      setData({ dogsDetails: newPets });
+      setData({ dogsDetails: newPets as PetDetails[] });
     }
   };
 
-  //TODO maybe a diff handler for onBlur that does not validate errors but still saves to zustand
-
   return (
     <Card>
-      <form
-        className="flex flex-col items-center"
-        onSubmit={handleSubmit(submitHandler)}
-        onBlur={handleSubmit(submitHandler)}
-      >
+      <form className="flex flex-col items-center">
         <div className="w-12 h-12 bg-amber-300 rounded-full" />
         <h4 className="mt-2">
           {petType} {idx + 1}
@@ -114,7 +97,14 @@ export default function PetDetailsForm({
               name="name"
               control={control}
               render={({ field }) => (
-                <Input {...field} placeholder="What is your pet's name?" />
+                <Input
+                  {...field}
+                  onBlur={(e) => {
+                    field.onBlur();
+                    saveFieldToStore("name", e.target.value);
+                  }}
+                  placeholder="What is your pet's name?"
+                />
               )}
             />
             {errors.name && <p className="text-red-500">Required</p>}
@@ -129,14 +119,20 @@ export default function PetDetailsForm({
               render={({ field }) => (
                 <div className="flex gap-3">
                   <PillButton
-                    onClick={() => field.onChange("Boy")}
+                    onClick={() => {
+                      field.onChange("Boy");
+                      saveFieldToStore("gender", "Boy");
+                    }}
                     active={field.value === "Boy"}
                     className="w-1/2 "
                   >
                     Boy
                   </PillButton>
                   <PillButton
-                    onClick={() => field.onChange("Girl")}
+                    onClick={() => {
+                      field.onChange("Girl");
+                      saveFieldToStore("gender", "Girl");
+                    }}
                     active={field.value === "Girl"}
                     className="w-1/2 "
                   >
@@ -166,7 +162,10 @@ export default function PetDetailsForm({
                       (species) => species.name === field.value
                     ) || null
                   }
-                  onChange={(option) => field.onChange(option.name)}
+                  onChange={(option) => {
+                    field.onChange(option.name);
+                    saveFieldToStore("breed", option.name);
+                  }}
                 />
               )}
             />
@@ -192,7 +191,10 @@ export default function PetDetailsForm({
                         (year) => year.name === field.value?.toString()
                       ) || null
                     }
-                    onChange={(option) => field.onChange(Number(option.name))}
+                    onChange={(option) => {
+                      field.onChange(Number(option.name));
+                      saveFieldToStore("birthdayYear", Number(option.name));
+                    }}
                   />
                 )}
               />
@@ -209,7 +211,10 @@ export default function PetDetailsForm({
                     value={
                       months.find((month) => month.id === field.value) || null
                     }
-                    onChange={(option) => field.onChange(Number(option.name))}
+                    onChange={(option) => {
+                      field.onChange(Number(option.name));
+                      saveFieldToStore("birthdayMonth", Number(option.name));
+                    }}
                   />
                 )}
               />

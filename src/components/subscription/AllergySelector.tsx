@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardButton from "../common/CardButton";
 import Input from "../common/Input";
 import PillButton from "../common/PillButton";
@@ -14,7 +14,7 @@ const ALLERGIES = [
   "Seafood",
 ] as const;
 
-type StandardAllergy = typeof ALLERGIES[number];
+type StandardAllergy = (typeof ALLERGIES)[number];
 type AllergyData = {
   true: boolean;
   allergies: (StandardAllergy | string)[];
@@ -22,27 +22,41 @@ type AllergyData = {
 
 interface Props {
   name: string;
-  fieldName: `catsDetails.${number}.allergies` | `dogsDetails.${number}.allergies`;
+  fieldName:
+    | `catsDetails.${number}.allergies`
+    | `dogsDetails.${number}.allergies`;
 }
 
 export default function AllergySelector({ name, fieldName }: Props) {
   // Get the pet's current allergies directly from Zustand
-  const [petType, petIndex] = fieldName.split('.') as ['catsDetails' | 'dogsDetails', string];
-  const petDetails = useSubscriptionFormStore(state => state[petType]?.[Number(petIndex)]);
-  const setData = useSubscriptionFormStore(state => state.setData);
+  const [petType, petIndex] = fieldName.split(".") as [
+    "catsDetails" | "dogsDetails",
+    string
+  ];
+  const petDetails = useSubscriptionFormStore(
+    (state) => state[petType]?.[Number(petIndex)]
+  );
+  const setData = useSubscriptionFormStore((state) => state.setData);
 
-  // Use the actual data from the store
-  const allergiesData: AllergyData = petDetails?.allergies || { true: false, allergies: [] };
+  // Use the actual data from the store, but don't provide defaults
+  const allergiesData = petDetails?.allergies;
 
-  const updateAllergies = (newAllergies: typeof allergiesData) => {
+  const [showError, setShowError] = useState(false);
+
+  const updateAllergies = (newAllergies: AllergyData) => {
+    setShowError(false); // Reset error when making changes
     const pets = useSubscriptionFormStore.getState()[petType] || [];
     const newPets = [...pets];
     newPets[Number(petIndex)] = {
       ...pets[Number(petIndex)],
-      allergies: newAllergies
+      allergies: newAllergies,
     };
     setData({ [petType]: newPets });
   };
+
+  // Check if allergies are selected when Yes is chosen
+  const hasValidAllergies = !allergiesData?.true || 
+    (allergiesData.true && allergiesData.allergies.length > 0);
 
   return (
     <Card className="flex flex-col items-center w-full">
@@ -51,20 +65,26 @@ export default function AllergySelector({ name, fieldName }: Props) {
       <div className="bodyMD mt-8">Does {name} have any allergies?</div>
       <div className="flex gap-4 mt-2 mb-8">
         <PillButton
-          active={allergiesData.true}
-          onClick={() => updateAllergies({ ...allergiesData, true: true })}
+        active={allergiesData?.true === true}
+          onClick={() => {
+            updateAllergies({ true: true, allergies: [] });
+            setShowError(true); // Show error when Yes is selected
+          }}
         >
           Yes
         </PillButton>
         <PillButton
-          active={!allergiesData.true}
-          onClick={() => updateAllergies({ ...allergiesData, true: false, allergies: [] })}
+          active={allergiesData?.true === false}
+          onClick={() => updateAllergies({ true: false, allergies: [] })}
         >
           No
         </PillButton>
       </div>
-      {allergiesData.true && (
-        <div>
+      {allergiesData?.true && (
+        <>
+          {showError && !hasValidAllergies && (
+            <p className="text-red-500 mb-4">Please select at least one allergy</p>
+          )}
           <div className="grid grid-cols-3 gap-6">
             {ALLERGIES.map((allergy) => (
               <CardButton
@@ -72,7 +92,7 @@ export default function AllergySelector({ name, fieldName }: Props) {
                 active={allergiesData.allergies.includes(allergy)}
                 onClick={() => {
                   const allergies = allergiesData.allergies.includes(allergy)
-                    ? allergiesData.allergies.filter(a => a !== allergy)
+                    ? allergiesData.allergies.filter((a) => a !== allergy)
                     : [...allergiesData.allergies, allergy];
                   updateAllergies({ ...allergiesData, allergies });
                 }}
@@ -88,26 +108,27 @@ export default function AllergySelector({ name, fieldName }: Props) {
             placeholder="Enter any other allergies"
             className="w-full mt-2"
             value={allergiesData.allergies
-              .filter((allergy): allergy is string => 
-                !ALLERGIES.includes(allergy as StandardAllergy)
+              .filter(
+                (allergy): allergy is string =>
+                  !ALLERGIES.includes(allergy as StandardAllergy)
               )
               .join(", ")}
             onChange={(e) => {
               const otherAllergies = e.target.value
                 .split(",")
-                .map(a => a.trim())
+                .map((a) => a.trim())
                 .filter(Boolean);
-              const standardAllergies = allergiesData.allergies
-                .filter((a): a is StandardAllergy => 
+              const standardAllergies = allergiesData.allergies.filter(
+                (a): a is StandardAllergy =>
                   ALLERGIES.includes(a as StandardAllergy)
-                );
+              );
               updateAllergies({
                 ...allergiesData,
-                allergies: [...standardAllergies, ...otherAllergies]
+                allergies: [...standardAllergies, ...otherAllergies],
               });
             }}
           />
-        </div>
+        </>
       )}
     </Card>
   );

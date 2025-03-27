@@ -12,20 +12,42 @@ import { usePathname, useRouter } from "next/navigation";
 export default function MobilePageSelector() {
   //get path
   const pathname = usePathname();
-  const pages = ["profile", "reviews", "history"];
-  const [selectedPage, setSelectedPage] = useState(pathname.split("/")[2]);
+  const pages = [
+    {
+      label: "Profile",
+      href: "profile",
+    },
+    {
+      label: "Reviews",
+      href: "reviews",
+    },
+    {
+      label: "Payment History",
+      href: "history",
+    },
+    {
+      label: "My Subscriptions",
+      href: "subscriptions",
+    },
+    {
+      label: "Pet Profiles",
+      href: "pet-profiles",
+    },
+  ];
+  const [selectedPage, setSelectedPage] = useState(
+    pages.find((page) => page.href === pathname.split("/")[2])
+  );
 
   const router = useRouter();
-
   return (
-    <div className="sm:hidden">
+    <div className="lg:hidden">
       <Listbox value={selectedPage} onChange={setSelectedPage}>
         <ListboxButton
           className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer border flex flex-row justify-between items-center ${
             selectedPage ? "text-black" : "text-gray-500"
           }`}
         >
-          {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)}
+          {selectedPage?.label}
           <ChevronDownIcon className="w-6 text-black" />
         </ListboxButton>
         <ListboxOptions
@@ -34,12 +56,12 @@ export default function MobilePageSelector() {
         >
           {pages.map((page) => (
             <ListboxOption
-              onClick={() => router.push(`/account/${page}`)}
-              key={page}
+              onClick={() => router.push(`/account/${page.href}`)}
+              key={page.label}
               value={page}
               className="data-[focus]:bg-gray-200 data-[focus]:rounded-2xl p-5 cursor-pointer"
             >
-              {page.charAt(0).toUpperCase() + page.slice(1)}
+              {page.label}
             </ListboxOption>
           ))}
         </ListboxOptions>
