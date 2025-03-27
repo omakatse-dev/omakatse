@@ -74,8 +74,8 @@ export default function Footer() {
       url: "/about",
     },
     {
-      name: "Terms of Service",
-      url: "/termsandconditions",
+      name: "Terms and Conditions",
+      url: "/terms-and-conditions",
     },
     {
       name: "FAQs",
@@ -89,7 +89,6 @@ export default function Footer() {
 
   return (
     <div className="bg-black w-screen px-8 py-10 lg:px-12 lg:py-20 flex flex-col gap-15">
-
       <div className="flex flex-col lg:flex-row gap-10 lg:justify-between items-center">
         <Link href="/" className="flex">
           <Image
@@ -169,7 +168,9 @@ export default function Footer() {
               placeholder="Enter your email"
               className="border-b mr-4 py-4 focus:outline-none w-full"
             />
-            <Button className="w-full" variant="primary">Subscribe</Button>
+            <Button className="w-full" variant="primary">
+              Subscribe
+            </Button>
           </div>
           <p className="bodyXS">
             {" "}
@@ -177,7 +178,6 @@ export default function Footer() {
             consent to receive updates from our company.
           </p>
         </div>
-
       </div>
 
       <div className="border-t border-white flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">

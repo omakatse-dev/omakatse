@@ -19,7 +19,7 @@ export default async function Page({
 }: {
   searchParams: Promise<{ preview: string }>;
 }) {
-  const { preview } = await searchParams
+  const { preview } = await searchParams;
   const termsAndConditions = await getTermsAndConditions(preview);
   return (
     <div className="w-full mt-32 md:mt-42 mx-8 md:mx-20 flex flex-col gap-8 items-center">

@@ -38,18 +38,18 @@ const options = {
 };
 
 export default function Page({ tac }: { tac: Entry<TermsAndConditionsType> }) {
-  console.log(tac);
   const TermsAndConditions = tac.fields
     .termsAndConditions as unknown as Document;
   const latestUpdate = dayjs(tac.sys.updatedAt);
-  console.log(tac);
   return (
     <div className="flex flex-col w-full md:px-64">
-      <h2 className="mb-2">Terms & conditions</h2>
+      <h2 className="mb-2">Terms and Conditions</h2>
       <p className="bodySM mb-6">
         Last updated: {latestUpdate.format("MMM D, YYYY")}
       </p>
-      <div className="mb-20">{documentToReactComponents(TermsAndConditions, options)}</div>
+      <div className="mb-20">
+        {documentToReactComponents(TermsAndConditions, options)}
+      </div>
       <ScrollUpButton className="fixed bottom-6 right-10" />
     </div>
   );
