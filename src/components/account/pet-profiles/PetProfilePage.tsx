@@ -20,7 +20,7 @@ export default function PetProfilePage() {
       size: "just right",
       allergies: { true: false, allergies: [] },
       preferences: { true: false, preferences: [] },
-      treatFrequency: { frequency: "a few", preferences: [], comments: "" },
+      treatFrequency: { frequency: "often", preferences: [], comments: "" },
     },
     {
       name: "Test",

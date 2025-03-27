@@ -9,6 +9,8 @@ import dogSpecies from "@/data/Dogs.json";
 import dayjs from "dayjs";
 import CardButton from "@/components/common/CardButton";
 import Textfield from "@/components/common/Textfield";
+import TreatPreferenceSelector from "@/components/subscription/TreatPreferenceSelector";
+import Button from "@/components/common/Button";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
@@ -35,6 +37,13 @@ export default function PetProfileForm({
     id: i,
     name: dayjs().month(i).format("MMM"),
   }));
+
+  const treatFrequencies = [
+    { id: 0, name: "None (No treats or snacks)", frequency: "none" },
+    { id: 1, name: "A few (less than daily)", frequency: "a few" },
+    { id: 2, name: "Sometimes (1-3 daily)", frequency: "sometimes" },
+    { id: 3, name: "Often (4+ daily)", frequency: "often" },
+  ];
 
   return (
     <form
@@ -226,9 +235,7 @@ export default function PetProfileForm({
                       </CardButton>
                     ))}
                   </div>
-                  <div className="mt-3">
-                    Other allergies (optional)
-                  </div>
+                  <div className="mt-3">Other allergies (optional)</div>
                   <Textfield
                     className="mt-2"
                     placeholder="Enter any other allergies"
@@ -254,6 +261,142 @@ export default function PetProfileForm({
             </>
           )}
         />
+      </div>
+      <div className="flex flex-col gap-2">
+        <div>Does {existingDetails.name} have any preferences?</div>
+        <Controller
+          name="preferences"
+          control={control}
+          render={({ field }) => (
+            <>
+              <div className="flex gap-3">
+                <PillButton
+                  active={field.value.true}
+                  onClick={() =>
+                    field.onChange({ preferences: [], true: true })
+                  }
+                >
+                  Yes
+                </PillButton>
+                <PillButton
+                  active={field.value.true === false}
+                  onClick={() =>
+                    field.onChange({ preferences: [], true: false })
+                  }
+                >
+                  No
+                </PillButton>
+              </div>
+
+              {field.value.true && (
+                <>
+                  <div className="mt-6">{existingDetails.name} prefers:</div>
+                  <div className="grid grid-cols-4 gap-4 mt-3">
+                    {ALLERGIES.map((preference) => (
+                      <CardButton
+                        key={preference}
+                        active={field.value.preferences.includes(preference)}
+                        onClick={() => {
+                          const preferences = field.value.preferences.includes(
+                            preference
+                          )
+                            ? field.value.preferences.filter(
+                                (a) => a !== preference
+                              )
+                            : [...field.value.preferences, preference];
+                          field.onChange({ ...field.value, preferences });
+                        }}
+                      >
+                        {preference}
+                      </CardButton>
+                    ))}
+                  </div>
+                  <div className="mt-3">Other preferences (optional)</div>
+                  <Textfield
+                    className="mt-2"
+                    placeholder="Enter any other preferences"
+                    value={field.value.preferences
+                      .filter((a) => !ALLERGIES.includes(a as StandardAllergy))
+                      .join(", ")}
+                    onChange={(e) => {
+                      const customPreferences = e.target.value
+                        .split(",")
+                        .map((a) => a.trim())
+                        .filter(Boolean);
+                      const standardPreferences =
+                        field.value.preferences.filter((a) =>
+                          ALLERGIES.includes(a as StandardAllergy)
+                        );
+                      field.onChange({
+                        ...field.value,
+                        preferences: [
+                          ...standardPreferences,
+                          ...customPreferences,
+                        ],
+                      });
+                    }}
+                  />
+                </>
+              )}
+            </>
+          )}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <div>
+          How often does {existingDetails.name} get treats?
+          <Controller
+            name="treatFrequency"
+            control={control}
+            render={({ field }) => (
+              <div className="flex flex-col gap-6">
+                <Selector
+                  {...field}
+                  className="border-primary rounded-full w-1/2 mt-2"
+                  options={treatFrequencies}
+                  value={
+                    treatFrequencies.find(
+                      (frequency) =>
+                        frequency.frequency === field.value.frequency
+                    ) || null
+                  }
+                  onChange={(option) => {
+                    field.onChange(option);
+                  }}
+                />
+                <div>
+                  <div>Types of treats {existingDetails.name} likes:</div>
+                  <TreatPreferenceSelector
+                    preferences={field.value.preferences}
+                    onChange={(preferences) => {
+                      field.onChange({ ...field.value, preferences });
+                    }}
+                  />
+                </div>
+                <div>
+                  <div>Additional comments (optional)</div>
+                  <Textfield
+                    className="mt-2 w-full"
+                    placeholder="Enter any additional comments"
+                    value={field.value.comments}
+                    onChange={(e) => {
+                      field.onChange({
+                        ...field.value,
+                        comments: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          />
+        </div>
+      </div>
+      <div className="flex w-full gap-5">
+        <Button variant="secondary" className="w-1/2">
+          Cancel
+        </Button>
+        <Button className="w-1/2">Save</Button>
       </div>
     </form>
   );
