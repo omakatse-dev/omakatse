@@ -108,7 +108,7 @@ export default function page() {
             Thank you for your support, and happy shopping!
           </p>
           <Image
-            src="/assets/kumo_primary.svg"
+            src="/assets/kumo_black.svg"
             alt="Kumo White"
             width={136.5}
             height={121} 
