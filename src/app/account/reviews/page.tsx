@@ -21,14 +21,17 @@ const getUserProfileData = async (): Promise<Claims> => {
 export default async function AccountReviewsPage() {
   const user = await getUserProfileData();
   const items = (await getFulfilledOrdersByEmail(user.email)) || [];
+  const regularItems = items.filter(
+    (item) => !item.name.includes("Subscription")
+  );
   const writtenReviews = await getReviewsByAuthor(user.email);
 
   return (
     <div>
-      <h2 className="hidden sm:block">Reviews</h2>
+      <h2 className="hidden lg:block">Reviews</h2>
       <div className="flex flex-col divide-y divide-gray-200 max-w-7xl sm:mt-10">
-        {items?.length > 0 ? (
-          items?.map((item) => (
+        {regularItems?.length > 0 ? (
+          regularItems?.map((item) => (
             <WriteReviewCard
               key={item.id}
               details={item}

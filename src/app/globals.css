@@ -94,6 +94,9 @@ h4 {
 .pink-shadow {
   @apply drop-shadow-[5px_5px_0px_rgba(238,128,127,1)];
 }
+.grey-shadow {
+  @apply drop-shadow-[5px_5px_0px_rgba(228,223,209,1)];
+}
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {

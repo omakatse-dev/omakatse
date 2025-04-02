@@ -9,7 +9,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { useEffect, useState } from "react";
 const allergySchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true,
@@ -21,34 +21,51 @@ export default function SubscriptionStepFivePage() {
   const router = useRouter();
   const cats = useSubscriptionFormStore((state) => state.catsDetails) || [];
   const dogs = useSubscriptionFormStore((state) => state.dogsDetails) || [];
+  const petType = useSubscriptionFormStore((state) => state.petType);
+  const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
+  const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
+  const [showError, setShowError] = useState(false);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AllergySchema>({
+  useForm<AllergySchema>({
     resolver: zodResolver(allergySchema),
-    defaultValues: {
-      catsDetails: cats,
-      dogsDetails: dogs
-    },
-    mode: "onChange"
   });
 
-  const onSubmit = () => {
+  const submitHandler = () => {
+    //check if preferences are filled
+    const catAllergies = cats.every((cat) => cat.allergies);
+    const dogAllergies = dogs.every((dog) => dog.allergies);
+    if (!catAllergies || !dogAllergies) {
+      setShowError(true);
+      return;
+    }
     router.push("/subscribe/step-6");
   };
 
+  useEffect(() => {
+    if (!hydrated) return;
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+    if (
+      (!storedDogCount && petType === "dog") ||
+      (!storedCatCount && petType === "cat") ||
+      (!storedDogCount && !storedCatCount && petType === "both")
+    ) {
+      router.push("/subscribe/step-2");
+    }
+  }, [router, storedDogCount, storedCatCount, petType, hydrated]);
+
   return (
     <div className="w-full pt-32 pb-20 bg-pink-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={5} totalSteps={9} />
+      <ProgressBar currentStep={5} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2">
-        <h3>What are your pets&apos; allergies?</h3>
+        <h3 className="font-bold">What are your pets&apos; allergies?</h3>
         <div className="text-gray-800 bodyLG">
           Products containing these allergens will be removed from the box
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-3xl items-center">
-        {(errors.catsDetails || errors.dogsDetails) && <div className="text-red bodyMD">Please select allergies for all pets</div>}
+      <form className="flex flex-col gap-8 w-full max-w-3xl items-center">
         {cats.map((cat, idx) => (
           <AllergenSelector
             key={idx}
@@ -71,8 +88,13 @@ export default function SubscriptionStepFivePage() {
           >
             Previous
           </Button>
-          <Button type="submit">Next</Button>
+          <Button onClick={submitHandler}>Next</Button>
         </div>
+        {showError && (
+          <div className="bodyMD text-red">
+            Please fill in all required fields for each pet before proceeding
+          </div>
+        )}
       </form>
     </div>
   );

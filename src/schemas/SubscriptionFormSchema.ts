@@ -1,20 +1,20 @@
-import {z} from "zod";
+import { z } from "zod";
 
 const petTreatFrequencySchema = z.object({
   frequency: z.enum(["none", "a few", "sometimes", "often"]),
   preferences: z.array(z.string()).default([]),
   comments: z.string().optional(),
-})
+});
 
 const petPreferenceSchema = z.object({
   true: z.boolean(),
   preferences: z.array(z.string()).default([]),
-})
+});
 
 const petAllergiesSchema = z.object({
   true: z.boolean(),
   allergies: z.array(z.string()).default([]),
-})
+});
 
 export const petDetailsSchema = z.object({
   name: z.string().nonempty(),
@@ -27,7 +27,7 @@ export const petDetailsSchema = z.object({
   allergies: petAllergiesSchema,
   preferences: petPreferenceSchema,
   treatFrequency: petTreatFrequencySchema,
-})
+});
 
 export const subscriptionFormSchema = z.object({
   petType: z.enum(["dog", "cat", "both"]),
@@ -35,8 +35,6 @@ export const subscriptionFormSchema = z.object({
   dogCount: z.number().int().min(0).max(4),
   dogsDetails: z.array(petDetailsSchema),
   catsDetails: z.array(petDetailsSchema),
-  boxSize: z.enum(["small", "large"]),
-  duration: z.enum(["trial", "3", "6", "12"]),
-})
+});
 
 export type SubscriptionFormType = z.infer<typeof subscriptionFormSchema>;

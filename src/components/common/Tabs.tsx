@@ -13,7 +13,9 @@ export default function Tabs({
 }) {
   const activeStyles = "bg-yellow border border-primary mb-1";
   return (
-    <div className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}>
+    <div
+      className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}
+    >
       {tabs.map((tab) => (
         <div
           key={tab}

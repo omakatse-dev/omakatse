@@ -11,6 +11,7 @@ import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useEffect } from "react";
 
 const petCountSchema = subscriptionFormSchema.pick({
   dogCount: true,
@@ -22,6 +23,14 @@ export type PetCountSchema = z.infer<typeof petCountSchema>;
 export default function SubscriptionStepTwoPage() {
   const router = useRouter();
   const petType = useSubscriptionFormStore((state) => state.petType);
+  const hydrated = useSubscriptionFormStore((state) => state.hydrated);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    if (!petType) {
+      router.push("/subscribe/step-1");
+    }
+  }, [petType, router, hydrated]);
 
   const {
     control,
@@ -30,18 +39,42 @@ export default function SubscriptionStepTwoPage() {
   } = useForm<PetCountSchema>({
     resolver: zodResolver(petCountSchema),
     defaultValues: {
-      catCount: useSubscriptionFormStore.getState().catCount || 0,
-      dogCount: useSubscriptionFormStore.getState().dogCount || 0
-    }
+      catCount: useSubscriptionFormStore.getState().catCount,
+      dogCount: useSubscriptionFormStore.getState().dogCount,
+    },
   });
 
-  const onSubmit = () => {
+  const setData = useSubscriptionFormStore((state) => state.setData);
+
+  const onSubmit = (data: PetCountSchema) => {
+    // reduce cat details array if cat count is longer than array
+    const catCount = useSubscriptionFormStore.getState().catCount;
+    const catDetails = useSubscriptionFormStore.getState().catsDetails;
+    if (catCount && catDetails) {
+      if (catCount < catDetails.length) {
+        setData({
+          catsDetails: catDetails.slice(0, catCount),
+        });
+      }
+    }
+
+    const dogCount = useSubscriptionFormStore.getState().dogCount;
+    const dogDetails = useSubscriptionFormStore.getState().dogsDetails;
+    if (dogCount && dogDetails) {
+      if (dogCount < dogDetails.length) {
+        setData({
+          dogsDetails: dogDetails.slice(0, dogCount),
+        });
+      }
+    }
+
+    setData(data);
     router.push("/subscribe/step-3");
   };
 
   return (
     <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
-      <ProgressBar currentStep={2} totalSteps={9} />
+      <ProgressBar currentStep={2} totalSteps={9} className="max-w-sm" />
       <form
         className="flex flex-col items-center gap-8"
         onSubmit={handleSubmit(onSubmit)}
