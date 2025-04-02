@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Button from "../common/Button";
+import Link from "next/link";
 
 function HowItWorks() {
   return (
@@ -66,11 +67,10 @@ function HowItWorks() {
           </div>
         </div>
       </div>
-      <Button
-        variant="primary"
-        className="w-full sm:w-auto justify-self-center"
-      >
-        Build your box now
+      <Button variant="primary" className="w-full lg:w-fit lg:self-center">
+        <Link href="/subscribe/step-1" passHref>
+          Build your box now
+        </Link>
       </Button>
     </div>
   );
