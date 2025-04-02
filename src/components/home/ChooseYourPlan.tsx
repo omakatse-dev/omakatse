@@ -48,7 +48,7 @@ function ChooseYourPlan() {
         />
       </div>
 
-      <div className="w-full">
+      <div className="w-full justify-items-center">
         <Button variant="primary" className="w-full lg:w-fit lg:self-center">
           <Link href="/subscribe/step-1" passHref>
             Build your box now
