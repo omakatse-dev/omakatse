@@ -168,7 +168,7 @@ export default function Footer() {
               placeholder="Enter your email"
               className="border-b mr-4 py-4 focus:outline-none w-full"
             />
-            <Button className="w-full" variant="primary">
+            <Button className="w-full bodyButton" variant="primary">
               Subscribe
             </Button>
           </div>
