@@ -109,7 +109,11 @@ export default function Page({
               disabled={currentPage === 1}
               className="px-4 py-2"
             >
-              <ChevronLeftIcon className="h-4" />
+              <ChevronLeftIcon
+                className={`h-4 ${
+                  currentPage === 1 ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
 
             {/* Display page numbers */}
@@ -132,7 +136,11 @@ export default function Page({
               disabled={currentPage === totalPages}
               className="px-4 py-2"
             >
-              <ChevronRightIcon className="h-4" />
+              <ChevronRightIcon
+                className={`h-4 ${
+                  currentPage === totalPages ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
           </div>
         </div>

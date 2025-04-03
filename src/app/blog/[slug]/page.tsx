@@ -11,6 +11,7 @@ import { Document, BLOCKS } from "@contentful/rich-text-types";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Asset } from "contentful";
 import ScrollProgressCircle from "@/components/common/ScrollProgressCircle";
+import ScrollUpButton from "@/components/common/ScrollUpButton";
 
 export type BlogPostType = {
   contentTypeId: "blogPost";
@@ -88,7 +89,9 @@ export default async function BlogPage({
   const blog = await getBlogBySlug(slug, preview);
 
   if (!blog) {
-    return <div className="text-center mt-32 text-primary">Blog post not found</div>;
+    return (
+      <div className="text-center mt-32 text-primary">Blog post not found</div>
+    );
   }
 
   const imageHeader = (blog.fields.imageHeader as unknown as Asset).fields.file
@@ -160,8 +163,9 @@ export default async function BlogPage({
         )}
       </div>
       <div className="mb-32">
-      {documentToReactComponents(description, options)}
+        {documentToReactComponents(description, options)}
       </div>
+        <ScrollUpButton className="fixed bottom-6 right-10" />
     </div>
   );
 }

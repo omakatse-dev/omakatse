@@ -74,11 +74,11 @@ export default function NavBar() {
           </button>
         </div>
 
-        <div className="hidden xl:flex items-center gap-x-8 font-open-sans font-semibold">
+        <div className="hidden xl:flex items-center gap-x-8">
           <div className="relative group">
             <Link
               href="/shop/cat-products"
-              className={`flex gap-1 b-2 border-b-0 ${
+              className={`flex gap-1 b-2 border-b-0 font-semibold ${
                 pathname.startsWith("/shop/cat-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
@@ -95,7 +95,7 @@ export default function NavBar() {
           <div className="relative group">
             <Link
               href="/shop/dog-products"
-              className={`flex gap-1 b-2 border-b-0 ${
+              className={`flex gap-1 b-2 border-b-0 font-semibold ${
                 pathname.startsWith("/shop/dog-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
@@ -113,7 +113,7 @@ export default function NavBar() {
             <Link
               href={link.url}
               key={link.name}
-              className={`block pb-1 ${
+              className={`block pb-1 font-semibold ${
                 pathname === link.url ? "border-b-2 border-black" : "border-b-0"
               }`}
             >
