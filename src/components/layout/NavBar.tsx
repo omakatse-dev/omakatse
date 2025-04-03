@@ -45,8 +45,22 @@ export default function NavBar() {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const { isCartOpen, openCart, closeCart } = useUIStore();
   const cartItems = useCartStore((state) => state.items);
-
   const clearCart = useCartStore((state) => state.clearCart);
+  const [isCatHovering, setIsCatHovering] = useState(false);
+  const [isDogHovering,setIsDogHovering] = useState(false);
+
+  const handleMouseOverCat = () => {
+    setIsCatHovering(true);
+  }
+
+  const handleMouseOverDog = () => {
+    setIsDogHovering(true);
+  }
+
+  const handleMouseLeave = () => {
+    setIsCatHovering(false);
+    setIsDogHovering(false);
+  }
 
   useEffect(() => {
     const checkCartStatus = async () => {
@@ -78,6 +92,7 @@ export default function NavBar() {
           <div className="relative group">
             <Link
               href="/shop/cat-products"
+              onMouseEnter={handleMouseOverCat}
               className={`flex gap-1 b-2 border-b-0 font-semibold ${
                 pathname.startsWith("/shop/cat-products")
                   ? "border-b-2 border-black"
@@ -88,13 +103,19 @@ export default function NavBar() {
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             </Link>
             {/* Dropdown for Cat */}
-            <div className="fixed mt-14 left-2 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
-              <HoverOverCat />
-            </div>
+            {isCatHovering && (
+              <div
+                className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
+                onMouseLeave={handleMouseLeave}
+              >
+                <HoverOverCat />
+              </div>
+            )}
           </div>
           <div className="relative group">
             <Link
               href="/shop/dog-products"
+              onMouseEnter={handleMouseOverDog}
               className={`flex gap-1 b-2 border-b-0 font-semibold ${
                 pathname.startsWith("/shop/dog-products")
                   ? "border-b-2 border-black"
@@ -105,9 +126,14 @@ export default function NavBar() {
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             </Link>
             {/* Dropdown for Dog */}
-            <div className="fixed mt-14 left-2 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
-              <HoverOverDog />
-            </div>
+            {isDogHovering && (
+              <div
+                className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
+                onMouseLeave={handleMouseLeave}
+              >
+                <HoverOverDog />
+              </div>
+            )}
           </div>
           {links.map((link) => (
             <Link
