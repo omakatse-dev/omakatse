@@ -88,7 +88,7 @@ export default function Page({
           height={190}
           className="rounded-3xl mb-8"
         />
-        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-opacity-50 p-4 rounded-md">
+        <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl lg:text-7xl font-bold w-full text-center">
           Omakatse&apos;s Blog
         </div>
       </div>
