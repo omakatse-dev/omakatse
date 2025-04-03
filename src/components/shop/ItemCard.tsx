@@ -25,10 +25,10 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
         width={100}
         height={100}
       />
-      <div className="bodyLG text-black font-semibold mt-4">
+      <div className="bodyLG text-primary font-semibold mt-4">
         {product.title}
       </div>
-      <div className="bodyMD text-black mt-2">
+      <div className="bodyMD text-primary mt-2">
         AED {formatPrice(product.priceRange.minVariantPrice.amount)}
       </div>
     </Link>

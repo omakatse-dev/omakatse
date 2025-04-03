@@ -5,7 +5,7 @@ export default function OMCheckbox({ checked, onChange, className }: { checked: 
     <Checkbox
       checked={checked}
       onChange={onChange}
-      className={`group block size-4 rounded border bg-white data-[checked]:bg-black ${className}`}
+      className={`group block size-4 rounded border bg-white data-[checked]:bg-primary ${className}`}
     >
       {/* Checkmark icon */}
       <svg

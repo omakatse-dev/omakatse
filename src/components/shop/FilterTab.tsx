@@ -21,7 +21,7 @@ export default function FilterTab({
           onClick={() => onChange(filter)}
           className={`cursor-pointer ${
             selectedFilter === filter
-              ? "text-black font-bold underline underline-offset-4"
+              ? "text-primary font-bold underline underline-offset-4"
               : ""
           }`}
         >

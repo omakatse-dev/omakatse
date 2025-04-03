@@ -19,21 +19,21 @@ export default function PetSelector({
             onClick={() => {field.onChange("cat")}}
             active={field.value === "cat"}
           >
-            <div className="h-64 w-64 bg-black" />
+            <div className="h-64 w-64 bg-primary" />
             Cat
           </CardButton>
           <CardButton
             onClick={() => field.onChange("dog")}
             active={field.value === "dog"}
           >
-            <div className="h-64 w-64 bg-black" />
+            <div className="h-64 w-64 bg-primary" />
             Dog
           </CardButton>
           <CardButton
             onClick={() => field.onChange("both")}
             active={field.value === "both"}
           >
-            <div className="h-64 w-64 bg-black" />
+            <div className="h-64 w-64 bg-primary" />
             Cat & Dog
           </CardButton>
         </div>

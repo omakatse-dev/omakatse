@@ -154,7 +154,7 @@ export default function ProductTitle({
               setCount={setQuantity}
             />
             <Button
-              className="flex items-center h-16 w-full"
+              className="flex items-center w-full"
               onClick={addToCartHandler}
             >
               Add to Cart - AED{" "}

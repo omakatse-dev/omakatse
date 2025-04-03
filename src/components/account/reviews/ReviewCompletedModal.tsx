@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 export default function ReviewCompletedModal() {
   const router = useRouter();
   return (
-    <div className="fixed inset-0 w-screen h-screen bg-black/50 flex items-center justify-center">
+    <div className="fixed inset-0 w-screen h-screen bg-primary/50 flex items-center justify-center">
       <div className="bg-yellow-pastel rounded-2xl px-12 py-8 max-w-md flex flex-col items-center text-center relative">
         <h4 className="mt-7">Thank you for reviewing this product</h4>
         <div className="bodyMD mt-2 text-gray-800">

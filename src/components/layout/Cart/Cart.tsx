@@ -52,7 +52,7 @@ export default function Cart({
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/50 z-20 ${
+        className={`fixed inset-0 bg-primary/50 z-20 ${
           !isOpen ? "hidden" : "block"
         }`}
         onClick={handleClose}

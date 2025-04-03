@@ -27,7 +27,7 @@
   --color-gray-400: #b8a9a1;
   --color-gray-500: #968a84;
   --color-gray-800: #59504c;
-  --color-black: #2c2420;
+  --color-primary: #2c2420;
 }
 
 :root {
@@ -35,43 +35,43 @@
 }
 
 h1 {
-  @apply font-parkinsans text-4xl sm:text-7xl font-bold leading-[1.1];
+  @apply text-primary font-parkinsans text-5xl md:text-7xl font-bold leading-[1.1];
 }
 
 h2 {
-  @apply font-parkinsans text-[2rem] sm:text-5xl font-bold leading-[1.2];
+  @apply text-primary font-parkinsans text-[2rem] md:text-5xl font-bold leading-[1.2];
 }
 
 h3 {
-  @apply font-parkinsans text-[1.75rem] sm:text-[2rem] leading-[1.2];
+  @apply font-parkinsans text-2xl md:text-[2rem] leading-[1.2];
 }
 
 h4 {
-  @apply font-parkinsans text-xl sm:text-2xl font-bold leading-[1.4];
+  @apply font-parkinsans text-xl md:text-2xl font-bold leading-[1.4];
 }
 
 .bodyXL {
-  @apply text-lg sm:text-xl leading-[1.5];
+  @apply text-lg md:text-xl leading-[1.5];
 }
 
 .bodyLG {
-  @apply text-base sm:text-lg leading-[1.5];
+  @apply text-base md:text-lg leading-[1.5];
 }
 
 .bodyMD {
-  @apply text-sm sm:text-base leading-[1.5];
+  @apply text-sm md:text-base leading-[1.5];
 }
 
 .bodySM {
-  @apply text-xs sm:text-sm leading-[1.5];
+  @apply text-xs md:text-sm leading-[1.5];
 }
 
 .bodyXS {
-  @apply text-[0.625rem] sm:text-xs leading-[1.5];
+  @apply text-[0.625rem] md:text-xs leading-[1.5];
 }
 
 .bodyButton {
-  @apply text-sm sm:text-base font-semibold leading-[1.5];
+  @apply text-sm md:text-base font-semibold leading-[1.5];
 }
 
 .border-primary {

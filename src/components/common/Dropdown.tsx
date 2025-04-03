@@ -26,11 +26,11 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         <ListboxButton
           ref={ref}
           className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center border-primary ${
-            value ? "text-black" : "text-gray-500"
+            value ? "text-primary" : "text-gray-500"
           }`}
         >
           {value ? value : placeholder}
-          <ChevronDownIcon className="w-6 text-black" />
+          <ChevronDownIcon className="w-6 text-primary" />
         </ListboxButton>
         <ListboxOptions
           className="rounded-2xl border-primary bg-white z-20 w-[var(--button-width)]"

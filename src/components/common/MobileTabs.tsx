@@ -17,7 +17,7 @@ export default function MobileTabs({
         <div
           key={tab}
           className={`${
-            tab === selectedTab && "text-black underline underline-offset-4"
+            tab === selectedTab && "text-primary underline underline-offset-4"
           }`}
           onClick={() => onChange(tab)}
         >

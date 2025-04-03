@@ -15,20 +15,20 @@ export default function CounterButton({
 }) {
   return (
     <div
-      className={`flex flex-row border-1 rounded-[2rem] w-44 h-16 justify-between items-center px-5 ${className}`}
+      className={`flex flex-row border-1 rounded-[2rem] w-44 h-11 md:h-13 justify-between items-center px-5 ${className}`}
     >
       <button
         onClick={() => setCount(count === min ? count : count - 1)}
-        className="text-black text-5xl font-light cursor-pointer"
+        className="text-primary text-5xl font-light cursor-pointer"
       >
-        <MinusIcon className="h-6 stroke-black stroke-2" />
+        <MinusIcon className="h-6 stroke-primary stroke-2" />
       </button>
       <div className="bodyMD font-bold align-middle">{count}</div>
       <button
         onClick={() => setCount(count === max ? count : count + 1)}
-        className="text-black text-5xl font-light cursor-pointer"
+        className="text-primary text-5xl font-light cursor-pointer"
       >
-        <PlusIcon className="h-6 stroke-black stroke-2" />
+        <PlusIcon className="h-6 stroke-primary stroke-2" />
       </button>
     </div>
   );

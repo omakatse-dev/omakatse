@@ -112,7 +112,7 @@ export default function Page({
         {Object.entries(groupedFaqs).map(([category, faqList]) => (
           <div
             key={category}
-            className="flex flex-col justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full"
+            className="flex flex-col justify-center p-6 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full"
           >
             <p className="bodyXL text-gray-500 mb-4">{category}</p>
 
@@ -126,7 +126,7 @@ export default function Page({
                 {({ open }) => (
                   <>
                     <DisclosureButton className="group flex w-full items-center justify-between py-4 text-left">
-                      <span className="bodyLG text-black">
+                      <span className="bodyLG text-primary">
                         {faq.fields.question.toString()}
                       </span>
                       <ChevronDownIcon

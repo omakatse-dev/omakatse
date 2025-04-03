@@ -85,11 +85,13 @@ export default function Page({
         <div className="w-full">
           <div className="flex flex-col md:flex-row md:gap-32 w-full">
             {/* Category Selector */}
-            <SelectCategory
-              categories={categories}
-              onCategorySelect={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
+            <div className="sticky top-28">
+              <SelectCategory
+                categories={categories}
+                onCategorySelect={setSelectedCategory}
+                selectedCategory={selectedCategory}
+              />
+            </div>
 
             {/* Blog Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
@@ -107,7 +109,11 @@ export default function Page({
               disabled={currentPage === 1}
               className="px-4 py-2"
             >
-              <ChevronLeftIcon className="h-4" />
+              <ChevronLeftIcon
+                className={`h-4 ${
+                  currentPage === 1 ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
 
             {/* Display page numbers */}
@@ -117,7 +123,7 @@ export default function Page({
                 onClick={() => handlePageChange(index + 1)}
                 className={`px-2 py-2 mx-2 rounded-md ${
                   currentPage === index + 1
-                    ? "text-black font-bold"
+                    ? "text-primary font-bold"
                     : "text-gray-800"
                 }`}
               >
@@ -130,7 +136,11 @@ export default function Page({
               disabled={currentPage === totalPages}
               className="px-4 py-2"
             >
-              <ChevronRightIcon className="h-4" />
+              <ChevronRightIcon
+                className={`h-4 ${
+                  currentPage === totalPages ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
           </div>
         </div>

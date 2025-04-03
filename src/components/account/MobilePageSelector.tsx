@@ -44,7 +44,7 @@ export default function MobilePageSelector() {
       <Listbox value={selectedPage} onChange={setSelectedPage}>
         <ListboxButton
           className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer border flex flex-row justify-between items-center ${
-            selectedPage ? "text-black" : "text-gray-500"
+            selectedPage ? "text-primary" : "text-gray-500"
           }`}
         >
           {selectedPage?.label}

@@ -11,6 +11,7 @@ import { Document, BLOCKS } from "@contentful/rich-text-types";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Asset } from "contentful";
 import ScrollProgressCircle from "@/components/common/ScrollProgressCircle";
+import ScrollUpButton from "@/components/common/ScrollUpButton";
 
 export type BlogPostType = {
   contentTypeId: "blogPost";
@@ -32,17 +33,17 @@ export type BlogPostType = {
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_: any, children: React.ReactNode) => (
-      <p className="bodyMD">{children}</p>
+      <p className="bodyMD text-gray-800 mb-8">{children}</p>
     ),
     [BLOCKS.HEADING_1]: (_: any, children: React.ReactNode) => (
-      <h4>{children}</h4>
+      <h4 className="text-primary mb-6">{children}</h4>
     ),
     [BLOCKS.HEADING_2]: (_: any, children: React.ReactNode) => (
-      <div className="bodyLG">{children}</div>
+      <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center p-6 bg-white rounded-xl drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full">
-        <div className="bodyMD">{children}</div>
+      <div className="flex justify-center p-6 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full mb-8">
+        <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
     [BLOCKS.OL_LIST]: (_: any, children: React.ReactNode) => (
@@ -88,7 +89,9 @@ export default async function BlogPage({
   const blog = await getBlogBySlug(slug, preview);
 
   if (!blog) {
-    return <div className="text-center mt-32">Blog post not found</div>;
+    return (
+      <div className="text-center mt-32 text-primary">Blog post not found</div>
+    );
   }
 
   const imageHeader = (blog.fields.imageHeader as unknown as Asset).fields.file
@@ -159,7 +162,10 @@ export default async function BlogPage({
           </div>
         )}
       </div>
-      {documentToReactComponents(description, options)}
+      <div className="mb-32">
+        {documentToReactComponents(description, options)}
+      </div>
+        <ScrollUpButton className="fixed bottom-6 right-10" />
     </div>
   );
 }

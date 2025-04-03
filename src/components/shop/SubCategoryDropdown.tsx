@@ -21,12 +21,12 @@ export default function SubCategoryDropdown({
   return (
     <div className={className}>
       <Listbox value={selectedOption} onChange={onChange}>
-        <ListboxButton className="rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center border border-black">
+        <ListboxButton className="rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center border border-primary">
           {selectedOption}
-          <ChevronDownIcon className="w-6 text-black" />
+          <ChevronDownIcon className="w-6 text-primary" />
         </ListboxButton>
         <ListboxOptions
-          className="rounded-2xl border border-black bg-white z-20 w-[var(--button-width)]"
+          className="rounded-2xl border border-primary bg-white z-20 w-[var(--button-width)]"
           anchor={{ to: "bottom start", gap: "8px" }}
         >
           {options.map((option) => (
