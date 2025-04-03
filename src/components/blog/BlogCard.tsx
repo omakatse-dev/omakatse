@@ -28,7 +28,7 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   if (!blog || !blog.fields) return null;
   return (
-    <div className="rounded-xl md:rounded-[1.25rem] border-1 border-gray-400 flex flex-col p-8">
+    <div className="rounded-xl md:rounded-[1.25rem] border-1 border-gray-400 flex flex-col p-6 md:p-8">
       <div className="flex flex-row gap-4 mb-4">
         <Tag>{blog.fields.categoryTag.toString()}</Tag>
         <p className="bodySM text-gray-500 flex items-center">

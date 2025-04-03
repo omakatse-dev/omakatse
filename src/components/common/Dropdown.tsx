@@ -40,7 +40,7 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
             <ListboxOption
               key={option}
               value={option}
-              className="data-[focus]:bg-gray-200 data-[focus]:rounded-2xl p-5 cursor-pointer"
+              className="data-[focus]:bg-gray-200 data-[focus]:rounded-2xl p-5 cursor-pointer text-sm md:text-base"
             >
               {option}
             </ListboxOption>

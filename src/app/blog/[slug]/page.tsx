@@ -120,23 +120,23 @@ export default async function BlogPage({
       <div className="flex flex-col gap-3">
         <Tag className="w-fit">{blog.fields.categoryTag.toString()}</Tag>
         <h2>{blog.fields.title.toString()}</h2>
-        <div>
+        <div className="">
           <div className="flex flex-row gap-2">
             <p className="bodySM text-gray-800">
               Edited:{" "}
               {dayjs(blog.fields.editedDate.toString()).format("MMM D, YYYY")}
             </p>
-            <p className="text-gray-200">|</p>
+            <div className="inline-block w-0.5 bg-gray-200"></div>
             <p className="bodySM text-gray-800">
               Posted:{" "}
               {dayjs(blog.fields.postedDate.toString()).format("MMM D, YYYY")}
             </p>
-            <p className="text-gray-200">|</p>
+            <div className="inline-block w-0.5 bg-gray-200"></div>
             <p className="bodySM text-gray-800">
               {blog.fields.readDuration.toString()} mins read
             </p>
           </div>
-          <p className="bodySM text-gray-800 font-semibold">
+          <p className="bodySM text-gray-800 font-semibold mt-1">
             Written by {blog.fields.author.toString()}
           </p>
         </div>
@@ -165,7 +165,7 @@ export default async function BlogPage({
       <div className="mb-32">
         {documentToReactComponents(description, options)}
       </div>
-        <ScrollUpButton className="fixed bottom-6 right-10" />
+      <ScrollUpButton className="fixed bottom-6 right-10" />
     </div>
   );
 }

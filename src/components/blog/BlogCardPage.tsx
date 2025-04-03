@@ -33,7 +33,7 @@ export default function Page({
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const handleResize = () => {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1200) {
       setBlogsPerPage(9);
     } else {
       setBlogsPerPage(3);
@@ -94,7 +94,7 @@ export default function Page({
             </div>
 
             {/* Blog Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
               {currentBlogs.map((blog) => (
                 <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
               ))}
