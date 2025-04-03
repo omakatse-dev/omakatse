@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="pt-32">
       <div className="px-6 py-5 lg:px-18 flex flex-col-reverse text-center lg:flex-row lg:justify-between">
-        <div className="lg:text-left lg:pt-20 lg:pl-20">
+        <div className="lg:text-left lg:pt-20 lg:pl-20 lg:mb-20 mb-12">
           <h1 className="mb-3 lg:mb-5 text-primary">
             A one-stop subscription service
           </h1>

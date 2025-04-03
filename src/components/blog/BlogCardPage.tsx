@@ -5,6 +5,7 @@ import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChainModifiers, EntryFields, Entry } from "contentful";
+import Image from "next/image";
 
 export type BlogPostType = {
   contentTypeId: "blogPost";
@@ -79,7 +80,18 @@ export default function Page({
 
   return (
     <div className="w-full">
-      <div className="bg-gray-500 h-120 rounded-4xl mb-8" />
+      <div className="relative">
+        <Image
+          src="/assets/OmakatseBlog.svg"
+          alt="Blog Image"
+          width={1340}
+          height={190}
+          className="rounded-3xl mb-8"
+        />
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-opacity-50 p-4 rounded-md">
+          Omakatse&apos;s Blog
+        </div>
+      </div>
       <div className="flex flex-row justify-center">
         <div className="hidden">Category selection</div>
         <div className="w-full">

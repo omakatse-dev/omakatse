@@ -24,9 +24,9 @@ export default function page() {
           <Button>Build your box now</Button>
         </div>
       </div>
-      <div className="xl:px-30 lg:px-10">
-        <div className="bg-white-100 py-10 lg:py-20 flex flex-col lg:flex-row gap-8 lg:gap-20">
-          <div className="flex flex-col gap-5">
+      <div className="">
+        <div className="bg-white-100 py-10 lg:py-20 flex flex-col lg:flex-row gap-8 lg:gap-20 lg:justify-center">
+          <div className="flex flex-col gap-5 lg:max-w-2xl">
             <h4 className="text-yellow"> Our Founder </h4>
             <h3 className="text-primary">
               {" "}
@@ -50,14 +50,14 @@ export default function page() {
             alt="About Tee"
             width="518"
             height="1"
-            className="lg:w-700 rounded-3xl self-center"
+            className="lg:w-700 rounded-3xl self-center lg:max-w-xl"
           />
         </div>
 
-        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row-reverse gap-10 lg:gap-20">
-          <div className="flex flex-col gap-5">
-            <h4 className="text-yellow"> XXXX </h4>
-            <h3 className="text-primary"> XXXX </h3>
+        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row-reverse gap-10 lg:gap-20 lg:justify-center">
+          <div className="flex flex-col gap-5 lg:max-w-2xl">
+            <h4 className="text-yellow">  History </h4>
+            <h3 className="text-primary"> How It Started </h3>
             <p className="bodyMD text-gray-800">
               Throughout her student and adult life, Tee would volunteer at
               local animal shelters in Canada. She is also an avid equestrian,
@@ -78,13 +78,13 @@ export default function page() {
             alt="About"
             width="518"
             height="1"
-            className="lg:w-500 rounded-3xl self-center"
+            className="lg:w-500 rounded-3xl self-center lg:max-w-xl"
           />
         </div>
 
-        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
-          <div className="flex flex-col gap-5">
-            <h4 className="text-yellow"> XXXX </h4>
+        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-center">
+          <div className="flex flex-col gap-5 lg:max-w-2xl">
+            <h4 className="text-yellow"> Our Inspiration </h4>
             <h3 className="text-primary">
               {" "}
               With Omakatse, Tee endeavours to introduce holistic pet products
@@ -107,7 +107,7 @@ export default function page() {
             alt="About"
             width="518"
             height="1"
-            className="lg:w-500 rounded-3xl self-center"
+            className="lg:w-500 rounded-3xl self-center lg:max-w-xl"
           />{" "}
         </div>
 
@@ -115,7 +115,7 @@ export default function page() {
           className="flex flex-col relative bg-yellow rounded-4xl my-10 lg:mx-20 px-5 lg:px-40 py-20 lg:py-40 gap-4 lg:gap-10"
           style={{
             backgroundImage: "url('/assets/pattern.svg')",
-            backgroundSize: "cover",
+            backgroundSize: "auto",
           }}
         >
           <Image
@@ -148,8 +148,8 @@ export default function page() {
           />
         </div>
 
-        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
-          <div className="flex flex-col gap-5">
+        <div className="bg-white-100 py-5 lg:py-20 flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-center">
+          <div className="flex flex-col gap-5 lg:max-w-2xl">
             <h4 className="text-yellow"> Our CEOs </h4>
             <h3 className="text-primary"> Meet Toby & Olly</h3>
             <p className="bodyMD text-gray-800">
@@ -170,8 +170,8 @@ export default function page() {
             alt="Tobby and Dolly"
             width="518"
             height="1"
-            className="lg:w-400 rounded-3xl self-center"
-          />{" "}
+            className="lg:w-400 rounded-3xl self-center lg:max-w-xl"
+          />
         </div>
 
         <div className="bg-gray-300 rounded-4xl my-15 lg:my-20 px-8 py-10 lg:px-16 lg:py-20 flex flex-col justify-center gap-6">

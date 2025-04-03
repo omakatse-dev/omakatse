@@ -30,11 +30,11 @@ const HoverOverDog = () => {
         {" "}
         {Object.entries(dropdownData).map(([header, links]) => (
           <div key={header}>
-            <h3 className="text-lg font-bold text-gray-800 mb-4">{header}</h3>
-            <ul className="flex flex-col gap-4 bodyButton">
+            <div className="bodyLG font-bold text-gray-800 mb-4">{header}</div>
+            <ul className="flex flex-col gap-4">
               {links.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.url} className="text-gray-800 font-semibold">
+                  <Link href={link.url} className="text-gray-800">
                     {link.name}
                   </Link>
                 </li>

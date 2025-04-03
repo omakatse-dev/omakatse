@@ -19,7 +19,7 @@ export default function Tabs({
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`px-6 sm:px-10 py-4 rounded-full cursor-pointer ${
+          className={`px-6 sm:px-10 py-4 rounded-full cursor-pointer text-xs lg:text-base ${
             tab === selectedTab && activeStyles
           }`}
           onClick={() => onChange(tab)}
