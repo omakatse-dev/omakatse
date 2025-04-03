@@ -28,7 +28,7 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
   return (
     <div className="justify-center mb-8 w-full md:w-fit">
       {/* For small screens, show dropdown */}
-      <div className="md:hidden">
+      <div className="md:hidden sticky top-20">
         <div className="relative w-full">
           <button
             onClick={handleButtonClick}

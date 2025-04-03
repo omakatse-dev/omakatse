@@ -85,11 +85,13 @@ export default function Page({
         <div className="w-full">
           <div className="flex flex-col md:flex-row md:gap-32 w-full">
             {/* Category Selector */}
-            <SelectCategory
-              categories={categories}
-              onCategorySelect={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
+            <div className="sticky top-28">
+              <SelectCategory
+                categories={categories}
+                onCategorySelect={setSelectedCategory}
+                selectedCategory={selectedCategory}
+              />
+            </div>
 
             {/* Blog Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
