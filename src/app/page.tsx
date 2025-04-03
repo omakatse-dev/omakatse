@@ -4,14 +4,16 @@ import Button from "../components/common/Button";
 import HowItWorks from "@/components/home/HowItWorks";
 import ChooseYourPlan from "@/components/home/ChooseYourPlan";
 import Blog from "@/components/home/Blog";
+import Image from "next/image";
 
 export default function Home() {
-
   return (
     <div className="pt-32">
       <div className="px-6 py-5 lg:px-18 flex flex-col-reverse text-center lg:flex-row lg:justify-between">
-        <div className="lg:text-left">
-          <h1 className="mb-3 lg:mb-5 text-primary">A one-stop subscription service</h1>
+        <div className="lg:text-left lg:pt-20 lg:pl-20">
+          <h1 className="mb-3 lg:mb-5 text-primary">
+            A one-stop subscription service
+          </h1>
           <h3 className="mb-5 lg:mb-10 font-normal text-primary">
             tailored for your furry family members
           </h3>
@@ -19,7 +21,14 @@ export default function Home() {
             Build your box now
           </Button>
         </div>
-        <div className="bg-gray-500 h-80 w-auto lg:w-2/3 lg:h-auto" />
+
+        <Image
+          src="assets/OmakatseLandingFirst.svg"
+          alt="Omakatse's Landing Page"
+          width={600}
+          height={200}
+          className="self-center lg:w-[806px] lg:h-[518px]"
+        />
       </div>
 
       <HowItWorks />

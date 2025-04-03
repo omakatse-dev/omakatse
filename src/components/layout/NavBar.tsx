@@ -139,6 +139,7 @@ export default function NavBar() {
             <Link
               href={link.url}
               key={link.name}
+              onMouseEnter={handleMouseLeave}
               className={`block pb-1 font-semibold ${
                 pathname === link.url ? "border-b-2 border-black" : "border-b-0"
               }`}
