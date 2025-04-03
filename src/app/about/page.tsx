@@ -85,22 +85,27 @@ export default function page() {
       </div>
 
 
-        <div className="flex flex-col relative bg-yellow rounded-4xl my-10 lg:mx-20 px-5 lg:px-40 py-20 lg:py-40 gap-4 lg:gap-10">
+        <div className="flex flex-col relative bg-yellow rounded-4xl my-10 lg:mx-20 px-5 lg:px-40 py-20 lg:py-40 gap-4 lg:gap-10"
+          style={{
+            backgroundImage: "url('/assets/pattern.svg')",
+            backgroundSize: "cover"
+          }}
+        >
           <Image
             src="/assets/kumo_white.svg"
             alt="Kumo White"
             width={136.5} 
             height={121} 
-            className="absolute lg:w-58 h-auto -top-7 -left-3.5 lg:-left-16 lg:-top-8"
+            className="absolute lg:w-58 h-auto -top-12 -left-6 lg:-left-16 lg:-top-8"
           />
           <h4 className="text-white text-center"> Our Mission </h4>
-          <h3 className="text-primary text-center">
+          <h3 className="text-primary text-center font-bold">
             {" "}
             At Omakatse Pets, we believe that every cat and dog deserves a
             forever home, and our purpose is to help these beautiful animals in
             every way possible.{" "}
           </h3>
-          <p className="bodyMD text-center px-10 text-gray-800">
+          <p className="bodyMD text-center text-gray-800">
             We are committed to giving back to the felines and canines community
             and work with our shelter partners to donate vital supplies and
             engaging toys, feeders to donate pet food to strays, as well as fund
@@ -112,7 +117,7 @@ export default function page() {
             alt="Kumo White"
             width={136.5}
             height={121} 
-            className="absolute lg:w-58 h-auto -bottom-24 -right-10 lg:-bottom-24 lg:-right-26"
+            className="absolute lg:w-58 h-auto -bottom-22 -right-8 lg:-bottom-24 lg:-right-26"
           />
         </div>
 
@@ -130,12 +135,12 @@ export default function page() {
             platforms, allowing you to learn what they think of our offerings
             directly.
           </p>
-          <Button variant="primary">Build your box now</Button>
+          <Button variant="primary" className="w-full lg:w-fit">Build your box now</Button>
         </div>
         <div className="bg-gray-700 rounded-4xl h-80 lg:w-600"></div>
       </div>
 
-      <div className="bg-gray-300 rounded-4xl my-15 lg:my-20 px-8 py-16 lg:px-16 lg:py-32 flex flex-col justify-center gap-6">
+      <div className="bg-gray-300 rounded-4xl my-15 lg:my-20 px-8 py-10 lg:px-16 lg:py-20 flex flex-col justify-center gap-6">
           <h3 className="text-gray-800 text-center"> Join our team </h3>
           <p className="text-primary text-center bodyLG mb-4">
             {" "}
