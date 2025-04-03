@@ -11,6 +11,7 @@ import {
 import { usePathname } from "next/navigation";
 import CatDropdown from "./CatDropdown";
 import DogDropdown from "./DogDropdown";
+import Button from "@/components/common/Button";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -36,7 +37,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
 
   return (
     <div
-      className={`fixed xl:hidden w-screen h-screen bg-yellow inset-0 z-10 p-8 transition-all overflow-auto ${
+      className={`fixed xl:hidden w-screen h-screen flex flex-col bg-yellow inset-0 z-10 p-8 transition-all overflow-auto ${
         !isOpen ? "-translate-y-full" : "-translate-y-0"
       }`}
     >
@@ -63,8 +64,8 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
       </div>
 
       <div className="flex flex-col pt-8 gap-8 font-open-sans font-semibold pb-8 border-b-1 border-white text-2xl">
-        <CatDropdown setIsOpen = {setIsOpen} />
-        <DogDropdown setIsOpen = {setIsOpen} />
+        <CatDropdown setIsOpen={setIsOpen} />
+        <DogDropdown setIsOpen={setIsOpen} />
 
         {links.map((link) => (
           <Link
@@ -91,6 +92,13 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
           <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
           <p>Account</p>
         </Link>
+      </div>
+      <div className="mt-auto pt-8">
+        <Button variant="primary" className="w-full">
+          <Link href="/subscribe/step-1" passHref>
+            Build your box now
+          </Link>
+        </Button>
       </div>
     </div>
   );
