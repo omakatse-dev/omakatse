@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Button from "../common/Button";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "./NavbarComponents/MobileMenu";
 import { useState } from "react";
 import {
   ShoppingCartIcon,
@@ -19,8 +19,8 @@ import { useUIStore } from "@/stores/uiStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { getCartById } from "@/utils/APIs";
-import HoverOverCat from "./HoverOverCat";
-import HoverOverDog from "./HoverOverDog";
+import HoverOverCat from "./NavbarComponents/HoverOverCat";
+import HoverOverDog from "./NavbarComponents/HoverOverDog";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {

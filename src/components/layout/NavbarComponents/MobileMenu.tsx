@@ -6,9 +6,11 @@ import Image from "next/image";
 import {
   ShoppingCartIcon,
   UserIcon,
-  ChevronDownIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import CatDropdown from "./CatDropdown";
+import DogDropdown from "./DogDropdown";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -16,6 +18,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
+  const pathname = usePathname();
   const links = [
     {
       name: "About Us",
@@ -60,19 +63,19 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
       </div>
 
       <div className="flex flex-col pt-8 gap-8 font-open-sans font-semibold pb-8 border-b-1 border-white text-2xl">
-        <Link
-          onClick={() => setIsOpen((prev) => !prev)}
-          href="/shop"
-          className="flex gap-1 items-center"
-        >
-          Shop
-          <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
-        </Link>
+        <CatDropdown setIsOpen = {setIsOpen} />
+        <DogDropdown setIsOpen = {setIsOpen} />
+
         {links.map((link) => (
           <Link
             onClick={() => setIsOpen((prev) => !prev)}
             href={link.url}
             key={link.name}
+            className={`block pb-1 ${
+              pathname === link.url
+                ? "border-b-2 w-fit border-black"
+                : "border-b-0"
+            }`}
           >
             {link.name}
           </Link>
