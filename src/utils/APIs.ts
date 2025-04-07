@@ -90,6 +90,11 @@ export const getProductsByCollection = async (
             key
             value
           }
+          variants(first: 2) {
+            nodes {
+              id
+            }
+          }
         }
       }
     }
