@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import FilterTab from "@/components/shop/FilterTab";
 import SortDropDown from "@/components/shop/SortDropDown";
 import Tabs from "@/components/common/Tabs";
@@ -72,6 +73,11 @@ export default function Shopfront({
     );
   });
 
+  const petImageSrc =
+  petType === "Cat"
+    ? "/assets/CatIcon.svg"
+    : "/assets/DogIcon.svg"
+
   return (
     <>
       <div className="mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
@@ -84,7 +90,15 @@ export default function Shopfront({
               Showing {filteredProducts.length} product(s)
             </div>
           </div>
-          <div className="bg-amber-500 w-12 h-12 hidden sm:flex" />
+          <div className ="rounded-full bg-white w-16 h-16 p-4">
+          <Image
+            src={petImageSrc}
+            alt="Pet Icon"
+            width={50}
+            height={50}
+            className=""
+          />
+          </div>
         </div>
         <Tabs
           tabs={TABS}
