@@ -74,10 +74,26 @@ export default function Shopfront({
   });
 
   const petImageSrc =
-  petType === "Cat"
-    ? "/assets/CatIcon.svg"
-    : "/assets/DogIcon.svg"
+    petType === "Cat" ? "/assets/CatIcon.svg" : "/assets/DogIcon.svg";
 
+  const filterCounts: Record<string, number> = {};
+
+  FILTERS.forEach((filter) => {
+    const count = products.filter((product) => {
+      const category = product.metafields.find(
+        (m) => m.key === "category"
+      )?.value;
+      const subCategory = product.metafields.find(
+        (m) => m.key === "sub_category"
+      )?.value;
+
+      return (
+        category === selectedTab && (subCategory === filter || filter === "All")
+      );
+    }).length;
+
+    filterCounts[filter] = count;
+  });
   return (
     <>
       <div className="mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
@@ -90,14 +106,14 @@ export default function Shopfront({
               Showing {filteredProducts.length} product(s)
             </div>
           </div>
-          <div className ="rounded-full bg-white w-16 h-16 p-4">
-          <Image
-            src={petImageSrc}
-            alt="Pet Icon"
-            width={50}
-            height={50}
-            className=""
-          />
+          <div className="rounded-full bg-white w-16 h-16 p-4">
+            <Image
+              src={petImageSrc}
+              alt="Pet Icon"
+              width={50}
+              height={50}
+              className=""
+            />
           </div>
         </div>
         <Tabs
@@ -138,6 +154,7 @@ export default function Shopfront({
             selectedFilter={selectedFilter}
             onChange={setSelectedFilter}
             className="hidden sm:flex"
+            counts={filterCounts}
           />
           <ItemsGrid products={filteredProducts} />
         </div>

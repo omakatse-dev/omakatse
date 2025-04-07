@@ -5,11 +5,13 @@ export default function FilterTab({
   selectedFilter,
   onChange,
   className,
+  counts,
 }: {
   filters: string[];
   selectedFilter: string;
   onChange: (filter: string) => void;
   className?: string;
+  counts: Record<string, number>;
 }) {
   return (
     <div
@@ -19,13 +21,18 @@ export default function FilterTab({
         <div
           key={filter}
           onClick={() => onChange(filter)}
-          className={`cursor-pointer ${
-            selectedFilter === filter
-              ? "text-primary font-bold underline underline-offset-4"
-              : ""
-          }`}
+          className="cursor-pointer"
         >
-          {filter}
+          <span
+            className={`inline-flex gap-2 ${
+              selectedFilter === filter
+                ? "text-primary font-bold border-b-2"
+                : ""
+            }`}
+          >
+            <span>{filter}</span>
+            <span>({counts[filter] ?? 0})</span>
+          </span>
         </div>
       ))}
     </div>
