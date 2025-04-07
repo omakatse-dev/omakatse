@@ -23,7 +23,9 @@ export default function ReviewSection({ reviews }: { reviews: Review[] }) {
     <div className="flex flex-col items-center gap-4 sm:gap-10 border-secondary rounded-2xl p-6 sm:p-10 mx-6 sm:md-12 my-10 max-w-7xl">
       <h4>What they are saying</h4>
       <ReviewsSummary reviewSummary={reviewSummary} />
-      <hr className="border-0.5 border-gray-400 w-full"/>
+      <hr
+        className={`w-full ${reviews.length > 0 ? "border-0.5" : "border-0"}`}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
         {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
