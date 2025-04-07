@@ -2,12 +2,14 @@ import React from "react";
 import ProductTitle from "./ProductTitle";
 import ProductDescription from "./ProductDescription";
 import ProductImages from "./ProductImages";
-import { ProductDetailsType } from "@/types/Types";
+import { ProductDetailsType, Review } from "@/types/Types";
 
 export default function ProductDetails({
   product,
+  reviews,
 }: {
   product: ProductDetailsType;
+  reviews: Review[];
 }) {
   return (
     <div className="flex flex-col md:pt-10 mt-32 md:px-12 max-w-7xl">
@@ -21,7 +23,7 @@ export default function ProductDetails({
             />
           )}
         </div>
-        <ProductTitle className="md:sticky md:top-52 h-fit" details={product} />
+        <ProductTitle className="md:sticky md:top-52 h-fit" details={product} reviews={reviews} />
         {product.metafield && (
           <ProductDescription
             description={product.metafield.value}

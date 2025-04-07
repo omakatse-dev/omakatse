@@ -20,7 +20,7 @@ export default async function ProductPage({
   const reviews = await getReviewByProductID(productId);
   return (
     <div className="w-screen flex flex-col items-center">
-      <ProductDetails product={product} />
+      <ProductDetails product={product} reviews={reviews.reviews}/>
       <ReviewSection reviews={reviews.reviews} />
       <OtherProducts products={relatedProducts} />
     </div>
