@@ -37,8 +37,9 @@ export default function MobileTabs({
               <Image
                 src={iconSrc}
                 alt={`${tab} icon`}
-                width={16}
-                height={16}
+                width={20}
+                height={20}
+                className ="mb-1"
               />
             )}
             <span>{tab}</span>
