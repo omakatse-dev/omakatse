@@ -197,6 +197,11 @@ export const getProductDetailsByID = async (productID: string) => {
             featuredImage {
               url
             }
+            variants(first: 2) {
+              nodes {
+                id
+              }
+            }
           }
         }
       }

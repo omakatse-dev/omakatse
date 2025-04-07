@@ -13,6 +13,9 @@ interface OtherProductsProps {
         amount: string;
       };
     };
+    variants?: {
+      nodes: { id: string }[];
+    };
   }[];
 }
 
