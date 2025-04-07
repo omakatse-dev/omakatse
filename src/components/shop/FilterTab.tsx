@@ -13,7 +13,7 @@ export default function FilterTab({
 }) {
   return (
     <div
-      className={`border-t w-80 gap-3 flex flex-col py-5 text-gray-800 bodyMD ${className}`}
+      className={`w-80 gap-3 flex flex-col py-5 text-gray-800 bodyMD ${className}`}
     >
       {filters.map((filter) => (
         <div
