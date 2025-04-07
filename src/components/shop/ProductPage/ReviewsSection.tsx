@@ -20,7 +20,7 @@ export default function ReviewSection({ reviews }: { reviews: Review[] }) {
       .length,
   };
   return (
-    <div className="flex flex-col items-center gap-4 sm:gap-10 border-secondary rounded-2xl p-6 sm:p-10 mx-6 my-10 w-full max-w-7xl">
+    <div className="flex flex-col items-center gap-4 sm:gap-10 border-secondary rounded-2xl p-6 sm:p-10 mx-6 sm:md-12 my-10 max-w-7xl">
       <h4>What they are saying</h4>
       <ReviewsSummary reviewSummary={reviewSummary} />
       <hr className="border-0.5 border-gray-400 w-full"/>
