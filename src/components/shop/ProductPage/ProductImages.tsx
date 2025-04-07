@@ -32,7 +32,7 @@ export default function ProductImages({
               alt="product"
               width={80}
               height={80}
-              className="rounded-lg border-primary p-2"
+              className="rounded-lg md:rounded-xl border-primary p-2"
             />
           </button>
         ))}
@@ -43,7 +43,7 @@ export default function ProductImages({
         <Image
           src={images.nodes[selectedIndex].url}
           alt="product"
-          className="bg-white rounded-xl md:w-full aspect-square border-primary justify-self-center p-12"
+          className="bg-white rounded-xl md:rounded-[1.25rem] md:w-full aspect-square border-primary justify-self-center p-12"
           width={516}
           height={516}
         />
