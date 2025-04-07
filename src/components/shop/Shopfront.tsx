@@ -102,18 +102,20 @@ export default function Shopfront({
             <h2>
               Shop {petType} {selectedTab}
             </h2>
-            <div className="mt-4 bodyMD">
+            <div className="mt-4 bodyMD flex gap-2 items-center">
+              <div className="rounded-full bg-white w-10 h-10 p-2 flex flex-row sm:hidden">
+                <Image
+                  src={petImageSrc}
+                  alt="Pet Icon"
+                  width={32}
+                  height={32}
+                />
+              </div>
               Showing {filteredProducts.length} product(s)
             </div>
           </div>
-          <div className="rounded-full bg-white w-16 h-16 p-4">
-            <Image
-              src={petImageSrc}
-              alt="Pet Icon"
-              width={50}
-              height={50}
-              className=""
-            />
+          <div className="rounded-full bg-white w-16 h-16 p-4 hidden sm:flex">
+            <Image src={petImageSrc} alt="Pet Icon" width={50} height={50} />
           </div>
         </div>
         <Tabs
