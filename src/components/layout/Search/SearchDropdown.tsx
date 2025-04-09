@@ -45,8 +45,8 @@ export default function SearchDropdown({
         onClick={handleClose}
       />
       <div
-        className={`fixed top-0 right-0 w-full sm:w-96 h-screen bg-yellow-pastel z-30 flex flex-col items-center p-8 transition-all duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 left-0 md:right-0 md:left-auto w-full sm:w-96 h-screen bg-yellow-pastel z-30 flex flex-col items-center p-8 transition-all duration-300 ${
+          isOpen ? "-translate-x-0 md:translate-x-0" : "-translate-x-full md:translate-x-full"
         }`}
       >
         <SearchInput
