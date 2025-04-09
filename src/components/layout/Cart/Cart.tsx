@@ -14,6 +14,9 @@ export default function Cart({
 }) {
   const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalCompareAtPrice = useCartStore(
+    (state) => state.totalCompareAtPrice
+  );
   const cartItems = useCartStore((state) => state.items);
 
   const createCartHandler = async () => {
@@ -74,7 +77,7 @@ export default function Cart({
         {regularCartItems.length > 0 ? (
           <>
             <FreeShippingTracker amountMore={100 - totalPrice} />
-            <div className="flex flex-col gap-8 mt-8">
+            <div className="flex flex-col gap-8 mt-8 w-full">
               {regularCartItems.map((item) => (
                 <RegularCartItem key={item.name} item={item} />
               ))}
@@ -95,7 +98,14 @@ export default function Cart({
             disabled={regularCartItems.length === 0}
             onClick={createCartHandler}
           >
-            Checkout - AED {formatPrice(totalPrice?.toString() || "0")}
+            <div className="flex gap-2">
+              Checkout - AED {formatPrice(totalPrice?.toString() || "0")}
+              {totalCompareAtPrice > 0 && (
+                <div className="line-through text-gray-500">
+                  AED {formatPrice(totalCompareAtPrice?.toString())}
+                </div>
+              )}
+            </div>
           </Button>
         </div>
       </div>

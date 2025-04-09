@@ -22,6 +22,9 @@ export type ShopfrontProduct = {
   priceRange: PriceRange;
   tags: string[];
   metafields: Metafield[];
+  variants?: {
+    nodes: { id: string }[];
+  };
 };
 
 export type ProductDetailsType = {

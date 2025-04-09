@@ -20,12 +20,12 @@ export default function ProductDescription({
         <Disclosure
           as="div"
           key={key}
-          className="border-t-1 border-primary"
+          className="border-t-1 border-t-gray-400"
           defaultOpen={false}
         >
           <DisclosureButton className="group flex w-full items-center justify-between">
             <span className="bodyLG text-primary py-4">{key}</span>
-            <ChevronDownIcon className="size-8 group-data-[open]:rotate-180 transition-all" />
+            <ChevronDownIcon className="size-8 text-primary group-data-[open]:rotate-180 transition-all" />
           </DisclosureButton>
           <Transition
               enter="transition ease-out duration-200"

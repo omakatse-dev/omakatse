@@ -7,8 +7,10 @@ import { formatPrice } from "@/utils/Utils";
 
 export default function ItemCard({ product }: { product: ShopfrontProduct }) {
   const id = product.id.split("/").pop();
+  const hasMultipleVariants = (product.variants?.nodes.length || 0) > 1;
+
   return (
-    <Link href={`/shop/${id}`} className="relative">
+    <Link href={`/shop/${id}`} className="relative block">
       {product.tags.length > 0 && (
         <Tag
           className={`absolute top-4 left-4 ${
@@ -28,8 +30,12 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
       <div className="bodyLG text-primary font-semibold mt-4">
         {product.title}
       </div>
+      {hasMultipleVariants && (
+        <div className="text-sm text-gray-500 mt-1">More options available</div>
+      )}
       <div className="bodyMD text-primary mt-2">
-        AED {formatPrice(product.priceRange.minVariantPrice.amount)}
+        {hasMultipleVariants ? "from AED " : "AED "}
+        {formatPrice(product.priceRange.minVariantPrice.amount)}
       </div>
     </Link>
   );

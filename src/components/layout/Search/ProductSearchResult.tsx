@@ -15,6 +15,8 @@ export default function ProductSearchResult({
       <Image
         src={product.featuredImage.url}
         alt={product.title}
+        width={30}
+        height={30}
         className="w-16 aspect-square object-cover"
       />
       <div className="flex flex-col w-full justify-between">
