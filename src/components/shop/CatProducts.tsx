@@ -37,6 +37,8 @@ export default function CatProducts({
     getQueryParam("sort") || SORTING_OPTIONS[0]
   );
 
+  const filterCounts: Record<string, number> = {};
+
   useEffect(() => {
     setQueryParam("tab", selectedTab);
   }, [selectedTab, setQueryParam]);
@@ -85,6 +87,7 @@ export default function CatProducts({
           filters={FILTERS}
           selectedFilter={selectedFilter}
           onChange={setSelectedFilter}
+          counts={filterCounts}
         />
         <ItemsGrid products={filteredProducts} />
       </div>

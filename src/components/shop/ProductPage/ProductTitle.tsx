@@ -21,7 +21,7 @@ export default function ProductTitle({
 }: {
   details: ProductDetailsType;
   className?: string;
-  reviews: Review[];
+  reviews?: Review[];
 }) {
   const defaultOptions = details.options.map((option) => {
     return {
@@ -81,9 +81,9 @@ export default function ProductTitle({
     }
     openCart();
   };
-  const rating =
-    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-  const totalReviews = reviews.length;
+  
+  const rating = reviews?.length ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length : 0;
+  const totalReviews = reviews?.length || 0;
   const fullStars = Math.floor(rating);
   const partialFill = rating % 1;
   return (
