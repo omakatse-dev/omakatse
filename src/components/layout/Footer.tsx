@@ -4,8 +4,7 @@ import Image from "next/image";
 import FacebookIcon from "../../icons/Facebook.svg";
 import InstagramIcon from "../../icons/Instagram.svg";
 import XIcon from "../../icons/X.svg";
-import Button from "../common/Button";
-import {} from "@heroicons/react/24/outline";
+import EmailSubscriptionForm from "../common/EmailSubscriptionForm";
 
 export default function Footer() {
   const icons = [
@@ -180,21 +179,8 @@ export default function Footer() {
             {" "}
             Join our newsletter to stay up to date on features and releases.
           </p>
-          <div className="flex lg:flex-row flex-col gap-4 mb-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="border-b mr-4 py-4 focus:outline-none w-full"
-            />
-            <Button className="w-full lg:w-2/4 bodyButton" variant="primary">
-              Subscribe
-            </Button>
-          </div>
-          <p className="bodyXS">
-            {" "}
-            By subscribing you agree to with our Privacy Policy and provide
-            consent to receive updates from our company.
-          </p>
+
+          <EmailSubscriptionForm />
         </div>
       </div>
       <div className="border-t border-gray-400 flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">
