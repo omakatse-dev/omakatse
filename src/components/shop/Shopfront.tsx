@@ -36,11 +36,6 @@ export default function Shopfront({
     getQueryParam("filter") || FILTERS[0]
   );
 
-  useEffect(() => {
-    setSelectedFilter(FILTERS[0]);
-    setQueryParam("filter", FILTERS[0]);
-  }, [selectedTab]);
-
   const SORTING_OPTIONS = [
     "New Arrivals",
     "Best Selling",
@@ -72,6 +67,12 @@ export default function Shopfront({
         selectedFilter === "All")
     );
   });
+
+  const changeTabHandler = (tab: string) => {
+    setSelectedTab(tab);
+    setQueryParam("filter", FILTERS[0]);
+    setSelectedFilter(FILTERS[0]);
+  };
 
   const petImageSrc =
     petType === "Cat" ? "/assets/CatIcon.svg" : "/assets/DogIcon.svg";
@@ -121,13 +122,13 @@ export default function Shopfront({
         <Tabs
           tabs={TABS}
           selectedTab={selectedTab}
-          onChange={setSelectedTab}
+          onChange={changeTabHandler}
           className="hidden sm:flex w-fit self-center mt-10 bg-gray-200"
         />
         <MobileTabs
           tabs={TABS}
           selectedTab={selectedTab}
-          onChange={setSelectedTab}
+          onChange={changeTabHandler}
           className="sm:hidden"
         />
         <SortDropDown
