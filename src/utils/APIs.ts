@@ -536,13 +536,8 @@ export const createCustomer = async (email: string) => {
       }
     }
   `;
-
-  console.log("Sending mutation to Shopify:", mutation);
-
-  // Make sure adminClient is properly initialized before using
   const response = await adminClient.request(mutation);
   console.log("Shopify GraphQL Response:", response.errors?.graphQLErrors);
-  
   const customerCreateResult = response?.data?.customerCreate;
   console.log("Customer Creation Result:", customerCreateResult);
 
