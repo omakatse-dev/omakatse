@@ -24,7 +24,7 @@ export default function SortDropDown({
       Sort By:
       <Listbox value={selectedOption} onChange={onChange}>
         {({ open }) => (
-          <>
+          <div>
             <ListboxButton className="rounded-full px-4 py-3 w-56 sm:w-64 bg-white cursor-pointer flex flex-row justify-between items-center border border-primary">
               {selectedOption}
               <ChevronDownIcon
@@ -47,7 +47,7 @@ export default function SortDropDown({
                 </ListboxOption>
               ))}
             </ListboxOptions>
-          </>
+          </div>
         )}
       </Listbox>
     </div>

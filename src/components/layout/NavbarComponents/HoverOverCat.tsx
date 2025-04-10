@@ -6,8 +6,8 @@ import React from "react";
 const HoverOverCat = () => {
   const dropdownData = {
     Treats: [
-      { name: "Dry", url: "/shop/cat-products/" },
-      { name: "Crunchy", url: "/shop/cat-products/" },
+      { name: "Dry", url: "/shop/cat-products?sort=New+Arrivals&filter=Dry&tab=Treats" },
+      { name: "Crunchy", url: "/shop/cat-products?sort=New+Arrivals&filter=Crunchy" },
       { name: "Wet", url: "/shop/cat-products/" },
       { name: "Soft & Chewy", url: "/shop/cat-products/" },
       { name: "Freeze-dried", url: "/shop/cat-products/" },
@@ -35,12 +35,12 @@ const HoverOverCat = () => {
             <ul className="flex flex-col gap-4">
               {links.map((link) => (
                 <li key={link.name}>
-                  <Link
+                  <a
                     href={link.url}
                     className="text-gray-800"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
