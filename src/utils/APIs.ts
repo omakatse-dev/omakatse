@@ -513,3 +513,42 @@ export const getSubscriptionPlan = async () => {
   console.log(res.errors);
   return res.data;
 };
+
+export const createCustomer = async (email: string) => {
+  
+  const mutation = `
+    mutation {
+      customerCreate(input: { 
+          email: "${email}"
+          emailMarketingConsent: {
+            marketingOptInLevel: SINGLE_OPT_IN,
+            marketingState: SUBSCRIBED
+          },
+      }) {
+        customer {
+          id
+          email
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+  const response = await adminClient.request(mutation);
+  console.log("Shopify GraphQL Response:", response.errors?.graphQLErrors);
+  const customerCreateResult = response?.data?.customerCreate;
+  console.log("Customer Creation Result:", customerCreateResult);
+
+  if (customerCreateResult && customerCreateResult.customer) {
+    return {
+      success: true,
+      customer: customerCreateResult.customer
+    };
+  } else {
+    throw new Error(
+      customerCreateResult?.userErrors?.[0]?.message || "Customer creation failed"
+    );
+  }
+};

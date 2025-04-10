@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function Tabs({
   tabs,
@@ -12,6 +13,40 @@ export default function Tabs({
   className?: string;
 }) {
   const activeStyles = "bg-yellow border border-primary mb-1";
+  const renderTabIcon = (tab: string) => {
+    if (tab === "Treats") {
+      return (
+        <Image
+          src="/assets/TreatsIcon.svg"
+          alt="Treats Icon"
+          width={20}
+          height={20}
+          className="inline-block mr-2 h-5 w-5"
+        />
+      );
+    } else if (tab === "Care Products") {
+      return (
+        <Image
+          src="/assets/CareProductsIcon.svg"
+          alt="Care Products Icon"
+          width={20}
+          height={20}
+          className="inline-block mr-2 h-5 w-5"
+        />
+      );
+    } else if (tab === "Accessories") {
+      return (
+        <Image
+          src="/assets/AccessoriesIcon.svg"
+          alt="Accessories Icon"
+          width={20}
+          height={20}
+          className="inline-block mr-2 h-5 w-5"
+        />
+      );
+    }
+    return null;
+  };
   return (
     <div
       className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}
@@ -33,7 +68,10 @@ export default function Tabs({
               : {}
           }
         >
-          {tab}
+          <div className="flex items-center">
+            {renderTabIcon(tab)}
+            <span>{tab}</span>
+          </div>
         </div>
       ))}
     </div>

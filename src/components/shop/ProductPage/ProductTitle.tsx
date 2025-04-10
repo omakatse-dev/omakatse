@@ -1,9 +1,7 @@
 "use client";
 
 import { ProductDetailsType, Review } from "@/types/Types";
-import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
-
 import Button from "@/components/common/Button";
 import Tag from "../../common/Tag";
 import Image from "next/image";
@@ -14,32 +12,37 @@ import { formatPrice } from "@/utils/Utils";
 import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
 
+interface Option {
+  name: string;
+  value: string;
+}
+
+interface ProductTitleProps {
+  details: ProductDetailsType;
+  className?: string;
+  reviews?: Review[];
+  selectedOptions: Option[];
+  setSelectedOptions: (options: Option[]) => void;
+  quantity: number;
+  setQuantity: (quantity: number) => void;
+}
+
 export default function ProductTitle({
   details,
   className,
   reviews,
-}: {
-  details: ProductDetailsType;
-  className?: string;
-  reviews?: Review[];
-}) {
-  const defaultOptions = details.options.map((option) => {
-    return {
-      name: option.name,
-      value: option.optionValues[0].name,
-    };
-  });
-
+  selectedOptions,
+  setSelectedOptions,
+  quantity,
+  setQuantity,
+}:
+  ProductTitleProps){
   const { openCart } = useUIStore();
 
-  //an array of selected options
-  const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
-  const [quantity, setQuantity] = useState(1);
-
-  const handleSelectOption = (option: number, value: string) => {
+  const handleSelectOption = (optionIndex: number, value: string) => {
     const newSelectedOptions = [...selectedOptions];
-    newSelectedOptions[option] = {
-      name: newSelectedOptions[option].name,
+    newSelectedOptions[optionIndex] = {
+      name: newSelectedOptions[optionIndex].name,
       value,
     };
     setSelectedOptions(newSelectedOptions);
