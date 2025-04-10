@@ -35,12 +35,12 @@ const HoverOverCat = () => {
             <ul className="flex flex-col gap-4">
               {links.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <Link
                     href={link.url}
                     className="text-gray-800"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
