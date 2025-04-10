@@ -42,7 +42,6 @@ export default function EmailSubscriptionForm() {
         <>
           <form onSubmit={handleSubmit} className="flex lg:flex-row flex-col gap-4">
             <input
-              type="email" // Added type="email" for better browser validation
               value={email}
               placeholder="Enter your email"
               className="border-b mr-4 py-4 focus:outline-none w-full"
