@@ -61,7 +61,10 @@ export default function AddToCartSection({
   return (
     <div className="flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between w-full md:px-12 md:py-4">
       <div className="bodyMD">{details.title}</div>
-      <Button className="flex items-center w-full md:w-auto" onClick={addToCartHandler}>
+      <Button
+        className="flex items-center w-full md:w-auto"
+        onClick={addToCartHandler}
+      >
         Add to Cart - AED{" "}
         {formatPrice(
           (Number(selectedVariant?.price.amount) * quantity).toString()
