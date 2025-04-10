@@ -1,39 +1,34 @@
 "use client";
 import React, { useState } from "react";
 import Button from "./Button";
+import { createCustomer } from "@/utils/APIs";
 
 export default function EmailSubscriptionForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      setMessage("Please enter a valid email.");
+      setMessage("Please enter a valid email");
       return;
     }
-
+    setIsLoading(true);
+    setMessage("");
     try {
-      // Send the email to Shopify API endpoint (to be created below)
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-      console.log("API Response Status:", res.status);
-
-      const data = await res.json();
-      console.log("API Response Data:", data);
-      if (data.success) {
-        setMessage("Thank you for subscribing!");
+      const result = await createCustomer(email);
+      console.log(result);
+      setMessage("Thank you for subscribing!");
+      setEmail(""); // Clear the input after successful submission
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage(error.message || "Failed to subscribe. Please try again.");
       } else {
-        setMessage("Subscription failed. Please try again.");
+        setMessage("Failed to subscribe. Please try again.");
       }
-    } catch {
-      setMessage("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,7 +36,6 @@ export default function EmailSubscriptionForm() {
     <div>
       <form onSubmit={handleSubmit} className="flex lg:flex-row flex-col gap-4">
         <input
-          type="email"
           value={email}
           placeholder="Enter your email"
           className="border-b mr-4 py-4 focus:outline-none w-full"
@@ -52,13 +46,13 @@ export default function EmailSubscriptionForm() {
           className="w-full lg:w-2/4 bodyButton"
           variant="primary"
           type="submit"
+          disabled={isLoading}
         >
-          Subscribe
+          {isLoading ? "Subscribing..." : "Subscribe"}
         </Button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="mt-2">{message}</p>}
       <p className="bodyXS mt-4">
-        {" "}
         By subscribing you agree to with our Privacy Policy and provide consent
         to receive updates from our company.
       </p>
