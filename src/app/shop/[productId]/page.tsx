@@ -1,10 +1,8 @@
 export const runtime = "nodejs";
 
 import ProductDetails from "@/components/shop/ProductPage/ProductDetails";
-import OtherProducts from "@/components/shop/ProductPage/OtherProducts";
 import { getProductDetailsByID } from "@/utils/APIs";
 import { getReviewByProductID } from "@/utils/APIs";
-import ReviewSection from "@/components/shop/ProductPage/ReviewsSection";
 
 export default async function ProductPage({
   params,
@@ -20,9 +18,7 @@ export default async function ProductPage({
   const reviews = await getReviewByProductID(productId);
   return (
     <div className="w-screen flex flex-col items-center">
-      <ProductDetails product={product} reviews={reviews.reviews}/>
-      <ReviewSection reviews={reviews.reviews} />
-      <OtherProducts products={relatedProducts} />
+      <ProductDetails product={product} reviews={reviews.reviews} relatedProducts={relatedProducts}/>
     </div>
   );
 }
