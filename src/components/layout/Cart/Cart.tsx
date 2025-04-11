@@ -38,7 +38,6 @@ export default function Cart({
       merchandiseId: item.id,
       quantity: item.quantity,
       sellingPlanId: "gid://shopify/SellingPlan/10819797251",
-      sellingPlanId: "gid://shopify/SellingPlan/10819797251",
     }));
     console.log(formattedSubscriptionItems);
     try {

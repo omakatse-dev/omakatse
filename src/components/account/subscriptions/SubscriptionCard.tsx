@@ -6,6 +6,7 @@ import Pets from "./Pets";
 import { SubscriptionContract } from "@/types/Types";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
+import Tag from "@/components/common/Tag";
 export type PetType = z.infer<typeof petDetailsSchema>;
 
 export default function SubscriptionCard({
@@ -19,8 +20,11 @@ export default function SubscriptionCard({
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
 
   return (
-    <Card className="bg-white flex flex-col gap-8">
-      <Pets dogs={dogs} cats={cats} />
+    <Card className="bg-white flex flex-col gap-6 md:gap-8">
+      <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
+        <Pets dogs={dogs} cats={cats} />
+        <Tag className="h-fit w-fit bg-yellow">{subscription.status}</Tag>
+      </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
           Box {subscription.number} out of {subscription.planDuration}
