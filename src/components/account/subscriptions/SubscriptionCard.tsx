@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import ProgressBar from "@/components/subscription/ProgressBar";
@@ -7,6 +9,8 @@ import { SubscriptionContract } from "@/types/Types";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import Tag from "@/components/common/Tag";
+import { useRouter } from "next/navigation";
+
 export type PetType = z.infer<typeof petDetailsSchema>;
 
 export default function SubscriptionCard({
@@ -18,6 +22,9 @@ export default function SubscriptionCard({
 
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
+  const contractId = subscription.contractId;
+
+  const router = useRouter();
 
   return (
     <Card className="bg-white flex flex-col gap-6 md:gap-8">
@@ -83,7 +90,12 @@ export default function SubscriptionCard({
           </div>
         </div>
       </div>
-      <Button className="w-full md:w-fit self-center">Cancel auto-renew</Button>
+      <Button
+        onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
+        className="w-full md:w-fit self-center"
+      >
+        Cancel auto-renew
+      </Button>
       <ul className="list-disc list-inside bodySM text-gray-500">
         <li>
           Your subscription will automatically renew after your current billing
