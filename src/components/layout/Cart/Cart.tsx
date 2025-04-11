@@ -36,12 +36,10 @@ export default function Cart({
       quantity: item.quantity,
       sellingPlanId: "gid://shopify/SellingPlan/10819797251",
     }));
-    console.log(formattedSubscriptionItems);
     try {
       const res = await createCart(
         formattedRegularItems.concat(formattedSubscriptionItems)
       );
-      console.log(res);
       localStorage.setItem("cartId", res.id);
       window.location.href = res.checkoutUrl;
     } catch (error) {

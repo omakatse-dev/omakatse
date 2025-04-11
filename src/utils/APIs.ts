@@ -241,7 +241,6 @@ export const getProductDetailsByID = async (productID: string) => {
 export const createCart = async (
   lines: { merchandiseId: string; quantity: number }[]
 ) => {
-  console.log("lines", lines);
   const cartQuery = `
   mutation createCart($lines: [CartLineInput!]) {
     cartCreate(
