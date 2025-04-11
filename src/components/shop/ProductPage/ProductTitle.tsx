@@ -1,7 +1,8 @@
 "use client";
 
-import { ProductDetailsType } from "@/types/Types";
+import { ProductDetailsType, Review } from "@/types/Types";
 import { useState } from "react";
+import { StarIcon } from "@heroicons/react/20/solid";
 
 import Button from "@/components/common/Button";
 import Tag from "../../common/Tag";
@@ -16,9 +17,11 @@ import { useUIStore } from "@/stores/uiStore";
 export default function ProductTitle({
   details,
   className,
+  reviews,
 }: {
   details: ProductDetailsType;
   className?: string;
+  reviews?: Review[];
 }) {
   const defaultOptions = details.options.map((option) => {
     return {
@@ -78,7 +81,11 @@ export default function ProductTitle({
     }
     openCart();
   };
-
+  
+  const rating = reviews?.length ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length : 0;
+  const totalReviews = reviews?.length || 0;
+  const fullStars = Math.floor(rating);
+  const partialFill = rating % 1;
   return (
     <div className={`flex flex-col px-8 md:p-0 md:w-1/2 ${className}`}>
       <div className="flex flex-row justify-between mb-2">
@@ -112,8 +119,33 @@ export default function ProductTitle({
               </div>
             )}
           </div>
-
-          <b className="bodySM font-light"> (4.5 stars) 10 reviews</b>
+          {totalReviews > 0 && (
+            <div className="flex gap-2">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, index) => (
+                  <div key={index} className="relative">
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        index < fullStars ? "text-yellow" : "text-gray-200"
+                      }`}
+                    />
+                    {index === fullStars && partialFill > 0 && (
+                      <div
+                        className="absolute inset-0 overflow-hidden"
+                        style={{ width: `${partialFill * 100}%` }}
+                      >
+                        <StarIcon className="w-5 h-5 text-yellow" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <b className="bodySM font-light">
+                {" "}
+                ({rating} stars) • {totalReviews} reviews
+              </b>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-5">
@@ -154,7 +186,7 @@ export default function ProductTitle({
               setCount={setQuantity}
             />
             <Button
-              className="flex items-center h-16 w-full"
+              className="flex items-center w-full"
               onClick={addToCartHandler}
             >
               Add to Cart - AED{" "}

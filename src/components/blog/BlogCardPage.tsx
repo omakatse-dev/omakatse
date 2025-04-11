@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
-import blogData from "../../data/blogData.json";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChainModifiers, EntryFields, Entry } from "contentful";
+import Image from "next/image";
 
 export type BlogPostType = {
   contentTypeId: "blogPost";
@@ -20,6 +20,7 @@ export type BlogPostType = {
     imageHeader: EntryFields.AssetLink;
     description: EntryFields.RichText;
     summary: EntryFields.Text;
+    slug: EntryFields.Text;
   };
 };
 
@@ -29,18 +30,15 @@ export default function Page({
   blogs: Entry<BlogPostType, ChainModifiers, string>[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
   const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  console.log(blogs);
 
   const handleResize = () => {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1200) {
       setBlogsPerPage(9);
     } else {
       setBlogsPerPage(3);
     }
-    setSearchQuery("");
   };
 
   useEffect(() => {
@@ -53,17 +51,18 @@ export default function Page({
     };
   }, []);
 
-  // Get unique categories from blogData, adding "All" as a category
-  const categories = ["All", ...new Set(blogData.map((blog) => blog.category))];
+  // Get unique categories from contentful, adding "All" as a category
+  const categories = [
+    "All",
+    ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString())),
+  ];
 
   // Filter blogData based on the search query and selected category
-  const filteredBlogs = blogData.filter((blog) => {
-    const matchesSearchQuery = blog.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+  const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
-      selectedCategory === "All" || blog.category === selectedCategory;
-    return matchesSearchQuery && matchesCategory;
+      selectedCategory === "All" ||
+      blog.fields.categoryTag.toString() === selectedCategory;
+    return matchesCategory;
   });
 
   // Calculate the index of the first and last blog on the current page
@@ -81,22 +80,35 @@ export default function Page({
 
   return (
     <div className="w-full">
-      <div className="bg-gray-500 h-120 rounded-4xl mb-8" />
+      <div className="relative">
+        <Image
+          src="/assets/OmakatseBlog.svg"
+          alt="Blog Image"
+          width={1340}
+          height={190}
+          className="rounded-3xl mb-8"
+        />
+        <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl lg:text-7xl font-bold w-full text-center">
+          Omakatse&apos;s Blog
+        </div>
+      </div>
       <div className="flex flex-row justify-center">
         <div className="hidden">Category selection</div>
         <div className="w-full">
           <div className="flex flex-col md:flex-row md:gap-32 w-full">
             {/* Category Selector */}
-            <SelectCategory
-              categories={categories}
-              onCategorySelect={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
+            <div className="sticky top-28">
+              <SelectCategory
+                categories={categories}
+                onCategorySelect={setSelectedCategory}
+                selectedCategory={selectedCategory}
+              />
+            </div>
 
             {/* Blog Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
               {currentBlogs.map((blog) => (
-                <BlogCard key={blog.id} blogData={blog} />
+                <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
               ))}
               {currentBlogs.length === 0 && <div>no blogs found</div>}
             </div>
@@ -109,7 +121,11 @@ export default function Page({
               disabled={currentPage === 1}
               className="px-4 py-2"
             >
-              <ChevronLeftIcon className="h-4" />
+              <ChevronLeftIcon
+                className={`h-4 ${
+                  currentPage === 1 ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
 
             {/* Display page numbers */}
@@ -119,7 +135,7 @@ export default function Page({
                 onClick={() => handlePageChange(index + 1)}
                 className={`px-2 py-2 mx-2 rounded-md ${
                   currentPage === index + 1
-                    ? "text-black font-bold"
+                    ? "text-primary font-bold"
                     : "text-gray-800"
                 }`}
               >
@@ -132,7 +148,11 @@ export default function Page({
               disabled={currentPage === totalPages}
               className="px-4 py-2"
             >
-              <ChevronRightIcon className="h-4" />
+              <ChevronRightIcon
+                className={`h-4 ${
+                  currentPage === totalPages ? "text-gray-200" : "text-primary"
+                }`}
+              />
             </button>
           </div>
         </div>

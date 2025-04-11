@@ -26,7 +26,7 @@ export default function Footer() {
   const catLinks = [
     {
       name: "Treats",
-      url: "/shop",
+      url: "/shop/cat-products",
     },
     {
       name: "Care Products",
@@ -41,7 +41,7 @@ export default function Footer() {
   const dogLinks = [
     {
       name: "Treats",
-      url: "/shop",
+      url: "/shop/dog-products",
     },
     {
       name: "Care Products",
@@ -74,12 +74,12 @@ export default function Footer() {
       url: "/about",
     },
     {
-      name: "Terms of Service",
-      url: "/about",
+      name: "Terms and Conditions",
+      url: "/terms-and-conditions",
     },
     {
       name: "FAQs",
-      url: "/about",
+      url: "/faqs",
     },
     {
       name: "Contact Us",
@@ -88,8 +88,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="bg-black w-screen px-8 py-10 lg:px-12 lg:py-20 flex flex-col gap-15">
-
+    <div className="bg-primary w-screen px-8 py-10 lg:px-12 lg:py-20 flex flex-col gap-15">
       <div className="flex flex-col lg:flex-row gap-10 lg:justify-between items-center">
         <Link href="/" className="flex">
           <Image
@@ -116,50 +115,68 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-10">
-        <div className="">
-          <p className="bodyLG text-gray-500 mb-4"> Cat </p>
-          <div className="bodySM text-white flex flex-col text-left">
-            {catLinks.map((link) => (
-              <Link href={link.url} key={link.name} className="py-2">
-                {link.name}
-              </Link>
-            ))}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="">
+            <p className="bodyLG text-gray-500 mb-4"> Cat </p>
+            <div className="bodySM text-white flex flex-col text-left">
+              {catLinks.map((link) => (
+                <Link
+                  href={link.url}
+                  key={link.name}
+                  className="py-2 text-sm lg:text-base"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="">
-          <p className="bodyLG text-gray-500 mb-4"> Dog </p>
-          <div className="bodySM text-white flex flex-col text-left">
-            {dogLinks.map((link) => (
-              <Link href={link.url} key={link.name} className="py-2">
-                {link.name}
-              </Link>
-            ))}
+          <div className="">
+            <p className="bodyLG text-gray-500 mb-4"> Dog </p>
+            <div className="bodySM text-white flex flex-col text-left">
+              {dogLinks.map((link) => (
+                <Link
+                  href={link.url}
+                  key={link.name}
+                  className="py-2 text-sm lg:text-base"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="">
-          <p className="bodyLG text-gray-500 mb-4"> Omakatse </p>
-          <div className="bodySM text-white flex flex-col text-left">
-            {omakatseLinks.map((link) => (
-              <Link href={link.url} key={link.name} className="py-2">
-                {link.name}
-              </Link>
-            ))}
+          <div className="">
+            <p className="bodyLG text-gray-500 mb-4"> Omakatse </p>
+            <div className="bodySM text-white flex flex-col text-left">
+              {omakatseLinks.map((link) => (
+                <Link
+                  href={link.url}
+                  key={link.name}
+                  className="py-2 text-sm lg:text-base"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="">
-          <p className="bodyLG text-gray-500 mb-4"> Support </p>
-          <div className="bodySM text-white flex flex-col text-left">
-            {supportlinks.map((link) => (
-              <Link href={link.url} key={link.name} className="py-2">
-                {link.name}
-              </Link>
-            ))}
+          <div className="">
+            <p className="bodyLG text-gray-500 mb-4"> Support </p>
+            <div className="bodySM text-white flex flex-col text-left">
+              {supportlinks.map((link) => (
+                <Link
+                  href={link.url}
+                  key={link.name}
+                  className="py-2 text-sm lg:text-base"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="text-white lg:pl-32">
           <p className="bodyMD mb-4 font-semibold"> Subscribe </p>
-          <p className="bodyMD mb-6">
+          <p className="bodyMD mb-6 text-sm lg:text-base">
             {" "}
             Join our newsletter to stay up to date on features and releases.
           </p>
@@ -169,7 +186,9 @@ export default function Footer() {
               placeholder="Enter your email"
               className="border-b mr-4 py-4 focus:outline-none w-full"
             />
-            <Button className="w-full" variant="primary">Subscribe</Button>
+            <Button className="w-full lg:w-2/4 bodyButton" variant="primary">
+              Subscribe
+            </Button>
           </div>
           <p className="bodyXS">
             {" "}
@@ -177,10 +196,8 @@ export default function Footer() {
             consent to receive updates from our company.
           </p>
         </div>
-
       </div>
-
-      <div className="border-t border-white flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">
+      <div className="border-t border-gray-400 flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">
         <p>© 2025 Omaktse. All rights reserved.</p>
       </div>
     </div>

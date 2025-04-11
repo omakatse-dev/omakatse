@@ -14,6 +14,9 @@ export default function Cart({
 }) {
   const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalCompareAtPrice = useCartStore(
+    (state) => state.totalCompareAtPrice
+  );
   const cartItems = useCartStore((state) => state.items);
 
   const createCartHandler = async () => {
@@ -35,7 +38,9 @@ export default function Cart({
       merchandiseId: item.id,
       quantity: item.quantity,
       sellingPlanId: "gid://shopify/SellingPlan/10819797251",
+      sellingPlanId: "gid://shopify/SellingPlan/10819797251",
     }));
+    console.log(formattedSubscriptionItems);
     try {
       const res = await createCart(
         formattedRegularItems.concat(formattedSubscriptionItems)
@@ -50,7 +55,7 @@ export default function Cart({
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/50 z-20 ${
+        className={`fixed inset-0 bg-primary/50 z-20 ${
           !isOpen ? "hidden" : "block"
         }`}
         onClick={handleClose}
@@ -72,7 +77,7 @@ export default function Cart({
         {regularCartItems.length > 0 ? (
           <>
             <FreeShippingTracker amountMore={100 - totalPrice} />
-            <div className="flex flex-col gap-8 mt-8">
+            <div className="flex flex-col gap-8 mt-8 w-full">
               {regularCartItems.map((item) => (
                 <RegularCartItem key={item.name} item={item} />
               ))}
@@ -93,7 +98,14 @@ export default function Cart({
             disabled={regularCartItems.length === 0}
             onClick={createCartHandler}
           >
-            Checkout - AED {formatPrice(totalPrice?.toString() || "0")}
+            <div className="flex gap-2">
+              Checkout - AED {formatPrice(totalPrice?.toString() || "0")}
+              {totalCompareAtPrice > 0 && (
+                <div className="line-through text-gray-500">
+                  AED {formatPrice(totalCompareAtPrice?.toString())}
+                </div>
+              )}
+            </div>
           </Button>
         </div>
       </div>

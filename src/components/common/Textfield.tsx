@@ -10,7 +10,7 @@ const Textfield = forwardRef<
   return (
     <Textarea
       ref={ref}
-      className={`resize-none focus:outline-black bg-white border-primary rounded-2xl mt-2 py-4 px-5 ${className} ${
+      className={`resize-none focus:outline-primary bg-white border-primary rounded-2xl mt-2 py-4 px-5 ${className} ${
         error ? "border-red" : ""
       }`}
       placeholder={placeholder}

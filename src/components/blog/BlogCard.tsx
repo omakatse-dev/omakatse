@@ -1,37 +1,52 @@
-import React from 'react';
-import Tag from '../common/Tag';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+import React from "react";
+import Tag from "../common/Tag";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { EntryFields, Entry } from "contentful";
+
+export type BlogPostType = {
+  contentTypeId: "blogPost";
+  fields: {
+    blogId: EntryFields.Integer;
+    categoryTag: EntryFields.Symbol;
+    title: EntryFields.Text;
+    editedDate: EntryFields.Date;
+    postedDate: EntryFields.Date;
+    readDuration: EntryFields.Integer;
+    author: EntryFields.Text;
+    imageHeader: EntryFields.AssetLink;
+    description: EntryFields.RichText;
+    summary: EntryFields.Text;
+    slug: EntryFields.Text;
+  };
+};
 
 interface BlogCardProps {
-  blogData: {
-    id: string;
-    category: string;
-    duration: string;
-    title: string;
-    description: string;
-  };
+  blog: Entry<BlogPostType>;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ blogData }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
+  if (!blog || !blog.fields) return null;
   return (
-    <div className="rounded-xl border-1 border-gray-400 flex flex-col p-8">
+    <div className="rounded-xl md:rounded-[1.25rem] border-1 border-gray-400 flex flex-col p-6 md:p-8">
       <div className="flex flex-row gap-4 mb-4">
-        <Tag>{blogData.category}</Tag>
-        <p className="bodySM text-gray-500 flex items-center">{blogData.duration} min read</p>
+        <Tag>{blog.fields.categoryTag.toString()}</Tag>
+        <p className="bodySM text-gray-500 flex items-center">
+          {blog.fields.readDuration.toString()} min read
+        </p>
       </div>
-      <h4 className="mb-2">{blogData.title}</h4>
-      <p className="bodyMD mb-6">{blogData.description}</p>
+      <h4 className="mb-2 text-primary">{blog.fields.title.toString()}</h4>
+      <p className="bodyMD mb-6 line-clamp-3 text-gray-800">{blog.fields.summary.toString()}</p>
       <div>
-        <Link href={`/blog/${blogData.id}`} passHref>
-          <button className="flex flex-row gap-2 items-center">
-            <p className="bodyButton">Read more</p>
+        <Link href={`/blog/${blog.fields.slug}`} passHref>
+          <div className="inline-flex flex-row gap-2 items-center cursor-pointer bodyButton text-primary">
+            Read more
             <ChevronRightIcon className="h-6" />
-          </button>
+          </div>
         </Link>
       </div>
     </div>
   );
-}
+};
 
 export default BlogCard;

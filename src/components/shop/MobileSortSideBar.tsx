@@ -17,7 +17,7 @@ export default function MobileSortSideBar({
   return (
     <>
       <div
-        className={`w-screen h-screen bg-black/50 absolute z-20 ${
+        className={`w-screen h-screen bg-primary/50 absolute z-20 ${
           !isOpen ? "hidden" : "block"
         }`}
         onClick={handleClose}

@@ -30,14 +30,14 @@ export default function CatProducts({
   const SORTING_OPTIONS = [
     "New Arrivals",
     "Best Selling",
-    "On Sale",
-    "In Stock",
     "Price: Low to High",
     "Price: High to Low",
   ];
   const [selectedSortingOption, setSelectedSortingOption] = useState(
     getQueryParam("sort") || SORTING_OPTIONS[0]
   );
+
+  const filterCounts: Record<string, number> = {};
 
   useEffect(() => {
     setQueryParam("tab", selectedTab);
@@ -87,6 +87,7 @@ export default function CatProducts({
           filters={FILTERS}
           selectedFilter={selectedFilter}
           onChange={setSelectedFilter}
+          counts={filterCounts}
         />
         <ItemsGrid products={filteredProducts} />
       </div>

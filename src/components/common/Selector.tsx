@@ -25,11 +25,11 @@ function Selector({
     <div className={className}>
       <Listbox value={value} onChange={onChange}>
         <ListboxButton
-          className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center ${value ? "text-black" : "text-gray-500"
+          className={`rounded-full px-4 py-3 w-full bg-white cursor-pointer flex flex-row justify-between items-center ${value ? "text-primary" : "text-gray-500"
             } ${buttonStyles}`}
         >
           {value ? value.name : placeholder}
-          <ChevronDownIcon className="w-6 text-black" />
+          <ChevronDownIcon className="w-6 text-primary" />
         </ListboxButton>
         <ListboxOptions
           className="rounded-2xl border-primary bg-white z-20 w-[var(--button-width)]"

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import FilterTab from "@/components/shop/FilterTab";
 import SortDropDown from "@/components/shop/SortDropDown";
 import Tabs from "@/components/common/Tabs";
@@ -38,8 +39,6 @@ export default function Shopfront({
   const SORTING_OPTIONS = [
     "New Arrivals",
     "Best Selling",
-    "On Sale",
-    "In Stock",
     "Price: Low to High",
     "Price: High to Low",
   ];
@@ -75,6 +74,27 @@ export default function Shopfront({
     setSelectedFilter(FILTERS[0]);
   };
 
+  const petImageSrc =
+    petType === "Cat" ? "/assets/CatIcon.svg" : "/assets/DogIcon.svg";
+
+  const filterCounts: Record<string, number> = {};
+
+  FILTERS.forEach((filter) => {
+    const count = products.filter((product) => {
+      const category = product.metafields.find(
+        (m) => m.key === "category"
+      )?.value;
+      const subCategory = product.metafields.find(
+        (m) => m.key === "sub_category"
+      )?.value;
+
+      return (
+        category === selectedTab && (subCategory === filter || filter === "All")
+      );
+    }).length;
+
+    filterCounts[filter] = count;
+  });
   return (
     <>
       <div className="mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
@@ -83,11 +103,21 @@ export default function Shopfront({
             <h2>
               Shop {petType} {selectedTab}
             </h2>
-            <div className="mt-4 bodyMD">
+            <div className="mt-4 bodyMD flex gap-2 items-center">
+              <div className="rounded-full bg-white w-10 h-10 p-2 flex flex-row sm:hidden">
+                <Image
+                  src={petImageSrc}
+                  alt="Pet Icon"
+                  width={32}
+                  height={32}
+                />
+              </div>
               Showing {filteredProducts.length} product(s)
             </div>
           </div>
-          <div className="bg-amber-500 w-12 h-12 hidden sm:flex" />
+          <div className="rounded-full bg-white w-16 h-16 p-4 hidden sm:flex">
+            <Image src={petImageSrc} alt="Pet Icon" width={50} height={50} />
+          </div>
         </div>
         <Tabs
           tabs={TABS}
@@ -127,6 +157,7 @@ export default function Shopfront({
             selectedFilter={selectedFilter}
             onChange={setSelectedFilter}
             className="hidden sm:flex"
+            counts={filterCounts}
           />
           <ItemsGrid products={filteredProducts} />
         </div>

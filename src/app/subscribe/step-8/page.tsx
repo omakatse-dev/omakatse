@@ -38,11 +38,11 @@ export default function SubscriptionStepEightPage() {
         <h3>Review your pets&apos; details</h3>
       </div>
       <div className="grid grid-cols-2 gap-8 w-full max-w-3xl">
-        {cats.map((cat) => (
-          <PetDetailsCard key={cat.name} details={cat} />
+        {cats.map((cat, idx) => (
+          <PetDetailsCard key={cat.name} details={cat} idx={idx} />
         ))}
-        {dogs.map((dog) => (
-          <PetDetailsCard key={dog.name} details={dog} />
+        {dogs.map((dog, idx) => (
+          <PetDetailsCard key={dog.name} details={dog} idx={idx} />
         ))}
       </div>
 

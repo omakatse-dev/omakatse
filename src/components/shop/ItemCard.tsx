@@ -3,11 +3,14 @@ import React from "react";
 import Tag from "../common/Tag";
 import Link from "next/link";
 import Image from "next/image";
+import { formatPrice } from "@/utils/Utils";
 
 export default function ItemCard({ product }: { product: ShopfrontProduct }) {
   const id = product.id.split("/").pop();
+  const hasMultipleVariants = (product.variants?.nodes.length || 0) > 1;
+
   return (
-    <Link href={`/shop/${id}`} className="relative">
+    <Link href={`/shop/${id}`} className="relative block">
       {product.tags.length > 0 && (
         <Tag
           className={`absolute top-4 left-4 ${
@@ -24,11 +27,15 @@ export default function ItemCard({ product }: { product: ShopfrontProduct }) {
         width={100}
         height={100}
       />
-      <div className="bodyLG text-black font-semibold mt-4">
+      <div className="bodyLG text-primary font-semibold mt-4">
         {product.title}
       </div>
-      <div className="bodyMD text-black mt-2">
-        AED {product.priceRange.minVariantPrice.amount}
+      {hasMultipleVariants && (
+        <div className="text-sm text-gray-500 mt-1">More options available</div>
+      )}
+      <div className="bodyMD text-primary mt-2">
+        {hasMultipleVariants ? "from AED " : "AED "}
+        {formatPrice(product.priceRange.minVariantPrice.amount)}
       </div>
     </Link>
   );

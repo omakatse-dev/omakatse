@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Modal from "react-modal";
 import Image from "next/image";
 import {
@@ -26,22 +26,43 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
 }) => {
   const [zoom, setZoom] = useState(1); // 1 = normal, 2 = zoomed
   const [transformOrigin, setTransformOrigin] = useState("center center");
+  const [dragging, setDragging] = useState(false);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLDivElement | null>(null);
+  const [mouseMoved, setMouseMoved] = useState(false);
+  const DRAG_THRESHOLD = 5;
+  const limit = (value: number, min: number, max: number) => {
+    return Math.max(min, Math.min(value, max));
+  };
+  
+  // Reset offset and transform origin when changing images
+  useEffect(() => {
+    setOffset({ x: 0, y: 0 });
+    setTransformOrigin("center center");
+    setZoom(1);
+  }, [selectedIndex]);
 
   const handleImageClick = (event: React.MouseEvent) => {
-    if (!imageRef.current) return;
-
+    if (!imageRef.current || mouseMoved) {
+      return; 
+    }
+  
     const { left, top, width, height } =
       imageRef.current.getBoundingClientRect();
     const clickX = event.clientX - left;
     const clickY = event.clientY - top;
-
-    // Convert to percentage for `transform-origin`
+  
     const percentX = (clickX / width) * 100;
     const percentY = (clickY / height) * 100;
-
-    setTransformOrigin(`${percentX}% ${percentY}%`);
-    setZoom((prevZoom) => (prevZoom === 1 ? 3 : 1));
+  
+    if (zoom === 1) {
+      setTransformOrigin(`${percentX}% ${percentY}%`);
+      setZoom(2);
+    } else {
+      setZoom(1);
+      setOffset({ x: 0, y: 0 });
+    }
   };
 
   const nextImage = () => {
@@ -49,59 +70,114 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
   };
 
   const prevImage = () => {
-    setSelectedIndex(selectedIndex === 0 ? images.length - 1 : selectedIndex - 1);
+    setSelectedIndex(
+      selectedIndex === 0 ? images.length - 1 : selectedIndex - 1
+    );
   };
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom === 1) return;
+    
+    e.stopPropagation();
+    
+    setDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragging) return;
+  
+    const deltaX = (e.clientX - dragStart.x) / zoom;
+    const deltaY = (e.clientY - dragStart.y) / zoom;
+  
+    if (Math.abs(deltaX) > DRAG_THRESHOLD || Math.abs(deltaY) > DRAG_THRESHOLD) {
+      setMouseMoved(true); 
+    }
+  
+    const newX = offset.x + deltaX;
+    const newY = offset.y + deltaY;
+  
+    // Calculate image size after zoom
+    const containerSize = 600; 
+    const imageSize = containerSize * zoom;
+    const maxOffset = (imageSize - containerSize) / 2;
+  
+    // limit offset so image stays within the container
+    const limitedX = limit(newX, -maxOffset, maxOffset);
+    const limitedY = limit(newY, -maxOffset, maxOffset);
+  
+    setOffset({ x: limitedX, y: limitedY });
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  
+    // Reset only *after* a short delay to allow the click to process (if needed)
+    setTimeout(() => {
+      setMouseMoved(false);
+    }, 0);
+  };
+  
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={closeModalHandler}
-      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-50 z-[10]"
+      className="fixed inset-0 hidden sm:flex flex-col items-center justify-center bg-gray-50 z-[10]"
       overlayClassName="fixed inset-0 z-[100]"
       ariaHideApp={false}
     >
       {/* Close Button */}
       <button
         onClick={closeModalHandler}
-        className="z-200 absolute top-14 right-6 bg-white p-2 border-black border-1 rounded-full cursor-pointer"
+        className="z-200 absolute top-24 right-12 bg-white p-2 border-primary border-1 rounded-full cursor-pointer"
       >
-        <XMarkIcon className="size-5" />
+        <XMarkIcon className="size-6 sm:size-10" />
       </button>
 
-      <div className="relative max-w-3xl w-full flex flex-col items-center z-[101]">
+      <div className="relative max-w-6xl w-full flex flex-col items-center z-[101]">
         <button
           onClick={prevImage}
-          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
+          className="absolute left-5 top-1/2 transform -translate-y-1/2 text-primary border-primary  bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
         >
-          <ChevronLeftIcon className="size-6" />
+          <ChevronLeftIcon className="size-6 sm:size-10" />
         </button>
 
         {/* Fixed Container */}
         <div
           ref={imageRef}
-          className="border-2 border-gray-200 rounded-lg w-[600px] h-[600px] overflow-hidden flex items-center justify-center cursor-pointer"
-          onClick={handleImageClick}
+          className="border-2 border-gray-200 rounded-lg w-[900px] h-[900px] overflow-hidden flex items-center justify-center"
+          style={{ cursor: zoom === 1 ? "zoom-in" : dragging ? "grabbing" : "grab" }}
         >
-          <Image
-            src={imageUrl}
-            alt="full-size product"
-            width={600}
-            height={600}
-            className="rounded-lg transition-transform duration-300 p-16 bg-white"
-            style={{
-              transform: `scale(${zoom})`,
-              transformOrigin: transformOrigin,
-              cursor: zoom === 1 ? "zoom-in" : "zoom-out",
-            }}
-          />
+          <div
+            className="relative w-full h-full flex items-center justify-center"
+            onClick={handleImageClick}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
+            <Image
+              src={imageUrl}
+              alt="full-size product"
+              width={900}
+              height={900}
+              draggable={false}
+              className="rounded-lg bg-white p-16"
+              style={{
+                transform: `scale(${zoom}) translate(${offset.x}px, ${offset.y}px)`,
+                transformOrigin: transformOrigin,
+                transition: dragging ? 'none' : 'transform 0.3s ease'
+              }}
+            />
+          </div>
         </div>
 
         <button
           onClick={nextImage}
-          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-black bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
+          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-primary bg-white border-1 border-primary p-2 rounded-full z-10 cursor-pointer"
         >
-          <ChevronRightIcon className="size-6" />
+          <ChevronRightIcon className="size-6 sm:size-10" />
         </button>
       </div>
 
@@ -118,8 +194,8 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
             <Image
               src={img}
               alt="thumbnail"
-              width={60}
-              height={60}
+              width={80}
+              height={80}
               className="rounded-md"
             />
           </button>

@@ -12,6 +12,9 @@ export default function SearchInput({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
+      if (value.trim() === "") {
+        return;
+      }
       window.location.href = `/shop?searchKey=${value}`;
     }
   };
