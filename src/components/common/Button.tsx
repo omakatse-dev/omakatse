@@ -18,10 +18,10 @@ export default function Button({
   disabled = false,
 }: ButtonProps) {
   const primaryStyles =
-    "bg-white hover:bg-yellow-pastel hover:drop-shadow-[5px_5px_0px_rgba(255,196,0,1)] active:bg-yellow lg:active:drop-shadow-[5px_5px_0px_rgba(255,255,255,1)] disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
+    "bg-white hover:bg-yellow-pastel hover:shadow-[5px_5px_0px_rgba(255,196,0,1),_6px_6px_0px_rgba(0,0,0,1)] active:bg-yellow lg:active:shadow-[5px_5px_0px_rgba(255,255,255,1),_6px_6px_0px_rgba(0,0,0,1)] disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
 
   const secondaryStyles =
-    "hover:bg-gray-50 hover:drop-shadow-[5px_5px_0px_rgba(150,138,132,1)] active:bg-gray-500 lg:active:drop-shadow-[5px_5px_0px_rgba(255,255,255,1)] disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
+    "hover:bg-gray-50 hover:shadow-[5px_5px_0px_rgba(150,138,132,1),_6px_6px_0px_rgba(0,0,0,1)] active:bg-gray-500 lg:active:shadow-[5px_5px_0px_rgba(255,255,255,1),_6px_6px_0px_rgba(0,0,0,1)] lg:active:text-white disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
 
   return (
     <button

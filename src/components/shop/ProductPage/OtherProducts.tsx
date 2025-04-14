@@ -1,23 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-
-interface OtherProductsProps {
-  products: {
-    id: string;
-    title: string;
-    featuredImage: {
-      url: string;
-    };
-    priceRange: {
-      minVariantPrice: {
-        amount: string;
-      };
-    };
-    variants?: {
-      nodes: { id: string }[];
-    };
-  }[];
-}
+import { OtherProductsProps } from "@/types/Types";
 
 const OtherProducts: React.FC<OtherProductsProps> = ({ products }) => {
   return (
