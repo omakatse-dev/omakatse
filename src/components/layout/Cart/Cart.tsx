@@ -44,7 +44,6 @@ export default function Cart({
       const res = await createCart(
         formattedRegularItems.concat(formattedSubscriptionItems)
       );
-      console.log(res);
       localStorage.setItem("cartId", res.id);
       window.location.href = res.checkoutUrl;
     } catch (error) {

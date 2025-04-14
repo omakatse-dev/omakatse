@@ -23,7 +23,7 @@ export default function Shopfront({
   petType: "Dog" | "Cat";
 }) {
   const { getQueryParam, setQueryParam } = useQueryParams();
-
+  console.log("here", getQueryParam("filter"));
   const TABS = Object.keys(categories);
   const [selectedTab, setSelectedTab] = useState(
     getQueryParam("tab") || TABS[0]

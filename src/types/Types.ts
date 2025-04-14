@@ -115,3 +115,21 @@ export type OtherProductsProps = {
 };
 
 export type CreateReviewPayload = Partial<Review>;
+
+export type SubscriptionContract = {
+  contractId: string;
+  boxId: string;
+  address: string;
+  date: string;
+  email: string;
+  items: string;
+  name: string;
+  nextBillingDate: string;
+  number: number;
+  pets: string;
+  petsId: string;
+  size: string;
+  planDuration: number;
+  status: string;
+  nextRenewalDate: string;
+};

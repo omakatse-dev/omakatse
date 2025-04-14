@@ -74,6 +74,7 @@ export default function NavBar() {
       if (cartId) {
         const res = await getCartById(cartId);
         if (!res.cart) {
+          //successful checkout
           localStorage.removeItem("cartId");
           clearCart();
         }
