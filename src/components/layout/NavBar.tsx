@@ -50,10 +50,16 @@ export default function NavBar() {
   const [isDogHovering,setIsDogHovering] = useState(false);
 
   const handleMouseOverCat = () => {
+    if (isDogHovering) {
+      setIsDogHovering(false);
+    }
     setIsCatHovering(true);
   }
 
   const handleMouseOverDog = () => {
+    if (isCatHovering) {
+      setIsCatHovering(false);
+    }
     setIsDogHovering(true);
   }
 

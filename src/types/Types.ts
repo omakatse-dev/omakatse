@@ -96,6 +96,24 @@ export type ReviewSummary = {
   oneStarCount: number;
 };
 
+export type OtherProductsProps = {
+  products: {
+    id: string;
+    title: string;
+    featuredImage: {
+      url: string;
+    };
+    priceRange: {
+      minVariantPrice: {
+        amount: string;
+      };
+    };
+    variants?: {
+      nodes: { id: string }[];
+    };
+  }[];
+};
+
 export type CreateReviewPayload = Partial<Review>;
 
 export type SubscriptionContract = {
