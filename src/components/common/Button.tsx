@@ -38,7 +38,7 @@ export default function Button({
           type={type}
           onClick={onClick}
           disabled={disabled}
-          className={`relative z-10 flex justify-center py-2.5 sm:py-4 px-10 bodyButton rounded-full text-primary border-black border transition-all cursor-pointer h-11 md:h-13 items-center
+          className={`relative z-10 flex justify-center py-2.5 sm:py-4 px-10 bodyButton rounded-full text-primary border-black border transition-all cursor-pointer h-11 md:h-13 items-center w-full
           ${variant === "primary" ? primaryStyles : secondaryStyles} ${className}`}
         >
           {children}

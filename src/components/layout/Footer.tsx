@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-10 lg:justify-between">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="">
             <p className="bodyLG text-gray-500 mb-4"> Cat </p>
