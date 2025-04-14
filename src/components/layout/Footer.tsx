@@ -177,7 +177,7 @@ export default function Footer() {
           <p className="bodyMD mb-4 font-semibold"> Subscribe </p>
           <p className="bodyMD mb-6 text-sm lg:text-base">
             {" "}
-            Join our newsletter to stay up to date on features and releases.
+            Stay in the loop with our newsletter and pet-approved goodies.
           </p>
 
           <EmailSubscriptionForm />
