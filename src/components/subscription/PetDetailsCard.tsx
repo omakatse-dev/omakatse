@@ -129,12 +129,20 @@ export default function PetDetailsCard({
           </div>
         </div>
         {editMode && (
+          <div className="flex flex-col w-full">
           <Button
             onClick={() => setEditPetIndex(idx)}
-            className="mt-8 w-fit self-center"
+            className="mt-8 w-full self-center"
           >
             Edit Pet
           </Button>
+          <Button
+            onClick={() => setEditPetIndex(idx)}
+            className="mt-4 w-full self-center"
+          >
+            Remove Pet
+          </Button>
+          </div>
         )}
       </div>
     </Card>
