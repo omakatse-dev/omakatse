@@ -1,26 +1,10 @@
 import Button from "@/components/common/Button";
 import React from "react";
-import { editShippingAddress } from "@/utils/APIs";
+
 export default function ShippingAddress() {
-  const editHandler = async () => {
-    console.log("changing addy");
-    const res = await editShippingAddress(
-      "gid://shopify/Customer/8131211788547",
-      [
-        {
-          address1: "277 South Bridge Road",
-          address2: "",
-          city: "Dubai",
-          country: "United Arab Emirates",
-          phone: "1234567890",
-        },
-      ]
-    );
-    console.log(res);
-  };
   return (
     <div className="flex flex-col gap-6 bodyMD max-w-2xl">
-      <button onClick={editHandler}>Test</button>
+      <button>Test</button>
       <h3 className="font-bold">Shipping address</h3>
       <div className="flex flex-col gap-2">
         <div className="text-gray-500">Country / Region</div>
