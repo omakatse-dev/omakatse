@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import PetListForContract from "@/components/account/subscriptions/PetListForContract";
 
 export default function page() {
@@ -21,7 +21,9 @@ export default function page() {
         Kindly double check the details below to renew. If you want to change
         the box size, duration or pet, click on edit subscription{" "}
       </div>
+      <Suspense fallback={<div>Loading Subscription Details...</div>}>
       <PetListForContract />
+      </Suspense>
     </div>
   );
 }
