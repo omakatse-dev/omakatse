@@ -8,7 +8,7 @@ import {
   DisclosurePanel,
   Transition,
 } from "@headlessui/react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
 interface CatDropdownProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +17,7 @@ interface CatDropdownProps {
 function CatDropdown({ setIsOpen }: CatDropdownProps) {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
+  const pathName = usePathname();
 
   return (
     <div>
@@ -55,7 +56,12 @@ function CatDropdown({ setIsOpen }: CatDropdownProps) {
                         setIsOpen((prev) => !prev);
                       }}
                       href="/shop/cat-products?sort=New+Arrivals&filter=All&tab=Treats"
-                      className={`bodyLG ${tab === "Treats" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${
+                        tab === "Treats" &&
+                        pathName.startsWith("/shop/cat-products")
+                          ? "pb-1 border-b-2 border-black"
+                          : "border-b-0"
+                      }`}
                     >
                       Treats
                     </a>
@@ -64,7 +70,7 @@ function CatDropdown({ setIsOpen }: CatDropdownProps) {
                     <a
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/cat-products/?sort=New+Arrivals&filter=All&tab=Care+Products"
-                      className={`bodyLG ${tab === "Care Products" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${tab === "Care Products" && pathName.startsWith("/shop/cat-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Care Products
                     </a>
@@ -73,7 +79,7 @@ function CatDropdown({ setIsOpen }: CatDropdownProps) {
                     <a
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/cat-products/?sort=New+Arrivals&filter=All&tab=Accessories"
-                      className={`bodyLG ${tab === "Accessories" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${tab === "Accessories" && pathName.startsWith("/shop/cat-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Accessories
                     </a>

@@ -8,7 +8,7 @@ import {
   DisclosurePanel,
   Transition,
 } from "@headlessui/react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
 interface DogDropdownProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +17,7 @@ interface DogDropdownProps {
 function DogDropdown({ setIsOpen }: DogDropdownProps) {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
+  const pathName = usePathname();
   return (
     <div>
       <Disclosure as="div">
@@ -52,7 +53,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
                     <a
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products?sort=New+Arrivals&tab=Treats"
-                      className={`bodyLG ${tab === "Treats" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${tab === "Treats" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Treats
                     </a>
@@ -61,7 +62,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
                     <a
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products/?sort=New+Arrivals&tab=Care+Products"
-                      className={`bodyLG ${tab === "Care Products" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${tab === "Care Products" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Care Products
                     </a>
@@ -70,7 +71,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
                     <a
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products/?sort=New+Arrivals&tab=Accessories"
-                      className={`bodyLG ${tab === "Accessories" ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
+                      className={`bodyLG ${tab === "Accessories" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Accessories
                     </a>

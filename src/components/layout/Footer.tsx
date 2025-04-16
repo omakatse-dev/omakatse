@@ -87,7 +87,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="bg-primary w-screen px-8 py-10 lg:px-12 lg:py-20 flex flex-col gap-15">
+    <div className="bg-primary w-screen px-6 py-10 lg:px-12 lg:py-20 flex flex-col gap-15">
       <div className="flex flex-col lg:flex-row gap-10 lg:justify-between items-center">
         <Link href="/" className="flex">
           <Image

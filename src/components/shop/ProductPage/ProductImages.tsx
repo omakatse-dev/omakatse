@@ -18,7 +18,7 @@ export default function ProductImages({
 
   return (
     <div className="flex md:flex-row flex-col-reverse gap-5 w-full md:px-0">
-      <div className="flex md:flex-col flex-row gap-5 md:w-1/8 md:justify-start justify-center mx-8 md:mx-0 border-b-1 md:border-b-0 pb-8 md:pb-0">
+      <div className="flex md:flex-col flex-row gap-5 md:w-1/8 md:justify-start justify-center mx-6 md:mx-0 border-b-1 md:border-b-0 pb-8 md:pb-0">
         {images.nodes.map((image, index) => (
           <button
             key={image.url}
@@ -39,8 +39,8 @@ export default function ProductImages({
       </div>
 
       {/* Main Image - Clickable */}
-      <div className="w-full h-full aspect-square">
-        <button onClick={openModal} className="w-full h-full mx-6 md:mx-0">
+      <div className="w-full aspect-square px-6">
+        <button onClick={openModal} className="w-full">
           <Image
             src={images.nodes[selectedIndex].url}
             alt="product"

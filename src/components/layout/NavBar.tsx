@@ -47,6 +47,8 @@ export default function NavBar() {
   const clearCart = useCartStore((state) => state.clearCart);
   const [isCatHovering, setIsCatHovering] = useState(false);
   const [isDogHovering, setIsDogHovering] = useState(false);
+  const [isHovering, setIsHovering] = useState<string | null>(null);
+
 
   const handleMouseOverCat = () => {
     if (isDogHovering) {
@@ -99,11 +101,11 @@ export default function NavBar() {
             <Link
               href="/shop/cat-products"
               onMouseEnter={handleMouseOverCat}
-              className={`flex gap-1 b-2 border-b-0 font-semibold ${
+              className={`flex gap-1 b-2 border-b-0 font-semibold pb-1 ${
                 pathname.startsWith("/shop/cat-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
-              }`}
+              } ${isCatHovering ? "border-b-2 border-black" : ""}`}
             >
               Cat
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
@@ -122,11 +124,11 @@ export default function NavBar() {
             <Link
               href="/shop/dog-products"
               onMouseEnter={handleMouseOverDog}
-              className={`flex gap-1 b-2 border-b-0 font-semibold ${
+              className={`flex gap-1 b-2 border-b-0 font-semibold pb-1 ${
                 pathname.startsWith("/shop/dog-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
-              }`}
+              } ${isDogHovering ? "border-b-2 border-black" : ""}`}
             >
               Dog
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
@@ -145,9 +147,13 @@ export default function NavBar() {
             <Link
               href={link.url}
               key={link.name}
-              onMouseEnter={handleMouseLeave}
+              onMouseEnter={() => {
+                handleMouseLeave();
+                setIsHovering(link.name);
+              }}
+              onMouseLeave={() => setIsHovering(null)}
               className={`block pb-1 font-semibold ${
-                pathname === link.url ? "border-b-2 border-black" : "border-b-0"
+                pathname === link.url || isHovering === link.name  ? "border-b-2 border-black" : "border-b-0"
               }`}
             >
               {link.name}
