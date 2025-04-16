@@ -49,7 +49,7 @@ export default function EmailSubscriptionForm() {
               required
             />
             <Button
-              className="w-full lg:w-2/4 bodyButton"
+              className="w-full bodyButton"
               variant="primary"
               type="submit"
               disabled={isLoading}

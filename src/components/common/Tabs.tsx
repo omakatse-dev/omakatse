@@ -12,7 +12,7 @@ export default function Tabs({
   onChange: (tab: string) => void;
   className?: string;
 }) {
-  const activeStyles = "bg-yellow border border-primary mb-1";
+  const activeStyles = "bg-yellow border border-1 mb-1";
   const renderTabIcon = (tab: string) => {
     if (tab === "Treats") {
       return (
@@ -48,29 +48,27 @@ export default function Tabs({
     return null;
   };
   return (
-    <div
-      className={`${className} rounded-full px-8 py-3 flex gap-5 font-semibold`}
-    >
+    <div className={`${className} rounded-full z-1 px-8 py-3 flex gap-5 font-semibold`}>
       {tabs.map((tab) => (
-        <div
-          key={tab}
-          className={`px-6 sm:px-10 py-4 rounded-full cursor-pointer text-xs lg:text-base ${
-            tab === selectedTab && activeStyles
-          }`}
-          onClick={() => onChange(tab)}
-          style={
-            selectedTab === tab
-              ? {
-                  boxShadow:
-                    "5px 5px 0px rgba(253,250,244,1), 6.5px 6.5px 0px rgba(0,0,0,1)",
-                  border: "1px solid black",
-                }
-              : {}
-          }
-        >
-          <div className="flex items-center">
-            {renderTabIcon(tab)}
-            <span>{tab}</span>
+        <div key={tab} className="relative group">
+          {/* Bottom tab */}
+          {selectedTab === tab && (
+            <div
+            className="absolute right-[-4px] bottom-[-4px] w-full h-full rounded-full bg-white border border-black"
+            aria-hidden="true"
+            />
+          )}
+          
+          {/* Top tab */}
+          <div
+            className={`relative z-1 px-6 sm:px-10 py-4 rounded-full w-full h-full cursor-pointer text-xs lg:text-base
+              ${selectedTab === tab ? activeStyles : ""}`}
+            onClick={() => onChange(tab)}
+          >
+            <div className="flex items-center">
+              {renderTabIcon(tab)}
+              <span>{tab}</span>
+            </div>
           </div>
         </div>
       ))}

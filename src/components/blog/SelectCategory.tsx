@@ -41,30 +41,28 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
               }`}
             />
           </button>
-          <div
-            className={`flex flex-col gap-5 absolute w-full mt-2 bg-white border rounded-[2rem] p-5 transition-all duration-300 ease-in-out transform ${
-              isOpen
-                ? "max-h-auto opacity-100 translate-y-0"
-                : "max-h-auto opacity-0 translate-y-[-20px] overflow-hidden"
-            }`}
-          >
-            {categories.map((category) => (
-              <div
-                key={category}
-                className={`cursor-pointer bodyMD ${
-                  selectedCategory === category ? "font-bold" : ""
-                }`}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category}
-              </div>
-            ))}
-          </div>
+          {isOpen && (
+            <div className="flex flex-col gap-5 absolute w-full mt-2 bg-white border rounded-[2rem] p-5 transition-all duration-300 ease-in-out transform">
+              {categories.map((category) => (
+                <div
+                  key={category}
+                  className={`cursor-pointer bodyMD ${
+                    selectedCategory === category ? "font-bold" : ""
+                  }`}
+                  onClick={() => {
+                    handleCategoryClick(category);
+                  }}
+                >
+                  {category}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       {/* For md and above screens, show clickable categories */}
-      <div className="hidden md:flex flex-col space-y-2">
+      <div className="hidden md:flex md:flex-col space-y-2">
         {categories.map((category) => (
           <button
             key={category}
