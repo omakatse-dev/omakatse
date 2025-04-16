@@ -160,7 +160,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
               width={900}
               height={900}
               draggable={false}
-              className="rounded-lg bg-white p-16 object-contain"
+              className="rounded-lg object-contain"
               style={{
                 transform: `scale(${zoom}) translate(${offset.x}px, ${offset.y}px)`,
                 transformOrigin: transformOrigin,
