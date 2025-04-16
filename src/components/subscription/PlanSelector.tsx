@@ -8,7 +8,7 @@ export default function PlanSelector({
   setSelectedPlan: (plan: string) => void;
 }) {
   return (
-    <div className="flex flex-col lg:flex-row gap-4 sm:gap-8 w-full">
+    <div className="flex flex-col lg:flex-row gap-4 sm:gap-8 w-full justify-center">
       <CardButton
         className="w-full sm:w-64"
         active={selectedPlan === "1 month"}

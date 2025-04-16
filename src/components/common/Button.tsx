@@ -24,7 +24,7 @@ export default function Button({
     "bg-white active:bg-gray-500 lg:active:text-white disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
 
     return (
-      <div className={`relative group inline-block w-full sm:self-center z-1 h-11 md:h-13 ${className}`}>
+      <div className={`relative group inline-block w-full sm:w-fit sm:self-center z-1 h-11 md:h-13 ${className}`}>
         {/* Bottom button */}
         <button
           type={type}
