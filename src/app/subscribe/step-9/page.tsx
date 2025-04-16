@@ -45,18 +45,18 @@ export default function SubscriptionStepNinePage() {
       image: "https://images.omakatsepets.com/subscription-box-small.png",
       options: [],
     });
-    console.log("here");
     const test = await getSubscriptionPlan();
-    console.log(test)
+    console.log(test);
   };
 
-
   return (
-    <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={9} totalSteps={9} className="max-w-sm" />
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">Choose your plan</h3>
-        <div>For subscriptions, your box will be delivered to you monthly.</div>
+        <div className="bodyMD">
+          For subscriptions, your box will be delivered to you monthly.
+        </div>
       </div>
       <Tabs
         tabs={["Small Box", "Large Box"]}
@@ -70,7 +70,8 @@ export default function SubscriptionStepNinePage() {
         setSelectedPlan={setSelectedPlan}
       />
 
-      <div className="flex gap-5">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 w-full justify-center">
+        <Button onClick={addToCartHandler}>Add to cart</Button>
         <Button
           onClick={() => router.push("/subscribe/step-8")}
           variant="secondary"
@@ -78,7 +79,6 @@ export default function SubscriptionStepNinePage() {
         >
           Previous
         </Button>
-        <Button onClick={addToCartHandler}>Add to cart</Button>
       </div>
     </div>
   );

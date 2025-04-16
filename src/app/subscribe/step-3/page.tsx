@@ -68,31 +68,36 @@ export default function SubscriptionStepThreePage() {
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
-    <div className="w-full pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-orange-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={3} totalSteps={9} className="max-w-sm" />
-      <h3 className="font-bold">Fill in your pets&apos; details</h3>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-bold">Fill in your pets&apos; details</h3>
+        <div className="bodyMD text-gray-800 text-center">
+          Tell us their names and a little about them.
+        </div>
+      </div>
       {showError && (
         <p className="text-red-500 bodyMD">
           Please fill in all required fields for each pet before proceeding
         </p>
       )}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 w-full sm:w-fit">
         {Array.from({ length: storedCatCount }).map((_, idx) => (
           <PetDetailsForm petType="Cat" key={idx} idx={idx} />
         ))}
         {Array.from({ length: storedDogCount }).map((_, idx) => (
-          <PetDetailsForm key={idx} idx={idx} petType="Dog" />
+          <PetDetailsForm key={idx} idx={idx} petType="Dog" catCount={storedCatCount} />
         ))}
       </div>
 
-      <div className="flex gap-5">
+      <div className="flex flex-col sm:flex-row-reverse justify-center gap-2 sm:gap-5 w-full">
+        <Button onClick={handleNext}>Next</Button>
         <Button
           onClick={() => router.push("/subscribe/step-2")}
           variant="secondary"
         >
           Previous
         </Button>
-        <Button onClick={handleNext}>Next</Button>
       </div>
     </div>
   );

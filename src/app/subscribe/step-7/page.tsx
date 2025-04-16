@@ -50,17 +50,17 @@ export default function SubscriptionStepSevenPage() {
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
-    <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={7} totalSteps={9} className="max-w-sm" />
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">
           Fill in any treats and additional information
         </h3>
-        <div className="text-gray-800 bodyLG">
-          Let us know anything we need to pay special attention to!
+        <div className="text-gray-800 bodyMD">
+          Add any must-knows or special notes for your pets.
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-8 w-full max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-3xl mx-auto">
         {cats.map((cat, idx) => (
           <TreatPreferenceCard
             key={cat.name}
@@ -75,6 +75,7 @@ export default function SubscriptionStepSevenPage() {
             petType="dogsDetails"
             petIndex={idx}
             name={dog.name}
+            catCount={cats.length}
           />
         ))}
       </div>

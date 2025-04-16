@@ -27,7 +27,7 @@ export default function CardButton({
             }
           : {}
       }
-      className={`px-5 py-8 border-primary rounded-2xl aspect-square ${className} ${
+      className={`px-5 py-4 sm:py-8 border-primary rounded-2xl ${className} ${
         disabled ? "bg-gray-200" : "bg-white cursor-pointer"
       }`}
     >

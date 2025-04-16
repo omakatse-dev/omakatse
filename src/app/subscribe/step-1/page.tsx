@@ -50,9 +50,16 @@ export default function SubscriptionStepOnePage() {
   };
 
   return (
-    <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={1} totalSteps={9} className="max-w-sm" />
-      <h3 className="font-bold">What kind of pets do you have?</h3>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-bold text-center">
+          What kind of pets do you have?
+        </h3>
+        <div className="bodyMD text-center text-gray-800">
+          Let&apos;s get to know your family.
+        </div>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center gap-8"

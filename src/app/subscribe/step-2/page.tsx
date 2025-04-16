@@ -73,7 +73,7 @@ export default function SubscriptionStepTwoPage() {
   };
 
   return (
-    <div className="w-full pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
+    <div className="w-full pt-32 px-8 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={2} totalSteps={9} className="max-w-sm" />
       <form
         className="flex flex-col items-center gap-8"
@@ -82,7 +82,7 @@ export default function SubscriptionStepTwoPage() {
         {(petType === "cat" || petType === "both") && (
           <PetCountSelector
             control={control}
-            petType="cat"
+            petType="Cat"
             both={petType === "both"}
           />
         )}
@@ -94,20 +94,20 @@ export default function SubscriptionStepTwoPage() {
         {(petType === "dog" || petType === "both") && (
           <PetCountSelector
             control={control}
-            petType="dog"
+            petType="Dog"
             both={petType === "both"}
           />
         )}
 
         <TipCard />
-        <div className="flex gap-5">
+        <div className="flex flex-col sm:flex-row-reverse justify-center gap-2 sm:gap-5 w-full">
+          <Button type="submit">Next</Button>
           <Button
             onClick={() => router.push("/subscribe/step-1")}
             variant="secondary"
           >
             Previous
           </Button>
-          <Button type="submit">Next</Button>
         </div>
       </form>
       {(errors.catCount || errors.dogCount) && (
