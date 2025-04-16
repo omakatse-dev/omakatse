@@ -1,9 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { ProductDetailsType } from "@/types/Types";
 import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
 import Button from "./Button";
 import { formatPrice } from "@/utils/Utils";
+import RestockModal from "../shop/ProductPage/RestockModal";
 
 interface Option {
   name: string;
@@ -35,6 +37,8 @@ export default function AddToCartSection({
   const { openCart } = useUIStore();
   const addItem = useCartStore((state) => state.addItem);
   const changeQuantity = useCartStore((state) => state.changeQuantity);
+  const [showRestockModal, setShowRestockModal] = useState(false);
+
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
     console.log(selectedVariant);
@@ -59,17 +63,33 @@ export default function AddToCartSection({
     openCart();
   };
   return (
-    <div className="flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between w-full md:px-12 md:py-4">
-      <div className="bodyMD">{details.title}</div>
-      <Button
-        className="flex items-center w-full md:w-auto"
-        onClick={addToCartHandler}
-      >
-        Add to Cart - AED{" "}
-        {formatPrice(
-          (Number(selectedVariant?.price.amount) * quantity).toString()
-        )}
-      </Button>
+    <div className="flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4">
+      <div className="bodyMD"> {details.title} </div>
+      {selectedVariant?.quantityAvailable &&
+      selectedVariant?.quantityAvailable > 0 ? (
+        <div className="w-full md:w-auto">
+          <Button
+            className="flex items-center w-full md:w-auto"
+            onClick={addToCartHandler}
+          >
+            Add to Cart - AED{" "}
+            {formatPrice(
+              (Number(selectedVariant?.price.amount) * quantity).toString()
+            )}
+          </Button>
+        </div>
+      ) : (
+        <Button className="w-full md:w-auto" onClick={() => setShowRestockModal(true)}>
+          Notify me when available
+        </Button>
+      )}
+      {showRestockModal && (
+        <RestockModal
+          closeModal={() => setShowRestockModal(false)}
+          variantId={selectedVariant?.id || ""}
+        />
+      )}
+    
     </div>
   );
 }

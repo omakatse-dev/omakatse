@@ -121,7 +121,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     <Modal
       isOpen={isOpen}
       onRequestClose={closeModalHandler}
-      className="fixed inset-0 hidden sm:flex flex-col items-center justify-center max-h-[100vh] bg-gray-50 z-[10] p-8"
+      className="fixed inset-0 sm:flex flex-col items-center justify-center max-h-[100vh] bg-gray-50 z-[10] pt-32 sm:pt-0 p-8"
       overlayClassName="fixed inset-0 z-[100]"
       ariaHideApp={false}
     >

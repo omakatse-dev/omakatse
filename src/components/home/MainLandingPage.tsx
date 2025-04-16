@@ -17,7 +17,6 @@ export default function MainLandingPage() {
             Build your box now
           </Button>
         </div>
-
         <Image
           src="assets/OmakatseLandingFirst.svg"
           alt="Omakatse's Landing Page"
@@ -26,6 +25,32 @@ export default function MainLandingPage() {
           className="self-center lg:w-[806px] lg:h-[518px]"
         />
       </div>
+      {/* <div
+        className="flex flex-col relative bg-yellow rounded-4xl my-10 lg:mx-20 px-5 lg:px-40 py-20 lg:py-40 gap-4 lg:gap-10"
+        style={{
+          backgroundImage: "url('/assets/pattern.svg')",
+          backgroundSize: "auto",
+        }}
+      >
+        <Image
+          src="/assets/kumo_white.svg"
+          alt="Kumo White"
+          width={136.5}
+          height={121}
+          className="absolute lg:w-58 h-auto -top-12 -left-6 lg:-left-16 lg:-top-8"
+        />
+        <h3 className="text-primary text-center font-bold">
+          {" "}
+          A fun and unique way to experience Japan!
+        </h3>
+        <Image
+          src="/assets/kumo_black.svg"
+          alt="Kumo White"
+          width={136.5}
+          height={121}
+          className="absolute lg:w-58 h-auto -bottom-22 -right-8 lg:-bottom-24 lg:-right-26"
+        />
+      </div> */}
     </div>
   );
 }
