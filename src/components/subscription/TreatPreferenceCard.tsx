@@ -4,11 +4,21 @@ import Selector from "../common/Selector";
 import Textfield from "../common/Textfield";
 import TreatPreferenceSelector from "./TreatPreferenceSelector";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
+import Image from "next/image";
+import cat1 from "../../../public/assets/Cat1.svg";
+import cat2 from "../../../public/assets/Cat2.svg";
+import cat3 from "../../../public/assets/Cat3.svg";
+import cat4 from "../../../public/assets/Cat4.svg";
+import dog1 from "../../../public/assets/Dog1.svg";
+import dog2 from "../../../public/assets/Dog2.svg";
+import dog3 from "../../../public/assets/Dog3.svg";
+import dog4 from "../../../public/assets/Dog4.svg";
 
 interface Props {
   name: string;
   petType: "catsDetails" | "dogsDetails";
   petIndex: number;
+  catCount?: number;
 }
 
 type TreatFrequencyData = {
@@ -17,10 +27,32 @@ type TreatFrequencyData = {
   comments?: string;
 };
 
+const variantMapping: Record<0 | 1 | 2 | 3, "yellow" | "blue" | "green" | "pink"> = {
+  0: "yellow",
+  1: "blue",
+  2: "green",
+  3: "pink",
+};
+
+const catMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: cat1,
+  1: cat2,
+  2: cat3,
+  3: cat4,
+};
+
+const dogMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: dog1,
+  1: dog2,
+  2: dog3,
+  3: dog4,
+};
+
 export default function TreatPreferenceCard({
   name,
   petType,
   petIndex,
+  catCount = 0,
 }: Props) {
   const options = [
     { id: 0, name: "None (No treats or snacks)", frequency: "none" },
@@ -49,11 +81,25 @@ export default function TreatPreferenceCard({
   };
 
   return (
-    <Card>
-      <div className="flex flex-col">
-        <div className="w-8 h-8 rounded-full bg-amber-300 mb-2 self-center" />
-        <h4 className="self-center">{name}</h4>
-        <div>
+    <Card
+      className="flex flex-col items-center w-full"
+      variant={variantMapping[(petIndex + catCount) as keyof typeof variantMapping]}
+    >
+      <div className="flex flex-col items-center w-full">
+        <div className="flex sm:flex-col items-center gap-4 sm:gap-0">
+          <Image
+            alt={`${name} ${petIndex + 1}`}
+            src={petType === "catsDetails" 
+              ? catMapping[petIndex as keyof typeof catMapping]
+              : dogMapping[petIndex as keyof typeof dogMapping]
+            }
+            width={100}
+            height={100}
+            className="w-16 h-16 sm:w-24 sm:h-24"
+          />
+          <h4>{name}</h4>
+        </div>
+        <div className="w-full">
           <div className="bodyMD mt-8 text-gray-800">
             How often does {name} get treats?
           </div>
@@ -87,19 +133,22 @@ export default function TreatPreferenceCard({
             })
           }
         />
-        <div className="bodyMD mt-8 text-gray-800">
-          Additional comments (optional)
+        <div className="w-full">
+          <div className="bodyMD mt-8 text-gray-800">
+            Additional comments (optional)
+          </div>
+          <Textfield
+            placeholder="Enter any additional comments"
+            className="w-full"
+            value={treatFrequency?.comments || ""}
+            onChange={(e) =>
+              updateTreatFrequency({
+                ...treatFrequency,
+                comments: e.target.value,
+              })
+            }
+          />
         </div>
-        <Textfield
-          placeholder="Enter any additional comments"
-          value={treatFrequency?.comments || ""}
-          onChange={(e) =>
-            updateTreatFrequency({
-              ...treatFrequency,
-              comments: e.target.value,
-            })
-          }
-        />
       </div>
     </Card>
   );

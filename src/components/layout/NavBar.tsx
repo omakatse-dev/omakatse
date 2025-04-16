@@ -22,10 +22,12 @@ import { getCartById } from "@/utils/APIs";
 import HoverOverCat from "./NavbarComponents/HoverOverCat";
 import HoverOverDog from "./NavbarComponents/HoverOverDog";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const { user } = useUser();
   const pathname = usePathname();
+  const router = useRouter();
   const links = [
     {
       name: "About Us",
@@ -47,26 +49,26 @@ export default function NavBar() {
   const cartItems = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
   const [isCatHovering, setIsCatHovering] = useState(false);
-  const [isDogHovering,setIsDogHovering] = useState(false);
+  const [isDogHovering, setIsDogHovering] = useState(false);
 
   const handleMouseOverCat = () => {
     if (isDogHovering) {
       setIsDogHovering(false);
     }
     setIsCatHovering(true);
-  }
+  };
 
   const handleMouseOverDog = () => {
     if (isCatHovering) {
       setIsCatHovering(false);
     }
     setIsDogHovering(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     setIsCatHovering(false);
     setIsDogHovering(false);
-  }
+  };
 
   useEffect(() => {
     const checkCartStatus = async () => {
@@ -167,7 +169,9 @@ export default function NavBar() {
         </Link>
 
         <div className="hidden xl:flex gap-8">
-          <Button variant="primary">Build your box now</Button>
+          <Button onClick={() => router.push("/subscribe/step-1")}>
+            Build your box now
+          </Button>
           <div className="flex gap-5">
             <button
               className="cursor-pointer"

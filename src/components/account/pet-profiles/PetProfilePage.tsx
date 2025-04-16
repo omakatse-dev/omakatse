@@ -54,6 +54,8 @@ export default function PetProfilePage() {
                 idx={idx}
                 editMode={true}
                 setEditPetIndex={setEditPetIndex}
+                petType={pet.type === "Cat" ? "catsDetails" : "dogsDetails"}
+                catCount={pets.filter(p => p.type === "Cat").length}
               />
             ))}
           </div>

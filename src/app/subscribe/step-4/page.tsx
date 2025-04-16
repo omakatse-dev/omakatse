@@ -67,12 +67,12 @@ export default function SubscriptionStepFourPage() {
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
-    <div className="w-full pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={4} totalSteps={9} className="max-w-sm" />
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center justify-center text-center gap-2">
         <h3 className="font-bold">What are your pets&apos; sizes?</h3>
-        <div className="text-gray-800 bodyLG">
-          We will curate apparel based on your pets&apos; sizes
+        <div className="text-gray-800 bodyMD text-center">
+          We&apos;ll pick the right-sized apparel so they look and feel great.
         </div>
       </div>
       <form className="flex flex-col gap-8 items-center w-full">
@@ -92,6 +92,7 @@ export default function SubscriptionStepFourPage() {
         ))}
         {Array.from({ length: dogCount }).map((_, idx) => (
           <SizeSelector
+            catCount={catCount}
             key={idx}
             control={control}
             name={dogs?.[idx].name || ""}

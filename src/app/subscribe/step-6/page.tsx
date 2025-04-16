@@ -33,13 +33,23 @@ export default function SubscriptionStepSixPage() {
   });
 
   const submitHandler = () => {
-    //check if preferences are filled
-    const catPreferences = cats.every((cat) => cat.preferences);
-    const dogPreferences = dogs.every((dog) => dog.preferences);
-    if (!catPreferences || !dogPreferences) {
+    // Check if all pets have valid preference selections
+    const hasValidPreferences = [...cats, ...dogs].every((pet) => {
+      // If preferences are not set at all, invalid
+      if (!pet.preferences) return false;
+      
+      // If they said no to preferences, that's valid
+      if (pet.preferences.true === false) return true;
+      
+      // If they said yes, must have at least one preference selected
+      return pet.preferences.true === true && pet.preferences.preferences.length > 0;
+    });
+
+    if (!hasValidPreferences) {
       setShowError(true);
       return;
     }
+
     router.push("/subscribe/step-7");
   };
 
@@ -56,14 +66,14 @@ export default function SubscriptionStepSixPage() {
       router.push("/subscribe/step-2");
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
-  
+
   return (
-    <div className="w-full pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
+    <div className="w-full px-8 pt-32 pb-20 bg-yellow-pastel flex flex-col items-center gap-8">
       <ProgressBar currentStep={6} totalSteps={9} className="max-w-sm" />
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">What do your pets like to eat?</h3>
-        <div className="text-gray-800 bodyLG">
-          We will curate the selection based on what your cats like
+        <div className="text-gray-800 bodyMD">
+          We will curate the selection based on what your pets like.
         </div>
       </div>
       <form className="flex flex-col items-center gap-8 w-full max-w-3xl">
@@ -82,18 +92,19 @@ export default function SubscriptionStepSixPage() {
               name={dog.name}
               petType="dogsDetails"
               petIndex={idx}
+              catCount={cats.length}
             />
           ))}
         </div>
 
-        <div className="flex gap-5">
+        <div className="flex flex-col sm:flex-row-reverse gap-2 sm:gap-5 w-full justify-center">
+          <Button onClick={submitHandler}>Next</Button>
           <Button
             onClick={() => router.push("/subscribe/step-5")}
             variant="secondary"
           >
             Previous
           </Button>
-          <Button onClick={submitHandler}>Next</Button>
         </div>
         {showError && (
           <div className="bodyMD text-red">
