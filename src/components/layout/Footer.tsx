@@ -25,30 +25,30 @@ export default function Footer() {
   const catLinks = [
     {
       name: "Treats",
-      url: "/shop/cat-products",
+      url: "/shop/cat-products?sort=New+Arrivals&filter=All&tab=Treats",
     },
     {
       name: "Care Products",
-      url: "/shop",
+      url: "/shop/cat-products?sort=New+Arrivals&filter=All&tab=Care+Products",
     },
     {
       name: "Accessories",
-      url: "/shop",
+      url: "/shop/cat-products?sort=New+Arrivals&filter=All&tab=Accessories",
     },
   ];
 
   const dogLinks = [
     {
       name: "Treats",
-      url: "/shop/dog-products",
+      url: "/shop/dog-products?sort=New+Arrivals&tab=Treats",
     },
     {
       name: "Care Products",
-      url: "/shop",
+      url: "/shop/dog-products?sort=New+Arrivals&tab=Care+Products",
     },
     {
       name: "Accessories",
-      url: "/shop",
+      url: "/shop/dog-products?sort=New+Arrivals&tab=Accessories",
     },
   ];
 
@@ -119,13 +119,13 @@ export default function Footer() {
             <p className="bodyLG text-gray-500 mb-4"> Cat </p>
             <div className="bodySM text-white flex flex-col text-left">
               {catLinks.map((link) => (
-                <Link
+                <a
                   href={link.url}
                   key={link.name}
                   className="py-2 text-sm lg:text-base"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -133,13 +133,13 @@ export default function Footer() {
             <p className="bodyLG text-gray-500 mb-4"> Dog </p>
             <div className="bodySM text-white flex flex-col text-left">
               {dogLinks.map((link) => (
-                <Link
+                <a
                   href={link.url}
                   key={link.name}
                   className="py-2 text-sm lg:text-base"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
