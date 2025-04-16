@@ -16,7 +16,7 @@ export default function TreatPreferenceSelector({
     "Soft chewy treats",
   ];
   return (
-    <div>
+    <div className="w-full">
       <div className="bodyMD mt-8 text-gray-800">
         Treat preferences (optional)
       </div>

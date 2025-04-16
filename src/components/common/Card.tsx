@@ -19,7 +19,7 @@ export default function Card({
 
   return (
     <div
-      className={`${dropShadowMapping[variant]} bg-gray-50 rounded-2xl p-8 ${className}`}
+      className={`${dropShadowMapping[variant]} bg-gray-50 rounded-2xl px-4 py-6 sm:p-8 ${className}`}
     >
       {children}
     </div>

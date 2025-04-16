@@ -4,18 +4,53 @@ import Tag from "../common/Tag";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import Button from "../common/Button";
+import Image from "next/image";
+import cat1 from "../../../public/assets/Cat1.svg";
+import cat2 from "../../../public/assets/Cat2.svg";
+import cat3 from "../../../public/assets/Cat3.svg";
+import cat4 from "../../../public/assets/Cat4.svg";
+import dog1 from "../../../public/assets/Dog1.svg";
+import dog2 from "../../../public/assets/Dog2.svg";
+import dog3 from "../../../public/assets/Dog3.svg";
+import dog4 from "../../../public/assets/Dog4.svg";
+
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
+
+const variantMapping: Record<0 | 1 | 2 | 3, "yellow" | "blue" | "green" | "pink"> = {
+  0: "yellow",
+  1: "blue",
+  2: "green",
+  3: "pink",
+};
+
+const catMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: cat1,
+  1: cat2,
+  2: cat3,
+  3: cat4,
+};
+
+const dogMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: dog1,
+  1: dog2,
+  2: dog3,
+  3: dog4,
+};
 
 export default function PetDetailsCard({
   details,
   idx,
   editMode = false,
   setEditPetIndex = () => {},
+  petType,
+  catCount = 0,
 }: {
   details: PetDetailsSchema;
   idx: number;
   editMode?: boolean;
   setEditPetIndex?: Dispatch<SetStateAction<number | undefined>>;
+  petType: "catsDetails" | "dogsDetails";
+  catCount?: number;
 }) {
   const numberToMonth = {
     1: "Jan",
@@ -38,24 +73,26 @@ export default function PetDetailsCard({
     chubby: "Chubby",
   };
 
-  const variantMapping = {
-    0: "yellow",
-    1: "blue",
-    2: "green",
-    3: "pink",
-  } as const;
-
   return (
     <Card
-      variant={variantMapping[idx as keyof typeof variantMapping]}
-      className="bg-white"
+      variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
+      className="flex flex-col items-center w-full"
     >
-      <div className="flex flex-col">
-        <div className="self-center flex flex-col items-center">
-          <div className="w-8 h-8 rounded-full bg-amber-300" />
+      <div className="flex flex-col items-center w-full">
+        <div className="flex sm:flex-col items-center gap-4 sm:gap-0">
+          <Image
+            alt={`${details.name} ${idx + 1}`}
+            src={petType === "catsDetails" 
+              ? catMapping[idx as keyof typeof catMapping]
+              : dogMapping[idx as keyof typeof dogMapping]
+            }
+            width={100}
+            height={100}
+            className="w-16 h-16 sm:w-24 sm:h-24"
+          />
           <h4>{details.name}</h4>
         </div>
-        <div className="mt-8 flex flex-col gap-4">
+        <div className="mt-8 flex flex-col gap-4 w-full">
           <div className="bodyMD text-gray-800">
             <span>{details.gender === "Girl" ? "Her" : "His"} details:</span>
             <div className="flex flex-wrap gap-2 mt-1">
@@ -116,7 +153,6 @@ export default function PetDetailsCard({
               )}
             </div>
           </div>
-
           <div className="bodyMD text-gray-800">
             <span>Additional comments:</span>
             <div className="flex flex-wrap gap-2 mt-1">

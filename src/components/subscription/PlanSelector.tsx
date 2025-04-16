@@ -8,9 +8,9 @@ export default function PlanSelector({
   setSelectedPlan: (plan: string) => void;
 }) {
   return (
-    <div className="flex flex-col lg:flex-row gap-8">
+    <div className="flex flex-col lg:flex-row gap-4 sm:gap-8 w-full">
       <CardButton
-        className="w-64"
+        className="w-full sm:w-64"
         active={selectedPlan === "1 month"}
         onClick={() => setSelectedPlan("1 month")}
       >
@@ -24,7 +24,7 @@ export default function PlanSelector({
         </div>
       </CardButton>
       <CardButton
-        className="w-64"
+        className="w-full sm:w-64"
         active={selectedPlan === "3 months"}
         onClick={() => setSelectedPlan("3 months")}
       >
@@ -38,7 +38,7 @@ export default function PlanSelector({
         </div>
       </CardButton>
       <CardButton
-        className="w-64"
+        className="w-full sm:w-64"
         active={selectedPlan === "6 months"}
         onClick={() => setSelectedPlan("6 months")}
       >
@@ -52,7 +52,7 @@ export default function PlanSelector({
         </div>
       </CardButton>
       <CardButton
-        className="w-64"
+        className="w-full sm:w-64"
         active={selectedPlan === "12 months"}
         onClick={() => setSelectedPlan("12 months")}
       >
