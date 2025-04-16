@@ -36,7 +36,6 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     return Math.max(min, Math.min(value, max));
   };
   
-  // Reset offset and transform origin when changing images
   useEffect(() => {
     setOffset({ x: 0, y: 0 });
     setTransformOrigin("center center");
@@ -100,7 +99,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     // Calculate image size after zoom
     const containerSize = 600; 
     const imageSize = containerSize * zoom;
-    const maxOffset = (imageSize - containerSize) / 4;
+    const maxOffset = (imageSize - containerSize) / 2;
   
     // limit offset so image stays within the container
     const limitedX = limit(newX, -maxOffset, maxOffset);
@@ -113,7 +112,6 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
   const handleMouseUp = () => {
     setDragging(false);
   
-    // Reset only *after* a short delay to allow the click to process (if needed)
     setTimeout(() => {
       setMouseMoved(false);
     }, 0);
