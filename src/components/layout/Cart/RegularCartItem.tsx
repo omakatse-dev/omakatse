@@ -15,9 +15,9 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
   };
   return (
     <div className="w-full flex flex-row gap-5">
-      <div className="relative h-fit w-20 rounded-lg">
+      <div className="relative h-fit w-24 rounded-lg">
         <XCircleIcon
-          className="w-6 absolute -top-2 -left-2 text-primary fill-white cursor-pointer"
+          className="w-8 absolute -top-3 -left-3 text-primary fill-gray-50 cursor-pointer stroke-1.5"
           onClick={handleRemoveItem}
         />
         <Image
@@ -25,7 +25,7 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
           alt={item.name}
           width={60}
           height={60}
-          className="w-full object-cover rounded-lg"
+          className="w-full object-cover rounded-lg border-primary"
         />
       </div>
       <div className="flex flex-col gap-1 w-full">

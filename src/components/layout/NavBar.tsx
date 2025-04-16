@@ -7,7 +7,6 @@ import Button from "../common/Button";
 import MobileMenu from "./NavbarComponents/MobileMenu";
 import { useState } from "react";
 import {
-  ShoppingCartIcon,
   MagnifyingGlassIcon,
   UserIcon,
   Bars3Icon,
@@ -47,26 +46,26 @@ export default function NavBar() {
   const cartItems = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
   const [isCatHovering, setIsCatHovering] = useState(false);
-  const [isDogHovering,setIsDogHovering] = useState(false);
+  const [isDogHovering, setIsDogHovering] = useState(false);
 
   const handleMouseOverCat = () => {
     if (isDogHovering) {
       setIsDogHovering(false);
     }
     setIsCatHovering(true);
-  }
+  };
 
   const handleMouseOverDog = () => {
     if (isCatHovering) {
       setIsCatHovering(false);
     }
     setIsDogHovering(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     setIsCatHovering(false);
     setIsDogHovering(false);
-  }
+  };
 
   useEffect(() => {
     const checkCartStatus = async () => {
@@ -186,9 +185,15 @@ export default function NavBar() {
               <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
             </a>
             <button onClick={openCart} className="cursor-pointer relative">
-              <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+              <Image
+                src="/assets/Cart.svg"
+                alt="Cart Icon"
+                width={80}
+                height={80}
+                className="cursor-pointer"
+              />
               {cartItems.length > 0 && (
-                <div className="absolute top-4 right-0 bg-red-500 rounded-full w-3 h-3" />
+                <div className="absolute top-3 right-0 bg-red-500 rounded-full w-2 h-2" />
               )}
             </button>
           </div>
@@ -196,9 +201,15 @@ export default function NavBar() {
 
         <div className="xl:hidden flex">
           <button onClick={openCart} className="cursor-pointer relative">
-            <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+            <Image
+              src="/assets/Cart.svg"
+              alt="Cart Icon"
+              width={26}
+              height={26}
+              className="cursor-pointer"
+            />{" "}
             {cartItems.length > 0 && (
-              <div className="absolute top-2 -right-1 bg-red-500 rounded-full w-3 h-3" />
+              <div className="absolute top-2 -right-0 bg-red-500 rounded-full w-2 h-2" />
             )}
           </button>
         </div>

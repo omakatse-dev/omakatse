@@ -39,15 +39,17 @@ export default function ProductImages({
       </div>
 
       {/* Main Image - Clickable */}
-      <button onClick={openModal} className="md:w-7/8 mx-6 md:mx-0">
-        <Image
-          src={images.nodes[selectedIndex].url}
-          alt="product"
-          className="bg-white rounded-xl md:rounded-[1.25rem] md:w-full aspect-square border-primary justify-self-center p-12"
-          width={516}
-          height={516}
-        />
-      </button>
+      <div className="w-full h-full aspect-square">
+        <button onClick={openModal} className="w-full h-full mx-6 md:mx-0">
+          <Image
+            src={images.nodes[selectedIndex].url}
+            alt="product"
+            className="bg-white rounded-xl md:rounded-[1.25rem] md:w-full aspect-square border-primary justify-self-center p-6"
+            width={516}
+            height={516}
+          />
+        </button>
+      </div>
 
       {/* Fullscreen Modal */}
       <ImageZoomModal
