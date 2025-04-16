@@ -13,8 +13,8 @@ import dog1 from "../../../public/assets/Dog1.svg";
 import dog2 from "../../../public/assets/Dog2.svg";
 import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
-import cat from "../../../public/assets/cat.svg";
-import dog from "../../../public/assets/dog.svg";
+import cat from "../../../public/assets/Cat.svg";
+import dog from "../../../public/assets/Dog.svg";
 import Image from "next/image";
 
 export default function SizeSelector({
