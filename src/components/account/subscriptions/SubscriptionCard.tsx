@@ -90,7 +90,7 @@ export default function SubscriptionCard({
           </div>
         </div>
       </div>
-      {subscription.status == "Active" && (
+      {subscription.status === "Active" && (
         <div>
           <Button
             onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
