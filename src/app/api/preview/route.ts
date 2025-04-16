@@ -14,7 +14,8 @@ export async function GET(req: Request) {
 
   // Enable Preview Mode (this sets a cookie)
   const res = NextResponse.redirect(`/blog/${slug}`);
-  res.cookies.set("preview", "true", { maxAge: 60 * 60 });
+  const cookies = res.cookies;
+  await cookies.set("preview", "true", { maxAge: 60 * 60 });
 
   return res;
 }

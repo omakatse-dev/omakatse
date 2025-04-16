@@ -33,7 +33,7 @@ export default function ProductDetails({
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="flex flex-col w-full items-center">
-      <div className="flex flex-col md:pt-10 mt-32 md:px-12 max-w-7xl">
+      <div className="flex flex-col md:pt-10 mt-32 md:px-12 max-w-7xl w-screen">
         <div className="md:pt-10 flex md:flex-row flex-col gap-8 md:gap-25 w-full">
           <div className="flex flex-col gap-15 md:w-1/2 md:flex-shrink-0 md:basis-1/2">
             <ProductImages images={product.images} />

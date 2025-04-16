@@ -36,7 +36,6 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     return Math.max(min, Math.min(value, max));
   };
   
-  // Reset offset and transform origin when changing images
   useEffect(() => {
     setOffset({ x: 0, y: 0 });
     setTransformOrigin("center center");
@@ -113,7 +112,6 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
   const handleMouseUp = () => {
     setDragging(false);
   
-    // Reset only *after* a short delay to allow the click to process (if needed)
     setTimeout(() => {
       setMouseMoved(false);
     }, 0);
@@ -123,19 +121,19 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
     <Modal
       isOpen={isOpen}
       onRequestClose={closeModalHandler}
-      className="fixed inset-0 hidden sm:flex flex-col items-center justify-center bg-gray-50 z-[10]"
+      className="fixed inset-0 hidden sm:flex flex-col items-center justify-center max-h-[100vh] bg-gray-50 z-[10] p-8"
       overlayClassName="fixed inset-0 z-[100]"
       ariaHideApp={false}
     >
       {/* Close Button */}
       <button
         onClick={closeModalHandler}
-        className="z-200 absolute top-24 right-12 bg-white p-2 border-primary border-1 rounded-full cursor-pointer"
+        className="z-200 absolute top-12 right-12 bg-white p-2 border-primary border-1 rounded-full cursor-pointer"
       >
         <XMarkIcon className="size-6 sm:size-10" />
       </button>
 
-      <div className="relative max-w-6xl w-full flex flex-col items-center z-[101]">
+      <div className="relative max-w-6xl w-full flex flex-col items-center z-[101] overflow-hidden">
         <button
           onClick={prevImage}
           className="absolute left-5 top-1/2 transform -translate-y-1/2 text-primary border-primary  bg-white border-1 p-2 rounded-full z-10 cursor-pointer"
@@ -143,10 +141,9 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
           <ChevronLeftIcon className="size-6 sm:size-10" />
         </button>
 
-        {/* Fixed Container */}
         <div
           ref={imageRef}
-          className="border-2 border-gray-200 rounded-lg w-[900px] h-[900px] overflow-hidden flex items-center justify-center"
+          className="border-2 border-gray-200 rounded-lg aspect-square overflow-hidden flex items-center justify-center"
           style={{ cursor: zoom === 1 ? "zoom-in" : dragging ? "grabbing" : "grab" }}
         >
           <div
@@ -163,7 +160,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
               width={900}
               height={900}
               draggable={false}
-              className="rounded-lg bg-white p-16"
+              className="rounded-lg object-contain"
               style={{
                 transform: `scale(${zoom}) translate(${offset.x}px, ${offset.y}px)`,
                 transformOrigin: transformOrigin,

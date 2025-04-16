@@ -93,7 +93,7 @@ export default function Cart({
             Shipping is calculated at checkout
           </div>
           <Button
-            className="w-full mt-3 py-4"
+            className="w-full mt-3"
             disabled={regularCartItems.length === 0}
             onClick={createCartHandler}
           >

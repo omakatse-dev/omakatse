@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-10 lg:justify-between">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="">
             <p className="bodyLG text-gray-500 mb-4"> Cat </p>
@@ -177,14 +177,14 @@ export default function Footer() {
           <p className="bodyMD mb-4 font-semibold"> Subscribe </p>
           <p className="bodyMD mb-6 text-sm lg:text-base">
             {" "}
-            Join our newsletter to stay up to date on features and releases.
+            Stay in the loop with our newsletter and pet-approved goodies.
           </p>
 
           <EmailSubscriptionForm />
         </div>
       </div>
       <div className="border-t border-gray-400 flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">
-        <p>© 2025 Omaktse. All rights reserved.</p>
+        <p>© 2025 Omakatse. All rights reserved.</p>
       </div>
     </div>
   );

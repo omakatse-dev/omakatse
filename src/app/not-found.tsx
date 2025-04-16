@@ -10,7 +10,7 @@ import AnimationData from "../assets/lotties/404.json";
 export default function NotFound() {
   return (
     <div className="my-52 flex flex-col gap-8 px-6">
-      <div className="px-24">
+      <div className="px-16 md:px-24">
       <Lottie animationData={AnimationData} loop={true}/>
       </div>
       <div className="flex flex-col gap-3 items-center">
