@@ -2,9 +2,9 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import PetListForContract from "@/components/account/subscriptions/PetListForContract";
+import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
 
 export default function page() {
-
   return (
     <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-6xl">
       <Link
@@ -18,11 +18,16 @@ export default function page() {
         Update your subscription details
       </h3>
       <div className="bodyMD text-gray-800 mt-1 text-center">
-        Let&apos;s double check on your pet details{" "}
+        Let&apos;s double check on your pet details!{" "}
       </div>
-      <Suspense fallback={<div>Loading Subscription Details...</div>}>
-      <PetListForContract />
-      </Suspense>
+      <div>
+        <Suspense fallback={<div>Loading Subscription Details...</div>}>
+          <PetListForContract />
+        </Suspense>
+      </div>
+      <div className="mt-8">
+        <AddPetCard />
+      </div>
     </div>
   );
 }

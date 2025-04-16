@@ -184,7 +184,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-gray-400 flex flex-row lg:justify-center bodySM text-white gap-6 pt-8">
-        <p>© 2025 Omaktse. All rights reserved.</p>
+        <p>© 2025 Omakatse. All rights reserved.</p>
       </div>
     </div>
   );

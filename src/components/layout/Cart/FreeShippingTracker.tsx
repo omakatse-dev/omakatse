@@ -13,7 +13,7 @@ export default function FreeShippingTracker({
           Spend AED {amountMore} more and get free shipping!
         </div>
       ) : (
-        <div>🎉 You&apos;ve unlocked free shipping!</div>
+        <div className="bodySM">🎉 You&apos;ve unlocked free shipping!</div>
       )}
       <ProgressBar
         currentStep={Math.min(100 - amountMore, 100)}
