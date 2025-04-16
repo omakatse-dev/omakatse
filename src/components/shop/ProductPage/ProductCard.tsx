@@ -24,8 +24,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const numericID = product.id.split("/").pop();
   const hasMultipleVariants = (product.variants?.nodes.length || 0) > 1;
-  console.log(product);
-  console.log(hasMultipleVariants);
+
   return (
     <Link href={`/shop/${numericID}`}>
       <Image
