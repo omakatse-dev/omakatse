@@ -24,12 +24,12 @@ export default function Button({
     "bg-white active:bg-gray-500 lg:active:text-white disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed";
 
     return (
-      <div className="relative group inline-block w-full sm:w-fit sm:self-center z-1">
+      <div className={`relative group inline-block w-full sm:self-center z-1 h-11 md:h-13 ${className}`}>
         {/* Bottom button */}
         <button
           type={type}
           disabled={disabled}
-          className={`absolute top-0 left-0 w-full h-full rounded-full transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-active:translate-x-1 group-active:translate-y-1 group-active:bg-white border-1 ${variant === "primary" ? "bg-yellow" : "bg-gray-500"}`}
+          className={`absolute inset-0 rounded-full transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-active:translate-x-1 group-active:translate-y-1 group-active:bg-white border-1 ${variant === "primary" ? "bg-yellow" : "bg-gray-500"}`}
           aria-hidden="true"
         > </button>
   
@@ -38,8 +38,8 @@ export default function Button({
           type={type}
           onClick={onClick}
           disabled={disabled}
-          className={`relative z-10 flex justify-center py-2.5 sm:py-4 px-10 bodyButton rounded-full text-primary border-black border transition-all cursor-pointer h-11 md:h-13 items-center w-full
-          ${variant === "primary" ? primaryStyles : secondaryStyles} ${className}`}
+          className={`relative z-10 flex justify-center px-10 bodyButton rounded-full text-primary border-black border transition-all cursor-pointer h-full items-center w-full flex-shrink-0
+          ${variant === "primary" ? primaryStyles : secondaryStyles}`}
         >
           {children}
         </button>

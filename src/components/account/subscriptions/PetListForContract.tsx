@@ -58,7 +58,7 @@ export default function PetListForContract() {
   }
 
   return (
-    <div className="mt-8 flex flex-col gap-8">
+    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
       {pets.length > 0 ? (
         pets.map((pet: PetDetailsSchema, idx: number) => (
           <PetDetailsCard key={idx} details={pet} idx={idx} editMode={true} />

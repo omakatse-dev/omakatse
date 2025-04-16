@@ -18,8 +18,7 @@ export default function page() {
         Update your subscription details
       </h3>
       <div className="bodyMD text-gray-800 mt-1 text-center">
-        Kindly double check the details below to renew. If you want to change
-        the box size, duration or pet, click on edit subscription{" "}
+        Let&apos;s double check on your pet details{" "}
       </div>
       <Suspense fallback={<div>Loading Subscription Details...</div>}>
       <PetListForContract />
