@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -21,6 +21,7 @@ function CatDropdown({ setIsOpen }: CatDropdownProps) {
 
   return (
     <div>
+      <Suspense>
       <Disclosure as="div">
         {({ open }) => (
           <>
@@ -90,6 +91,7 @@ function CatDropdown({ setIsOpen }: CatDropdownProps) {
           </>
         )}
       </Disclosure>
+      </Suspense>
     </div>
   );
 }

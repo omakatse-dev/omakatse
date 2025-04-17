@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -20,6 +20,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
   const pathName = usePathname();
   return (
     <div>
+      <Suspense>
       <Disclosure as="div">
         {({ open }) => (
           <>
@@ -82,6 +83,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
           </>
         )}
       </Disclosure>
+      </Suspense>
     </div>
   );
 }

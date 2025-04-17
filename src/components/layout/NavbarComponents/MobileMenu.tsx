@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import {
   ShoppingCartIcon,
@@ -64,8 +64,10 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
       </div>
 
       <div className="flex flex-col pt-8 gap-8 font-open-sans font-semibold pb-8 border-b-1 border-white text-2xl">
-        <CatDropdown setIsOpen={setIsOpen} />
-        <DogDropdown setIsOpen={setIsOpen} />
+        <Suspense>
+          <CatDropdown setIsOpen={setIsOpen} />
+          <DogDropdown setIsOpen={setIsOpen} />
+        </Suspense>
 
         {links.map((link) => (
           <Link
