@@ -13,7 +13,7 @@ import TreatPreferenceSelector from "@/components/subscription/TreatPreferenceSe
 import Button from "@/components/common/Button";
 import { updatePets } from "@/utils/SubscriptionAPIs";
 
-type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
+export type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
 const ALLERGIES = ["Beef", "Dairy", "Wheat", "Poultry"] as const;
 type StandardAllergy = (typeof ALLERGIES)[number];

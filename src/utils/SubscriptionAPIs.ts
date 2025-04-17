@@ -1,6 +1,6 @@
 "use server";
 
-import { PetDetailsSchema } from "@/app/subscribe/step-4/page";
+import { PetDetailsSchema } from "@/components/account/pet-profiles/PetProfileForm";
 
 const endpoint = process.env.SUBSCRIPTION_WORKER_ENDPOINT || "";
 
