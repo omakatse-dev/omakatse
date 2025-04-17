@@ -61,13 +61,14 @@ export default function PetListForContract() {
     <div className="mt-8 flex flex-wrap gap-8 justify-center">
       {pets.length > 0 ? (
         pets.map((pet: PetDetailsSchema, idx: number) => (
-          <PetDetailsCard
-            key={idx}
-            details={pet}
-            idx={idx}
-            editMode={true}
-            petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
-          />
+          <div key={idx}>
+            <PetDetailsCard
+              details={pet}
+              idx={idx}
+              editMode={true}
+              petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
+            />
+          </div>
         ))
       ) : (
         <div>No pets found for this subscription.</div>

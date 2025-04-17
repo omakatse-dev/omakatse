@@ -1,8 +1,7 @@
 "use client";
 
-import Button from "@/components/common/Button";
 import Card from "@/components/common/Card";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function AddPetCard() {
   return (
@@ -13,9 +12,12 @@ export default function AddPetCard() {
           Add a new pet to your subscription (maximum 4 pets)
         </div>
       </div>
-      <Button onClick={() => redirect("/contact")} className="mt-4 w-full sm:w-fit">
-        Contact Us
-      </Button>
+      <Link
+        href="/contact"
+        className="bodyButton mt-4 underline underline-offset-8"
+      >
+        Add a pet
+      </Link>
     </Card>
   );
 }

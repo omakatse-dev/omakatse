@@ -64,7 +64,7 @@ export default function RenewSubscriptionCard({
       <div className="flex flex-col gap-4 md:flex-row w-full md:gap-6">
         <Button
           onClick={() =>
-            router.push(`/edit-subscription?contractId=${contractId}`)
+            router.push(`/renew-subscription/edit-subscription?contractId=${contractId}`)
           }
           className="w-full md:w-full self-center"
         >

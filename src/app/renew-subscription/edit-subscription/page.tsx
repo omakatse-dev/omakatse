@@ -3,8 +3,9 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import PetListForContract from "@/components/account/subscriptions/PetListForContract";
 import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
+import Button from "@/components/common/Button";
 
-export default function page() {
+export default function EditSubscriptionPage() {
   return (
     <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-6xl">
       <Link
@@ -25,8 +26,11 @@ export default function page() {
           <PetListForContract />
         </Suspense>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 flex flex-col gap-8">
         <AddPetCard />
+        <Link href="/renew-subscription/choose-plan" className="self-center">
+          <Button>Choose plan</Button>
+        </Link>
       </div>
     </div>
   );

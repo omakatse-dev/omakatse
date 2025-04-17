@@ -46,7 +46,7 @@ export default function PetProfilePage() {
           <div className="bodyMD text-center sm:text-start sm:-mt-8">
             Here are your current pets that are subscribed to our box:
           </div>
-          <div className="flex flex-wrap gap-8 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center">
             {pets.map((pet, idx) => (
               <PetDetailsCard
                 key={pet.name}
@@ -55,7 +55,7 @@ export default function PetProfilePage() {
                 editMode={true}
                 setEditPetIndex={setEditPetIndex}
                 petType={pet.type === "Cat" ? "catsDetails" : "dogsDetails"}
-                catCount={pets.filter(p => p.type === "Cat").length}
+                catCount={pets.filter((p) => p.type === "Cat").length}
               />
             ))}
           </div>
