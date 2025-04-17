@@ -83,7 +83,10 @@ export default function ExitSurvey() {
                 <PillButton
                   active={field.value === reason}
                   key={reason}
-                  onClick={() => field.onChange(reason)}
+                  onClick={(e: React.MouseEvent) => {
+                    e.preventDefault();
+                    field.onChange(reason);
+                  }}
                 >
                   {reason}
                 </PillButton>
@@ -121,7 +124,10 @@ export default function ExitSurvey() {
                   {[...Array(10)].map((_, i) => (
                     <button
                       key={i + 1}
-                      onClick={() => field.onChange(i + 1)}
+                      onClick={(e: React.MouseEvent) => {
+                        e.preventDefault();
+                        field.onChange(i + 1);
+                      }}
                       className={`h-7 w-7 md:h-12 md:w-12 rounded-full border border-black cursor-pointer ${
                         field.value === i + 1 && "bg-yellow"
                       }`}
@@ -161,10 +167,17 @@ export default function ExitSurvey() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-8 mt-8">
-          <Button type="submit" variant="secondary">
+          <Button
+            type="submit"
+            variant="secondary"
+            loading={status === "loading"}
+          >
             Cancel subscription
           </Button>
-          <Button onClick={() => router.push("/account/subscriptions")}>
+          <Button
+            type="button"
+            onClick={() => router.push("/account/subscriptions")}
+          >
             Keep subscription
           </Button>
         </div>

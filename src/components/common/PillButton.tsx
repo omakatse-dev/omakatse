@@ -11,7 +11,7 @@ export default function PillButton({
   error?: boolean;
   className?: string;
   active?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }) {
   return (
     <button
