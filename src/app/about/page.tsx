@@ -161,7 +161,7 @@ export default function page() {
               platforms, allowing you to learn what they think of our offerings
               directly.
             </p>
-            <Button variant="primary" className="w-full lg:w-fit">
+            <Button variant="primary" className="w-full lg:w-fit lg:self-start">
               Build your box now
             </Button>
           </div>
@@ -174,7 +174,7 @@ export default function page() {
           />
         </div>
 
-        <div className="bg-gray-300 rounded-4xl my-15 lg:my-20 px-8 py-10 lg:px-16 lg:py-20 flex flex-col justify-center gap-6">
+        <div className="bg-gray-300 rounded-4xl mb-15 lg:mb-20 px-8 py-10 lg:px-16 lg:py-20 flex flex-col justify-center gap-6">
           <h3 className="text-gray-800 text-center"> Join our team </h3>
           <p className="text-primary text-center bodyLG mb-4">
             {" "}

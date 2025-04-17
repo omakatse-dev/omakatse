@@ -2,24 +2,8 @@ import React from "react";
 import Tag from "../common/Tag";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { EntryFields, Entry } from "contentful";
-
-export type BlogPostType = {
-  contentTypeId: "blogPost";
-  fields: {
-    blogId: EntryFields.Integer;
-    categoryTag: EntryFields.Symbol;
-    title: EntryFields.Text;
-    editedDate: EntryFields.Date;
-    postedDate: EntryFields.Date;
-    readDuration: EntryFields.Integer;
-    author: EntryFields.Text;
-    imageHeader: EntryFields.AssetLink;
-    description: EntryFields.RichText;
-    summary: EntryFields.Text;
-    slug: EntryFields.Text;
-  };
-};
+import { Entry } from "contentful";
+import { BlogPostType } from "@/types/Types";
 
 interface BlogCardProps {
   blog: Entry<BlogPostType>;

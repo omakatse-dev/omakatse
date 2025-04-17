@@ -4,25 +4,9 @@ import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ChainModifiers, EntryFields, Entry } from "contentful";
+import { ChainModifiers, Entry } from "contentful";
 import Image from "next/image";
-
-export type BlogPostType = {
-  contentTypeId: "blogPost";
-  fields: {
-    blogId: EntryFields.Integer;
-    categoryTag: EntryFields.Symbol;
-    title: EntryFields.Text;
-    editedDate: EntryFields.Date;
-    postedDate: EntryFields.Date;
-    readDuration: EntryFields.Integer;
-    author: EntryFields.Text;
-    imageHeader: EntryFields.AssetLink;
-    description: EntryFields.RichText;
-    summary: EntryFields.Text;
-    slug: EntryFields.Text;
-  };
-};
+import { BlogPostType } from "@/types/Types";
 
 export default function Page({
   blogs,
@@ -51,13 +35,11 @@ export default function Page({
     };
   }, []);
 
-  // Get unique categories from contentful, adding "All" as a category
   const categories = [
     "All",
     ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString())),
   ];
 
-  // Filter blogData based on the search query and selected category
   const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
       selectedCategory === "All" ||
@@ -65,11 +47,9 @@ export default function Page({
     return matchesCategory;
   });
 
-  // Calculate the index of the first and last blog on the current page
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
 
-  // Slice the filtered blogData to show only the blogs for the current page
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
@@ -86,7 +66,7 @@ export default function Page({
           alt="Blog Image"
           width={1340}
           height={190}
-          className="rounded-3xl mb-8"
+          className="rounded-3xl mb-8 w-full"
         />
         <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl lg:text-7xl font-bold w-full text-center">
           Omakatse&apos;s Blog

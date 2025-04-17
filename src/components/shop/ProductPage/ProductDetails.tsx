@@ -69,6 +69,7 @@ export default function ProductDetails({
         details={product}
         selectedOptions={selectedOptions}
         quantity={quantity}
+        className="sticky bottom-0 h-fit"
       />
     </div>
   );
