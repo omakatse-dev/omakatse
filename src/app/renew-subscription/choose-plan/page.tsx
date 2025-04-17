@@ -3,23 +3,25 @@
 import Tabs from "@/components/common/Tabs";
 import PlanSelector from "@/components/subscription/PlanSelector";
 import TipCard from "@/components/subscription/TipCard";
-import Link from "next/link";
 import { useState } from "react";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/common/Button";
+import { useRouter } from "next/navigation";
+
 export default function ChoosePlanPage() {
+  const router = useRouter();
   const [boxSize, setBoxSize] = useState<string>("Small Box");
   const [selectedPlan, setSelectedPlan] = useState<string>("");
 
   return (
     <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-6xl flex flex-col gap-8">
-      <Link
-        href="/renew-subscription"
+      <button
+        onClick={() => router.back()}
         className="bodyButton flex items-center gap-2 cursor-pointer w-fit"
       >
         <ChevronLeftIcon className="w-6" />
         Go back
-      </Link>
+      </button>
       <div className="flex flex-col text-center self-center gap-2">
         <h3 className="font-bold">Choose your plan</h3>
         <div className="bodyMD text-gray-800">

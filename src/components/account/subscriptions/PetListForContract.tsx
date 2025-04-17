@@ -47,8 +47,6 @@ export default function PetListForContract() {
     return <div>No subscription found for the provided contract ID.</div>;
   }
 
-  console.log(subscription.pets);
-
   let pets = [];
   try {
     pets = JSON.parse(subscription.pets || "[]"); // Safely parse the pets string

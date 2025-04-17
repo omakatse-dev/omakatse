@@ -13,6 +13,8 @@ import dog1 from "../../../public/assets/Dog1.svg";
 import dog2 from "../../../public/assets/Dog2.svg";
 import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
@@ -75,6 +77,8 @@ export default function PetDetailsCard({
     "just right": "Just Right",
     chubby: "Chubby",
   };
+  const searchParams = useSearchParams();
+  const contractId = searchParams.get("contractId");
 
   return (
     <Card
@@ -173,9 +177,11 @@ export default function PetDetailsCard({
             <Button onClick={() => setEditPetIndex(idx)} className="w-1/2">
               Remove Pet
             </Button>
-            <Button onClick={() => setEditPetIndex(idx)} className="w-1/2">
-              Edit Pet
-            </Button>
+            <Link
+              href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
+            >
+              <Button className="w-1/2">Edit Pet</Button>
+            </Link>
           </div>
         )}
       </div>
