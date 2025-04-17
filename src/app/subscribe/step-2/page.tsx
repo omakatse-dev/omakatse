@@ -105,6 +105,7 @@ export default function SubscriptionStepTwoPage() {
           <Button
             onClick={() => router.push("/subscribe/step-1")}
             variant="secondary"
+            bgColor="bg-blue-pastel"
           >
             Previous
           </Button>

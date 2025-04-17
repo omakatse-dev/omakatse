@@ -76,7 +76,7 @@ export default function PetDetailsCard({
   return (
     <Card
       variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
-      className="flex flex-col items-center w-full"
+      className="flex flex-col items-center w-full sm:w-2/5 bg-white"
     >
       <div className="flex flex-col items-center w-full">
         <div className="flex sm:flex-col items-center gap-4 sm:gap-0">

@@ -70,12 +70,15 @@ export default function SubscriptionStepNinePage() {
         setSelectedPlan={setSelectedPlan}
       />
 
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 w-full justify-center">
-        <Button onClick={addToCartHandler}>Add to cart</Button>
+      <div className="flex flex-col sm:flex-row-reverse gap-2 sm:gap-5 w-full justify-center">
+        <Button onClick={addToCartHandler}>
+          Add to cart
+        </Button>
         <Button
           onClick={() => router.push("/subscribe/step-8")}
           variant="secondary"
           type="button"
+          bgColor="bg-green-pastel"
         >
           Previous
         </Button>

@@ -6,7 +6,7 @@ import SubscriptionList from '@/components/account/subscriptions/SubscriptionLis
 export default function page() {
 
   return (
-    <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-6xl">
+    <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-4xl">
       <Link
         href="/account/subscriptions"
         className="bodyButton flex items-center gap-2 cursor-pointer w-fit"

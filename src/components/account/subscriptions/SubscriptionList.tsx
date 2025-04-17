@@ -35,9 +35,8 @@ export default function SubscriptionList() {
   if (!user) return <div>Please log in to view subscriptions.</div>; 
   const isRenewSubscription = pathname.includes('/renew-subscription');
 
-
   return (
-    <div className="mt-8">
+    <div className="mt-8 flex flex-col gap-8">
       {subscriptions.map((subscription: SubscriptionContract) => (
         isRenewSubscription ? (
           <RenewSubscriptionCard

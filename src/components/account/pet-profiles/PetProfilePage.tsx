@@ -46,7 +46,7 @@ export default function PetProfilePage() {
           <div className="bodyMD text-center sm:text-start sm:-mt-8">
             Here are your current pets that are subscribed to our box:
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-wrap gap-8 justify-center">
             {pets.map((pet, idx) => (
               <PetDetailsCard
                 key={pet.name}
