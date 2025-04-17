@@ -64,7 +64,7 @@ const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
 
   return (
     <div className="bg-yellow-pastel px-6 pt-10 pb-16 lg:px-12 lg:py-20 w-full flex justify-center">
-      <div className="w-full max-w-[120rem]">
+      <div className="w-full max-w-7xl">
         <h2 className="text-center mb-8 lg:mb-15">More Blogs</h2>
 
         {isLoading && (
