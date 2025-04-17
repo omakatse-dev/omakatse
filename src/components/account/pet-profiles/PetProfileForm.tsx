@@ -11,6 +11,7 @@ import CardButton from "@/components/common/CardButton";
 import Textfield from "@/components/common/Textfield";
 import TreatPreferenceSelector from "@/components/subscription/TreatPreferenceSelector";
 import Button from "@/components/common/Button";
+import { updatePets } from "@/utils/SubscriptionAPIs";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
@@ -18,15 +19,21 @@ const ALLERGIES = ["Beef", "Dairy", "Wheat", "Poultry"] as const;
 type StandardAllergy = (typeof ALLERGIES)[number];
 export default function PetProfileForm({
   existingDetails,
+  contractId,
+  petIndex,
 }: {
   existingDetails: PetDetailsSchema;
+  contractId: string;
+  petIndex: number;
 }) {
   const { register, handleSubmit, control } = useForm<PetDetailsSchema>({
     defaultValues: existingDetails,
   });
 
-  const onSubmit = (data: PetDetailsSchema) => {
+  const onSubmit = async (data: PetDetailsSchema) => {
+    console.log("here??");
     console.log(data);
+    await updatePets(contractId, data, petIndex);
   };
 
   const years = Array.from({ length: 25 }, (_, i) => ({
@@ -400,7 +407,9 @@ export default function PetProfileForm({
         <Button variant="secondary" className="w-1/2">
           Cancel
         </Button>
-        <Button className="w-1/2">Save</Button>
+        <Button type="submit" className="w-1/2">
+          Save
+        </Button>
       </div>
     </form>
   );

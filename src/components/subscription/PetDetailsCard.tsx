@@ -1,4 +1,3 @@
-import React, { Dispatch, SetStateAction } from "react";
 import Card from "../common/Card";
 import Tag from "../common/Tag";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
@@ -15,6 +14,7 @@ import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { removePet } from "@/utils/SubscriptionAPIs";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
@@ -46,14 +46,12 @@ export default function PetDetailsCard({
   details,
   idx,
   editMode = false,
-  setEditPetIndex = () => {},
   petType,
   catCount = 0,
 }: {
   details: PetDetailsSchema;
   idx: number;
   editMode?: boolean;
-  setEditPetIndex?: Dispatch<SetStateAction<number | undefined>>;
   petType: "catsDetails" | "dogsDetails";
   catCount?: number;
 }) {
@@ -78,7 +76,11 @@ export default function PetDetailsCard({
     chubby: "Chubby",
   };
   const searchParams = useSearchParams();
-  const contractId = searchParams.get("contractId");
+  const contractId = searchParams.get("contractId") || "";
+
+  const removePetHandler = async () => {
+    await removePet(contractId, idx);
+  };
 
   return (
     <Card
@@ -174,7 +176,7 @@ export default function PetDetailsCard({
         </div>
         {editMode && (
           <div className="flex flex-col sm:flex-row sm:justify-center mt-8 w-full gap-2">
-            <Button onClick={() => setEditPetIndex(idx)} className="w-1/2">
+            <Button onClick={removePetHandler} className="w-1/2">
               Remove Pet
             </Button>
             <Link
