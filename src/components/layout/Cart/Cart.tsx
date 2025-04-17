@@ -37,7 +37,7 @@ export default function Cart({
     const formattedSubscriptionItems = subscriptionItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
-      sellingPlanId: "gid://shopify/SellingPlan/10819797251",
+      sellingPlanId: item.sellingPlanId,
     }));
     console.log(formattedSubscriptionItems);
     try {

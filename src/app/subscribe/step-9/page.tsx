@@ -10,16 +10,27 @@ import { useEffect, useState } from "react";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useCartStore } from "@/stores/cartStore";
 import { getSubscriptionPlan } from "@/utils/APIs";
+
+type PlanOption = "12 months" | "6 months" | "3 months" | "1 month";
+
 export default function SubscriptionStepNinePage() {
   const router = useRouter();
 
   const [boxSize, setBoxSize] = useState<string>("Small Box");
-  const [selectedPlan, setSelectedPlan] = useState<string>("12 months");
+  const [selectedPlan, setSelectedPlan] = useState<PlanOption>("12 months");
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const addItem = useCartStore((state) => state.addItem);
   const hydrated = useSubscriptionFormStore((state) => state.hydrated);
+  
+  const selectedPlanMapping = {
+    "12 months": 3,
+    "6 months": 2,
+    "3 months": 1,
+    "1 month": 0,
+  };
+
   useEffect(() => {
     if (!hydrated) return;
 
@@ -35,18 +46,32 @@ export default function SubscriptionStepNinePage() {
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
   const addToCartHandler = async () => {
+    
+    // TODO change this id if the box changes
+    const productId =
+      boxSize === "Small Box"
+        ? "gid://shopify/Product/8944155918595"
+        : "gid://shopify/Product/8944976658691";
+    const plans = await getSubscriptionPlan(productId);
+    console.log("plans", plans);
+
     //TODO need to find a way to add the notes to the item
     addItem({
-      id: "gid://shopify/ProductVariant/46680266211587", //this is the variant id
-      name: "Subscription Box",
-      price: "0",
+      id: "gid://shopify/ProductVariant/46680266211587", //this depends on box size
+      name:
+        boxSize === "Small Box"
+          ? "Small Subscription Box"
+          : "Large Subscription Box",
+      price: "0", //TODO create box / plan to price mapping
       compareAtPrice: "",
       quantity: 1,
-      image: "https://images.omakatsepets.com/subscription-box-small.png",
+      sellingPlanId: plans[selectedPlanMapping[selectedPlan]], //TODO need to change this mapping to use the plan name or something
+      image:
+        boxSize === "Small Box"
+          ? "https://images.omakatsepets.com/subscription-box-small.png"
+          : "https://images.omakatsepets.com/subscription-box-large.png",
       options: [],
     });
-    const test = await getSubscriptionPlan();
-    console.log(test);
   };
 
   return (

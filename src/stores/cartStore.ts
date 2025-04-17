@@ -8,6 +8,7 @@ export type CartItemType = {
   compareAtPrice: string;
   quantity: number;
   image: string;
+  sellingPlanId?: string;
   options: {
     name: string;
     value: string;

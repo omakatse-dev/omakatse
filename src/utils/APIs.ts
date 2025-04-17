@@ -487,10 +487,10 @@ export const getContracts = async () => {
   return res.data;
 };
 
-export const getSubscriptionPlan = async () => {
+export const getSubscriptionPlan = async (productId: string) => {
   const query = `
     query GetSellingPLan {
-    product(id: "gid://shopify/Product/8944976658691") {
+    product(id: "${productId}") {
       sellingPlanGroups(first: 5) {
         edges {
           node {
@@ -508,13 +508,15 @@ export const getSubscriptionPlan = async () => {
       }
     }
   }`;
+
   const res = await storefrontClient.request(query);
   console.log(res.errors);
-  return res.data;
+  return res.data.product.sellingPlanGroups.edges.flatMap((edge: any) =>
+    edge.node.sellingPlans.edges.map((plan: any) => plan.node.id)
+  );
 };
 
 export const createCustomer = async (email: string) => {
-  
   const mutation = `
     mutation {
       customerCreate(input: { 
@@ -543,11 +545,12 @@ export const createCustomer = async (email: string) => {
   if (customerCreateResult && customerCreateResult.customer) {
     return {
       success: true,
-      customer: customerCreateResult.customer
+      customer: customerCreateResult.customer,
     };
   } else {
     throw new Error(
-      customerCreateResult?.userErrors?.[0]?.message || "Customer creation failed"
+      customerCreateResult?.userErrors?.[0]?.message ||
+        "Customer creation failed"
     );
   }
 };
