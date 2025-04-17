@@ -47,8 +47,6 @@ export default function PetListForContract() {
     return <div>No subscription found for the provided contract ID.</div>;
   }
 
-  console.log(subscription.pets);
-
   let pets = [];
   try {
     pets = JSON.parse(subscription.pets || "[]"); // Safely parse the pets string
@@ -58,16 +56,17 @@ export default function PetListForContract() {
   }
 
   return (
-    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className="mt-8 flex flex-wrap gap-8 justify-center">
       {pets.length > 0 ? (
         pets.map((pet: PetDetailsSchema, idx: number) => (
-          <PetDetailsCard
-            key={idx}
-            details={pet}
-            idx={idx}
-            editMode={true}
-            petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
-          />
+          <div key={idx}>
+            <PetDetailsCard
+              details={pet}
+              idx={idx}
+              editMode={true}
+              petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
+            />
+          </div>
         ))
       ) : (
         <div>No pets found for this subscription.</div>

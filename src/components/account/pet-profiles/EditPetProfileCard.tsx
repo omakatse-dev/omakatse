@@ -9,8 +9,10 @@ export default function EditPetProfileCard({
 }: {
   existingDetails: PetDetailsSchema;
 }) {
+
+  console.log(existingDetails)
   return (
-    <Card className="max-w-4xl bg-white">
+    <Card className="bg-white">
       <div className="flex flex-col items-center">
         <div className="flex flex-row sm:flex-col items-center gap-2">
           <div className="w-24 h-24 rounded-full bg-yellow" />

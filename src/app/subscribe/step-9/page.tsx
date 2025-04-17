@@ -55,7 +55,7 @@ export default function SubscriptionStepNinePage() {
       <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">Choose your plan</h3>
         <div className="bodyMD">
-          For subscriptions, your box will be delivered to you monthly.
+          We&apos;ll send your box out monthly, no need to lift a paw.
         </div>
       </div>
       <Tabs
@@ -70,12 +70,13 @@ export default function SubscriptionStepNinePage() {
         setSelectedPlan={setSelectedPlan}
       />
 
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 w-full justify-center">
+      <div className="flex flex-col sm:flex-row-reverse gap-2 sm:gap-5 w-full justify-center">
         <Button onClick={addToCartHandler}>Add to cart</Button>
         <Button
           onClick={() => router.push("/subscribe/step-8")}
           variant="secondary"
           type="button"
+          bgColor="bg-green-pastel"
         >
           Previous
         </Button>

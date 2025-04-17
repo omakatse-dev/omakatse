@@ -1,12 +1,14 @@
 "use server";
 const endpoint = process.env.SUBSCRIPTION_WORKER_ENDPOINT || "";
 
-const ensureTrailingSlash = (url : string) => {
+const ensureTrailingSlash = (url: string) => {
   return url.endsWith("/") ? url : url + "/";
 };
 
 export const getSubscriptions = async (email: string) => {
-  const res = await fetch(ensureTrailingSlash(endpoint) + "subscription?email=" + email);
+  const res = await fetch(
+    ensureTrailingSlash(endpoint) + "subscription?email=" + email
+  );
   const data = await res.json();
   return data;
 };
@@ -31,4 +33,10 @@ export const deactivateSubscription = async (contractId: string) => {
     body: JSON.stringify({ contractId }),
   });
   return res.body;
+};
+
+export const getPetsByContractId = async (contractId: string) => {
+  const res = await fetch(endpoint + "pet?contractId=" + contractId);
+  const data = await res.json()
+  return data.results;
 };

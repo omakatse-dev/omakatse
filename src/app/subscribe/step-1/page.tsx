@@ -65,7 +65,7 @@ export default function SubscriptionStepOnePage() {
         className="flex flex-col items-center gap-8"
       >
         <PetSelector control={control} />
-        <Button type="submit" className="px-32">
+        <Button type="submit">
           Next
         </Button>
       </form>

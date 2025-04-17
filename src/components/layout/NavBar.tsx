@@ -198,8 +198,8 @@ export default function NavBar() {
               <Image
                 src="/assets/Cart.svg"
                 alt="Cart Icon"
-                width={80}
-                height={80}
+                width={24}
+                height={24}
                 className="cursor-pointer"
               />
               {cartItems.length > 0 && (
