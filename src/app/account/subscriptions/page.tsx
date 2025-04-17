@@ -1,10 +1,12 @@
 import SubscriptionList from "@/components/account/subscriptions/SubscriptionList";
-
+import React, { Suspense } from "react";
 export default function SubscriptionsPage() {
   return (
     <div>
       <h2 className="hidden lg:block">My Subscriptions</h2>
-      <SubscriptionList />
+      <Suspense fallback={<div>Loading...</div>}>
+        <SubscriptionList />
+      </Suspense>
     </div>
   );
 }

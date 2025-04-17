@@ -42,7 +42,7 @@ export default function MobileTabs({
                 className ="mb-1"
               />
             )}
-            <span>{tab}</span>
+            <span className="text-xs">{tab}</span>
           </div>
         );
       })}

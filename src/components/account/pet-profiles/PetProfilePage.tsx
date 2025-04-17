@@ -4,8 +4,7 @@ import PetDetailsCard from "@/components/subscription/PetDetailsCard";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
-import { useState } from "react";
-import EditPetProfileCard from "./EditPetProfileCard";
+import { Suspense } from "react";
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
 export default function PetProfilePage() {
@@ -36,34 +35,29 @@ export default function PetProfilePage() {
     },
   ];
 
-  const [editPetIndex, setEditPetIndex] = useState<number | undefined>();
-
   return (
     <>
-      {editPetIndex === undefined ? (
-        <div className="max-w-3xl flex flex-col gap-8">
-          <h2 className="hidden sm:block">Pet Profiles</h2>
-          <div className="bodyMD text-center sm:text-start sm:-mt-8">
-            Here are your current pets that are subscribed to our box:
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-3xl flex flex-col gap-8">
+        <h2 className="hidden sm:block">Pet Profiles</h2>
+        <div className="bodyMD text-center sm:text-start sm:-mt-8">
+          Here are your current pets that are subscribed to our box:
+        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center">
             {pets.map((pet, idx) => (
               <PetDetailsCard
                 key={pet.name}
                 details={pet}
                 idx={idx}
                 editMode={true}
-                setEditPetIndex={setEditPetIndex}
                 petType={pet.type === "Cat" ? "catsDetails" : "dogsDetails"}
-                catCount={pets.filter(p => p.type === "Cat").length}
+                catCount={pets.filter((p) => p.type === "Cat").length}
               />
             ))}
           </div>
-          <AddPetCard />
-        </div>
-      ) : (
-        <EditPetProfileCard existingDetails={pets[editPetIndex]} />
-      )}
+        </Suspense>
+        <AddPetCard />
+      </div>
     </>
   );
 }

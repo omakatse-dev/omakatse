@@ -94,7 +94,7 @@ export default function ProductTitle({
   const partialFill = rating % 1;
   return (
     <>
-      <div className={`flex flex-col px-8 md:p-0 md:w-1/2 ${className}`}>
+      <div className={`flex flex-col px-6 md:p-0 md:w-1/2 ${className}`}>
         <div className="flex flex-row justify-between mb-2">
           <div>
             {details.tags.length > 0 && (

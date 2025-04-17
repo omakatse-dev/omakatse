@@ -65,6 +65,7 @@ export default function SubscriptionStepEightPage() {
         <Button
           onClick={() => router.push("/subscribe/step-7")}
           variant="secondary"
+          bgColor="bg-orange-pastel"
         >
           Previous
         </Button>

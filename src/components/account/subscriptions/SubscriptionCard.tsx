@@ -30,7 +30,13 @@ export default function SubscriptionCard({
     <Card className="bg-white flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
         <Pets dogs={dogs} cats={cats} />
-        <Tag className="h-fit w-fit bg-yellow">{subscription.status}</Tag>
+        <Tag
+          className={`h-fit w-fit ${
+            subscription.status === "ACTIVE" ? "bg-yellow" : "bg-gray-200"
+          }`}
+        >
+          {subscription.status}
+        </Tag>
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
@@ -50,7 +56,8 @@ export default function SubscriptionCard({
         <div className="md:border-r border-gray-200">
           <label className="bodySM text-gray-500">No. of Pets</label>
           <div className="bodyMD font-semibold mt-1">
-            {dogs.length} dog(s), {cats.length} cat(s)
+            {dogs.length > 0 && `${dogs.length} dog(s)`}{" "}
+            {cats.length > 0 && `${cats.length} cat(s)`}
           </div>
         </div>
         <div>
@@ -90,22 +97,24 @@ export default function SubscriptionCard({
           </div>
         </div>
       </div>
-      {subscription.status === "Active" && (
-        <div>
-          <Button
-            onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
-            className="w-full md:w-fit self-center"
-          >
-            Cancel auto-renew
-          </Button>
-        </div>
+      {subscription.status === "ACTIVE" ? (
+        <Button
+          onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
+          className="w-full md:w-fit self-center"
+        >
+          Cancel auto-renew
+        </Button>
+      ) : (
+        <Button
+          onClick={() =>
+            router.push(`/renew-subscription?contractId=${contractId}`)
+          }
+          className="w-full md:w-fit self-center"
+        >
+          Renew subscription
+        </Button>
       )}
-      <Button
-        onClick={() => router.push(`/renew-subscription?contractId=${contractId}`)}
-        className="w-full md:w-fit self-center"
-      >
-        Renew subscription
-      </Button>
+
       <ul className="list-disc list-inside bodySM text-gray-500">
         <li>
           Your subscription will automatically renew after your current billing

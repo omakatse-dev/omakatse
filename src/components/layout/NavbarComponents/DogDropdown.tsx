@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages */
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -8,16 +8,19 @@ import {
   DisclosurePanel,
   Transition,
 } from "@headlessui/react";
-import { usePathname } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
 interface DogDropdownProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function DogDropdown({ setIsOpen }: DogDropdownProps) {
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
+  const pathName = usePathname();
   return (
     <div>
+      <Suspense>
       <Disclosure as="div">
         {({ open }) => (
           <>
@@ -48,43 +51,31 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
               <DisclosurePanel className="relative pl-5 mt-3">
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <Link
+                    <a
                       onClick={() => setIsOpen((prev) => !prev)}
-                      href="/shop/dog-products/"
-                      className={`bodyLG ${
-                        pathname.startsWith("/shop/dog-products")
-                          ? "pb-1 border-b-2 border-black"
-                          : "border-b-0"
-                      }`}
+                      href="/shop/dog-products?sort=New+Arrivals&tab=Treats"
+                      className={`bodyLG ${tab === "Treats" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Treats
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link
+                    <a
                       onClick={() => setIsOpen((prev) => !prev)}
-                      href="/shop/dog-products/"
-                      className={`bodyLG ${
-                        pathname.startsWith("/shop/dog-products")
-                          ? "pb-1 border-b-2 border-black"
-                          : "border-b-0"
-                      }`}
+                      href="/shop/dog-products/?sort=New+Arrivals&tab=Care+Products"
+                      className={`bodyLG ${tab === "Care Products" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Care Products
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link
+                    <a
                       onClick={() => setIsOpen((prev) => !prev)}
-                      href="/shop/dog-products/"
-                      className={`bodyLG ${
-                        pathname.startsWith("/shop/dog-products")
-                          ? "pb-1 border-b-2 border-black"
-                          : "border-b-0"
-                      }`}
+                      href="/shop/dog-products/?sort=New+Arrivals&tab=Accessories"
+                      className={`bodyLG ${tab === "Accessories" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Accessories
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </DisclosurePanel>
@@ -92,6 +83,7 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
           </>
         )}
       </Disclosure>
+      </Suspense>
     </div>
   );
 }

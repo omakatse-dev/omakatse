@@ -13,10 +13,15 @@ import dog1 from "../../../public/assets/Dog1.svg";
 import dog2 from "../../../public/assets/Dog2.svg";
 import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
-const variantMapping: Record<0 | 1 | 2 | 3, "yellow" | "blue" | "green" | "pink"> = {
+const variantMapping: Record<
+  0 | 1 | 2 | 3,
+  "yellow" | "blue" | "green" | "pink"
+> = {
   0: "yellow",
   1: "blue",
   2: "green",
@@ -72,19 +77,22 @@ export default function PetDetailsCard({
     "just right": "Just Right",
     chubby: "Chubby",
   };
+  const searchParams = useSearchParams();
+  const contractId = searchParams.get("contractId");
 
   return (
     <Card
       variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
-      className="flex flex-col items-center w-full"
+      className="flex flex-col items-center w-full bg-white"
     >
       <div className="flex flex-col items-center w-full">
         <div className="flex sm:flex-col items-center gap-4 sm:gap-0">
           <Image
             alt={`${details.name} ${idx + 1}`}
-            src={petType === "catsDetails" 
-              ? catMapping[idx as keyof typeof catMapping]
-              : dogMapping[idx as keyof typeof dogMapping]
+            src={
+              petType === "catsDetails"
+                ? catMapping[idx as keyof typeof catMapping]
+                : dogMapping[idx as keyof typeof dogMapping]
             }
             width={100}
             height={100}
@@ -166,18 +174,14 @@ export default function PetDetailsCard({
         </div>
         {editMode && (
           <div className="flex flex-col sm:flex-row sm:justify-center mt-8 w-full gap-2">
-          <Button
-            onClick={() => setEditPetIndex(idx)}
-            className=""
-          >
-            Edit Pet
-          </Button>
-          <Button
-            onClick={() => setEditPetIndex(idx)}
-            className="w-1/2"
-          >
-            Remove Pet
-          </Button>
+            <Button onClick={() => setEditPetIndex(idx)} className="w-1/2">
+              Remove Pet
+            </Button>
+            <Link
+              href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
+            >
+              <Button className="w-1/2">Edit Pet</Button>
+            </Link>
           </div>
         )}
       </div>

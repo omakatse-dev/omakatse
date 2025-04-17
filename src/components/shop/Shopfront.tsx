@@ -97,7 +97,7 @@ export default function Shopfront({
   });
   return (
     <>
-      <div className="mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
+      <div className="mt-30 sm:mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
         <div className="flex flex-row justify-between">
           <div>
             <h2>
@@ -143,6 +143,7 @@ export default function Shopfront({
             selectedOption={selectedFilter}
             onChange={setSelectedFilter}
             className="w-full"
+            counts={filterCounts}
           />
           <div
             className="border rounded-full h-full aspect-square cursor-pointer bg-white flex items-center justify-center"
