@@ -4,16 +4,16 @@ import BlogCard from "../blog/BlogCard";
 import Button from "../common/Button";
 import Link from "next/link";
 import { getAllBlogPosts } from "@/utils/contentfulAPI";
-import { Entry } from "contentful";
+import { ChainModifiers, Entry } from "contentful";
 import { BlogPostType } from "@/types/Types";
 
 function Blog() {
-  const [currentBlogs, setCurrentBlogs] = useState<Entry<BlogPostType>[]>([]);
+  const [currentBlogs, setCurrentBlogs] = useState<Entry<BlogPostType, ChainModifiers, string>[]>([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       const res = await getAllBlogPosts();
-      const firstThree = res.items.slice(0, 3);
+      const firstThree = res.items.slice(0, 3) as Entry<BlogPostType, ChainModifiers, string>[];
       setCurrentBlogs(firstThree);
     };
 

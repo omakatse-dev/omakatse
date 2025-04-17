@@ -1,7 +1,7 @@
 import { faqType } from "@/app/faqs/page";
-import { BlogPostType } from "@/components/blog/BlogCardPage";
 import { TermsAndConditionsType } from "@/app/terms-and-conditions/page";
 import { createClient, EntryCollection, Entry } from "contentful";
+import { BlogPostType } from "@/types/Types";
 
 const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!;
