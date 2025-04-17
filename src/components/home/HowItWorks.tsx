@@ -5,7 +5,8 @@ import HowItWorksCard from "./HowItWorksCard";
 
 function HowItWorks() {
   return (
-    <div className="flex flex-col bg-pink-pastel px-6 lg:px-12 py-10 lg:py-20">
+    <div className="bg-pink-pastel justify-items-center">
+    <div className="flex flex-col px-6 lg:px-12 py-10 lg:py-20 max-w-screen-2xl">
       <h2 className="text-3xl flex place-content-center mb-5 text-primary">
         How it works
       </h2>
@@ -39,6 +40,7 @@ function HowItWorks() {
           Build your box now
         </Link>
       </Button>
+    </div>
     </div>
   );
 }

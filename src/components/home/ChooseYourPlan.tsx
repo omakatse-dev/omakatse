@@ -8,7 +8,8 @@ function ChooseYourPlan() {
   const [selectedTab, setSelectedTab] = React.useState("Small Box");
 
   return (
-    <div className="bg-gray-200 flex flex-col px-6 lg:px-12 py-15 lg:py-20 gap-8 lg:gap-10 items-center">
+    <div className="bg-gray-200 justify-items-center">
+    <div className="max-w-screen-2xl w-full flex flex-col px-6 lg:px-12 py-15 lg:py-20 gap-8 lg:gap-10 items-center">
       <h2 className="text-center text-primary">Choose your plan</h2>
 
       <div className="rounded-[2.5rem] p-3">
@@ -53,6 +54,7 @@ function ChooseYourPlan() {
           Build your box now
         </Link>
       </Button>
+    </div>
     </div>
   );
 }

@@ -21,7 +21,8 @@ function Blog() {
   }, []);
 
   return (
-    <div className="bg-gray-50 px-6 lg:px-12 py-10 lg:py-20 flex flex-col gap-8 lg:gap-15">
+    <div className="bg-gray-50 justify-items-center">
+    <div className="w-full max-w-screen-2xl px-6 lg:px-12 py-10 lg:py-20 flex flex-col gap-8 lg:gap-15">
       <h2 className="text-center">Omakatse&apos;s blog</h2>
 
       <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
@@ -38,6 +39,7 @@ function Blog() {
           View more blogs
         </Link>
       </Button>
+    </div>
     </div>
   );
 }
