@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+"use client";
+import React, { useState }, { useState } from "react";
 import { ProductDetailsType } from "@/types/Types";
 import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
