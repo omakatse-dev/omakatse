@@ -1,18 +1,16 @@
 "use client";
-
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useRouter, useSearchParams } from "next/navigation";
 import EditPetProfileCard from "@/components/account/pet-profiles/EditPetProfileCard";
 
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getPetsByContractId } from "@/utils/SubscriptionAPIs";
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
-export default function EditPetPage() {
+function EditPetPage() {
   const router = useRouter();
-  //todo fetch pet details according to petIndex and contractId
 
   const searchParams = useSearchParams();
   const petIndex = searchParams.get("petIndex") || 0;
@@ -38,5 +36,13 @@ export default function EditPetPage() {
         <EditPetProfileCard existingDetails={existingDetails} />
       )}
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditPetPage />
+    </Suspense>
   );
 }

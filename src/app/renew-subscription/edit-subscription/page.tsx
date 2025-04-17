@@ -8,9 +8,9 @@ import Button from "@/components/common/Button";
 export default async function EditSubscriptionPage({
   searchParams,
 }: {
-  searchParams: { contractId: string };
+  searchParams: Promise<{ contractId: string }>;
 }) {
-  const contractId = await searchParams.contractId;
+  const contractId = (await searchParams).contractId;
   return (
     <div className="mt-28 sm:mt-48 px-6 pb-10 sm:pb-20 w-screen max-w-6xl">
       <Link
