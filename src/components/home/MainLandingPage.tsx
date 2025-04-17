@@ -7,9 +7,12 @@ export default function MainLandingPage() {
     <div className="flex">
       <div className="w-full py-5 px-6 lg:px-18 flex flex-col-reverse text-center lg:flex-row lg:justify-between">
         <div className="lg:text-left lg:pt-20 lg:pl-20 lg:mb-20 mb-12 w-full">
-          <h2 className="mb-3 lg:mb-5 text-primary">
+          <h2 className="h2 lg:hidden mb-3 lg:mb-5 text-primary">
             A one-stop subscription service
           </h2>
+          <h1 className="h1 hidden lg:block mb-3 lg:mb-5 text-primary">
+            A one-stop subscription service
+          </h1>
           <h3 className="mb-5 lg:mb-10 font-normal text-primary">
             tailored for your furry family members
           </h3>
