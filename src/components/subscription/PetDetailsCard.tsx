@@ -14,7 +14,8 @@ import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { removePet } from "@/utils/SubscriptionAPIs";
+import { useState } from "react";
+import ConfirmRemovePetModal from "./ConfirmRemovePetModal";
 
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
@@ -48,12 +49,14 @@ export default function PetDetailsCard({
   editMode = false,
   petType,
   catCount = 0,
+  petCount = 1,
 }: {
   details: PetDetailsSchema;
   idx: number;
   editMode?: boolean;
   petType: "catsDetails" | "dogsDetails";
   catCount?: number;
+  petCount?: number;
 }) {
   const numberToMonth = {
     1: "Jan",
@@ -77,116 +80,131 @@ export default function PetDetailsCard({
   };
   const searchParams = useSearchParams();
   const contractId = searchParams.get("contractId") || "";
-
-  const removePetHandler = async () => {
-    await removePet(contractId, idx);
-  };
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   return (
-    <Card
-      variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
-      className="flex flex-col items-center w-full bg-white"
-    >
-      <div className="flex flex-col items-center w-full">
-        <div className="flex sm:flex-col items-center gap-4 sm:gap-0">
-          <Image
-            alt={`${details.name} ${idx + 1}`}
-            src={
-              petType === "catsDetails"
-                ? catMapping[idx as keyof typeof catMapping]
-                : dogMapping[idx as keyof typeof dogMapping]
-            }
-            width={100}
-            height={100}
-            className="w-16 h-16 sm:w-24 sm:h-24"
-          />
-          <h4>{details.name}</h4>
+    <>
+      <Card
+        variant={
+          variantMapping[(idx + catCount) as keyof typeof variantMapping]
+        }
+        className="flex flex-col items-center w-full bg-white"
+      >
+        <div className="flex flex-col items-center w-full">
+          <div className="flex sm:flex-col items-center gap-4 sm:gap-0">
+            <Image
+              alt={`${details.name} ${idx + 1}`}
+              src={
+                petType === "catsDetails"
+                  ? catMapping[idx as keyof typeof catMapping]
+                  : dogMapping[idx as keyof typeof dogMapping]
+              }
+              width={100}
+              height={100}
+              className="w-16 h-16 sm:w-24 sm:h-24"
+            />
+            <h4>{details.name}</h4>
+          </div>
+          <div className="mt-8 flex flex-col gap-4 w-full">
+            <div className="bodyMD text-gray-800">
+              <span>{details.gender === "Girl" ? "Her" : "His"} details:</span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                <Tag>{details.gender}</Tag>
+                <Tag>{details.breed}</Tag>
+                <Tag>
+                  {
+                    numberToMonth[
+                      details.birthdayMonth as keyof typeof numberToMonth
+                    ]
+                  }{" "}
+                  {details.birthdayYear}
+                </Tag>
+                <Tag>
+                  {sizeMapping[details.size as keyof typeof sizeMapping]}
+                </Tag>
+              </div>
+            </div>
+            <div className="bodyMD text-gray-800">
+              <span>
+                {details.gender === "Girl" ? "She" : "He"} is allergic to:
+              </span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {details.allergies.true ? (
+                  details.allergies.allergies.map((allergy) => (
+                    <Tag key={allergy}>{allergy}</Tag>
+                  ))
+                ) : (
+                  <Tag>NA</Tag>
+                )}
+              </div>
+            </div>
+            <div className="bodyMD text-gray-800">
+              <span>{details.gender === "Girl" ? "She" : "He"} likes:</span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {details.preferences.true ? (
+                  details.preferences.preferences.map((pref) => (
+                    <Tag key={pref}>{pref}</Tag>
+                  ))
+                ) : (
+                  <Tag>NA</Tag>
+                )}
+              </div>
+            </div>
+            <div className="bodyMD text-gray-800">
+              <span>Treat frequency:</span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                <Tag>{details.treatFrequency.frequency}</Tag>
+              </div>
+            </div>
+            <div className="bodyMD text-gray-800">
+              <span>Treat preferences:</span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {details.treatFrequency.preferences.length > 0 ? (
+                  details.treatFrequency.preferences.map((pref) => (
+                    <Tag key={pref}>{pref}</Tag>
+                  ))
+                ) : (
+                  <Tag>NA</Tag>
+                )}
+              </div>
+            </div>
+            <div className="bodyMD text-gray-800">
+              <span>Additional comments:</span>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {details.treatFrequency.comments ? (
+                  <Tag>{details.treatFrequency.comments}</Tag>
+                ) : (
+                  <Tag>None</Tag>
+                )}
+              </div>
+            </div>
+          </div>
+          {editMode && (
+            <div className="flex flex-col sm:flex-row sm:justify-center mt-8 w-full gap-2">
+              <Button
+                onClick={() => setShowConfirmationModal(true)}
+                className="w-1/2"
+                disabled={petCount === 1}
+              >
+                Remove Pet
+              </Button>
+              <Link
+                href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
+              >
+                <Button className="w-1/2">Edit Pet</Button>
+              </Link>
+            </div>
+          )}
         </div>
-        <div className="mt-8 flex flex-col gap-4 w-full">
-          <div className="bodyMD text-gray-800">
-            <span>{details.gender === "Girl" ? "Her" : "His"} details:</span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              <Tag>{details.gender}</Tag>
-              <Tag>{details.breed}</Tag>
-              <Tag>
-                {
-                  numberToMonth[
-                    details.birthdayMonth as keyof typeof numberToMonth
-                  ]
-                }{" "}
-                {details.birthdayYear}
-              </Tag>
-              <Tag>{sizeMapping[details.size as keyof typeof sizeMapping]}</Tag>
-            </div>
-          </div>
-          <div className="bodyMD text-gray-800">
-            <span>
-              {details.gender === "Girl" ? "She" : "He"} is allergic to:
-            </span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {details.allergies.true ? (
-                details.allergies.allergies.map((allergy) => (
-                  <Tag key={allergy}>{allergy}</Tag>
-                ))
-              ) : (
-                <Tag>NA</Tag>
-              )}
-            </div>
-          </div>
-          <div className="bodyMD text-gray-800">
-            <span>{details.gender === "Girl" ? "She" : "He"} likes:</span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {details.preferences.true ? (
-                details.preferences.preferences.map((pref) => (
-                  <Tag key={pref}>{pref}</Tag>
-                ))
-              ) : (
-                <Tag>NA</Tag>
-              )}
-            </div>
-          </div>
-          <div className="bodyMD text-gray-800">
-            <span>Treat frequency:</span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              <Tag>{details.treatFrequency.frequency}</Tag>
-            </div>
-          </div>
-          <div className="bodyMD text-gray-800">
-            <span>Treat preferences:</span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {details.treatFrequency.preferences.length > 0 ? (
-                details.treatFrequency.preferences.map((pref) => (
-                  <Tag key={pref}>{pref}</Tag>
-                ))
-              ) : (
-                <Tag>NA</Tag>
-              )}
-            </div>
-          </div>
-          <div className="bodyMD text-gray-800">
-            <span>Additional comments:</span>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {details.treatFrequency.comments ? (
-                <Tag>{details.treatFrequency.comments}</Tag>
-              ) : (
-                <Tag>None</Tag>
-              )}
-            </div>
-          </div>
-        </div>
-        {editMode && (
-          <div className="flex flex-col sm:flex-row sm:justify-center mt-8 w-full gap-2">
-            <Button onClick={removePetHandler} className="w-1/2">
-              Remove Pet
-            </Button>
-            <Link
-              href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
-            >
-              <Button className="w-1/2">Edit Pet</Button>
-            </Link>
-          </div>
-        )}
-      </div>
-    </Card>
+      </Card>
+      {showConfirmationModal && (
+        <ConfirmRemovePetModal
+          close={() => setShowConfirmationModal(false)}
+          name={details.name}
+          contractId={contractId}
+          petIndex={idx}
+        />
+      )}
+    </>
   );
 }

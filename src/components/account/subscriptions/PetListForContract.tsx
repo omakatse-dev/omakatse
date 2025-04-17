@@ -64,6 +64,7 @@ export default function PetListForContract() {
               details={pet}
               idx={idx}
               editMode={true}
+              petCount={pets.length}
               petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
             />
           </div>
