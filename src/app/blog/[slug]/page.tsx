@@ -96,15 +96,11 @@ export default async function BlogPage({
           </div>
         </Link>
 
-        {/* Back button for desktop */}
-        <div>
-          <ScrollProgressCircle />
-        </div>
+        <ScrollProgressCircle />
 
         <div className="flex flex-col gap-3  ">
           <Tag className="w-fit">{blog.fields.categoryTag?.toString()}</Tag>
           <h2>{blog.fields.title?.toString()}</h2>
-          <div className="">
             <div className="flex flex-row gap-2">
               <p className="bodySM text-gray-800">
                 Edited:{" "}
@@ -127,7 +123,6 @@ export default async function BlogPage({
             <p className="bodySM text-gray-800 font-semibold mt-1">
               Written by {blog.fields.author?.toString()}
             </p>
-          </div>
         </div>
 
         <div className="flex flex-col gap-2 items-center w-fit self-center">
