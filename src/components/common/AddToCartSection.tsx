@@ -16,12 +16,14 @@ interface AddToCartSectionProps {
   details: ProductDetailsType;
   selectedOptions: Option[];
   quantity: number;
+  className?: string;
 }
 
 export default function AddToCartSection({
   details,
   selectedOptions,
   quantity,
+  className,
 }: AddToCartSectionProps) {
   const selectedVariant = details.variants.nodes.find((variant) => {
     return (
@@ -63,7 +65,7 @@ export default function AddToCartSection({
     openCart();
   };
   return (
-    <div className="flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4 bg-white w-full">
+    <div className={`flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4 bg-white w-full ${className}`}>
       <div className="bodyMD"> {details.title} </div>
       {selectedVariant?.quantityAvailable &&
       selectedVariant?.quantityAvailable > 0 ? (
