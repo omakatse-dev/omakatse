@@ -103,7 +103,7 @@ export default async function BlogPage({
   const description = blog.fields.description as unknown as Document;
 
   return (
-    <div className="flex flex-col mt-32 w-full px-8 py-2 gap-8 md:px-64">
+    <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64">
       {/* Back button for mobile */}
       <Link href="/blog">
         <div className="inline-flex items-center py-2 cursor-pointer font-semibold md:hidden">

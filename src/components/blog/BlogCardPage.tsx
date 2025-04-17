@@ -51,13 +51,11 @@ export default function Page({
     };
   }, []);
 
-  // Get unique categories from contentful, adding "All" as a category
   const categories = [
     "All",
     ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString())),
   ];
 
-  // Filter blogData based on the search query and selected category
   const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
       selectedCategory === "All" ||
@@ -65,11 +63,9 @@ export default function Page({
     return matchesCategory;
   });
 
-  // Calculate the index of the first and last blog on the current page
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
 
-  // Slice the filtered blogData to show only the blogs for the current page
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
@@ -86,7 +82,7 @@ export default function Page({
           alt="Blog Image"
           width={1340}
           height={190}
-          className="rounded-3xl mb-8"
+          className="rounded-3xl mb-8 w-full"
         />
         <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl lg:text-7xl font-bold w-full text-center">
           Omakatse&apos;s Blog
