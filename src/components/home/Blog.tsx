@@ -4,24 +4,8 @@ import BlogCard from "../blog/BlogCard";
 import Button from "../common/Button";
 import Link from "next/link";
 import { getAllBlogPosts } from "@/utils/contentfulAPI";
-import { EntryFields, Entry } from "contentful";
-
-export type BlogPostType = {
-  contentTypeId: "blogPost";
-  fields: {
-    blogId: EntryFields.Integer;
-    categoryTag: EntryFields.Symbol;
-    title: EntryFields.Text;
-    editedDate: EntryFields.Date;
-    postedDate: EntryFields.Date;
-    readDuration: EntryFields.Integer;
-    author: EntryFields.Text;
-    imageHeader: EntryFields.AssetLink;
-    description: EntryFields.RichText;
-    summary: EntryFields.Text;
-    slug: EntryFields.Text;
-  };
-};
+import { Entry } from "contentful";
+import { BlogPostType } from "@/types/Types";
 
 function Blog() {
   const [currentBlogs, setCurrentBlogs] = useState<Entry<BlogPostType>[]>([]);

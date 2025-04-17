@@ -4,25 +4,9 @@ import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ChainModifiers, EntryFields, Entry } from "contentful";
+import { ChainModifiers, Entry } from "contentful";
 import Image from "next/image";
-
-export type BlogPostType = {
-  contentTypeId: "blogPost";
-  fields: {
-    blogId: EntryFields.Integer;
-    categoryTag: EntryFields.Symbol;
-    title: EntryFields.Text;
-    editedDate: EntryFields.Date;
-    postedDate: EntryFields.Date;
-    readDuration: EntryFields.Integer;
-    author: EntryFields.Text;
-    imageHeader: EntryFields.AssetLink;
-    description: EntryFields.RichText;
-    summary: EntryFields.Text;
-    slug: EntryFields.Text;
-  };
-};
+import { BlogPostType } from "@/types/Types";
 
 export default function Page({
   blogs,

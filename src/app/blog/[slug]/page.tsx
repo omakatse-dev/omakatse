@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { EntryFields } from "contentful";
 import { getBlogBySlug } from "../../../utils/contentfulAPI";
 import Tag from "@/components/common/Tag";
 import dayjs from "dayjs";
@@ -12,23 +11,6 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Asset } from "contentful";
 import ScrollProgressCircle from "@/components/common/ScrollProgressCircle";
 import ScrollUpButton from "@/components/common/ScrollUpButton";
-
-export type BlogPostType = {
-  contentTypeId: "blogPost";
-  fields: {
-    blogId: EntryFields.Integer;
-    categoryTag: EntryFields.Symbol;
-    title: EntryFields.Text;
-    editedDate: EntryFields.Date;
-    postedDate: EntryFields.Date;
-    readDuration: EntryFields.Integer;
-    author: EntryFields.Text;
-    imageHeader: EntryFields.AssetLink;
-    description: EntryFields.RichText;
-    summary: EntryFields.Text;
-    slug: EntryFields.Text;
-  };
-};
 
 const options = {
   renderNode: {
@@ -42,7 +24,7 @@ const options = {
       <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center p-6 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full mb-8">
+      <div className="flex justify-center items-center pt-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-ful mb-8">
         <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
@@ -64,7 +46,7 @@ const options = {
               Source:
               <Link
                 href={node.data.target.fields.description.toString()}
-                className="ml-1 underline text-blue-500"
+                className="ml-1 underline text-[#40AED7]"
               >
                 {node.data.target.fields.title.toString()}
               </Link>
