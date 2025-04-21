@@ -11,6 +11,7 @@ import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useCartStore } from "@/stores/cartStore";
 import { getSubscriptionPlan } from "@/utils/APIs";
 import { useUIStore } from "@/stores/uiStore";
+import AddedModal from "@/components/subscription/AddedModal";
 type PlanOption = "12 months" | "6 months" | "3 months" | "1 month";
 
 export default function SubscriptionStepNinePage() {
@@ -18,10 +19,12 @@ export default function SubscriptionStepNinePage() {
 
   const [boxSize, setBoxSize] = useState<string>("Small Box");
   const [selectedPlan, setSelectedPlan] = useState<PlanOption>("12 months");
+  const [showModal, setShowModal] = useState(true);
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const addItem = useCartStore((state) => state.addItem);
+  const cartItems = useCartStore((state) => state.items);
   const hydrated = useSubscriptionFormStore((state) => state.hydrated);
   const { openCart } = useUIStore();
 
@@ -47,12 +50,19 @@ export default function SubscriptionStepNinePage() {
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
   const addToCartHandler = async () => {
+    const subItems = cartItems.filter((item) =>
+      item.name.includes("Subscription")
+    );
+    if (subItems.length > 0) {
+      setShowModal(true);
+      return;
+    }
     const productId =
       boxSize === "Small Box"
         ? "gid://shopify/Product/8944155918595"
         : "gid://shopify/Product/8944976658691";
     const plans = await getSubscriptionPlan(productId);
-    
+
     addItem({
       id:
         boxSize !== "Small Box"
@@ -78,6 +88,7 @@ export default function SubscriptionStepNinePage() {
 
   return (
     <div className="w-full px-8 pt-32 pb-20 bg-green-pastel flex flex-col items-center gap-8">
+      {showModal && <AddedModal close={() => setShowModal(false)} />}
       <ProgressBar currentStep={9} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">Choose your plan</h3>
