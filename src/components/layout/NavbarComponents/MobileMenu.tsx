@@ -13,6 +13,7 @@ import DogDropdown from "./DogDropdown";
 import Button from "@/components/common/Button";
 import { useUIStore } from "@/stores/uiStore";
 import { useCartStore } from "@/stores/cartStore";
+import AccountDropdown from "./AccountDropdown";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -99,14 +100,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
       </div>
 
       <div className="flex flex-col pt-8 font-open-sans font-semibold text-2xl">
-        <Link
-          onClick={() => setIsOpen((prev) => !prev)}
-          href="/account/profile"
-          className="flex gap-3 items-center"
-        >
-          <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
-          <p>Account</p>
-        </Link>
+        <AccountDropdown setIsOpen={setIsOpen} />
       </div>
       <div className="mt-auto pt-8">
         <Button variant="primary" className="w-full">
