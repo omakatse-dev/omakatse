@@ -13,9 +13,9 @@ export default function MainLandingPage() {
           <h1 className="h1 hidden lg:block mb-3 lg:mb-5 text-primary">
             A one-stop subscription service
           </h1>
-          <h3 className="mb-5 lg:mb-10 font-normal text-primary">
+          <div className="mb-5 lg:mb-10 font-normal text-2xl lg:text-[2rem] text-gray-800">
             tailored for your furry family members
-          </h3>
+          </div>
           <Button variant="primary" className="w-full lg:w-fit">
             Build your box now
           </Button>
