@@ -24,8 +24,9 @@ const HoverOverDog = () => {
   };
 
   return (
+    <div className="px-6 lg:px-12">
     <div className="bg-yellow-light shadow-lg px-16 py-8 rounded-[2rem] w-full">
-      <div className="flex justify-between mr-40">
+      <div className="flex gap-20 mr-40">
         {" "}
         {Object.entries(dropdownData).map(([header, links]) => (
           <div key={header}>
@@ -42,6 +43,7 @@ const HoverOverDog = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

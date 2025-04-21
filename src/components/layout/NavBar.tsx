@@ -103,7 +103,8 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="flex fixed justify-between bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
+      <div className="fixed top-4 w-full px-6 xl:px-12 left-1/2 -translate-x-1/2 z-10">
+      <div className="flex justify-between w-full bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full">
         <div className="xl:hidden flex justify-center gap-3">
           <button onClick={() => setIsOpen((prev) => !prev)}>
             <Bars3Icon className="h-6 w-6 stroke-primary stroke-[2]" />
@@ -129,7 +130,7 @@ export default function NavBar() {
             {/* Dropdown for Cat */}
             {isCatHovering && (
               <div
-                className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
+                className="fixed mt-14 left-0 w-full opacity-100 transition-opacity duration-200 z-20"
                 ref={dropdownRef}
               >
                 <HoverOverCat />
@@ -236,6 +237,7 @@ export default function NavBar() {
               <div className="absolute top-2 -right-0 bg-red-500 rounded-full w-2 h-2" />
             )}
           </button>
+        </div>
         </div>
       </div>
 
