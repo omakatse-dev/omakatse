@@ -171,7 +171,7 @@ export default function NavBar() {
                 }}
                 onMouseLeave={() => setIsHovering(null)}
                 className={`block pb-1 font-medium ${
-                  pathname === link.url || isHovering === link.name
+                  pathname.startsWith(link.url) || isHovering === link.name
                     ? "border-b-2 border-black"
                     : "border-b-0"
                 }`}

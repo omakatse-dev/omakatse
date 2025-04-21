@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function page() {
   return (
     <div className="w-full max-w-5xl flex flex-col sm:flex-row gap-6 sm:gap-30 mt-28 sm:mt-48 px-6 pb-10 sm:pb-20">
-      <div className="flex flex-col sm:text-left sm:w-1/2 pt-4">
+      <div className="flex flex-col sm:w-1/2 pt-4 items-center sm:items-start text-center sm:text-start">
         <Image
         src="assets/ContactUsKumo.svg"
         alt="Contact Us Kumo"

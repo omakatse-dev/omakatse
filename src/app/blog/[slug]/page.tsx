@@ -86,8 +86,8 @@ export default async function BlogPage({
   const description = blog.fields.description as unknown as Document;
 
   return (
-    <div className="w-full">
-      <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64 max-w-7xl justify-self-center">
+    <div className="w-full flex flex-col">
+      <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64 max-w-7xl self-center">
         {/* Back button for mobile */}
         <Link href="/blog">
           <div className="inline-flex items-center py-2 cursor-pointer font-semibold md:hidden">
