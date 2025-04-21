@@ -7,6 +7,9 @@ import { SubscriptionContract } from "@/types/Types";
 import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { getSubscriptionPlan } from "@/utils/APIs";
+import { useCartStore } from "@/stores/cartStore";
+import { useUIStore } from "@/stores/uiStore";
 
 export type PetType = z.infer<typeof petDetailsSchema>;
 
@@ -20,6 +23,47 @@ export default function RenewSubscriptionCard({
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
   const contractId = subscription.contractId;
+  const addItem = useCartStore((state) => state.addItem);
+  const { openCart } = useUIStore();
+
+  const selectedPlanMapping: Record<string, number> = {
+    "12": 3,
+    "6": 2,
+    "3": 1,
+    "1": 0,
+  };
+
+  const addToCartHandler = async () => {
+
+    const productId =
+      subscription.size === "SMALL"
+        ? "gid://shopify/Product/8944155918595"
+        : "gid://shopify/Product/8944976658691";
+    const plans = await getSubscriptionPlan(productId);
+
+    addItem({
+      id:
+        subscription.size !== "SMALL"
+          ? "gid://shopify/ProductVariant/46680266211587"
+          : "gid://shopify/ProductVariant/46670734328067",
+      name:
+        subscription.size === "SMALL"
+          ? "Small Subscription Box"
+          : "Large Subscription Box",
+      price: "0", //TODO create box / plan to price mapping
+      compareAtPrice: "",
+      quantity: 1,
+      sellingPlanId:
+        plans[selectedPlanMapping[subscription.planDuration.toString()]],
+      duration: subscription.planDuration + " months",
+      image:
+        subscription.size === "SMALL"
+          ? "https://images.omakatsepets.com/subscription-box-small.png"
+          : "https://images.omakatsepets.com/subscription-box-large.png",
+      options: [],
+    });
+    openCart();
+  };
 
   const router = useRouter();
   return (
@@ -64,14 +108,16 @@ export default function RenewSubscriptionCard({
       <div className="flex flex-col gap-4 md:flex-row w-full md:gap-6">
         <Button
           onClick={() =>
-            router.push(`/renew-subscription/edit-subscription?contractId=${contractId}`)
+            router.push(
+              `/renew-subscription/edit-subscription?contractId=${contractId}`
+            )
           }
           className="w-full md:w-full self-center"
         >
           Edit subscription
         </Button>
         <Button
-          onClick={() => router.push(``)}
+          onClick={addToCartHandler}
           className="w-full md:w-full self-center"
         >
           Add to cart

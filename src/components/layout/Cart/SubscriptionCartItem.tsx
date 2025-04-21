@@ -8,7 +8,6 @@ export default function SubscriptionCartItem({ item }: { item: CartItemType }) {
   const handleRemoveItem = () => {
     removeItem(item);
   };
-  console.log(item)
   return (
     <div className="flex gap-5 border-primary rounded-2xl p-4 relative">
       <XCircleIcon
