@@ -108,7 +108,7 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                   <a
                     href={
                       user
-                        ? "/account/profile"
+                        ? "/api/auth/logout"
                         : "/api/auth/login?returnTo=/account/profile"
                     }
                     className="flex pt-3 bodyLG"

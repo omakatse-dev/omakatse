@@ -57,7 +57,7 @@ const HoverOverProfile = () => {
         <a
           href={
             user
-              ? "/account/profile"
+              ? "/api/auth/logout"
               : "/api/auth/login?returnTo=/account/profile"
           }
           className="flex pt-4 text-gray-800"

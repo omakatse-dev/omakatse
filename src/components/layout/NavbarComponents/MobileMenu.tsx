@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import Image from "next/image";
 import {
-  UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
