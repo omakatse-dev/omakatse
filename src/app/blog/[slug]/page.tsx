@@ -138,7 +138,7 @@ export default async function BlogPage({
               Source:
               <Link
                 href={imageHeaderDescription.toString()}
-                className="ml-1 underline text-blue-500"
+                className="ml-1 underline text-[#40AED7]"
               >
                 {imageHeaderTitle?.toString()}
               </Link>
