@@ -7,13 +7,13 @@ export default function MainLandingPage() {
     <div className="max-w-screen-2xl justify-items-center mx-auto">
       <div className="w-full py-5 px-6 lg:px-18 flex flex-col-reverse text-center lg:flex-row lg:justify-between">
         <div className="lg:text-left lg:pt-20 lg:pl-20 lg:mb-20 mb-12 w-full">
-          <h2 className="h2 lg:hidden mb-3 lg:mb-5 text-primary">
+          <div className="lg:hidden mb-3 lg:mb-5 text-[2.5rem] font-bold text-primary font-parkinsans leading-[1.1]">
             A one-stop subscription service
-          </h2>
+          </div>
           <h1 className="h1 hidden lg:block mb-3 lg:mb-5 text-primary">
             A one-stop subscription service
           </h1>
-          <div className="mb-5 lg:mb-10 font-normal text-2xl lg:text-[2rem] text-gray-800">
+          <div className="mb-5 lg:mb-10 font-normal text-2xl lg:text-[2rem] text-gray-800 leading-[1.2]">
             tailored for your furry family members
           </div>
           <Button variant="primary" className="w-full lg:w-fit">
