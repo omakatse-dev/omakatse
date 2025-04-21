@@ -32,7 +32,6 @@ export default function Cart({
       quantity: item.quantity,
     }));
 
-    // TODO schedule contract over notification
     const formattedSubscriptionItems = subscriptionItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,

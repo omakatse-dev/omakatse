@@ -8,15 +8,13 @@ export default function CancellationSuccessModal() {
       <div className="w-full mx-12 max-w-lg rounded-2xl bg-yellow-pastel px-12 py-8 flex flex-col items-center">
         <h4>Your subscription has been deactivated.</h4>
         <div className="bodyMD text-gray-800 mt-2">
-          You&apos;ll receive a confirmation email shortly. When you return to
-          your Subscription page, you&apos;ll see that auto-renewal is now
-          turned off.
+          You’ll receive a confirmation email shortly. When you return to your
+          Subscription page, you’ll see that auto-renewal is now turned off.
         </div>
-        <div className="bodySM text-gray-800 mt-2">
-          <b>Note: </b> If a next renewal date still appears, your deactivation
-          was not successful.
-        </div>
-        <Button onClick={() => router.push("/account/profile")} className="mt-8">
+        <Button
+          onClick={() => router.push("/account/profile")}
+          className="mt-8"
+        >
           Back to my profile
         </Button>
       </div>
