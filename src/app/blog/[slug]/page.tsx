@@ -25,7 +25,7 @@ const options = {
       <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center items-center pt-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-ful mb-8">
+      <div className="flex justify-center items-center pt-8 px-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] mb-8">
         <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
