@@ -9,6 +9,7 @@ export type CartItemType = {
   quantity: number;
   image: string;
   sellingPlanId?: string;
+  duration?: string;
   options: {
     name: string;
     value: string;

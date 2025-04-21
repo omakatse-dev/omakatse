@@ -66,6 +66,7 @@ export default function SubscriptionStepNinePage() {
       compareAtPrice: "",
       quantity: 1,
       sellingPlanId: plans[selectedPlanMapping[selectedPlan]],
+      duration: selectedPlan,
       image:
         boxSize === "Small Box"
           ? "https://images.omakatsepets.com/subscription-box-small.png"

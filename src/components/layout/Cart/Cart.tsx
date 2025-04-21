@@ -5,6 +5,7 @@ import { useCartStore } from "@/stores/cartStore";
 import RegularCartItem from "./RegularCartItem";
 import { formatPrice } from "@/utils/Utils";
 import { createCart } from "@/utils/APIs";
+import SubscriptionCartItem from "./SubscriptionCartItem";
 
 export default function Cart({
   isOpen,
@@ -13,20 +14,19 @@ export default function Cart({
   isOpen: boolean;
   handleClose: () => void;
 }) {
-  const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
   const totalCompareAtPrice = useCartStore(
     (state) => state.totalCompareAtPrice
   );
   const cartItems = useCartStore((state) => state.items);
 
+  const subscriptionItems = cartItems.filter((item) =>
+    item.name.includes("Subscription")
+  );
+  const regularItems = cartItems.filter(
+    (item) => !item.name.includes("Subscription")
+  );
   const createCartHandler = async () => {
-    const subscriptionItems = cartItems.filter((item) =>
-      item.name.includes("Subscription")
-    );
-    const regularItems = cartItems.filter(
-      (item) => !item.name.includes("Subscription")
-    );
     const formattedRegularItems = regularItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
@@ -85,12 +85,15 @@ export default function Cart({
             onClick={handleClose}
           />
         </div>
-        {regularCartItems.length > 0 ? (
+        {cartItems.length > 0 ? (
           <>
             <FreeShippingTracker amountMore={100 - totalPrice} />
             <div className="flex flex-col gap-8 mt-8 w-full">
-              {regularCartItems.map((item) => (
+              {regularItems.map((item) => (
                 <RegularCartItem key={item.name} item={item} />
+              ))}
+              {subscriptionItems.map((item) => (
+                <SubscriptionCartItem key={item.name} item={item} />
               ))}
             </div>
           </>
@@ -106,7 +109,7 @@ export default function Cart({
           </div>
           <Button
             className="w-full mt-3"
-            disabled={regularCartItems.length === 0}
+            disabled={cartItems.length === 0}
             onClick={createCartHandler}
           >
             <div className="flex gap-2">
