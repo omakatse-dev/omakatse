@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import Image from "next/image";
 import {
-  ShoppingCartIcon,
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -12,6 +11,8 @@ import { usePathname } from "next/navigation";
 import CatDropdown from "./CatDropdown";
 import DogDropdown from "./DogDropdown";
 import Button from "@/components/common/Button";
+import { useUIStore } from "@/stores/uiStore";
+import { useCartStore } from "@/stores/cartStore";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -20,6 +21,9 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   const pathname = usePathname();
+  const { openCart } = useUIStore();
+    const cartItems = useCartStore((state) => state.items);
+  
   const links = [
     {
       name: "About Us",
@@ -58,8 +62,17 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             className="cursor-pointer"
           />
         </Link>
-        <button className="pr-2">
-          <ShoppingCartIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+        <button onClick={openCart} className="cursor-pointer relative">
+          <Image
+            src="/assets/Cart.svg"
+            alt="Cart Icon"
+            width={26}
+            height={26}
+            className="cursor-pointer"
+          />{" "}
+          {cartItems.length > 0 && (
+            <div className="absolute top-3 -right-0 bg-red-500 rounded-full w-2 h-2" />
+          )}
         </button>
       </div>
 
