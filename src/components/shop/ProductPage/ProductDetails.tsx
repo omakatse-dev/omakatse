@@ -60,8 +60,8 @@ export default function ProductDetails({
             />
           )}
         </div>
-        <div className="px-6">
-        <ReviewSection reviews={reviews} />
+        <div className="">
+          <ReviewSection reviews={reviews} />
         </div>
       </div>
       <OtherProducts products={relatedProducts} />

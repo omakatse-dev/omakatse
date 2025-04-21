@@ -27,9 +27,7 @@ export default function ItemsGrid({
             className="mb-8"
           />
           <h4 className="mb-2">No items found</h4>
-          <div className="bodyMD">
-            We are working to add more items in the future
-          </div>{" "}
+          <div className="bodyMD">Try searching for another keyword! </div>{" "}
         </div>
       )}
     </div>

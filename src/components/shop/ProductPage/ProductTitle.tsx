@@ -207,12 +207,14 @@ export default function ProductTitle({
               </Button>
             </div>
           ) : (
+            <div>
             <Button
-              className="w-full"
+              className="w-full "
               onClick={() => setShowRestockModal(true)}
             >
               Notify me when available
             </Button>
+            </div>
           )}
         </div>
       </div>

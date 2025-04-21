@@ -40,3 +40,9 @@ export const getPetsByContractId = async (contractId: string) => {
   const data = await res.json()
   return data.results;
 };
+
+export const getPastBoxesByEmail = async (email: string) => {
+  const res = await fetch(endpoint + "pastBoxes?email=" + email);
+  const data = await res.json();
+  return data.results;
+};

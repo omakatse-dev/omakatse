@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BlogCard from "@/components/blog/BlogCard";
 import SelectCategory from "@/components/blog/SelectCategory";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -14,32 +14,13 @@ export default function Page({
   blogs: Entry<BlogPostType, ChainModifiers, string>[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [blogsPerPage, setBlogsPerPage] = useState(9);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const handleResize = () => {
-    if (window.innerWidth >= 1200) {
-      setBlogsPerPage(9);
-    } else {
-      setBlogsPerPage(3);
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const categories = [
     "All",
     ...new Set(blogs.map((blog) => blog.fields.categoryTag.toString())),
   ];
-
+  const blogsPerPage = 9;
   const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
       selectedCategory === "All" ||
@@ -66,9 +47,9 @@ export default function Page({
           alt="Blog Image"
           width={1340}
           height={190}
-          className="rounded-3xl mb-8 w-full"
+          className="rounded-3xl mb-8 sm:h-100 object-cover w-full"
         />
-        <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl lg:text-7xl font-bold w-full text-center">
+        <div className="absolute top-1/2 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl lg:text-7xl font-bold w-full text-center ">
           Omakatse&apos;s Blog
         </div>
       </div>

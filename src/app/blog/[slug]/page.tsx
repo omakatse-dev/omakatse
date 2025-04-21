@@ -25,7 +25,7 @@ const options = {
       <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center items-center pt-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-ful mb-8">
+      <div className="flex justify-center items-center pt-8 px-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] mb-8">
         <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
@@ -86,8 +86,8 @@ export default async function BlogPage({
   const description = blog.fields.description as unknown as Document;
 
   return (
-    <div className="w-full">
-      <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64 max-w-7xl justify-self-center">
+    <div className="w-full flex flex-col">
+      <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64 max-w-7xl self-center">
         {/* Back button for mobile */}
         <Link href="/blog">
           <div className="inline-flex items-center py-2 cursor-pointer font-semibold md:hidden">
@@ -138,7 +138,7 @@ export default async function BlogPage({
               Source:
               <Link
                 href={imageHeaderDescription.toString()}
-                className="ml-1 underline text-blue-500"
+                className="ml-1 underline text-[#40AED7]"
               >
                 {imageHeaderTitle?.toString()}
               </Link>

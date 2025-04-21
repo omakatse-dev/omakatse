@@ -12,7 +12,7 @@ function ChooseYourPlan() {
     <div className="max-w-screen-2xl w-full flex flex-col px-6 lg:px-12 py-15 lg:py-20 gap-8 lg:gap-10 items-center">
       <h2 className="text-center text-primary">Choose your plan</h2>
 
-      <div className="rounded-[2.5rem] p-3">
+      <div className="rounded-[2.5rem] w-full sm:w-fit">
         <Tabs
           tabs={["Small Box", "Large Box"]}
           selectedTab={selectedTab}

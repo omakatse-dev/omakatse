@@ -22,6 +22,10 @@ export default function MobilePageSelector() {
       href: "reviews",
     },
     {
+      label: "Past Boxes",
+      href: "past-boxes",
+    },
+    {
       label: "Payment History",
       href: "history",
     },

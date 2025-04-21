@@ -17,6 +17,10 @@ export default function PageSelector() {
       href: "reviews",
     },
     {
+      label: "Past Boxes",
+      href: "past-boxes",
+    },
+    {
       label: "Payment History",
       href: "history",
     },

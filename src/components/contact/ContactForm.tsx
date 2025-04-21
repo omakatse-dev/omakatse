@@ -111,6 +111,7 @@ export default function ContactForm() {
         />
         {errors.message && <p className="text-red">{errors.message.message}</p>}
       </div>
+      <div>
       <Button type="submit" disabled={status !== "idle"}>
         {status === "loading"
           ? "Sending..."
@@ -118,6 +119,7 @@ export default function ContactForm() {
           ? "Sent!"
           : "Send Message"}
       </Button>
+      </div>
     </form>
   );
 }
