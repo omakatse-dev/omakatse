@@ -1,13 +1,11 @@
 import CardButton from "../common/CardButton";
 
-type PlanOption = "12 months" | "6 months" | "3 months" | "1 month";
-
 export default function PlanSelector({
   selectedPlan,
   setSelectedPlan,
 }: {
-  selectedPlan: PlanOption;
-  setSelectedPlan: (plan: PlanOption) => void;
+  selectedPlan: string;
+  setSelectedPlan: (plan: string) => void;
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-4 sm:gap-8 w-full justify-center">

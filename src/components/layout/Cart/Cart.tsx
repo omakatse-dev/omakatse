@@ -5,6 +5,7 @@ import { useCartStore } from "@/stores/cartStore";
 import RegularCartItem from "./RegularCartItem";
 import { formatPrice } from "@/utils/Utils";
 import { createCart } from "@/utils/APIs";
+
 export default function Cart({
   isOpen,
   handleClose,
@@ -31,21 +32,32 @@ export default function Cart({
       quantity: item.quantity,
     }));
 
-    // TODO select the right selling plan based on duration
-    // TODO add notes to the item
     // TODO schedule contract over notification
     const formattedSubscriptionItems = subscriptionItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
       sellingPlanId: item.sellingPlanId,
     }));
-    console.log(formattedSubscriptionItems);
+
+    const petDetails = JSON.parse(
+      localStorage.getItem("subscription-storage") || "{}"
+    );
+    const note =
+      petDetails.state.petType === "dog"
+        ? petDetails.state.dogsDetails
+        : petDetails.state.petType === "cat"
+        ? petDetails.state.catsDetails
+        : petDetails.state.petType === "both"
+        ? petDetails.state.dogDetails.concat(petDetails.state.catDetails)
+        : undefined;
+
     try {
       const res = await createCart(
-        formattedRegularItems.concat(formattedSubscriptionItems)
+        formattedRegularItems.concat(formattedSubscriptionItems),
+        formattedSubscriptionItems.length > 0 ? JSON.stringify(note) : undefined
       );
       localStorage.setItem("cartId", res.id);
-      window.location.href = res.checkoutUrl;
+      window.open(res.checkoutUrl, "_blank");
     } catch (error) {
       console.log("something went wrong creating cart", error);
     }

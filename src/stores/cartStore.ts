@@ -49,7 +49,6 @@ export const useCartStore = create<CartState>()(
             Number(item.compareAtPrice) * item.quantity,
         })),
       changeQuantity: (item: CartItemType, newQuantity: number) => {
-        console.log("HERE", item);
         set((state) => ({
           items: state.items.map((i) =>
             i.id === item.id ? { ...i, quantity: newQuantity } : i

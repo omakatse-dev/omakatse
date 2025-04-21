@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
 import { useCartStore } from "@/stores/cartStore";
 import { getSubscriptionPlan } from "@/utils/APIs";
-
+import { useUIStore } from "@/stores/uiStore";
 type PlanOption = "12 months" | "6 months" | "3 months" | "1 month";
 
 export default function SubscriptionStepNinePage() {
@@ -23,7 +23,8 @@ export default function SubscriptionStepNinePage() {
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const addItem = useCartStore((state) => state.addItem);
   const hydrated = useSubscriptionFormStore((state) => state.hydrated);
-  
+  const { openCart } = useUIStore();
+
   const selectedPlanMapping = {
     "12 months": 3,
     "6 months": 2,
@@ -46,18 +47,17 @@ export default function SubscriptionStepNinePage() {
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
   const addToCartHandler = async () => {
-    
-    // TODO change this id if the box changes
     const productId =
       boxSize === "Small Box"
         ? "gid://shopify/Product/8944155918595"
         : "gid://shopify/Product/8944976658691";
     const plans = await getSubscriptionPlan(productId);
-    console.log("plans", plans);
-
-    //TODO need to find a way to add the notes to the item
+    
     addItem({
-      id: "gid://shopify/ProductVariant/46680266211587", //this depends on box size
+      id:
+        boxSize !== "Small Box"
+          ? "gid://shopify/ProductVariant/46680266211587"
+          : "gid://shopify/ProductVariant/46670734328067",
       name:
         boxSize === "Small Box"
           ? "Small Subscription Box"
@@ -65,13 +65,14 @@ export default function SubscriptionStepNinePage() {
       price: "0", //TODO create box / plan to price mapping
       compareAtPrice: "",
       quantity: 1,
-      sellingPlanId: plans[selectedPlanMapping[selectedPlan]], //TODO need to change this mapping to use the plan name or something
+      sellingPlanId: plans[selectedPlanMapping[selectedPlan]],
       image:
         boxSize === "Small Box"
           ? "https://images.omakatsepets.com/subscription-box-small.png"
           : "https://images.omakatsepets.com/subscription-box-large.png",
       options: [],
     });
+    openCart();
   };
 
   return (
@@ -92,7 +93,7 @@ export default function SubscriptionStepNinePage() {
       <TipCard />
       <PlanSelector
         selectedPlan={selectedPlan}
-        setSelectedPlan={setSelectedPlan}
+        setSelectedPlan={(plan) => setSelectedPlan(plan as PlanOption)}
       />
 
       <div className="flex flex-col sm:flex-row-reverse gap-2 sm:gap-5 w-full justify-center">
