@@ -1,5 +1,8 @@
 "use client";
 
+import Spinner from "../../../public/assets/Paw.svg";
+import Image from "next/image";
+
 interface ButtonProps {
   children: React.ReactNode;
   className?: string;
@@ -8,10 +11,12 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   bgColor?: string;
+  loading?: boolean;
 }
 
 export default function Button({
   children,
+  loading = false,
   variant = "primary",
   className,
   onClick,
@@ -33,7 +38,7 @@ export default function Button({
       {/* Bottom button */}
       <button
         type={type}
-        disabled={disabled}
+        disabled={disabled || loading}
         className={`absolute inset-0 rounded-full transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-active:translate-x-1 group-active:translate-y-1 group-active:bg-white border-1 ${
           variant === "primary" ? "bg-yellow" : "group-hover:bg-gray-500"
         }`}
@@ -46,11 +51,15 @@ export default function Button({
       <button
         type={type}
         onClick={onClick}
-        disabled={disabled}
+        disabled={disabled || loading}
         className={`relative z-10 flex justify-center px-10 bodyButton rounded-full text-primary border-black border transition-all cursor-pointer h-full items-center w-full flex-shrink-0
           ${variant === "primary" ? primaryStyles : secondaryStyles}`}
       >
-        {children}
+        {loading ? (
+          <Image src={Spinner} alt="loading" className="w-8 animate-spin" />
+        ) : (
+          children
+        )}
       </button>
     </div>
   );

@@ -54,7 +54,7 @@ export default function PetListForContract() {
     console.error("Failed to parse pets:", err);
     return <div>Invalid pet data for this subscription.</div>;
   }
-
+  console.log(pets)
   return (
     <div className="mt-8 flex flex-wrap gap-8 justify-center">
       {pets.length > 0 ? (
@@ -64,6 +64,7 @@ export default function PetListForContract() {
               details={pet}
               idx={idx}
               editMode={true}
+              petCount={pets.length}
               petType={pet.type === "Dog" ? "dogsDetails" : "catsDetails"}
             />
           </div>

@@ -1,4 +1,7 @@
 "use server";
+
+import { PetDetailsSchema } from "@/components/account/pet-profiles/PetProfileForm";
+
 const endpoint = process.env.SUBSCRIPTION_WORKER_ENDPOINT || "";
 
 const ensureTrailingSlash = (url: string) => {
@@ -37,8 +40,35 @@ export const deactivateSubscription = async (contractId: string) => {
 
 export const getPetsByContractId = async (contractId: string) => {
   const res = await fetch(endpoint + "pet?contractId=" + contractId);
-  const data = await res.json()
+  const data = await res.json();
   return data.results;
+};
+
+export const updatePets = async (
+  contractId: string,
+  newPetDetails: PetDetailsSchema,
+  petIndex: number
+) => {
+  console.log({
+    contractId,
+    newPetDetails,
+    petIndex,
+  });
+  const res = await fetch(endpoint + "editPets", {
+    method: "PUT",
+    body: JSON.stringify({ contractId, newPetDetails, petIndex }),
+  });
+  const data = await res.json();
+  return data;
+};
+
+export const removePet = async (contractId: string, petIndex: number) => {
+  const res = await fetch(endpoint + "removePet", {
+    method: "PUT",
+    body: JSON.stringify({ contractId, petIndex }),
+  });
+  const data = await res.json();
+  return data;
 };
 
 export const getPastBoxesByEmail = async (email: string) => {
@@ -46,3 +76,4 @@ export const getPastBoxesByEmail = async (email: string) => {
   const data = await res.json();
   return data.results;
 };
+

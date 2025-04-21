@@ -5,6 +5,8 @@ import { useCartStore } from "@/stores/cartStore";
 import RegularCartItem from "./RegularCartItem";
 import { formatPrice } from "@/utils/Utils";
 import { createCart } from "@/utils/APIs";
+import SubscriptionCartItem from "./SubscriptionCartItem";
+
 export default function Cart({
   isOpen,
   handleClose,
@@ -12,40 +14,49 @@ export default function Cart({
   isOpen: boolean;
   handleClose: () => void;
 }) {
-  const regularCartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
   const totalCompareAtPrice = useCartStore(
     (state) => state.totalCompareAtPrice
   );
   const cartItems = useCartStore((state) => state.items);
 
+  const subscriptionItems = cartItems.filter((item) =>
+    item.name.includes("Subscription")
+  );
+  const regularItems = cartItems.filter(
+    (item) => !item.name.includes("Subscription")
+  );
   const createCartHandler = async () => {
-    const subscriptionItems = cartItems.filter((item) =>
-      item.name.includes("Subscription")
-    );
-    const regularItems = cartItems.filter(
-      (item) => !item.name.includes("Subscription")
-    );
     const formattedRegularItems = regularItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
     }));
 
-    // TODO select the right selling plan based on duration
-    // TODO add notes to the item
-    // TODO schedule contract over notification
     const formattedSubscriptionItems = subscriptionItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,
-      sellingPlanId: "gid://shopify/SellingPlan/10819797251",
+      sellingPlanId: item.sellingPlanId,
     }));
-    console.log(formattedSubscriptionItems);
+
+    const petDetails = JSON.parse(
+      localStorage.getItem("subscription-storage") || "{}"
+    );
+    const note =
+      petDetails.state.petType === "dog"
+        ? petDetails.state.dogsDetails
+        : petDetails.state.petType === "cat"
+        ? petDetails.state.catsDetails
+        : petDetails.state.petType === "both"
+        ? petDetails.state.dogDetails.concat(petDetails.state.catDetails)
+        : undefined;
+
     try {
       const res = await createCart(
-        formattedRegularItems.concat(formattedSubscriptionItems)
+        formattedRegularItems.concat(formattedSubscriptionItems),
+        formattedSubscriptionItems.length > 0 ? JSON.stringify(note) : undefined
       );
       localStorage.setItem("cartId", res.id);
-      window.location.href = res.checkoutUrl;
+      window.open(res.checkoutUrl, "_blank");
     } catch (error) {
       console.log("something went wrong creating cart", error);
     }
@@ -73,12 +84,15 @@ export default function Cart({
             onClick={handleClose}
           />
         </div>
-        {regularCartItems.length > 0 ? (
+        {cartItems.length > 0 ? (
           <>
             <FreeShippingTracker amountMore={100 - totalPrice} />
             <div className="flex flex-col gap-8 mt-8 w-full">
-              {regularCartItems.map((item) => (
+              {regularItems.map((item) => (
                 <RegularCartItem key={item.name} item={item} />
+              ))}
+              {subscriptionItems.map((item) => (
+                <SubscriptionCartItem key={item.name} item={item} />
               ))}
             </div>
           </>
@@ -94,7 +108,7 @@ export default function Cart({
           </div>
           <Button
             className="w-full mt-3"
-            disabled={regularCartItems.length === 0}
+            disabled={cartItems.length === 0}
             onClick={createCartHandler}
           >
             <div className="flex gap-2">

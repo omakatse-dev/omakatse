@@ -38,12 +38,12 @@ export default function SubscriptionList() {
   if (error) return <div>Error loading user: {error.message}</div>;
   if (!user) return <div>Please log in to view subscriptions.</div>;
   const isRenewSubscription = pathname.includes("/renew-subscription");
-  if (!contractId && isRenewSubscription) return <div>No contract ID found.</div>;
+  if (!contractId && isRenewSubscription)
+    return <div>No contract ID found.</div>;
 
   const subscriptionToRenew = subscriptions.filter(
     (sub) => sub.contractId === contractId
   );
-  console.log(subscriptionToRenew);
 
   return (
     <div className="mt-8 flex flex-col gap-8">

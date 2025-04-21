@@ -249,19 +249,22 @@ export const getProductDetailsByID = async (productID: string) => {
 };
 
 export const createCart = async (
-  lines: { merchandiseId: string; quantity: number }[]
+  lines: { merchandiseId: string; quantity: number }[],
+  note?: string
 ) => {
   const cartQuery = `
-  mutation createCart($lines: [CartLineInput!]) {
+  mutation createCart($lines: [CartLineInput!], $note: String) {
     cartCreate(
       input: {
         lines: $lines
+        note: $note
       }
     ) {
       cart {
         id
         checkoutUrl
         totalQuantity
+        note
         cost {
           totalAmount {
             amount
@@ -297,9 +300,8 @@ export const createCart = async (
   }`;
 
   const res = await storefrontClient.request(cartQuery, {
-    variables: { lines, note: "This si a test note" },
+    variables: { lines, note },
   });
-  console.log(res);
   return res.data.cartCreate.cart;
 };
 
@@ -487,19 +489,40 @@ export const getContracts = async () => {
   return res.data;
 };
 
-export const getSubscriptionPlan = async () => {
+interface SellingPlanNode {
+  id: string;
+  name: string;
+}
+
+interface SellingPlanEdge {
+  node: SellingPlanNode;
+}
+
+interface SellingPlanGroupNode {
+  sellingPlans: {
+    edges: SellingPlanEdge[];
+  };
+}
+
+interface SellingPlanGroupEdge {
+  node: SellingPlanGroupNode;
+}
+
+export async function getSubscriptionPlan(
+  productId: string
+): Promise<string[]> {
   const query = `
-    query GetSellingPLan {
-    product(id: "gid://shopify/Product/8944976658691") {
-      sellingPlanGroups(first: 5) {
-        edges {
-          node {
-            appName
-            sellingPlans(first: 5) {
-              edges {
-                node {
-                  id
-                  name
+    query {
+      product(id: "${productId}") {
+        sellingPlanGroups(first: 5) {
+          edges {
+            node {
+              sellingPlans(first: 4) {
+                edges {
+                  node {
+                    id
+                    name
+                  }
                 }
               }
             }
@@ -507,14 +530,20 @@ export const getSubscriptionPlan = async () => {
         }
       }
     }
-  }`;
+  `;
+
   const res = await storefrontClient.request(query);
-  console.log(res.errors);
-  return res.data;
-};
+  if (!res.data?.product?.sellingPlanGroups?.edges) {
+    return [];
+  }
+
+  return res.data.product.sellingPlanGroups.edges.flatMap(
+    (edge: SellingPlanGroupEdge) =>
+      edge.node.sellingPlans.edges.map((plan: SellingPlanEdge) => plan.node.id)
+  );
+}
 
 export const createCustomer = async (email: string) => {
-  
   const mutation = `
     mutation {
       customerCreate(input: { 
@@ -543,11 +572,12 @@ export const createCustomer = async (email: string) => {
   if (customerCreateResult && customerCreateResult.customer) {
     return {
       success: true,
-      customer: customerCreateResult.customer
+      customer: customerCreateResult.customer,
     };
   } else {
     throw new Error(
-      customerCreateResult?.userErrors?.[0]?.message || "Customer creation failed"
+      customerCreateResult?.userErrors?.[0]?.message ||
+        "Customer creation failed"
     );
   }
 };

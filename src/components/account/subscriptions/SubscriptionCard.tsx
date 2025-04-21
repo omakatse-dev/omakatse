@@ -19,6 +19,7 @@ export default function SubscriptionCard({
   subscription: SubscriptionContract;
 }) {
   const pets = JSON.parse(subscription.pets);
+  console.log(subscription);
 
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
@@ -40,11 +41,12 @@ export default function SubscriptionCard({
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
-          Box {subscription.number} out of {subscription.planDuration}
+          Box {subscription.boxIds?.split(",").length} out of{" "}
+          {subscription.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={subscription.number}
+          currentStep={subscription.boxIds?.split(",").length}
           totalSteps={subscription.planDuration}
         />
       </div>

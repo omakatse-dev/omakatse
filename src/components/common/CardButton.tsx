@@ -14,24 +14,24 @@ export default function CardButton({
   disabled?: boolean;
 }) {
   return (
-    <button
-      onClick={onClick}
-      type="button"
-      disabled={disabled}
-      style={
-        active
-          ? {
-              boxShadow:
-                "5px 5px 0px rgba(255,196,0,1), 6.5px 6.5px 0px rgba(0,0,0,1)",
-              border: "1px solid primary",
-            }
-          : {}
-      }
-      className={`px-5 py-4 sm:py-8 border-primary rounded-2xl ${className} ${
-        disabled ? "bg-gray-200" : "bg-white cursor-pointer"
-      }`}
-    >
-      {children}
-    </button>
+    <>
+      <div className={`relative ${className}`}>
+        <div
+          className={`bg-yellow w-full h-full absolute rounded-2xl border border-black transition-all ${
+            active && "translate-x-2 translate-y-2"
+          }`}
+        />
+        <button
+          onClick={onClick}
+          type="button"
+          disabled={disabled}
+          className={`relative px-5 py-4 sm:py-8 rounded-2xl w-full h-full ${
+            active ? "border border-black bg-gray-50" : "border-primary bg-white"
+          } ${disabled ? "bg-gray-200" : "cursor-pointer"}`}
+        >
+          {children}
+        </button>
+      </div>
+    </>
   );
 }

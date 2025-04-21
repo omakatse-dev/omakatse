@@ -119,7 +119,7 @@ export type CreateReviewPayload = Partial<Review>;
 
 export type SubscriptionContract = {
   contractId: string;
-  boxId: string;
+  boxIds: string;
   address: string;
   date: string;
   email: string;
