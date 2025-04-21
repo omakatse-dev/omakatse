@@ -46,7 +46,7 @@ export default function ReviewCard({ review }: { review: Review }) {
             alt={review.title}
             width={100}
             height={100}
-            className="w-20 h-20 rounded-xl mt-6"
+            className="w-20 h-20 rounded-xl mt-6 border-1 border-gray-200"
           />
         </button>
       )}

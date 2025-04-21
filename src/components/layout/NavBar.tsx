@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Button from "../common/Button";
 import MobileMenu from "./NavbarComponents/MobileMenu";
@@ -24,6 +24,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function NavBar() {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { user } = useUser();
   const pathname = usePathname();
   const router = useRouter();
@@ -51,7 +52,6 @@ export default function NavBar() {
   const [isDogHovering, setIsDogHovering] = useState(false);
   const [isHovering, setIsHovering] = useState<string | null>(null);
 
-
   const handleMouseOverCat = () => {
     if (isDogHovering) {
       setIsDogHovering(false);
@@ -64,11 +64,6 @@ export default function NavBar() {
       setIsCatHovering(false);
     }
     setIsDogHovering(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsCatHovering(false);
-    setIsDogHovering(false);
   };
 
   useEffect(() => {
@@ -86,6 +81,26 @@ export default function NavBar() {
     checkCartStatus();
   }, []);
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCatHovering(false);
+        setIsDogHovering(false);
+      }
+    }
+
+    if (isCatHovering || isDogHovering) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isCatHovering || isDogHovering]);
+
   return (
     <>
       <div className="flex fixed justify-between bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full top-4 w-11/12 left-1/2 -translate-x-1/2 z-10">
@@ -100,10 +115,9 @@ export default function NavBar() {
 
         <div className="hidden xl:flex items-center gap-x-8">
           <div className="relative group">
-            <Link
-              href="/shop/cat-products"
-              onMouseEnter={handleMouseOverCat}
-              className={`flex gap-1 b-2 border-b-0 font-semibold pb-1 ${
+            <button
+              onClick={handleMouseOverCat}
+              className={`flex gap-1 b-2 border-b-0 font-medium pb-1 ${
                 pathname.startsWith("/shop/cat-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
@@ -111,22 +125,21 @@ export default function NavBar() {
             >
               Cat
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
-            </Link>
+            </button>
             {/* Dropdown for Cat */}
             {isCatHovering && (
               <div
                 className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
-                onMouseLeave={handleMouseLeave}
+                ref={dropdownRef}
               >
                 <HoverOverCat />
               </div>
             )}
           </div>
           <div className="relative group">
-            <Link
-              href="/shop/dog-products"
-              onMouseEnter={handleMouseOverDog}
-              className={`flex gap-1 b-2 border-b-0 font-semibold pb-1 ${
+            <button
+              onClick={handleMouseOverDog}
+              className={`flex gap-1 b-2 border-b-0 font-medium pb-1 ${
                 pathname.startsWith("/shop/dog-products")
                   ? "border-b-2 border-black"
                   : "border-b-0"
@@ -134,12 +147,12 @@ export default function NavBar() {
             >
               Dog
               <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
-            </Link>
+            </button>
             {/* Dropdown for Dog */}
             {isDogHovering && (
               <div
                 className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
-                onMouseLeave={handleMouseLeave}
+                ref={dropdownRef}
               >
                 <HoverOverDog />
               </div>
@@ -150,12 +163,13 @@ export default function NavBar() {
               href={link.url}
               key={link.name}
               onMouseEnter={() => {
-                handleMouseLeave();
                 setIsHovering(link.name);
               }}
               onMouseLeave={() => setIsHovering(null)}
-              className={`block pb-1 font-semibold ${
-                pathname === link.url || isHovering === link.name  ? "border-b-2 border-black" : "border-b-0"
+              className={`block pb-1 font-medium ${
+                pathname === link.url || isHovering === link.name
+                  ? "border-b-2 border-black"
+                  : "border-b-0"
               }`}
             >
               {link.name}

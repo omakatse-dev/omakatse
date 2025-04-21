@@ -26,7 +26,7 @@ const HoverOverCat = () => {
 
   return (
     <div className="bg-yellow-light shadow-lg px-16 py-8 rounded-[2rem] w-full">
-      <div className="flex justify-between mr-40">
+      <div className="flex gap-20 mr-40">
         {Object.entries(dropdownData).map(([header, links]) => (
           <div key={header}>
             <a className="bodyLG font-bold text-gray-800" href={`/shop/cat-products?sort=New+Arrivals&filter=All&tab=${header}`}>{header}</a>
