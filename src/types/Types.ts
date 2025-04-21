@@ -1,4 +1,5 @@
 export type SortOption = "CREATED" | "BEST_SELLING" | "PRICE";
+import { EntryFields } from "contentful";
 
 type PriceRange = {
   minVariantPrice: {
@@ -132,4 +133,21 @@ export type SubscriptionContract = {
   planDuration: number;
   status: string;
   nextRenewalDate: string;
+};
+
+export type BlogPostType = {
+  contentTypeId: "blogPost";
+  fields: {
+    blogId: EntryFields.Integer;
+    categoryTag: EntryFields.Symbol;
+    title: EntryFields.Text;
+    editedDate: EntryFields.Date;
+    postedDate: EntryFields.Date;
+    readDuration: EntryFields.Integer;
+    author: EntryFields.Text;
+    imageHeader: EntryFields.AssetLink;
+    description: EntryFields.RichText;
+    summary: EntryFields.Text;
+    slug: EntryFields.Text;
+  };
 };

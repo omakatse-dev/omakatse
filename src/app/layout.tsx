@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className="no-scrollbar">
       <UserProvider>
         <body
-          className={`${openSans.variable} ${parkinsans.variable} overflow-auto overflow-x-hidden bg-gray-50`}
+          className={`${openSans.variable} ${parkinsans.variable} antialiased overflow-auto overflow-x-hidden bg-gray-50`}
         >
           <NavBar />
           <div className="flex justify-center">{children}</div>

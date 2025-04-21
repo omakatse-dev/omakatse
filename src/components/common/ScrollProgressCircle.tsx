@@ -37,7 +37,7 @@ export default function ScrollProgressCircle() {
   return (
     <Link
       href="/blog"
-      className="hidden md:block w-16 fixed top-52 left-20 hover:scale-110 transition-all"
+      className="hidden md:block w-16 fixed top-34 left-20 hover:scale-110 transition-all"
     >
       <svg style={{ position: "absolute" }} width="0" height="0">
         <defs>

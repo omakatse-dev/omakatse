@@ -33,9 +33,9 @@ export default function ProductDetails({
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="flex flex-col w-full items-center">
-      <div className="flex flex-col md:pt-10 mt-32 md:px-12 max-w-7xl w-screen">
+      <div className="flex flex-col md:pt-10 mt-32 md:mt-14 md:px-12 max-w-7xl w-screen">
         <div className="md:pt-10 flex md:flex-row flex-col gap-8 md:gap-25 w-full">
-          <div className="flex flex-col gap-15 md:w-1/2 md:flex-shrink-0 md:basis-1/2">
+          <div className="flex flex-col gap-15 md:w-1/2 w-full md:flex-shrink-0 md:basis-1/2">
             <ProductImages images={product.images} />
             {product.metafield && (
               <ProductDescription
@@ -45,7 +45,7 @@ export default function ProductDetails({
             )}
           </div>
           <ProductTitle
-            className="md:sticky md:top-52 h-fit"
+            className="md:sticky md:top-32 h-fit "
             details={product}
             reviews={reviews}
             selectedOptions={selectedOptions}
@@ -56,17 +56,20 @@ export default function ProductDetails({
           {product.metafield && (
             <ProductDescription
               description={product.metafield.value}
-              className="md:hidden px-8"
+              className="md:hidden px-6"
             />
           )}
         </div>
+        <div className="">
+          <ReviewSection reviews={reviews} />
+        </div>
       </div>
-      <ReviewSection reviews={reviews} />
       <OtherProducts products={relatedProducts} />
       <AddToCartSection
         details={product}
         selectedOptions={selectedOptions}
         quantity={quantity}
+        className="sticky bottom-0 h-fit"
       />
     </div>
   );

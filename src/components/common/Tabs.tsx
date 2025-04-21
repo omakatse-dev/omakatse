@@ -50,7 +50,7 @@ export default function Tabs({
   return (
     <div className={`${className} rounded-full z-1 px-8 py-3 flex gap-5 font-semibold`}>
       {tabs.map((tab) => (
-        <div key={tab} className="relative group">
+        <div key={tab} className="relative group w-full sm:w-fit">
           {/* Bottom tab */}
           {selectedTab === tab && (
             <div
@@ -65,7 +65,7 @@ export default function Tabs({
               ${selectedTab === tab ? activeStyles : ""}`}
             onClick={() => onChange(tab)}
           >
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               {renderTabIcon(tab)}
               <span>{tab}</span>
             </div>

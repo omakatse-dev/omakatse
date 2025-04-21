@@ -21,7 +21,7 @@ export default function ColorTabs({
             <div
               key={tab.name}
               className={`w-10 h-10 rounded-full cursor-pointer border p-0.5 mb-1 ${
-                tab.name === selectedTab ? "border-black border-1" : "border-0"
+                tab.name === selectedTab ? "border-black border-1" : "border-1 border-primary"
               }`}
               onClick={() => onChange(tab.name)}
             >
