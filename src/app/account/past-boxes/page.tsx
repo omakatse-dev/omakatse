@@ -1,5 +1,5 @@
 import { PastBoxType } from "@/types/Types";
-import PastBoxCard from "@/components/subscription/PastBoxCard";
+import PastBoxSummaryCard from "@/components/subscription/PastBoxSummaryCard";
 import { getPastBoxesByEmail } from "@/utils/SubscriptionAPIs";
 import { Claims, getSession } from "@auth0/nextjs-auth0";
 
@@ -27,7 +27,11 @@ export default async function PastBoxesPage() {
               <h4>Subscription {idx + 1}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {contracts[contractId].map((box: PastBoxType) => (
-                  <PastBoxCard key={box.boxId} box={box} />
+                  <PastBoxSummaryCard
+                    key={box.boxId}
+                    box={box}
+                    duration={contracts[contractId][0].planDuration}
+                  />
                 ))}
               </div>
             </div>

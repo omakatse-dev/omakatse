@@ -11,7 +11,7 @@ export default function PastBoxPage({ box }: { box: PastBoxDetailsType }) {
   return (
     <div className="flex flex-col gap-8">
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push("/account/past-boxes")}
         className="bodyButton flex items-center gap-2 cursor-pointer w-fit"
       >
         <ChevronLeftIcon className="w-6" />

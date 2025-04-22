@@ -8,13 +8,20 @@ import dayjs from "dayjs";
 import { redirect } from "next/navigation";
 
 // This card will receive boxid or box as prop
-export default function PastBoxCard({ box }: { box: PastBoxType }) {
-
+export default function PastBoxSummaryCard({
+  box,
+  duration,
+}: {
+  box: PastBoxType;
+  duration: number;
+}) {
   return (
     <div className="flex flex-col bg-white rounded-xl sm:rounded-[1.25rem] p-6 sm:p-8 items-center">
-      <Tag className="mb-3">Delivered</Tag>
+      <Tag className="mb-3">Shipped</Tag>
       <h4>{dayjs(box.date).format("MMM YYYY")}</h4>
-      <div className="bodyMD mb-3">Box {box.number} out of X</div>
+      <div className="bodyMD mb-3">
+        Box {box.number} out of {duration}
+      </div>
       <Image
         src="/assets/box_image.svg"
         alt="Box"
