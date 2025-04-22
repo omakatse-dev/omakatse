@@ -15,20 +15,21 @@ const getUserProfileData = async (): Promise<Claims> => {
 export default async function PastBoxesPage() {
   const user = await getUserProfileData();
   const contracts = await getPastBoxesByEmail(user.email);
+  console.log(contracts);
 
   return (
     <div className="flex flex-col gap-8">
       <h2 className="hidden lg:block">Past Boxes</h2>
-      {contracts.length > 0 ? (
-        <div className="flex flex-col gap-8">
-          {Object.keys(contracts).map((contractId) => (
-            <div
-              key={contractId}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {contracts[contractId].map((box: PastBoxType) => (
-                <PastBoxCard key={box.boxId} box={box} />
-              ))}
+      {Object.keys(contracts).length > 0 ? (
+        <div className="flex flex-col gap-16">
+          {Object.keys(contracts).map((contractId, idx) => (
+            <div key={contractId} className="flex flex-col gap-4">
+              <h4>Subscription {idx + 1}</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {contracts[contractId].map((box: PastBoxType) => (
+                  <PastBoxCard key={box.boxId} box={box} />
+                ))}
+              </div>
             </div>
           ))}
         </div>

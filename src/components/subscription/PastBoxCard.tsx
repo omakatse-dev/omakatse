@@ -1,11 +1,15 @@
+"use client";
+
 import Tag from "@/components/common/Tag";
 import Image from "next/image";
 import Button from "@/components/common/Button";
 import { PastBoxType } from "@/types/Types";
 import dayjs from "dayjs";
+import { redirect } from "next/navigation";
 
 // This card will receive boxid or box as prop
 export default function PastBoxCard({ box }: { box: PastBoxType }) {
+
   return (
     <div className="flex flex-col bg-white rounded-xl sm:rounded-[1.25rem] p-6 sm:p-8 items-center">
       <Tag className="mb-3">Delivered</Tag>
@@ -18,8 +22,13 @@ export default function PastBoxCard({ box }: { box: PastBoxType }) {
         height={200}
         className="mb-3"
       />
-      {/* This Button will pass the boxid as a prop to viewboxdetails component */}
-      <Button variant="primary" className="w-full sm:w-fit">
+      <Button
+        variant="primary"
+        className="w-full sm:w-fit"
+        onClick={() => {
+          redirect(`/account/past-boxes/${box.boxId}`);
+        }}
+      >
         View Box
       </Button>
     </div>

@@ -45,7 +45,7 @@ export type ProductImageNode = {
   }[];
 };
 
-type Option = {
+export type Option = {
   name: string;
   optionValues: OptionValue[];
 };
@@ -181,4 +181,23 @@ export type ContractType = {
   status: string;
   petsId: string;
   pets: string;
+};
+
+export type PastBoxDetailsType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  petsId: string;
+  pets: string;
+  boxId: string;
+  date: string;
+  number: number;
+  paymentDate: string;
+  items: string;
 };

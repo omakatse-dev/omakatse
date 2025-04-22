@@ -83,3 +83,9 @@ export const getPetProfilesByEmail = async (email: string) => {
   const data = await res.json();
   return data.results;
 };
+
+export const getPastBoxById = async (boxId: string) => {
+  const res = await fetch(endpoint + "box?boxId=" + boxId);
+  const data = await res.json();
+  return data;
+};

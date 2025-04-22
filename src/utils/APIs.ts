@@ -207,6 +207,7 @@ export const getProductDetailsByID = async (productID: string) => {
                 id
               }
             }
+              
           }
         }
       }
@@ -580,4 +581,38 @@ export const createCustomer = async (email: string) => {
         "Customer creation failed"
     );
   }
+};
+
+export const getProductByVariantId = async (variantId: string) => {
+  const query = `
+  query getProductByVariantId($variantId: ID!) {
+  node(id: $variantId) {
+    ... on ProductVariant {
+      id
+      title
+      product {
+        id
+        title
+        description
+        handle
+        options(first: 5) {
+          name
+        }
+        metafield(key: "boxexclusive", namespace: "custom") {
+          key
+          value
+        }
+      }
+      image {
+        url
+      }
+    }
+  }
+}`;
+  const res = await storefrontClient.request(query, {
+    variables: {
+      variantId: variantId,
+    },
+  });
+  return res.data;
 };

@@ -19,7 +19,6 @@ export default function SubscriptionCard({
   subscription: SubscriptionContract;
 }) {
   const pets = JSON.parse(subscription.pets);
-  console.log(subscription);
 
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
