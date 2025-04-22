@@ -168,3 +168,17 @@ export type PastBoxType = {
   paymentDate: string;
   items: string;
 };
+
+export type ContractType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  petsId: string;
+  pets: string;
+};

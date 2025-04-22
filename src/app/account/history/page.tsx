@@ -6,7 +6,7 @@ import { Claims, getSession } from "@auth0/nextjs-auth0";
 import MobilePastOrders from "@/components/account/history/MobilePastOrders";
 import PastOrdersTable from "@/components/account/history/PastOrdersTable";
 
-const getUserProfileData = async (): Promise<Claims> => {
+export const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
 
   if (!session) {

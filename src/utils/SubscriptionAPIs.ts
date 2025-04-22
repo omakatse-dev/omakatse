@@ -78,3 +78,8 @@ export const getPastBoxesByEmail = async (email: string) => {
   return data;
 };
 
+export const getPetProfilesByEmail = async (email: string) => {
+  const res = await fetch(endpoint + "pets?email=" + email);
+  const data = await res.json();
+  return data.results;
+};
