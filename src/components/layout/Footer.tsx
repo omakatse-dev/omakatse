@@ -55,7 +55,7 @@ export default function Footer() {
   const omakatseLinks = [
     {
       name: "Build your box now",
-      url: "/subscribe",
+      url: "/subscribe/step-1",
     },
     {
       name: "About Us",

@@ -1,12 +1,40 @@
-import React from "react";
+import { PastBoxType } from "@/types/Types";
 import PastBoxCard from "@/components/subscription/PastBoxCard";
+import { getPastBoxesByEmail } from "@/utils/SubscriptionAPIs";
+import { Claims, getSession } from "@auth0/nextjs-auth0";
 
-export default function PastBoxesPage() {
+const getUserProfileData = async (): Promise<Claims> => {
+  const session = await getSession();
+  if (!session) {
+    throw new Error(`Requires authentication`);
+  }
+  const { user } = session;
+  return user;
+};
+
+export default async function PastBoxesPage() {
+  const user = await getUserProfileData();
+  const contracts = await getPastBoxesByEmail(user.email);
+
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <h2 className="hidden lg:block">Past Boxes</h2>
-      {/* here, i will have to get all boxes under each subscription (contractid) and pass to each card*/}
-      <PastBoxCard />
+      {contracts.length > 0 ? (
+        <div className="flex flex-col gap-8">
+          {Object.keys(contracts).map((contractId) => (
+            <div
+              key={contractId}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
+              {contracts[contractId].map((box: PastBoxType) => (
+                <PastBoxCard key={box.boxId} box={box} />
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>No past boxes found</div>
+      )}
     </div>
   );
 }

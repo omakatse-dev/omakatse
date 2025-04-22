@@ -73,7 +73,8 @@ export const removePet = async (contractId: string, petIndex: number) => {
 
 export const getPastBoxesByEmail = async (email: string) => {
   const res = await fetch(endpoint + "pastBoxes?email=" + email);
+  // console.log("endpoint", endpoint + "pastBoxes?email=" + email)
   const data = await res.json();
-  return data.results;
+  return data;
 };
 

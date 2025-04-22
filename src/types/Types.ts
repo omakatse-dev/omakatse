@@ -151,3 +151,20 @@ export type BlogPostType = {
     slug: EntryFields.Text;
   };
 };
+
+export type PastBoxType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  boxId: string;
+  date: string;
+  number: number;
+  paymentDate: string;
+  items: string;
+};

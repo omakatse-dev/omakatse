@@ -20,12 +20,19 @@ const getUserProfileData = async (): Promise<Claims> => {
 
 export default async function AccountHistoryPage() {
   const user = await getUserProfileData();
-  const pastOrders = await getOrdersByEmail(user.email);
+  const pastOrders = (await getOrdersByEmail(user.email)) || [];
 
   return (
-    <div>
-      <MobilePastOrders pastOrders={pastOrders ?? []} />
-      <PastOrdersTable pastOrders={pastOrders ?? []} />
-    </div>
+    <>
+      <h2 className="hidden lg:block lg:mb-8">Payment History</h2>
+      {pastOrders?.length > 0 ? (
+        <div>
+          <MobilePastOrders pastOrders={pastOrders ?? []} />
+          <PastOrdersTable pastOrders={pastOrders ?? []} />
+        </div>
+      ) : (
+        <div>No past orders found</div>
+      )}
+    </>
   );
 }
