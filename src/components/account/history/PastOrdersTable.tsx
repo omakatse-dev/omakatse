@@ -1,4 +1,4 @@
-import { MoneyV2, Order } from "@/types/admin.types";
+import { Order } from "@/types/admin.types";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import React from "react";
@@ -6,9 +6,7 @@ import React from "react";
 export default function PastOrdersTable({
   pastOrders,
 }: {
-  pastOrders: (Pick<Order, "id" | "createdAt" | "displayFulfillmentStatus"> & {
-    netPaymentSet: { shopMoney: Pick<MoneyV2, "amount"> };
-  })[];
+  pastOrders: Order[];
 }) {
   const statusMap = {
     FULFILLED: (
@@ -41,9 +39,23 @@ export default function PastOrdersTable({
           <div>{dayjs(order.createdAt).format("DD MMM YYYY")}</div>
           <div>AED {order.netPaymentSet.shopMoney.amount}</div>
           <div>
-            <CheckIcon className="w-6 stroke-2" />
+            {order.lineItems?.edges?.some((item) =>
+              !item.node.name.toLowerCase().includes("subscription")
+            ) ? (
+              <CheckIcon className="w-6 stroke-2" />
+            ) : (
+              "-"
+            )}
           </div>
-          <div>-</div>
+          <div>
+            {order.lineItems?.edges?.some((item) =>
+              item.node.name.toLowerCase().includes("subscription")
+            ) ? (
+              <CheckIcon className="w-6 stroke-2" />
+            ) : (
+              "-"
+            )}
+          </div>
           <div>
             {
               statusMap[

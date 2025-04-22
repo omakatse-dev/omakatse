@@ -27,11 +27,7 @@ export default async function PastBoxesPage() {
               <h4>Subscription {idx + 1}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {contracts[contractId].map((box: PastBoxType) => (
-                  <PastBoxSummaryCard
-                    key={box.boxId}
-                    box={box}
-                    duration={contracts[contractId][0].planDuration}
-                  />
+                  <PastBoxSummaryCard key={box.boxId} box={box} />
                 ))}
               </div>
             </div>

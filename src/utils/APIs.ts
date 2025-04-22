@@ -411,7 +411,7 @@ export const getOrdersByEmail = async (email: string) => {
         edges {
           node {
             id
-            orders(first: 100) {
+            orders(first: 100, sortKey: CREATED_AT, reverse: true) {
               nodes {
                 id
                 createdAt
@@ -419,6 +419,14 @@ export const getOrdersByEmail = async (email: string) => {
                 netPaymentSet {
                   shopMoney {
                     amount
+                  }
+                }
+                lineItems(first: 10) {
+                  edges {
+                    node {
+                      id
+                      name
+                    }
                   }
                 }
               }
