@@ -17,11 +17,11 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
-          Box {box.number} out of {box.planDuration}
+          Box {box.number % box.planDuration} out of {box.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={box.number}
+          currentStep={box.number % box.planDuration}
           totalSteps={box.planDuration}
         />
       </div>

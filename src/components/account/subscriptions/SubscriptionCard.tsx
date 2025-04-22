@@ -25,6 +25,7 @@ export default function SubscriptionCard({
   const contractId = subscription.contractId;
 
   const router = useRouter();
+  console.log(subscription);
 
   return (
     <Card className="bg-white flex flex-col gap-6 md:gap-8">
@@ -40,12 +41,13 @@ export default function SubscriptionCard({
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
-          Box {subscription.boxIds?.split(",").length} out of{" "}
-          {subscription.planDuration}
+          Box{" "}
+          {subscription.boxIds?.split(",").length % subscription.planDuration}{" "}
+          out of {subscription.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={subscription.boxIds?.split(",").length}
+          currentStep={subscription.boxIds?.split(",").length % subscription.planDuration}
           totalSteps={subscription.planDuration}
         />
       </div>
