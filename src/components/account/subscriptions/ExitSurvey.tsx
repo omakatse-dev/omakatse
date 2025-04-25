@@ -48,6 +48,7 @@ export default function ExitSurvey() {
   );
   const searchParams = useSearchParams();
   const contractId = searchParams.get("contractId");
+  const email = searchParams.get("email");
 
   if (!contractId) {
     router.push("/");
@@ -57,6 +58,7 @@ export default function ExitSurvey() {
     setStatus("loading");
     try {
       await saveExitSurveyData(
+        email || "",
         data.reason,
         data.customReason || "",
         data.returnRating,

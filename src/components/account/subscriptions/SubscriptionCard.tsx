@@ -47,7 +47,9 @@ export default function SubscriptionCard({
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={subscription.boxIds?.split(",").length % subscription.planDuration}
+          currentStep={
+            subscription.boxIds?.split(",").length % subscription.planDuration
+          }
           totalSteps={subscription.planDuration}
         />
       </div>
@@ -102,8 +104,15 @@ export default function SubscriptionCard({
       </div>
       {subscription.status === "ACTIVE" ? (
         <Button
-          onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
+          onClick={() =>
+            router.push(
+              `/exit-survey?contractId=${contractId}&email=${subscription.email}`
+            )
+          }
           className="w-full md:w-fit self-center"
+          // disabled={
+          //   subscription.boxIds?.split(",").length !== subscription.planDuration
+          // }
         >
           Cancel auto-renew
         </Button>
