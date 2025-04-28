@@ -19,13 +19,12 @@ export default function SubscriptionCard({
   subscription: SubscriptionContract;
 }) {
   const pets = JSON.parse(subscription.pets);
-
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
+  console.log(cats)
   const contractId = subscription.contractId;
 
   const router = useRouter();
-  console.log(subscription);
 
   return (
     <Card className="bg-white flex flex-col gap-6 md:gap-8">
@@ -110,9 +109,9 @@ export default function SubscriptionCard({
             )
           }
           className="w-full md:w-fit self-center"
-          // disabled={
-          //   subscription.boxIds?.split(",").length !== subscription.planDuration
-          // }
+          disabled={
+            subscription.boxIds?.split(",").length !== subscription.planDuration
+          }
         >
           Cancel auto-renew
         </Button>

@@ -4,6 +4,7 @@ import { PastBoxDetailsType } from "@/types/Types";
 import { PetType } from "../subscriptions/SubscriptionCard";
 import ProgressBar from "@/components/subscription/ProgressBar";
 import BoxContent from "./BoxContent";
+import dayjs from "dayjs";
 
 export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
   const pets = JSON.parse(box.pets);
@@ -39,7 +40,7 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
         </div>
         <div>
           <label className="bodySM text-gray-500">Next billing date</label>
-          <div className="bodyMD font-semibold mt-1">{box.nextBillingDate}</div>
+          <div className="bodyMD font-semibold mt-1">{dayjs(box.nextBillingDate).format("DD MMM YYYY")}</div>
         </div>
         <div className="md:border-r border-gray-200">
           <label className="bodySM text-gray-500">Ship to</label>
@@ -65,7 +66,7 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
         </div>
         <div>
           <label className="bodySM text-gray-500">Next Renewal Date</label>
-          <div className="bodyMD font-semibold mt-1">{box.nextRenewalDate}</div>
+          <div className="bodyMD font-semibold mt-1">{dayjs(box.nextRenewalDate).format("DD MMM YYYY")}</div>
         </div>
       </div>
       <hr className="border-gray-200" />
