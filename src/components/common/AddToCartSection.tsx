@@ -62,10 +62,14 @@ export default function AddToCartSection({
     openCart();
   };
   return (
-    <div className={`flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4 bg-white w-full ${className}`}>
+    <div
+      className={`flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4 bg-white w-full ${className}`}
+    >
       <div className="bodyMD"> {details.title} </div>
-      {selectedVariant?.quantityAvailable &&
-      selectedVariant?.quantityAvailable > 0 ? (
+      {details.tags.includes("Box Exclusive") ? (
+        <Button disabled>This is a box exclusive product</Button>
+      ) : selectedVariant?.quantityAvailable &&
+        selectedVariant?.quantityAvailable > 0 ? (
         <div className="w-full md:w-auto">
           <Button
             className="flex items-center w-full md:w-auto"
@@ -78,7 +82,10 @@ export default function AddToCartSection({
           </Button>
         </div>
       ) : (
-        <Button className="w-full md:w-auto" onClick={() => setShowRestockModal(true)}>
+        <Button
+          className="w-full md:w-auto"
+          onClick={() => setShowRestockModal(true)}
+        >
           Notify me when available
         </Button>
       )}
@@ -88,7 +95,6 @@ export default function AddToCartSection({
           variantId={selectedVariant?.id || ""}
         />
       )}
-    
     </div>
   );
 }

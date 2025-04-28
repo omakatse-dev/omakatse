@@ -24,6 +24,7 @@ export default function BoxItem({
       const res = await getProductByVariantId(
         "gid://shopify/ProductVariant/" + item.variantId
       );
+      console.log(res.node.product.tags);
       setProduct(res.node);
       const reviews = await getReviewByProductID(
         res.node.product.id.split("/").pop() || ""
@@ -133,7 +134,7 @@ export default function BoxItem({
             <div className="flex justify-between h-fit md:w-1/4">
               <div className="bodyLG">x{item.quantity}</div>
 
-              {product?.product?.metafield?.value === "true" ? (
+              {product?.product?.tags?.includes("Box Exclusive") ? (
                 <Tag className="bg-green">Box Exclusive</Tag>
               ) : (
                 <div

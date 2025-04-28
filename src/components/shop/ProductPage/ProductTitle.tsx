@@ -88,17 +88,37 @@ export default function ProductTitle({
   const totalReviews = reviews?.length || 0;
   const fullStars = Math.floor(rating);
   const partialFill = rating % 1;
+
+  const tagColorMapping = {
+    "Box Exclusive": "bg-green",
+    "Selling Fast": "bg-yellow-pastel",
+    New: "bg-yellow",
+  } as const;
+
+  const getTagColor = (tag: string) => {
+    return tagColorMapping[tag as keyof typeof tagColorMapping] || "bg-pink";
+  };
+  console.log(selectedVariant?.quantityAvailable);
   return (
     <>
       <div className={`flex flex-col px-6 md:p-0 md:w-1/2 ${className}`}>
         <div className="flex flex-row justify-between mb-2">
           <div>
-            {details.tags.length > 0 && (
-              <Tag className="bg-yellow mb-2">{details.tags[0]}</Tag>
+            {selectedVariant?.quantityAvailable !== undefined &&
+              selectedVariant?.quantityAvailable > 0 &&
+              details.tags.length > 0 &&
+              details.tags.map((tag) => (
+                <Tag key={tag} className={getTagColor(tag)}>
+                  {tag}
+                </Tag>
+              ))}
+            {(!selectedVariant?.quantityAvailable ||
+              selectedVariant?.quantityAvailable === 0) && (
+              <Tag>Out of Stock</Tag>
             )}
-            <b className="bodyXL text-gray-800 font-normal">
+            <div className="bodyXL text-gray-800 font-normal mt-2">
               {details.description}
-            </b>
+            </div>
           </div>
           <Image
             src="/assets/CatIcon.svg"
@@ -179,8 +199,10 @@ export default function ProductTitle({
                 )
               )}
           </div>
-          {selectedVariant?.quantityAvailable &&
-          selectedVariant?.quantityAvailable > 0 ? (
+          {details.tags.includes("Box Exclusive") ? (
+            <Button disabled>This is a box exclusive product</Button>
+          ) : selectedVariant?.quantityAvailable &&
+            selectedVariant?.quantityAvailable > 0 ? (
             <div className="flex items-center gap-2">
               <div className="flex flex-col gap-2">
                 <CounterButton
@@ -199,7 +221,10 @@ export default function ProductTitle({
               </Button>
             </div>
           ) : (
-            <Button onClick={() => setShowRestockModal(true)} className="w-full">
+            <Button
+              onClick={() => setShowRestockModal(true)}
+              className="w-full"
+            >
               Notify me when available
             </Button>
           )}

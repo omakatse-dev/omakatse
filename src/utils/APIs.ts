@@ -606,10 +606,7 @@ export const getProductByVariantId = async (variantId: string) => {
         options(first: 5) {
           name
         }
-        metafield(key: "boxexclusive", namespace: "custom") {
-          key
-          value
-        }
+        tags
       }
       image {
         url
