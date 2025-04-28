@@ -2,8 +2,10 @@ import Tag from "@/components/common/Tag";
 import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
 import { ProductOption, ProductVariant } from "@/types/admin.types";
-import { getProductByVariantId } from "@/utils/APIs";
+import { Review } from "@/types/Types";
+import { getProductByVariantId, getReviewByProductID } from "@/utils/APIs";
 import { formatPrice } from "@/utils/Utils";
+import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -14,14 +16,31 @@ export default function BoxItem({
   item: { variantId: string; quantity: number };
 }) {
   const [product, setProduct] = useState<ProductVariant>();
-
+  const [ratings, setRatings] = useState<number>(0);
+  const fullStars = Math.floor(ratings);
+  const partialFill = ratings % 1;
   useEffect(() => {
     const getProduct = async () => {
       const res = await getProductByVariantId(
         "gid://shopify/ProductVariant/" + item.variantId
       );
       setProduct(res.node);
+      const reviews = await getReviewByProductID(
+        res.node.product.id.split("/").pop() || ""
+      );
+      const rating =
+        reviews.reviews.reduce(
+          (acc: number, review: Review) => acc + review.rating,
+          0
+        ) / reviews.reviews.length;
+      console.log(rating);
+      if (isNaN(rating)) {
+        setRatings(0);
+      } else {
+        setRatings(rating);
+      }
     };
+
     getProduct();
   }, [item.variantId]);
 
@@ -89,6 +108,27 @@ export default function BoxItem({
                   AED {formatPrice(product.compareAtPrice.amount)}
                 </div>
               </div>
+              {ratings > 0 && (
+                <div className="flex">
+                  {[...Array(5)].map((_, index) => (
+                    <div key={index} className="relative">
+                      <StarIcon
+                        className={`w-5 h-5 ${
+                          index < fullStars ? "text-yellow" : "text-gray-200"
+                        }`}
+                      />
+                      {index === fullStars && partialFill > 0 && (
+                        <div
+                          className="absolute inset-0 overflow-hidden"
+                          style={{ width: `${partialFill * 100}%` }}
+                        >
+                          <StarIcon className="w-5 h-5 text-yellow" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex justify-between h-fit md:w-1/4">
               <div className="bodyLG">x{item.quantity}</div>

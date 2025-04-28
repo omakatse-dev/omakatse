@@ -155,7 +155,9 @@ export default function ProductTitle({
                   <div className="flex flex-col gap-2" key={option.name}>
                     <div className="flex flex-row gap-4">
                       <ColorTabs
-                        tabs={option.optionValues.map(value => ({ name: value.name }))}
+                        tabs={option.optionValues.map((value) => ({
+                          name: value.name,
+                        }))}
                         selectedTab={selectedOptions[idx].values[0]}
                         onChange={(value) => handleSelectOption(idx, value)}
                       />
@@ -166,7 +168,9 @@ export default function ProductTitle({
                     <b className="bodyMD font-normal">{option.name}</b>
                     <div className="flex flex-row gap-4">
                       <ProductTabs
-                        tabs={option.optionValues.map(value => ({ name: value.name }))}
+                        tabs={option.optionValues.map((value) => ({
+                          name: value.name,
+                        }))}
                         selectedTab={selectedOptions[idx].values[0]}
                         onChange={(value) => handleSelectOption(idx, value)}
                       />
@@ -175,30 +179,27 @@ export default function ProductTitle({
                 )
               )}
           </div>
-
-          <div className="flex flex-col gap-2">
-            <b className="bodyMD font-normal">Quantity</b>
-            <CounterButton
-              count={quantity}
-              setCount={setQuantity}
-              min={1}
-              max={selectedVariant?.quantityAvailable || 1}
-            />
-          </div>
-
           {selectedVariant?.quantityAvailable &&
           selectedVariant?.quantityAvailable > 0 ? (
-            <Button
-              className="flex items-center"
-              onClick={addToCartHandler}
-            >
-              Add to Cart - AED{" "}
-              {formatPrice(
-                (Number(selectedVariant?.price.amount) * quantity).toString()
-              )}
-            </Button>
+            <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-2">
+                <CounterButton
+                  count={quantity}
+                  setCount={setQuantity}
+                  min={1}
+                  max={selectedVariant?.quantityAvailable || 1}
+                />
+              </div>
+
+              <Button className="" onClick={addToCartHandler}>
+                Add to Cart - AED{" "}
+                {formatPrice(
+                  (Number(selectedVariant?.price.amount) * quantity).toString()
+                )}
+              </Button>
+            </div>
           ) : (
-            <Button onClick={() => setShowRestockModal(true)}>
+            <Button onClick={() => setShowRestockModal(true)} className="w-full">
               Notify me when available
             </Button>
           )}
