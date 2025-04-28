@@ -1,7 +1,9 @@
 import Tag from "@/components/common/Tag";
-import { ProductVariant } from "@/types/admin.types";
-import { Option } from "@/types/Types";
+import { useCartStore } from "@/stores/cartStore";
+import { useUIStore } from "@/stores/uiStore";
+import { ProductOption, ProductVariant } from "@/types/admin.types";
 import { getProductByVariantId } from "@/utils/APIs";
+import { formatPrice } from "@/utils/Utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -24,6 +26,32 @@ export default function BoxItem({
   }, [item.variantId]);
 
   const optionValues = product?.title?.split(" / ") || [];
+  const changeQuantity = useCartStore((state) => state.changeQuantity);
+  const addItem = useCartStore((state) => state.addItem);
+  const openCart = useUIStore((state) => state.openCart);
+
+  const addToCartHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // if item is already in cart, update the quantity
+    const item = useCartStore
+      .getState()
+      .items.find((item) => item.id === product?.id);
+    if (item) {
+      changeQuantity(item, item.quantity + 1);
+    } else {
+      addItem({
+        id: product?.id || "", //this is the variant id
+        name: product?.title || "",
+        price: product?.price.amount || "",
+        compareAtPrice: product?.compareAtPrice?.amount || "",
+        quantity: 1,
+        image: product?.image?.url || "",
+        options: product?.product?.options || [],
+      });
+    }
+    openCart();
+  };
 
   return (
     <>
@@ -47,11 +75,19 @@ export default function BoxItem({
                 {product?.product?.title}
               </div>
               <div className="bodySM flex flex-col gap-1">
-                {product?.product?.options?.map((opt: Option, idx: number) => (
-                  <div key={opt.name}>
-                    {opt.name}: {optionValues[idx]}
-                  </div>
-                ))}
+                {product?.product?.options?.map(
+                  (opt: ProductOption, idx: number) => (
+                    <div key={opt.name}>
+                      {opt.name}: {optionValues[idx]}
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="bodyLG flex gap-2">
+                <div> AED {formatPrice(product.price.amount)}</div>
+                <div className="line-through text-gray-500">
+                  AED {formatPrice(product.compareAtPrice.amount)}
+                </div>
               </div>
             </div>
             <div className="flex justify-between h-fit md:w-1/4">
@@ -60,7 +96,10 @@ export default function BoxItem({
               {product?.product?.metafield?.value === "true" ? (
                 <Tag className="bg-green">Box Exclusive</Tag>
               ) : (
-                <div className="bodyButton underline underline-offset-8">
+                <div
+                  className="bodyButton underline underline-offset-8"
+                  onClick={addToCartHandler}
+                >
                   Add to cart
                 </div>
               )}

@@ -614,6 +614,12 @@ export const getProductByVariantId = async (variantId: string) => {
       image {
         url
       }
+      compareAtPrice {
+        amount
+      }
+      price {
+        amount
+      }
     }
   }
 }`;

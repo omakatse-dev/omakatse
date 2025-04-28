@@ -7,15 +7,11 @@ import { useUIStore } from "@/stores/uiStore";
 import Button from "./Button";
 import { formatPrice } from "@/utils/Utils";
 import RestockModal from "../shop/ProductPage/RestockModal";
-
-interface Option {
-  name: string;
-  value: string;
-}
+import { ProductOption } from "@/types/admin.types";
 
 interface AddToCartSectionProps {
   details: ProductDetailsType;
-  selectedOptions: Option[];
+  selectedOptions: ProductOption[];
   quantity: number;
   className?: string;
 }
@@ -32,7 +28,7 @@ export default function AddToCartSection({
       variant.selectedOptions.every((option) =>
         selectedOptions.some(
           (selected) =>
-            selected.name === option.name && selected.value === option.value
+            selected.name === option.name && selected.values[0] === option.value
         )
       )
     );

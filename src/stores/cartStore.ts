@@ -1,3 +1,4 @@
+import { ProductOption } from "@/types/admin.types";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
@@ -10,10 +11,7 @@ export type CartItemType = {
   image: string;
   sellingPlanId?: string;
   duration?: string;
-  options: {
-    name: string;
-    value: string;
-  }[];
+  options: ProductOption[];
 };
 
 type CartState = {

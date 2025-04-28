@@ -1,3 +1,4 @@
+import { ProductOption } from "@/types/admin.types";
 export type SortOption = "CREATED" | "BEST_SELLING" | "PRICE";
 import { EntryFields } from "contentful";
 
@@ -33,7 +34,7 @@ export type ProductDetailsType = {
   id: string;
   description: string;
   tags: string[];
-  options: Option[];
+  options: ProductOption[];
   variants: VariantNodes;
   images: ProductImageNode;
   metafield: Metafield;
@@ -43,15 +44,6 @@ export type ProductImageNode = {
   nodes: {
     url: string;
   }[];
-};
-
-export type Option = {
-  name: string;
-  optionValues: OptionValue[];
-};
-
-export type OptionValue = {
-  name: string;
 };
 
 type VariantNodes = {

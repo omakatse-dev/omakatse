@@ -8,11 +8,7 @@ import OtherProducts from "./OtherProducts";
 import ReviewSection from "./ReviewsSection";
 import { useState } from "react";
 import AddToCartSection from "@/components/common/AddToCartSection";
-
-interface Option {
-  name: string;
-  value: string;
-}
+import { ProductOption } from "@/types/admin.types";
 
 export default function ProductDetails({
   product,
@@ -24,12 +20,16 @@ export default function ProductDetails({
   relatedProducts: OtherProductsProps["products"];
 }) {
   const defaultOptions = product.options.map((option) => ({
+    id: option.id || "",
     name: option.name,
-    value: option.optionValues[0].name,
+    values: [option.optionValues[0].name],
+    optionValues: option.optionValues,
+    position: option.position || 0,
+    translations: [],
   }));
 
   const [selectedOptions, setSelectedOptions] =
-    useState<Option[]>(defaultOptions);
+    useState<ProductOption[]>(defaultOptions);
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="flex flex-col w-full items-center">

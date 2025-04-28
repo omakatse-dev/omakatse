@@ -3,8 +3,8 @@
 import { PetDetailsSchema } from "@/components/account/pet-profiles/PetProfileForm";
 
 const endpoint = process.env.SUBSCRIPTION_WORKER_ENDPOINT || "";
-const schedulerEndpoint = process.env.SCHEDULER_WORKER_ENDPOINT || "";
-const restockEndpoint = process.env.RESTOCK_WORKER_ENDPOINT || "";
+// const schedulerEndpoint = process.env.SCHEDULER_WORKER_ENDPOINT || "";
+// const restockEndpoint = process.env.RESTOCK_WORKER_ENDPOINT || "";
 
 const ensureTrailingSlash = (url: string) => {
   return url.endsWith("/") ? url : url + "/";

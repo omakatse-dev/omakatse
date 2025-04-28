@@ -1,12 +1,14 @@
-import React from "react";
-import { OptionValue } from "@/types/Types";
+interface TabProps {
+  name: string;
+}
+
 export default function ColorTabs({
   tabs,
   selectedTab,
   onChange,
   className,
 }: {
-  tabs: OptionValue[];
+  tabs: TabProps[];
   selectedTab: string;
   onChange: (tab: string) => void;
   className?: string;

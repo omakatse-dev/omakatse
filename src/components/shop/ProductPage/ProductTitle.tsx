@@ -13,18 +13,14 @@ import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
 import RestockModal from "./RestockModal";
 import { useState } from "react";
-
-interface Option {
-  name: string;
-  value: string;
-}
+import { ProductOption } from "@/types/admin.types";
 
 interface ProductTitleProps {
   details: ProductDetailsType;
   className?: string;
   reviews?: Review[];
-  selectedOptions: Option[];
-  setSelectedOptions: (options: Option[]) => void;
+  selectedOptions: ProductOption[];
+  setSelectedOptions: (options: ProductOption[]) => void;
   quantity: number;
   setQuantity: (quantity: number) => void;
 }
@@ -43,8 +39,10 @@ export default function ProductTitle({
   const handleSelectOption = (optionIndex: number, value: string) => {
     const newSelectedOptions = [...selectedOptions];
     newSelectedOptions[optionIndex] = {
+      ...newSelectedOptions[optionIndex],
       name: newSelectedOptions[optionIndex].name,
-      value,
+      values: [value],
+      translations: newSelectedOptions[optionIndex].translations || [],
     };
     setSelectedOptions(newSelectedOptions);
   };
@@ -55,18 +53,16 @@ export default function ProductTitle({
       variant.selectedOptions.every((option) =>
         selectedOptions.some(
           (selected) =>
-            selected.name === option.name && selected.value === option.value
+            selected.name === option.name && selected.values[0] === option.value
         )
       )
     );
   });
+
   const addItem = useCartStore((state) => state.addItem);
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
-    console.log(selectedVariant);
-    const items = useCartStore.getState().items;
-    console.log(items);
     const item = useCartStore
       .getState()
       .items.find((item) => item.id === selectedVariant?.id);
@@ -130,33 +126,26 @@ export default function ProductTitle({
                 </div>
               )}
             </div>
-            {totalReviews > 0 && (
-              <div className="flex gap-2">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, index) => (
-                    <div key={index} className="relative">
-                      <StarIcon
-                        className={`w-5 h-5 ${
-                          index < fullStars ? "text-yellow" : "text-gray-200"
-                        }`}
-                      />
-                      {index === fullStars && partialFill > 0 && (
-                        <div
-                          className="absolute inset-0 overflow-hidden"
-                          style={{ width: `${partialFill * 100}%` }}
-                        >
-                          <StarIcon className="w-5 h-5 text-yellow" />
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <b className="bodySM font-light">
-                  {" "}
-                  ({rating} stars) • {totalReviews} reviews
-                </b>
+
+            <div className="flex items-center">
+              <div className="flex items-center">
+                {[...Array(5)].map((_, index) => (
+                  <StarIcon
+                    key={index}
+                    className={`h-5 w-5 ${
+                      index < fullStars
+                        ? "text-yellow"
+                        : index === fullStars && partialFill > 0
+                        ? "text-yellow"
+                        : "text-gray-200"
+                    }`}
+                  />
+                ))}
               </div>
-            )}
+              <span className="ml-2 text-sm text-gray-500">
+                {totalReviews} reviews
+              </span>
+            </div>
           </div>
 
           <div className="flex flex-col gap-5">
@@ -166,8 +155,8 @@ export default function ProductTitle({
                   <div className="flex flex-col gap-2" key={option.name}>
                     <div className="flex flex-row gap-4">
                       <ColorTabs
-                        tabs={option.optionValues}
-                        selectedTab={selectedOptions[idx].value}
+                        tabs={option.optionValues.map(value => ({ name: value.name }))}
+                        selectedTab={selectedOptions[idx].values[0]}
                         onChange={(value) => handleSelectOption(idx, value)}
                       />
                     </div>
@@ -177,8 +166,8 @@ export default function ProductTitle({
                     <b className="bodyMD font-normal">{option.name}</b>
                     <div className="flex flex-row gap-4">
                       <ProductTabs
-                        tabs={option.optionValues}
-                        selectedTab={selectedOptions[idx].value}
+                        tabs={option.optionValues.map(value => ({ name: value.name }))}
+                        selectedTab={selectedOptions[idx].values[0]}
                         onChange={(value) => handleSelectOption(idx, value)}
                       />
                     </div>
@@ -187,34 +176,31 @@ export default function ProductTitle({
               )}
           </div>
 
+          <div className="flex flex-col gap-2">
+            <b className="bodyMD font-normal">Quantity</b>
+            <CounterButton
+              count={quantity}
+              setCount={setQuantity}
+              min={1}
+              max={selectedVariant?.quantityAvailable || 1}
+            />
+          </div>
+
           {selectedVariant?.quantityAvailable &&
           selectedVariant?.quantityAvailable > 0 ? (
-            <div className="flex flex-col md:flex-row gap-4 w-full">
-              <CounterButton
-                min={1}
-                max={selectedVariant?.quantityAvailable}
-                count={quantity}
-                setCount={setQuantity}
-              />
-              <Button
-                className="flex items-center w-full"
-                onClick={addToCartHandler}
-              >
-                Add to Cart - AED{" "}
-                {formatPrice(
-                  (Number(selectedVariant?.price.amount) * quantity).toString()
-                )}
-              </Button>
-            </div>
-          ) : (
-            <div>
             <Button
-              className="w-full "
-              onClick={() => setShowRestockModal(true)}
+              className="flex items-center"
+              onClick={addToCartHandler}
             >
+              Add to Cart - AED{" "}
+              {formatPrice(
+                (Number(selectedVariant?.price.amount) * quantity).toString()
+              )}
+            </Button>
+          ) : (
+            <Button onClick={() => setShowRestockModal(true)}>
               Notify me when available
             </Button>
-            </div>
           )}
         </div>
       </div>
