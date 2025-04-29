@@ -121,7 +121,7 @@ export default function NavBar() {
             <div className="relative group">
               <button
                 onClick={handleMouseOverCat}
-                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 ${
+                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 cursor-pointer ${
                   pathname.startsWith("/shop/cat-products")
                     ? "border-b-2 border-black"
                     : "border-b-0"
@@ -143,7 +143,7 @@ export default function NavBar() {
             <div className="relative group">
               <button
                 onClick={handleMouseOverDog}
-                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 ${
+                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 cursor-pointer ${
                   pathname.startsWith("/shop/dog-products")
                     ? "border-b-2 border-black"
                     : "border-b-0"
@@ -204,7 +204,7 @@ export default function NavBar() {
               </button>
               <button
                 onClick={() => setIsProfileHovering((prev) => !prev)}
-                className="flex items-center"
+                className="flex items-center cursor-pointer"
               >
                 <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
               </button>

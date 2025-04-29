@@ -41,7 +41,7 @@ export default async function AccountReviewsPage() {
             />
           ))
         ) : (
-          <div>You have not purchased anything</div>
+          <div>You can only review items you have purchased!</div>
         )}
       </div>
     </div>

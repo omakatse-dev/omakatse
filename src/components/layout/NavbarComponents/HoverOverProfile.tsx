@@ -8,8 +8,8 @@ const HoverOverProfile = () => {
     "My Account": [
       { name: "Profile", url: "/account/profile" },
       {
-        name: "My Subscription",
-        url: "/account/subscriptions",
+        name: "Reviews",
+        url: "/account/reviews",
       },
       {
         name: "Past Boxes",
@@ -20,8 +20,8 @@ const HoverOverProfile = () => {
         url: "/account/history",
       },
       {
-        name: "Reviews",
-        url: "/account/reviews",
+        name: "My Subscriptions",
+        url: "/account/subscriptions",
       },
       {
         name: "Pet Profile",
@@ -38,7 +38,10 @@ const HoverOverProfile = () => {
           <div className="flex mr-30">
             {Object.entries(dropdownData).map(([header, links]) => (
               <div key={header}>
-                <a className="bodyLG font-bold text-gray-800" href={`/account/profile`}>
+                <a
+                  className="bodyLG font-bold text-gray-800"
+                  href={`/account/profile`}
+                >
                   {header}
                 </a>
                 <ul className="flex flex-col gap-4 mt-4">

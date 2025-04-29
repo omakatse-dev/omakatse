@@ -3,6 +3,8 @@
 import { PetDetailsSchema } from "@/components/account/pet-profiles/PetProfileForm";
 
 const endpoint = process.env.SUBSCRIPTION_WORKER_ENDPOINT || "";
+// const schedulerEndpoint = process.env.SCHEDULER_WORKER_ENDPOINT || "";
+// const restockEndpoint = process.env.RESTOCK_WORKER_ENDPOINT || "";
 
 const ensureTrailingSlash = (url: string) => {
   return url.endsWith("/") ? url : url + "/";
@@ -17,6 +19,7 @@ export const getSubscriptions = async (email: string) => {
 };
 
 export const saveExitSurveyData = async (
+  email: string,
   reason: string,
   customReason: string,
   returnRating: number,
@@ -25,17 +28,22 @@ export const saveExitSurveyData = async (
   const sheetsEndpoint = process.env.CANCELLATION_FORM_ENDPOINT || "";
   const res = await fetch(sheetsEndpoint, {
     method: "POST",
-    body: JSON.stringify({ reason, customReason, returnRating, comments }),
+    body: JSON.stringify({
+      email,
+      reason,
+      customReason,
+      returnRating,
+      comments,
+    }),
   });
   return res.body;
 };
 
 export const deactivateSubscription = async (contractId: string) => {
-  const res = await fetch(endpoint + "deactivateContract", {
+  await fetch(endpoint + "deactivateContract", {
     method: "PUT",
     body: JSON.stringify({ contractId }),
   });
-  return res.body;
 };
 
 export const getPetsByContractId = async (contractId: string) => {
@@ -73,7 +81,19 @@ export const removePet = async (contractId: string, petIndex: number) => {
 
 export const getPastBoxesByEmail = async (email: string) => {
   const res = await fetch(endpoint + "pastBoxes?email=" + email);
+  // console.log("endpoint", endpoint + "pastBoxes?email=" + email)
+  const data = await res.json();
+  return data;
+};
+
+export const getPetProfilesByEmail = async (email: string) => {
+  const res = await fetch(endpoint + "pets?email=" + email);
   const data = await res.json();
   return data.results;
 };
 
+export const getPastBoxById = async (boxId: string) => {
+  const res = await fetch(endpoint + "box?boxId=" + boxId);
+  const data = await res.json();
+  return data;
+};

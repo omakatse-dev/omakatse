@@ -207,6 +207,7 @@ export const getProductDetailsByID = async (productID: string) => {
                 id
               }
             }
+              
           }
         }
       }
@@ -410,7 +411,7 @@ export const getOrdersByEmail = async (email: string) => {
         edges {
           node {
             id
-            orders(first: 100) {
+            orders(first: 100, sortKey: CREATED_AT, reverse: true) {
               nodes {
                 id
                 createdAt
@@ -418,6 +419,14 @@ export const getOrdersByEmail = async (email: string) => {
                 netPaymentSet {
                   shopMoney {
                     amount
+                  }
+                }
+                lineItems(first: 10) {
+                  edges {
+                    node {
+                      id
+                      name
+                    }
                   }
                 }
               }
@@ -580,4 +589,41 @@ export const createCustomer = async (email: string) => {
         "Customer creation failed"
     );
   }
+};
+
+export const getProductByVariantId = async (variantId: string) => {
+  const query = `
+  query getProductByVariantId($variantId: ID!) {
+  node(id: $variantId) {
+    ... on ProductVariant {
+      id
+      title
+      product {
+        id
+        title
+        description
+        handle
+        options(first: 5) {
+          name
+        }
+        tags
+      }
+      image {
+        url
+      }
+      compareAtPrice {
+        amount
+      }
+      price {
+        amount
+      }
+    }
+  }
+}`;
+  const res = await storefrontClient.request(query, {
+    variables: {
+      variantId: variantId,
+    },
+  });
+  return res.data;
 };

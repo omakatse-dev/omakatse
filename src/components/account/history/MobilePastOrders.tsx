@@ -1,11 +1,9 @@
-import { MoneyV2, Order } from "@/types/admin.types";
+import { Order } from "@/types/admin.types";
 import MobilePastOrderCard from "./MobilePastOrderCard";
 export default function MobilePastOrders({
   pastOrders,
 }: {
-  pastOrders: (Pick<Order, "id" | "createdAt" | "displayFulfillmentStatus"> & {
-    netPaymentSet: { shopMoney: Pick<MoneyV2, "amount"> };
-  })[];
+  pastOrders: Order[];
 }) {
   return (
     <div className="lg:hidden flex flex-col divide-y divide-gray-200">

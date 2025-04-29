@@ -6,6 +6,7 @@ type SubscriptionFormState = Partial<SubscriptionFormType> & {
   setData: (data: Partial<SubscriptionFormType>) => void;
   hydrated: boolean;
   setHydrated: () => void;
+  clearData: () => void;
 };
 
 export const useSubscriptionFormStore = create<SubscriptionFormState>()(
@@ -14,6 +15,10 @@ export const useSubscriptionFormStore = create<SubscriptionFormState>()(
       setData: (data) => set(data),
       hydrated: false,
       setHydrated: () => set({ hydrated: true }),
+      clearData: () => {
+        set({});
+        localStorage.removeItem("subscription-storage");
+      },
     }),
     {
       name: "subscription-storage",

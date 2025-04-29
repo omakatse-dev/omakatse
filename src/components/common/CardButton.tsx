@@ -25,7 +25,7 @@ export default function CardButton({
           onClick={onClick}
           type="button"
           disabled={disabled}
-          className={`relative px-5 py-4 sm:py-8 rounded-2xl w-full h-full ${
+          className={`relative px-5 py-4 sm:py-8 rounded-2xl w-full h-full ${className} ${
             active ? "border border-black bg-gray-50" : "border-primary bg-white"
           } ${disabled ? "bg-gray-200" : "cursor-pointer"}`}
         >

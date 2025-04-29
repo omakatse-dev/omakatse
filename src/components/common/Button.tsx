@@ -33,7 +33,7 @@ export default function Button({
 
   return (
     <div
-      className={`relative group inline-block w-full sm:w-fit sm:self-center z-1 h-11 md:h-13 ${className}`}
+      className={`relative group inline-block z-1 h-11 md:h-13 ${className}`}
     >
       {/* Bottom button */}
       <button

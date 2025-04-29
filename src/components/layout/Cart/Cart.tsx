@@ -7,6 +7,10 @@ import { formatPrice } from "@/utils/Utils";
 import { createCart } from "@/utils/APIs";
 import SubscriptionCartItem from "./SubscriptionCartItem";
 
+interface PetDetail {
+  [key: string]: string | number | boolean;
+}
+
 export default function Cart({
   isOpen,
   handleClose,
@@ -43,11 +47,26 @@ export default function Cart({
     );
     const note =
       petDetails.state.petType === "dog"
-        ? petDetails.state.dogsDetails
+        ? petDetails.state.dogsDetails.map((detail: PetDetail) => ({
+            ...detail,
+            type: "Dog",
+          }))
         : petDetails.state.petType === "cat"
-        ? petDetails.state.catsDetails
+        ? petDetails.state.catsDetails.map((detail: PetDetail) => ({
+            ...detail,
+            type: "Cat",
+          }))
         : petDetails.state.petType === "both"
-        ? petDetails.state.dogDetails.concat(petDetails.state.catDetails)
+        ? [
+            ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+              ...detail,
+              type: "Dog",
+            })),
+            ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+              ...detail,
+              type: "Cat",
+            })),
+          ]
         : undefined;
 
     try {

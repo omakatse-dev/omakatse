@@ -46,14 +46,14 @@ const dogMapping: Record<0 | 1 | 2 | 3, string> = {
 export default function PetDetailsCard({
   details,
   idx,
-  editMode = false,
+  editMode = "none",
   petType,
   catCount = 0,
   petCount = 1,
 }: {
   details: PetDetailsSchema;
   idx: number;
-  editMode?: boolean;
+  editMode?: string;
   petType: "catsDetails" | "dogsDetails";
   catCount?: number;
   petCount?: number;
@@ -81,12 +81,17 @@ export default function PetDetailsCard({
   const searchParams = useSearchParams();
   const contractId = searchParams.get("contractId") || "";
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
+  console.log(idx, details.name);
   return (
     <>
       <Card
         variant={
-          variantMapping[(idx + catCount) as keyof typeof variantMapping]
+          variantMapping[
+            (idx +
+              (details.type === "Dog"
+                ? catCount
+                : 0)) as keyof typeof variantMapping
+          ]
         }
         className="flex flex-col items-center w-full bg-white"
       >
@@ -179,15 +184,17 @@ export default function PetDetailsCard({
               </div>
             </div>
           </div>
-          {editMode && (
+          {editMode !== "none" && (
             <div className="flex flex-col sm:flex-row sm:justify-center mt-8 w-full gap-2">
-              <Button
-                onClick={() => setShowConfirmationModal(true)}
-                className="w-1/2"
-                disabled={petCount === 1}
-              >
-                Remove Pet
-              </Button>
+              {editMode === "all" && (
+                <Button
+                  onClick={() => setShowConfirmationModal(true)}
+                  className="w-1/2"
+                  disabled={petCount === 1}
+                >
+                  Remove Pet
+                </Button>
+              )}
               <Link
                 href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
               >

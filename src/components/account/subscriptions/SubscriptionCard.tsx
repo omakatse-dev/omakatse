@@ -19,10 +19,9 @@ export default function SubscriptionCard({
   subscription: SubscriptionContract;
 }) {
   const pets = JSON.parse(subscription.pets);
-  console.log(subscription);
-
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
+  console.log(cats)
   const contractId = subscription.contractId;
 
   const router = useRouter();
@@ -41,12 +40,15 @@ export default function SubscriptionCard({
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
-          Box {subscription.boxIds?.split(",").length} out of{" "}
-          {subscription.planDuration}
+          Box{" "}
+          {subscription.boxIds?.split(",").length % subscription.planDuration}{" "}
+          out of {subscription.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={subscription.boxIds?.split(",").length}
+          currentStep={
+            subscription.boxIds?.split(",").length % subscription.planDuration
+          }
           totalSteps={subscription.planDuration}
         />
       </div>
@@ -101,8 +103,15 @@ export default function SubscriptionCard({
       </div>
       {subscription.status === "ACTIVE" ? (
         <Button
-          onClick={() => router.push(`/exit-survey?contractId=${contractId}`)}
+          onClick={() =>
+            router.push(
+              `/exit-survey?contractId=${contractId}&email=${subscription.email}`
+            )
+          }
           className="w-full md:w-fit self-center"
+          disabled={
+            subscription.boxIds?.split(",").length !== subscription.planDuration
+          }
         >
           Cancel auto-renew
         </Button>

@@ -1,3 +1,4 @@
+import { ProductOption } from "@/types/admin.types";
 export type SortOption = "CREATED" | "BEST_SELLING" | "PRICE";
 import { EntryFields } from "contentful";
 
@@ -33,7 +34,7 @@ export type ProductDetailsType = {
   id: string;
   description: string;
   tags: string[];
-  options: Option[];
+  options: ProductOption[];
   variants: VariantNodes;
   images: ProductImageNode;
   metafield: Metafield;
@@ -43,15 +44,6 @@ export type ProductImageNode = {
   nodes: {
     url: string;
   }[];
-};
-
-type Option = {
-  name: string;
-  optionValues: OptionValue[];
-};
-
-export type OptionValue = {
-  name: string;
 };
 
 type VariantNodes = {
@@ -150,4 +142,54 @@ export type BlogPostType = {
     summary: EntryFields.Text;
     slug: EntryFields.Text;
   };
+};
+
+export type PastBoxType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  boxId: string;
+  date: string;
+  number: number;
+  paymentDate: string;
+  items: string;
+};
+
+export type ContractType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  petsId: string;
+  pets: string;
+};
+
+export type PastBoxDetailsType = {
+  contractId: string;
+  size: string;
+  nextBillingDate: string;
+  address: string;
+  name: string;
+  planDuration: number;
+  email: string;
+  nextRenewalDate: string;
+  status: string;
+  petsId: string;
+  pets: string;
+  boxId: string;
+  date: string;
+  number: number;
+  paymentDate: string;
+  items: string;
 };
