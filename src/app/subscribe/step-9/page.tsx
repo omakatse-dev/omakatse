@@ -19,7 +19,7 @@ export default function SubscriptionStepNinePage() {
 
   const [boxSize, setBoxSize] = useState<string>("Small Box");
   const [selectedPlan, setSelectedPlan] = useState<PlanOption>("12 months");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const petType = useSubscriptionFormStore((state) => state.petType);
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);

@@ -46,11 +46,11 @@ export default function AddedModal({ close }: { close: () => void }) {
             }))
           : petDetails.state.petType === "both"
           ? [
-              ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+              ...petDetails.state.dogsDetails.map((detail: PetDetail) => ({
                 ...detail,
                 type: "Dog",
               })),
-              ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+              ...petDetails.state.catsDetails.map((detail: PetDetail) => ({
                 ...detail,
                 type: "Cat",
               })),
@@ -72,8 +72,14 @@ export default function AddedModal({ close }: { close: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-10">
-      <div className="p-8 sm:p-12 rounded-2xl bg-yellow-pastel w-11/12 sm:w-full sm:max-w-lg text-center relative flex flex-col gap-8">
+    <div
+      className="fixed inset-0 bg-black/50 flex justify-center items-center z-10"
+      onClick={close}
+    >
+      <div
+        className="p-8 sm:p-12 rounded-2xl bg-yellow-pastel w-11/12 sm:w-full sm:max-w-lg text-center relative flex flex-col gap-8"
+        onClick={(e) => e.stopPropagation()}
+      >
         <XMarkIcon
           className="w-6 h-6 absolute top-4 right-4 stroke-2 cursor-pointer"
           onClick={close}
