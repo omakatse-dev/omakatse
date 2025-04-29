@@ -8,6 +8,7 @@ import {
 } from "@headlessui/react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from "next/link";
 
 
 interface AccountDropdownProps {
@@ -45,7 +46,7 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                 <DisclosurePanel className="relative pl-5 mt-3">
                   <ul className="flex flex-col gap-3 pb-3 border-b-1 border-white">
                     <li>
-                      <a
+                      <Link
                         onClick={() => {
                           setIsOpen((prev) => !prev);
                         }}
@@ -57,7 +58,7 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                         }`}
                       >
                         Profile
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a
@@ -69,43 +70,43 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                       </a>
                     </li>
                     <li>
-                      <a
+                      <Link
                         onClick={() => setIsOpen((prev) => !prev)}
                         href="/account/past-boxes"
                         className={`bodyLG ${pathName.startsWith("/account/past-boxes") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                       >
                         Past Boxes
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         onClick={() => setIsOpen((prev) => !prev)}
                         href="/account/history"
                         className={`bodyLG ${pathName.startsWith("/account/history") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                       >
                         Payment History
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         onClick={() => setIsOpen((prev) => !prev)}
                         href="/account/reviews"
                         className={`bodyLG ${pathName.startsWith("/account/reviews") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                       >
                         Reviews
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         onClick={() => setIsOpen((prev) => !prev)}
                         href="/account/pet-profiles"
                         className={`bodyLG ${pathName.startsWith("/account/pet-profiles") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                       >
                         Pet Profile
-                      </a>
+                      </Link>
                     </li>
                   </ul>
-                  <a
+                  <Link
                     href={
                       user
                         ? "/api/auth/logout"
@@ -114,7 +115,7 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                     className="flex pt-3 bodyLG"
                   >
                     {user ? "Logout" : "Login"}
-                  </a>
+                  </Link>
                 </DisclosurePanel>
               </Transition>
             </>

@@ -33,7 +33,7 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
         {item.options.length > 1 &&
           item.options.map((option) => (
             <div key={option.name} className="bodySM text-gray-800">
-              {option.name}: {option.value}
+              {option.name}: {option.values?.[0]}
             </div>
           ))}
         <div className="flex flex-row justify-between items-center mt-5 min-h-16">
