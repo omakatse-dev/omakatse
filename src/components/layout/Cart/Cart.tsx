@@ -59,11 +59,11 @@ export default function Cart({
             }))
           : petDetails.state.petType === "both"
           ? [
-              ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+              ...petDetails.state.dogsDetails.map((detail: PetDetail) => ({
                 ...detail,
                 type: "Dog",
               })),
-              ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+              ...petDetails.state.catsDetails.map((detail: PetDetail) => ({
                 ...detail,
                 type: "Cat",
               })),
