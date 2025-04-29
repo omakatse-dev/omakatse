@@ -13,7 +13,6 @@ import dog2 from "../../../public/assets/Dog2.svg";
 import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ConfirmRemovePetModal from "./ConfirmRemovePetModal";
 
@@ -50,6 +49,7 @@ export default function PetDetailsCard({
   petType,
   catCount = 0,
   petCount = 1,
+  contractId = "",
 }: {
   details: PetDetailsSchema;
   idx: number;
@@ -57,6 +57,7 @@ export default function PetDetailsCard({
   petType: "catsDetails" | "dogsDetails";
   catCount?: number;
   petCount?: number;
+  contractId?: string;
 }) {
   const numberToMonth = {
     1: "Jan",
@@ -78,10 +79,9 @@ export default function PetDetailsCard({
     "just right": "Just Right",
     chubby: "Chubby",
   };
-  const searchParams = useSearchParams();
-  const contractId = searchParams.get("contractId") || "";
+
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  console.log(idx, details.name);
+
   return (
     <>
       <Card
@@ -198,7 +198,7 @@ export default function PetDetailsCard({
               <Link
                 href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
               >
-                <Button className="w-1/2">Edit Pet</Button>
+                <Button>Edit Pet</Button>
               </Link>
             </div>
           )}

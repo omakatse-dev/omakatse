@@ -14,10 +14,65 @@ import Button from "@/components/common/Button";
 import { updatePets } from "@/utils/SubscriptionAPIs";
 import { useState } from "react";
 import EditPetSuccessModal from "./EditPetSuccessModal";
+import Image from "next/image";
+import beef from "../../../../public/assets/Beef.svg";
+import dairy from "../../../../public/assets/Dairy.svg";
+import wheat from "../../../../public/assets/Wheat.svg";
+import poultry from "../../../../public/assets/Poultry.svg";
+import lamb from "../../../../public/assets/Lamb.svg";
+import seafood from "../../../../public/assets/Seafood.svg";
+import deer from "../../../../public/assets/Deer.svg";
+import cat from "../../../../public/assets/Cat.svg";
+import dog from "../../../../public/assets/Dog.svg";
+import cat1 from "../../../../public/assets/Cat1.svg";
+import cat2 from "../../../../public/assets/Cat2.svg";
+import cat3 from "../../../../public/assets/Cat3.svg";
+import cat4 from "../../../../public/assets/Cat4.svg";
+import dog1 from "../../../../public/assets/Dog1.svg";
+import dog2 from "../../../../public/assets/Dog2.svg";
+import dog3 from "../../../../public/assets/Dog3.svg";
+import dog4 from "../../../../public/assets/Dog4.svg";
+import { useRouter } from "next/navigation";
+
 export type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
-const ALLERGIES = ["Beef", "Dairy", "Wheat", "Poultry"] as const;
-type StandardAllergy = (typeof ALLERGIES)[number];
+const CAT_ALLERGIES = ["Poultry", "Beef", "Seafood", "Deer"] as const;
+const DOG_ALLERGIES = ["Beef", "Dairy", "Wheat", "Poultry", "Lamb", "Seafood"] as const;
+type CatAllergy = (typeof CAT_ALLERGIES)[number];
+type DogAllergy = (typeof DOG_ALLERGIES)[number];
+
+const isCatAllergy = (allergy: string): allergy is CatAllergy => {
+  return CAT_ALLERGIES.includes(allergy as CatAllergy);
+};
+
+const isDogAllergy = (allergy: string): allergy is DogAllergy => {
+  return DOG_ALLERGIES.includes(allergy as DogAllergy);
+};
+
+const allergyImageMapping: Record<CatAllergy | DogAllergy, string> = {
+  Beef: beef,
+  Dairy: dairy,
+  Wheat: wheat,
+  Poultry: poultry,
+  Lamb: lamb,
+  Seafood: seafood,
+  Deer: deer,
+};
+
+const catMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: cat1,
+  1: cat2,
+  2: cat3,
+  3: cat4,
+};
+
+const dogMapping: Record<0 | 1 | 2 | 3, string> = {
+  0: dog1,
+  1: dog2,
+  2: dog3,
+  3: dog4,
+};
+
 export default function PetProfileForm({
   existingDetails,
   contractId,
@@ -30,6 +85,7 @@ export default function PetProfileForm({
   const { register, handleSubmit, control } = useForm<PetDetailsSchema>({
     defaultValues: existingDetails,
   });
+  const router = useRouter();
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -63,6 +119,20 @@ export default function PetProfileForm({
         className="flex flex-col gap-8 w-full mt-8 bodyMD"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <div className="flex flex-col items-center justify-center gap-2">
+          <Image
+            src={
+              existingDetails.type === "Cat"
+                ? catMapping[petIndex as keyof typeof catMapping]
+                : dogMapping[petIndex as keyof typeof dogMapping]
+            }
+            alt={`${existingDetails.type} ${petIndex + 1}`}
+            width={100}
+            height={100}
+            className="w-16 h-16 sm:w-24 sm:h-24"
+          />
+          <h4>{existingDetails.name}</h4>
+        </div>
         <div className="flex flex-col lg:flex-row justify-between w-full gap-6">
           <div className="w-full lg:w-1/2 flex flex-col gap-2">
             <div>Name</div>
@@ -176,27 +246,48 @@ export default function PetProfileForm({
               name="size"
               control={control}
               render={({ field }) => (
-                <div className="flex flex-col sm:flex-row gap-8">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full sm:justify-between">
                   <CardButton
                     active={field.value === "skinny"}
                     onClick={() => field.onChange("skinny")}
+                    className="flex items-center justify-center sm:flex-col w-full"
                   >
-                    <div className="w-32 h-16 bg-amber-300 mb-4" />
-                    Skinny
+                    <Image
+                      src={existingDetails.type === "Cat" ? cat : dog}
+                      alt="Skinny"
+                      width={100}
+                      height={100}
+                      className="scale-60"
+                    />
+                    <div className="w-1/2 sm:w-full">Small</div>
                   </CardButton>
                   <CardButton
                     active={field.value === "just right"}
                     onClick={() => field.onChange("just right")}
+                    className="flex items-center justify-center sm:flex-col w-full"
                   >
-                    <div className="w-32 h-16 bg-amber-300 mb-4" />
-                    Just Right
+                    <Image
+                      src={existingDetails.type === "Cat" ? cat : dog}
+                      alt="Just Right"
+                      width={100}
+                      height={100}
+                      className="scale-90"
+                    />
+                    <div className="w-1/2 sm:w-full">Medium</div>
                   </CardButton>
                   <CardButton
                     active={field.value === "chubby"}
                     onClick={() => field.onChange("chubby")}
+                    className="flex items-center justify-center sm:flex-col w-full"
                   >
-                    <div className="w-32 h-16 bg-amber-300 mb-4" />
-                    Chubby
+                    <Image
+                      src={existingDetails.type === "Cat" ? cat : dog}
+                      alt="Chubby"
+                      width={100}
+                      height={100}
+                      className="scale-120"
+                    />
+                    <div className="w-1/2 sm:w-full">Large</div>
                   </CardButton>
                 </div>
               )}
@@ -237,21 +328,27 @@ export default function PetProfileForm({
                       {existingDetails.name} is allergic to:
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-3">
-                      {ALLERGIES.map((allergy) => (
+                      {(existingDetails.type === "Dog" ? DOG_ALLERGIES : CAT_ALLERGIES).map((allergy) => (
                         <CardButton
                           key={allergy}
                           active={field.value.allergies.includes(allergy)}
                           onClick={() => {
-                            const allergies = field.value.allergies.includes(
-                              allergy
-                            )
+                            const allergies = field.value.allergies.includes(allergy)
                               ? field.value.allergies.filter(
                                   (a) => a !== allergy
                                 )
                               : [...field.value.allergies, allergy];
                             field.onChange({ ...field.value, allergies });
                           }}
+                          className="flex flex-col items-center gap-2"
                         >
+                          <Image
+                            src={allergyImageMapping[allergy]}
+                            alt={allergy}
+                            width={24}
+                            height={24}
+                            className="w-12 h-12 sm:w-24 sm:h-24"
+                          />
                           {allergy}
                         </CardButton>
                       ))}
@@ -262,7 +359,7 @@ export default function PetProfileForm({
                       placeholder="Enter any other allergies"
                       value={field.value.allergies
                         .filter(
-                          (a) => !ALLERGIES.includes(a as StandardAllergy)
+                          (a) => !(existingDetails.type === "Dog" ? isDogAllergy(a) : isCatAllergy(a))
                         )
                         .join(", ")}
                       onChange={(e) => {
@@ -271,7 +368,7 @@ export default function PetProfileForm({
                           .map((a) => a.trim())
                           .filter(Boolean);
                         const standardAllergies = field.value.allergies.filter(
-                          (a) => ALLERGIES.includes(a as StandardAllergy)
+                          (a) => existingDetails.type === "Dog" ? isDogAllergy(a) : isCatAllergy(a)
                         );
                         field.onChange({
                           ...field.value,
@@ -317,7 +414,7 @@ export default function PetProfileForm({
                   <>
                     <div className="mt-6">{existingDetails.name} prefers:</div>
                     <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-3">
-                      {ALLERGIES.map((preference) => (
+                      {(existingDetails.type === "Dog" ? DOG_ALLERGIES : CAT_ALLERGIES).map((preference) => (
                         <CardButton
                           key={preference}
                           active={field.value.preferences.includes(preference)}
@@ -330,7 +427,15 @@ export default function PetProfileForm({
                                 : [...field.value.preferences, preference];
                             field.onChange({ ...field.value, preferences });
                           }}
+                          className="flex flex-col items-center gap-2"
                         >
+                          <Image
+                            src={allergyImageMapping[preference]}
+                            alt={preference}
+                            width={24}
+                            height={24}
+                            className="w-12 h-12 sm:w-24 sm:h-24"
+                          />
                           {preference}
                         </CardButton>
                       ))}
@@ -341,7 +446,7 @@ export default function PetProfileForm({
                       placeholder="Enter any other preferences"
                       value={field.value.preferences
                         .filter(
-                          (a) => !ALLERGIES.includes(a as StandardAllergy)
+                          (a) => !(existingDetails.type === "Dog" ? isDogAllergy(a) : isCatAllergy(a))
                         )
                         .join(", ")}
                       onChange={(e) => {
@@ -351,7 +456,7 @@ export default function PetProfileForm({
                           .filter(Boolean);
                         const standardPreferences =
                           field.value.preferences.filter((a) =>
-                            ALLERGIES.includes(a as StandardAllergy)
+                            existingDetails.type === "Dog" ? isDogAllergy(a) : isCatAllergy(a)
                           );
                         field.onChange({
                           ...field.value,
@@ -419,7 +524,7 @@ export default function PetProfileForm({
           </div>
         </div>
         <div className="flex w-full gap-5 justify-center">
-          <Button variant="secondary" className="w-1/2">
+          <Button variant="secondary" className="w-1/2" onClick={() => router.back()}>
             Cancel
           </Button>
           <Button

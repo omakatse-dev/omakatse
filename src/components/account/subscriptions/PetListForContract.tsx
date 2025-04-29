@@ -60,6 +60,7 @@ export default function PetListForContract() {
         pets.map((pet: PetDetailsSchema, idx: number) => (
           <div key={idx}>
             <PetDetailsCard
+              contractId={contractId || ""}
               details={pet}
               idx={idx}
               editMode="all"

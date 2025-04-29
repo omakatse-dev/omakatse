@@ -57,6 +57,7 @@ export default function PetProfilePage({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center">
                     {pets.map((pet: PetDetailsSchema, idx: number) => (
                       <PetDetailsCard
+                        contractId={contract.contractId}
                         key={pet.name}
                         details={pet}
                         idx={idx}
