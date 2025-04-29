@@ -5,6 +5,8 @@ import { getOrdersByEmail } from "@/utils/APIs";
 import { Claims, getSession } from "@auth0/nextjs-auth0";
 import MobilePastOrders from "@/components/account/history/MobilePastOrders";
 import PastOrdersTable from "@/components/account/history/PastOrdersTable";
+import Button from "@/components/common/Button";
+import Link from "next/link";
 
 export const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
@@ -31,7 +33,15 @@ export default async function AccountHistoryPage() {
           <PastOrdersTable pastOrders={pastOrders ?? []} />
         </div>
       ) : (
-        <div>No past orders found</div>
+        <>
+          <div className="bodyMD text-gray-800">
+            No payments yet. Your payment history will appear here after your
+            first subscription or purchase.
+          </div>
+          <Link href="/subscribe/step-1">
+            <Button className="w-full sm:w-fit mt-10">Build your box now</Button>
+          </Link>
+        </>
       )}
     </>
   );

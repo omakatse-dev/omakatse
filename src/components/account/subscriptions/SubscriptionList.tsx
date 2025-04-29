@@ -6,6 +6,8 @@ import { SubscriptionContract } from "@/types/Types";
 import SubscriptionCard from "./SubscriptionCard";
 import { usePathname, useSearchParams } from "next/navigation";
 import RenewSubscriptionCard from "./RenewSubscriptionCard";
+import Link from "next/link";
+import Button from "@/components/common/Button";
 
 export default function SubscriptionList() {
   const { user, error, isLoading } = useUser();
@@ -55,7 +57,15 @@ export default function SubscriptionList() {
         ))
       )}
       {subscriptions.length === 0 && !loadingSubs && (
-        <div>No subscriptions found.</div>
+        <>
+          <div className="bodyMD text-gray-800">
+            No subscriptions yet. Start building your very first box and treat
+            your furry family members to something special every month.
+          </div>
+          <Link href="/subscribe/step-1">
+            <Button className="w-full sm:w-fit">Build your box now</Button>
+          </Link>
+        </>
       )}
     </div>
   );

@@ -10,6 +10,7 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
   const pets = JSON.parse(box.pets);
   const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
+
   return (
     <div className="border-primary rounded-2xl p-6 sm:p-8 max-w-4xl flex flex-col gap-8">
       <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
@@ -40,7 +41,11 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
         </div>
         <div>
           <label className="bodySM text-gray-500">Next billing date</label>
-          <div className="bodyMD font-semibold mt-1">{dayjs(box.nextBillingDate).format("DD MMM YYYY")}</div>
+          <div className="bodyMD font-semibold mt-1">
+            {box.status === "active"
+              ? dayjs(box.nextBillingDate).format("DD MMM YYYY")
+              : "-"}
+          </div>
         </div>
         <div className="md:border-r border-gray-200">
           <label className="bodySM text-gray-500">Ship to</label>
@@ -66,7 +71,9 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
         </div>
         <div>
           <label className="bodySM text-gray-500">Next Renewal Date</label>
-          <div className="bodyMD font-semibold mt-1">{dayjs(box.nextRenewalDate).format("DD MMM YYYY")}</div>
+          <div className="bodyMD font-semibold mt-1">
+            {dayjs(box.nextRenewalDate).format("DD MMM YYYY")}
+          </div>
         </div>
       </div>
       <hr className="border-gray-200" />

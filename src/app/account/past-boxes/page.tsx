@@ -2,6 +2,7 @@ import { PastBoxType } from "@/types/Types";
 import PastBoxSummaryCard from "@/components/subscription/PastBoxSummaryCard";
 import { getPastBoxesByEmail } from "@/utils/SubscriptionAPIs";
 import { Claims, getSession } from "@auth0/nextjs-auth0";
+import Button from "@/components/common/Button";
 
 const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
@@ -34,7 +35,13 @@ export default async function PastBoxesPage() {
           ))}
         </div>
       ) : (
-        <div>No past boxes found</div>
+        <>
+          <div className="bodyMD text-gray-800">
+            No past boxes yet. Once you’ve built and received your first box,
+            you’ll see it here!
+          </div>
+          <Button className="w-full sm:w-fit">Build your box now</Button>
+        </>
       )}
     </div>
   );

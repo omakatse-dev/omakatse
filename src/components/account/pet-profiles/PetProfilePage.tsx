@@ -6,6 +6,8 @@ import { z } from "zod";
 import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
 import { Suspense } from "react";
 import { ContractType } from "@/types/Types";
+import Button from "@/components/common/Button";
+import Link from "next/link";
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
 export default function PetProfilePage({
@@ -79,7 +81,15 @@ export default function PetProfilePage({
           <AddPetCard />
         </div>
       ) : (
-        <div>No subs found</div>
+        <>
+          <div className="bodyMD text-gray-800">
+            No pet profiles yet. Start building your very first box to customize
+            pet profiles for your furry family members!
+          </div>
+          <Link href="/subscribe/step-1">
+            <Button className="w-full sm:w-fit">Build your box now</Button>
+          </Link>
+        </>
       )}
     </div>
   );

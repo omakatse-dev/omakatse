@@ -5,7 +5,8 @@ import { Review } from "@/types/Types";
 import { getFulfilledOrdersByEmail, getReviewsByAuthor } from "@/utils/APIs";
 
 import { Claims, getSession } from "@auth0/nextjs-auth0";
-
+import Button from "@/components/common/Button";
+import Link from "next/link";
 const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
 
@@ -41,7 +42,20 @@ export default async function AccountReviewsPage() {
             />
           ))
         ) : (
-          <div>You can only review items you have purchased!</div>
+          <div className="flex flex-col gap-10">
+            <div className="bodyMD text-gray-800">
+              No reviews yet. Start purchasing your first product to leave a
+              review!
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6">
+              <Link href="/shop/cat-products">
+                <Button className="w-full sm:w-fit">Shop Cat Products</Button>
+              </Link>
+              <Link href="/shop/dog-products">
+                <Button className="w-full sm:w-fit">Shop Dog Products</Button>
+              </Link>
+            </div>
+          </div>
         )}
       </div>
     </div>
