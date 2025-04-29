@@ -2,6 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "../common/Button";
 import { createCart } from "@/utils/APIs";
 import { useCartStore } from "@/stores/cartStore";
+import { createPortal } from "react-dom";
 
 interface PetDetail {
   [key: string]: string | number | boolean;
@@ -71,7 +72,7 @@ export default function AddedModal({ close }: { close: () => void }) {
     }
   };
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 bg-black/50 flex justify-center items-center z-10"
       onClick={close}
@@ -93,6 +94,7 @@ export default function AddedModal({ close }: { close: () => void }) {
         </ul>
         <Button onClick={createCartHandler}>Checkout</Button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

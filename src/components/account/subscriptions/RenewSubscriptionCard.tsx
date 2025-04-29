@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { getSubscriptionPlan } from "@/utils/APIs";
 import { useCartStore } from "@/stores/cartStore";
 import { useUIStore } from "@/stores/uiStore";
+import { useState } from "react";
+import AddedModal from "@/components/subscription/AddedModal";
 
 export type PetType = z.infer<typeof petDetailsSchema>;
 
@@ -24,7 +26,9 @@ export default function RenewSubscriptionCard({
   const cats = pets.filter((pet: PetType) => pet.type === "Cat");
   const contractId = subscription.contractId;
   const addItem = useCartStore((state) => state.addItem);
+  const cartItems = useCartStore((state) => state.items);
   const { openCart } = useUIStore();
+  const [showAddedModal, setShowAddedModal] = useState(false);
 
   const selectedPlanMapping: Record<string, number> = {
     "12": 3,
@@ -34,7 +38,10 @@ export default function RenewSubscriptionCard({
   };
 
   const addToCartHandler = async () => {
-
+    if (cartItems.some((item) => item.name.includes("Subscription Box"))) {
+      setShowAddedModal(true);
+      return;
+    }
     const productId =
       subscription.size === "SMALL"
         ? "gid://shopify/Product/8944155918595"
@@ -68,6 +75,7 @@ export default function RenewSubscriptionCard({
   const router = useRouter();
   return (
     <Card className="bg-white flex flex-col gap-6 md:gap-8">
+      {showAddedModal && <AddedModal close={() => setShowAddedModal(false)} />}
       <div className="flex flex-col-reverse md:flex-row justify-between gap-4 md:justify-center">
         <Pets dogs={dogs} cats={cats} />
       </div>

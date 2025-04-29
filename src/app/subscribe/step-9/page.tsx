@@ -104,6 +104,7 @@ export default function SubscriptionStepNinePage() {
       />
       <TipCard />
       <PlanSelector
+        boxSize={boxSize as "Small Box" | "Large Box"}
         selectedPlan={selectedPlan}
         setSelectedPlan={(plan) => setSelectedPlan(plan as PlanOption)}
       />

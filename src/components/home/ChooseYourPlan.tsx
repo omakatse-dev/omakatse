@@ -3,9 +3,10 @@ import Button from "@/components/common/Button";
 import Tabs from "@/components/common/Tabs";
 import PricingCard from "./PricingCard";
 import Link from "next/link";
+import prices from "@/data/BoxPrice.json";
 
 function ChooseYourPlan() {
-  const [selectedTab, setSelectedTab] = React.useState("Small Box");
+  const [selectedTab, setSelectedTab] = React.useState("Small Box"); 
 
   return (
     <div className="bg-gray-200 justify-items-center">
@@ -24,25 +25,25 @@ function ChooseYourPlan() {
       <div className="flex flex-col lg:flex-row gap-8 w-full">
         <PricingCard
           title="1 Month"
-          price={40}
+          price={prices[selectedTab as "Small Box" | "Large Box"][0]}
           durationText="AED/mo"
           savingsText="Try us, no commitment"
         />
         <PricingCard
           title="3 Months"
-          price={35}
+          price={prices[selectedTab as "Small Box" | "Large Box"][1]}
           durationText="AED/mo"
           savingsText="save AED 20"
         />
         <PricingCard
           title="6 Months"
-          price={30}
+          price={prices[selectedTab as "Small Box" | "Large Box"][2]}
           durationText="AED/mo"
           savingsText="save AED 40"
         />
         <PricingCard
           title="12 Months"
-          price={25}
+          price={prices[selectedTab as "Small Box" | "Large Box"][3]}
           durationText="AED/mo"
           savingsText="Super savings, save AED 80"
           highlight

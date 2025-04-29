@@ -1,12 +1,15 @@
 import CardButton from "../common/CardButton";
-
+import prices from "@/data/BoxPrice.json";
 export default function PlanSelector({
   selectedPlan,
   setSelectedPlan,
+  boxSize,
 }: {
   selectedPlan: string;
   setSelectedPlan: (plan: string) => void;
+  boxSize: "Small Box" | "Large Box";
 }) {
+  
   return (
     <div className="flex flex-col lg:flex-row gap-4 sm:gap-8 w-full justify-center">
       <CardButton
@@ -17,7 +20,7 @@ export default function PlanSelector({
         <div className="flex flex-col gap-8">
           <h4>1 month</h4>
           <div>
-            <h1>40</h1>
+            <h1>{prices[boxSize][0]}</h1>
             <h3 className="font-bold text-gray-400">AED/mo</h3>
           </div>
           <div className="bodyLG text-gray-800">to just try your first box</div>
@@ -31,7 +34,7 @@ export default function PlanSelector({
         <div className="flex flex-col gap-8">
           <h4>3 months</h4>
           <div>
-            <h1>35</h1>
+            <h1>{prices[boxSize][1]}</h1>
             <h3 className="font-bold text-gray-400">AED/mo</h3>
           </div>
           <div className="bodyLG text-gray-800">save AED 20</div>
@@ -45,7 +48,7 @@ export default function PlanSelector({
         <div className="flex flex-col gap-8">
           <h4>6 months</h4>
           <div>
-            <h1>30</h1>
+            <h1>{prices[boxSize][2]}</h1>
             <h3 className="font-bold text-gray-400">AED/mo</h3>
           </div>
           <div className="bodyLG text-gray-800">save AED 40</div>
@@ -59,7 +62,7 @@ export default function PlanSelector({
         <div className="flex flex-col gap-8">
           <h4>12 months</h4>
           <div>
-            <h1>25</h1>
+            <h1>{prices[boxSize][3]}</h1>
             <h3 className="font-bold text-gray-400">AED/mo</h3>
           </div>
           <div className="bodyLG text-gray-800">save AED 60</div>

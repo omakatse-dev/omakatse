@@ -76,6 +76,7 @@ export default function ChoosePlanPage() {
       />
       <TipCard className="bg-white w-fit self-center" />
       <PlanSelector
+        boxSize={boxSize as "Small Box" | "Large Box"}
         selectedPlan={selectedPlan}
         setSelectedPlan={setSelectedPlan}
       />
