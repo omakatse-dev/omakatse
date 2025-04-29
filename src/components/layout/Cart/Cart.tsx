@@ -45,29 +45,32 @@ export default function Cart({
     const petDetails = JSON.parse(
       localStorage.getItem("subscription-storage") || "{}"
     );
-    const note =
-      petDetails.state.petType === "dog"
-        ? petDetails.state.dogsDetails.map((detail: PetDetail) => ({
-            ...detail,
-            type: "Dog",
-          }))
-        : petDetails.state.petType === "cat"
-        ? petDetails.state.catsDetails.map((detail: PetDetail) => ({
-            ...detail,
-            type: "Cat",
-          }))
-        : petDetails.state.petType === "both"
-        ? [
-            ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+    const note = {
+      pets:
+        petDetails.state.petType === "dog"
+          ? petDetails.state.dogsDetails.map((detail: PetDetail) => ({
               ...detail,
               type: "Dog",
-            })),
-            ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+            }))
+          : petDetails.state.petType === "cat"
+          ? petDetails.state.catsDetails.map((detail: PetDetail) => ({
               ...detail,
               type: "Cat",
-            })),
-          ]
-        : undefined;
+            }))
+          : petDetails.state.petType === "both"
+          ? [
+              ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+                ...detail,
+                type: "Dog",
+              })),
+              ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+                ...detail,
+                type: "Cat",
+              })),
+            ]
+          : undefined,
+      duration: subscriptionItems[0].duration,
+    };
 
     try {
       const res = await createCart(

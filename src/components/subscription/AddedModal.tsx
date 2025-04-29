@@ -3,6 +3,10 @@ import Button from "../common/Button";
 import { createCart } from "@/utils/APIs";
 import { useCartStore } from "@/stores/cartStore";
 
+interface PetDetail {
+  [key: string]: string | number | boolean;
+}
+
 export default function AddedModal({ close }: { close: () => void }) {
   const cartItems = useCartStore((state) => state.items);
 
@@ -28,14 +32,32 @@ export default function AddedModal({ close }: { close: () => void }) {
     const petDetails = JSON.parse(
       localStorage.getItem("subscription-storage") || "{}"
     );
-    const note =
-      petDetails.state.petType === "dog"
-        ? petDetails.state.dogsDetails
-        : petDetails.state.petType === "cat"
-        ? petDetails.state.catsDetails
-        : petDetails.state.petType === "both"
-        ? petDetails.state.dogDetails.concat(petDetails.state.catDetails)
-        : undefined;
+    const note = {
+      pets:
+        petDetails.state.petType === "dog"
+          ? petDetails.state.dogsDetails.map((detail: PetDetail) => ({
+              ...detail,
+              type: "Dog",
+            }))
+          : petDetails.state.petType === "cat"
+          ? petDetails.state.catsDetails.map((detail: PetDetail) => ({
+              ...detail,
+              type: "Cat",
+            }))
+          : petDetails.state.petType === "both"
+          ? [
+              ...petDetails.state.dogDetails.map((detail: PetDetail) => ({
+                ...detail,
+                type: "Dog",
+              })),
+              ...petDetails.state.catDetails.map((detail: PetDetail) => ({
+                ...detail,
+                type: "Cat",
+              })),
+            ]
+          : undefined,
+      duration: subscriptionItems[0].duration,
+    };
 
     try {
       const res = await createCart(

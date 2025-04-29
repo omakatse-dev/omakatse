@@ -60,14 +60,26 @@ export default function BoxItem({
     if (item) {
       changeQuantity(item, item.quantity + 1);
     } else {
+      // Format selected options from the variant title
+      const selectedOptions = product?.product?.options.map((option, idx) => ({
+        id: option.id,
+        name: option.name,
+        values: [optionValues[idx]],
+        translations: option.translations || [],
+        position: option.position,
+        optionValues: option.optionValues,
+        __typename: option.__typename,
+        linkedMetafield: option.linkedMetafield,
+      })) || [];
+
       addItem({
         id: product?.id || "", //this is the variant id
-        name: product?.title || "",
+        name: product?.product?.title || "",
         price: product?.price.amount || "",
         compareAtPrice: product?.compareAtPrice?.amount || "",
         quantity: 1,
         image: product?.image?.url || "",
-        options: product?.product?.options || [],
+        options: selectedOptions,
       });
     }
     openCart();

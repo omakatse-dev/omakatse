@@ -133,7 +133,7 @@ export default function ReviewForm() {
         <TnC />
         <Button
           type="submit"
-          className="w-full sm:w-fit sm:px-16"
+          className="w-full sm:w-fit"
           disabled={isUploadingReview}
         >
           {isUploadingReview ? "Submitting..." : "Submit"}
