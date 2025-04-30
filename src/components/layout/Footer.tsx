@@ -70,7 +70,7 @@ export default function Footer() {
   const supportlinks = [
     {
       name: "Privacy Policy",
-      url: "/about",
+      url: "/privacy-policy",
     },
     {
       name: "Terms and Conditions",
