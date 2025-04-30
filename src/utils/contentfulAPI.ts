@@ -1,5 +1,6 @@
 import { faqType } from "@/app/faqs/page";
 import { TermsAndConditionsType } from "@/app/terms-and-conditions/page";
+import { PrivacyPolicyType } from "@/components/privacy-policy/PrivacyPolicyPage";
 import { createClient, EntryCollection, Entry } from "contentful";
 import { BlogPostType } from "@/types/Types";
 
@@ -63,6 +64,20 @@ export const getTermsAndConditions = async (
       })
     : await client.getEntries<TermsAndConditionsType>({
         content_type: "termsAndConditions",
+      });
+
+  return res.items.length > 0 ? res.items[0] : null;
+};
+
+export const getPrivacyPolicy = async (
+  preview: string
+): Promise<Entry<PrivacyPolicyType> | null> => {
+  const res = preview
+    ? await previewClient.getEntries<PrivacyPolicyType>({
+        content_type: "privacyPolicy",
+      })
+    : await client.getEntries<PrivacyPolicyType>({
+        content_type: "privacyPolicy",
       });
 
   return res.items.length > 0 ? res.items[0] : null;
