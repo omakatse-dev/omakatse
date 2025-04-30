@@ -38,12 +38,14 @@ export default function SearchShopfront({
         Showing {products.length} results(s)
       </div>
 
-      <SortDropDown
-        options={SORTING_OPTIONS}
-        selectedOption={selectedSortingOption}
-        onChange={setSelectedSortingOption}
-        className="mt-4"
-      />
+      {products.length > 0 && (
+        <SortDropDown
+          options={SORTING_OPTIONS}
+          selectedOption={selectedSortingOption}
+          onChange={setSelectedSortingOption}
+          className="mt-4"
+        />
+      )}
 
       <ItemsGrid products={products} className="mt-10" />
     </div>

@@ -131,12 +131,14 @@ export default function Shopfront({
           onChange={changeTabHandler}
           className="sm:hidden"
         />
-        <SortDropDown
-          className="mt-4 hidden sm:flex"
-          options={SORTING_OPTIONS}
-          selectedOption={selectedSortingOption}
-          onChange={setSelectedSortingOption}
-        />
+        {filteredProducts.length > 0 && (
+          <SortDropDown
+            className="mt-4 hidden sm:flex"
+            options={SORTING_OPTIONS}
+            selectedOption={selectedSortingOption}
+            onChange={setSelectedSortingOption}
+          />
+        )}
         <div className="flex flex-row justify-between items-center gap-2 sm:hidden">
           <SubCategoryDropdown
             options={FILTERS}

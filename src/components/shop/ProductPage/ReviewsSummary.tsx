@@ -12,7 +12,7 @@ export default function ReviewsSummary({
   const partialFill = rating % 1;
 
   return (
-    <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row justify-center items-center sm:divide-x divide-gray-400 w-full">
+    <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row justify-center items-center divide-gray-400 w-full">
       {reviewSummary.totalReviews > 0 ? (
         <div className="sm:px-10 h-full gap-3 flex flex-col justify-center items-center">
           <div className="text-5xl font-bold">{rating.toFixed(1)}</div>
@@ -46,7 +46,7 @@ export default function ReviewsSummary({
         </div>
       )}
 
-      <div className="sm:px-10 w-full sm:w-1/3 flex flex-col gap-2">
+      <div className="sm:px-10 w-full sm:w-1/3 flex flex-col gap-2 sm:border-l border-gray-400">
         <div className="flex items-center gap-2 w-full">
           <div className="flex w-36">
             <StarIcon className="w-4 h-4 text-yellow" />

@@ -111,7 +111,7 @@ export default function Cart({
             <FreeShippingTracker amountMore={100 - totalPrice} />
             <div className="flex flex-col gap-8 mt-8 w-full">
               {regularItems.map((item) => (
-                <RegularCartItem key={item.name} item={item} />
+                <RegularCartItem key={item.id} item={item} />
               ))}
               {subscriptionItems.map((item) => (
                 <SubscriptionCartItem key={item.name} item={item} />

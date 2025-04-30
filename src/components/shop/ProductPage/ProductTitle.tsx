@@ -63,7 +63,7 @@ export default function ProductTitle({
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
-    console.log(selectedOptions)
+    console.log(selectedOptions);
     const item = useCartStore
       .getState()
       .items.find((item) => item.id === selectedVariant?.id);
@@ -105,18 +105,20 @@ export default function ProductTitle({
       <div className={`flex flex-col px-6 md:p-0 md:w-1/2 ${className}`}>
         <div className="flex flex-row justify-between mb-2">
           <div>
-            {selectedVariant?.quantityAvailable !== undefined &&
-              selectedVariant?.quantityAvailable > 0 &&
-              details.tags.length > 0 &&
-              details.tags.map((tag) => (
-                <Tag key={tag} className={getTagColor(tag)}>
-                  {tag}
-                </Tag>
-              ))}
-            {(!selectedVariant?.quantityAvailable ||
-              selectedVariant?.quantityAvailable === 0) && (
-              <Tag>Out of Stock</Tag>
-            )}
+            <div className="flex flex-row gap-2 flex-wrap">
+              {selectedVariant?.quantityAvailable !== undefined &&
+                selectedVariant?.quantityAvailable > 0 &&
+                details.tags.length > 0 &&
+                details.tags.map((tag) => (
+                  <Tag key={tag} className={getTagColor(tag)}>
+                    {tag}
+                  </Tag>
+                ))}
+              {(!selectedVariant?.quantityAvailable ||
+                selectedVariant?.quantityAvailable === 0) && (
+                <Tag>Out of Stock</Tag>
+              )}
+            </div>
             <div className="bodyXL text-gray-800 font-normal mt-2">
               {details.description}
             </div>
@@ -157,8 +159,8 @@ export default function ProductTitle({
                       index < fullStars
                         ? "text-yellow"
                         : index === fullStars && partialFill > 0
-                        ? "text-yellow"
-                        : "text-gray-200"
+                          ? "text-yellow"
+                          : "text-gray-200"
                     }`}
                   />
                 ))}
@@ -187,7 +189,7 @@ export default function ProductTitle({
                 ) : (
                   <div className="flex flex-col gap-2" key={option.name}>
                     <b className="bodyMD font-normal">{option.name}</b>
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row flex-wrap gap-4">
                       <ProductTabs
                         tabs={option.optionValues.map((value) => ({
                           name: value.name,
@@ -204,8 +206,8 @@ export default function ProductTitle({
             <Button disabled>This is a box exclusive product</Button>
           ) : selectedVariant?.quantityAvailable &&
             selectedVariant?.quantityAvailable > 0 ? (
-            <div className="flex items-center gap-2">
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col xl:flex-row items-center gap-2">
+              <div className="flex flex-col gap-2 w-full xl:w-fit">
                 <CounterButton
                   count={quantity}
                   setCount={setQuantity}
@@ -214,7 +216,7 @@ export default function ProductTitle({
                 />
               </div>
 
-              <Button className="" onClick={addToCartHandler}>
+              <Button className="w-full xl:w-fit" onClick={addToCartHandler}>
                 Add to Cart - AED{" "}
                 {formatPrice(
                   (Number(selectedVariant?.price.amount) * quantity).toString()

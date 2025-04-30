@@ -19,18 +19,20 @@ export default function SearchInput({
     }
   };
   return (
-    <div className="w-full flex justify-center">
-      <MagnifyingGlassIcon className="w-6 -mr-6" />
-      <input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        type="text"
-        placeholder="What are you looking for?"
-        className="w-full border-b border-gray-400 px-8 py-3 font-semibold placeholder:text-gray-500 focus:outline-none"
-      />
+    <div className="w-full flex justify-between gap-4">
+      <div className="flex w-full">
+        <input
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          type="text"
+          placeholder="What are you looking for?"
+          className="w-full border-secondary rounded-full p-3 placeholder:text-gray-500 focus:outline-none bg-white"
+        />
+        <MagnifyingGlassIcon className="w-6 -ml-10 stroke-2" />
+      </div>
       <XMarkIcon
-        className="w-6 -ml-6 cursor-pointer"
+        className="w-6 cursor-pointer stroke-2"
         onClick={() => {
           onChange("");
           handleClose();

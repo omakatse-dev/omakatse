@@ -60,7 +60,7 @@ export default function ProductDetails({
             />
           )}
         </div>
-        <div className="">
+        <div className="px-6 md:px-0">
           <ReviewSection reviews={reviews} />
         </div>
       </div>
@@ -69,7 +69,7 @@ export default function ProductDetails({
         details={product}
         selectedOptions={selectedOptions}
         quantity={quantity}
-        className="sticky bottom-0 h-fit"
+        className="sticky bottom-0 h-fit z-10"
       />
     </div>
   );

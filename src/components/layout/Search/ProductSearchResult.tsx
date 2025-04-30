@@ -1,4 +1,5 @@
 import { ShopfrontProduct } from "@/types/Types";
+import { formatPrice } from "@/utils/Utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -22,7 +23,7 @@ export default function ProductSearchResult({
       <div className="flex flex-col w-full justify-between">
         <div className="font-semibold bodyMD">{product.title}</div>
         <div className="bodySM text-gray-800">
-          {product.priceRange.minVariantPrice.amount}
+          AED {formatPrice(product.priceRange.minVariantPrice.amount)}
         </div>
       </div>
     </Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../common/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function MainLandingPage() {
   return (
@@ -16,9 +17,11 @@ export default function MainLandingPage() {
           <div className="mb-5 xl:mb-10 font-normal text-2xl xl:text-[2rem] text-gray-800 leading-[1.2]">
             tailored for your furry family members
           </div>
-          <Button variant="primary" className="w-full xl:w-fit">
-            Build your box now
-          </Button>
+          <Link href="/subscribe/step-1">
+            <Button variant="primary" className="w-full xl:w-fit">
+              Build your box now
+            </Button>
+          </Link>
         </div>
         <Image
           src="assets/OmakatseLandingFirst.svg"

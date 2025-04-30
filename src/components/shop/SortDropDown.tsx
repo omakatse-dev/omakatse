@@ -34,8 +34,8 @@ export default function SortDropDown({
               />
             </ListboxButton>
             <ListboxOptions
-              className="rounded-2xl border border-primary bg-white z-20 w-[var(--button-width)]"
-              anchor={{ to: "bottom start", gap: "8px" }}
+              className="rounded-2xl border border-primary bg-white z-20 w-(--button-width)"
+              anchor={{ to: "bottom", gap: "8px" }}
             >
               {options.map((option) => (
                 <ListboxOption

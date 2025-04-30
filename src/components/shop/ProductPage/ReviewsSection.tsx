@@ -26,11 +26,13 @@ export default function ReviewSection({ reviews }: { reviews: Review[] }) {
       <hr
         className={`w-full ${reviews.length > 0 ? "border-0.5 border-primary" : "border-0"}`}
       />
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-        {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
-        ))}
-      </div>
+      {reviews.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+          {reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import SelectCategory from "@/components/blog/SelectCategory";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChainModifiers, Entry } from "contentful";
 import Image from "next/image";
+import NoItemsFound from "../../../public/assets/NoItemsFound.svg";
 import { BlogPostType } from "@/types/Types";
 
 export default function Page({
@@ -67,12 +68,21 @@ export default function Page({
             </div>
 
             {/* Blog Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
-              {currentBlogs.map((blog) => (
-                <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
-              ))}
-              {currentBlogs.length === 0 && <div>no blogs found</div>}
-            </div>
+            {currentBlogs.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+                {currentBlogs.map((blog) => (
+                  <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center text-center w-full p-6">
+                <Image src={NoItemsFound} alt="No blogs found" />
+                <h4 className="mt-6">No blogs found</h4>
+                <div className="bodyMD">
+                  We are working to add more blogs in the future!
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Pagination Controls */}

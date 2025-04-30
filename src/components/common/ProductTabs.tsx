@@ -19,7 +19,7 @@ export default function ProductTabs({
       {tabs.map((tab) => (
         <div
           key={tab.name}
-          className={`px-4 py-2 rounded-xl cursor-pointer border-1 ${
+          className={`px-4 py-2 rounded-xl cursor-pointer border-1 min-w-fit ${
             tab.name === selectedTab && activeStyles
           }`}
           onClick={() => onChange(tab.name)}
