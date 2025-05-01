@@ -26,11 +26,24 @@ export default function Page({
 }: {
   faqs: Entry<faqType, ChainModifiers, string>[];
 }) {
+  const categoryRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({});
+
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    scrollToTop();
+  
+    if (category === 'All') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const element = categoryRefs.current[category];
+  
+    if (element) {
+      const navbarHeight = 190; 
+      const elementTop = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: elementTop - navbarHeight, behavior: 'smooth' });
+    }
   };
 
   const categories = [
@@ -38,14 +51,8 @@ export default function Page({
     ...new Set(faqs.map((faq) => faq.fields.category)),
   ];
 
-  const filteredFaqs = faqs.filter((faq) => {
-    const matchesCategory =
-      selectedCategory === "All" ||
-      faq.fields.category.toString() === selectedCategory;
-    return matchesCategory;
-  });
   // Group FAQs by category
-  const groupedFaqs = filteredFaqs.reduce(
+  const groupedFaqs = faqs.reduce(
     (acc: Record<string, Entry<faqType>[]>, faq) => {
       const category = faq.fields.category;
       if (!acc[category.toString()]) {
@@ -56,27 +63,21 @@ export default function Page({
     },
     {}
   );
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Smooth scrolling
-    });
-  };
-
+  
   return (
-    <div className="flex flex-col items-center w-full md:px-64">
-      {/* Category Selector */}
+    <div className="relative flex flex-col items-center w-full md:px-64">
+
+      {/* Dropdown Menu for Mobile */}
       <Disclosure
         as="div"
-        className="w-full md:w-72 z-1 sticky top-28 md:top-32"
+        className="w-full md:w-72 z-1 sticky top-28 md:top-32 md:hidden"
       >
         {({ open }) => (
           <>
             <DisclosureButton className="w-full text-left py-3 px-5 rounded-full border-1 bg-white bodyMD flex justify-between">
               {selectedCategory || "Select Category"}
               <ChevronDownIcon
-                className={`h-6 transition-transform duration-300 ${
+                className={`h-6 transition-transform duration-300${
                   open ? "rotate-180" : ""
                 }`}
               />
@@ -108,11 +109,14 @@ export default function Page({
       </Disclosure>
 
       {/* FAQ List */}
-      <div className="mt-6 mb-32 w-full flex flex-col gap-8">
+      <div className="mt-6 mb-32 w-full flex flex-col gap-8 items-center">
         {Object.entries(groupedFaqs).map(([category, faqList]) => (
           <div
             key={category}
-            className="flex flex-col justify-center p-6 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full"
+            ref={(el: HTMLDivElement | null) => {
+              categoryRefs.current[category] = el;
+            }}
+            className="flex flex-col max-w-3xl justify-center p-6 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] w-full"
           >
             <p className="bodyXL text-gray-500 mb-4">{category}</p>
 
@@ -130,7 +134,7 @@ export default function Page({
                         {faq.fields.question.toString()}
                       </span>
                       <ChevronDownIcon
-                        className={`size-8 transition-all text-[#2C2420] ${
+                        className={`size-8 transition-all text-[#2C2420] min-w-9 ${
                           open ? "rotate-180" : ""
                         }`}
                       />
