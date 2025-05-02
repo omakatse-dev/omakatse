@@ -84,7 +84,7 @@ export default function Page({
                   : ''
               }`}
             >
-              {category}
+              {category.toString()}
             </span>
           </button>
         ))}
