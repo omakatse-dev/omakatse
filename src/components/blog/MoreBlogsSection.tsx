@@ -1,10 +1,10 @@
-"use client"; // Required for useState and useEffect
+'use client'; // Required for useState and useEffect
 
-import React, { useState, useEffect } from "react";
-import { getAllBlogPosts } from "@/utils/contentfulAPI";
-import BlogCard from "./BlogCard";
-import { Entry, ChainModifiers } from "contentful";
-import { BlogPostType } from "@/types/Types";
+import React, { useState, useEffect } from 'react';
+import { getAllBlogPosts } from '@/utils/contentfulAPI';
+import BlogCard from './BlogCard';
+import { Entry, ChainModifiers } from 'contentful';
+import { BlogPostType } from '@/types/Types';
 
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
@@ -20,7 +20,7 @@ interface MoreBlogsSectionProps {
 }
 
 const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
-  currentBlogId,
+  currentBlogId
 }) => {
   const [moreBlogs, setMoreBlogs] = useState<
     Entry<BlogPostType, ChainModifiers, string>[]
@@ -50,10 +50,10 @@ const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
             setMoreBlogs(selectedBlogs);
           }
         } else {
-          console.warn("No blog posts returned from API.");
+          console.warn('No blog posts returned from API.');
         }
       } catch (error) {
-        console.error("Error fetching related blog posts:", error);
+        console.error('Error fetching related blog posts:', error);
       } finally {
         setIsLoading(false);
       }
@@ -63,9 +63,9 @@ const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
   }, [currentBlogId]);
 
   return (
-    <div className="bg-yellow-pastel px-6 pt-10 pb-16 lg:px-12 lg:py-20 w-full flex justify-center">
+    <div className="bg-yellow-pastel flex w-full justify-center px-6 pt-10 pb-16 lg:px-12 lg:py-20">
       <div className="w-full max-w-7xl">
-        <h2 className="text-center mb-8 lg:mb-15">More Blogs</h2>
+        <h2 className="text-primary mb-8 text-center lg:mb-15">More Blogs</h2>
 
         {isLoading && (
           <div className="text-center text-gray-500">Loading blogs...</div>
@@ -78,7 +78,7 @@ const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
         )}
 
         {!isLoading && hasOtherBlogs && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {moreBlogs.map((blog) => (
               <BlogCard key={blog.sys.id} blog={blog} />
             ))}

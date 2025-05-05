@@ -39,7 +39,7 @@ h1 {
 }
 
 h2 {
-  @apply text-primary font-parkinsans text-[2rem] md:text-5xl font-bold leading-[1.2];
+  @apply font-parkinsans text-[2rem] md:text-5xl font-bold leading-[1.2];
 }
 
 h3 {

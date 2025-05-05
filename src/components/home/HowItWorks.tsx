@@ -16,22 +16,22 @@ function HowItWorks() {
           step={1}
           imageSrc="/assets/kumo_details.svg"
           imageAlt="Kumo Details"
-          title="Share your pet's name, age, and what makes them purr"
-          description="Let us know your pet's quirks and preferences."
+          title="Start with the basics"
+          description="Tell us their name, age and what makes them purr or wag."
         />
         <HowItWorksCard
           step={2}
           imageSrc="/assets/kumo_customise.svg"
           imageAlt="Kumo Customisation"
-          title="We handpick items based on your pet's needs"
-          description="We curate the best goodies tailored just for your pets."
+          title="Curated with care"
+          description="We handpick the best goodies, just for your pet."
         />
         <HowItWorksCard
           step={3}
           imageSrc="/assets/kumo_delivery.svg"
           imageAlt="Kumo Delivery"
-          title="Expect a box of joy at your door each month"
-          description="We send it straight to you, no chasing required."
+          title="Treat day, every month"
+          description="A fresh box at your door, no chasing required."
         />
       </div>
 
