@@ -1,95 +1,95 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import FilterTab from "@/components/shop/FilterTab";
-import SortDropDown from "@/components/shop/SortDropDown";
-import Tabs from "@/components/common/Tabs";
-import React, { useEffect, useState } from "react";
-import ItemsGrid from "@/components/shop/ItemsGrid";
-import useQueryParams from "@/hooks/useQueryParams";
-import { ShopfrontProduct } from "@/types/Types";
-import MobileTabs from "../common/MobileTabs";
-import SubCategoryDropdown from "./SubCategoryDropdown";
-import { ArrowsUpDownIcon } from "@heroicons/react/24/outline";
-import MobileSortSideBar from "./MobileSortSideBar";
+import Image from 'next/image';
+import FilterTab from '@/components/shop/FilterTab';
+import SortDropDown from '@/components/shop/SortDropDown';
+import Tabs from '@/components/common/Tabs';
+import React, { useEffect, useState } from 'react';
+import ItemsGrid from '@/components/shop/ItemsGrid';
+import useQueryParams from '@/hooks/useQueryParams';
+import { ShopfrontProduct } from '@/types/Types';
+import MobileTabs from '../common/MobileTabs';
+import SubCategoryDropdown from './SubCategoryDropdown';
+import { ArrowsUpDownIcon } from '@heroicons/react/24/outline';
+import MobileSortSideBar from './MobileSortSideBar';
 
 export default function Shopfront({
   products,
   categories,
-  petType,
+  petType
 }: {
   products: ShopfrontProduct[];
   categories: Record<string, string[]>;
-  petType: "Dog" | "Cat";
+  petType: 'Dog' | 'Cat';
 }) {
   const { getQueryParam, setQueryParam } = useQueryParams();
-  console.log("here", getQueryParam("filter"));
+  console.log('here', getQueryParam('filter'));
   const TABS = Object.keys(categories);
   const [selectedTab, setSelectedTab] = useState(
-    getQueryParam("tab") || TABS[0]
+    getQueryParam('tab') || TABS[0]
   );
 
   const [showMobileSortSidebar, setShowMobileSortSidebar] = useState(false);
 
   const FILTERS = categories[selectedTab as keyof typeof categories];
   const [selectedFilter, setSelectedFilter] = useState(
-    getQueryParam("filter") || FILTERS[0]
+    getQueryParam('filter') || FILTERS[0]
   );
 
   const SORTING_OPTIONS = [
-    "New Arrivals",
-    "Best Selling",
-    "Price: Low to High",
-    "Price: High to Low",
+    'New Arrivals',
+    'Best Selling',
+    'Price: Low to High',
+    'Price: High to Low'
   ];
   const [selectedSortingOption, setSelectedSortingOption] = useState(
-    getQueryParam("sort") || SORTING_OPTIONS[0]
+    getQueryParam('sort') || SORTING_OPTIONS[0]
   );
 
   useEffect(() => {
-    setQueryParam("tab", selectedTab);
+    setQueryParam('tab', selectedTab);
   }, [selectedTab, setQueryParam]);
 
   useEffect(() => {
-    setQueryParam("filter", selectedFilter);
+    setQueryParam('filter', selectedFilter);
   }, [selectedFilter, setQueryParam]);
 
   useEffect(() => {
-    setQueryParam("sort", selectedSortingOption);
+    setQueryParam('sort', selectedSortingOption);
   }, [selectedSortingOption, setQueryParam]);
 
   const filteredProducts = products.filter((product) => {
     return (
-      product.metafields.find((metafield) => metafield.key === "category")
+      product.metafields.find((metafield) => metafield.key === 'category')
         ?.value === selectedTab &&
-      (product.metafields.find((metafield) => metafield.key === "sub_category")
+      (product.metafields.find((metafield) => metafield.key === 'sub_category')
         ?.value === selectedFilter ||
-        selectedFilter === "All")
+        selectedFilter === 'All')
     );
   });
 
   const changeTabHandler = (tab: string) => {
     setSelectedTab(tab);
-    setQueryParam("filter", FILTERS[0]);
+    setQueryParam('filter', FILTERS[0]);
     setSelectedFilter(FILTERS[0]);
   };
 
   const petImageSrc =
-    petType === "Cat" ? "/assets/CatIcon.svg" : "/assets/DogIcon.svg";
+    petType === 'Cat' ? '/assets/CatIcon.svg' : '/assets/DogIcon.svg';
 
   const filterCounts: Record<string, number> = {};
 
   FILTERS.forEach((filter) => {
     const count = products.filter((product) => {
       const category = product.metafields.find(
-        (m) => m.key === "category"
+        (m) => m.key === 'category'
       )?.value;
       const subCategory = product.metafields.find(
-        (m) => m.key === "sub_category"
+        (m) => m.key === 'sub_category'
       )?.value;
 
       return (
-        category === selectedTab && (subCategory === filter || filter === "All")
+        category === selectedTab && (subCategory === filter || filter === 'All')
       );
     }).length;
 
@@ -97,14 +97,14 @@ export default function Shopfront({
   });
   return (
     <>
-      <div className="mt-30 sm:mt-36 w-full px-6 max-w-7xl flex flex-col pb-16">
+      <div className="mt-30 flex w-full max-w-7xl flex-col px-6 pb-16 sm:mt-36">
         <div className="flex flex-row justify-between">
           <div>
-            <h2>
+            <h2 className="text-primary">
               Shop {petType} {selectedTab}
             </h2>
-            <div className="mt-4 bodyMD flex gap-2 items-center">
-              <div className="rounded-full bg-white w-10 h-10 p-2 flex flex-row sm:hidden">
+            <div className="bodyMD mt-4 flex items-center gap-2">
+              <div className="flex h-10 w-10 flex-row rounded-full bg-white p-2 sm:hidden">
                 <Image
                   src={petImageSrc}
                   alt="Pet Icon"
@@ -115,7 +115,7 @@ export default function Shopfront({
               Showing {filteredProducts.length} product(s)
             </div>
           </div>
-          <div className="rounded-full bg-white w-16 h-16 p-4 hidden sm:flex">
+          <div className="hidden h-16 w-16 rounded-full bg-white p-4 sm:flex">
             <Image src={petImageSrc} alt="Pet Icon" width={50} height={50} />
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function Shopfront({
           tabs={TABS}
           selectedTab={selectedTab}
           onChange={changeTabHandler}
-          className="hidden sm:flex w-fit self-center mt-10 bg-gray-200"
+          className="mt-10 hidden w-fit self-center bg-gray-200 sm:flex"
         />
         <MobileTabs
           tabs={TABS}
@@ -139,7 +139,7 @@ export default function Shopfront({
             onChange={setSelectedSortingOption}
           />
         )}
-        <div className="flex flex-row justify-between items-center gap-2 sm:hidden">
+        <div className="flex flex-row items-center justify-between gap-2 sm:hidden">
           <SubCategoryDropdown
             options={FILTERS}
             selectedOption={selectedFilter}
@@ -148,7 +148,7 @@ export default function Shopfront({
             counts={filterCounts}
           />
           <div
-            className="border rounded-full h-full aspect-square cursor-pointer bg-white flex items-center justify-center"
+            className="flex aspect-square h-full cursor-pointer items-center justify-center rounded-full border bg-white"
             onClick={() => setShowMobileSortSidebar(true)}
           >
             <ArrowsUpDownIcon className="w-6" />

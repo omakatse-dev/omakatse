@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { getBlogBySlug } from "../../../utils/contentfulAPI";
-import Tag from "@/components/common/Tag";
-import dayjs from "dayjs";
-import Image from "next/image";
-import Link from "next/link";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document, BLOCKS } from "@contentful/rich-text-types";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { Asset } from "contentful";
-import ScrollProgressCircle from "@/components/common/ScrollProgressCircle";
-import ScrollUpButton from "@/components/common/ScrollUpButton";
-import MoreBlogsSection from "@/components/blog/MoreBlogsSection";
+import React from 'react';
+import { getBlogBySlug } from '../../../utils/contentfulAPI';
+import Tag from '@/components/common/Tag';
+import dayjs from 'dayjs';
+import Image from 'next/image';
+import Link from 'next/link';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Document, BLOCKS } from '@contentful/rich-text-types';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { Asset } from 'contentful';
+import ScrollProgressCircle from '@/components/common/ScrollProgressCircle';
+import ScrollUpButton from '@/components/common/ScrollUpButton';
+import MoreBlogsSection from '@/components/blog/MoreBlogsSection';
 
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_: any, children: React.ReactNode) => (
-      <p className="bodyMD text-gray-800 mb-8">{children}</p>
+      <p className="bodyMD mb-8 text-gray-800">{children}</p>
     ),
     [BLOCKS.HEADING_1]: (_: any, children: React.ReactNode) => (
       <h4 className="text-primary mb-6">{children}</h4>
@@ -25,29 +25,29 @@ const options = {
       <div className="bodyLG text-primary mb-3">{children}</div>
     ),
     [BLOCKS.QUOTE]: (_: any, children: React.ReactNode) => (
-      <div className="flex justify-center items-center pt-8 px-8 bg-white rounded-xl md:rounded-[1.25rem] drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] mb-8">
+      <div className="mb-8 flex items-center justify-center rounded-xl bg-white px-8 pt-8 drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] md:rounded-[1.25rem]">
         <div className="bodyMD text-primary">{children}</div>
       </div>
     ),
     [BLOCKS.OL_LIST]: (_: any, children: React.ReactNode) => (
-      <ol className="list-decimal ml-4">{children}</ol>
+      <ol className="ml-4 list-decimal">{children}</ol>
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       return (
-        <div className="flex flex-col gap-2 items-center py-8 w-fit self-center">
+        <div className="flex w-fit flex-col items-center gap-2 self-center py-8">
           <Image
             src={`https:${node.data.target.fields.file.url}`}
             alt="Description Image"
             width={400}
             height={100}
-            className="rounded-xl self-center"
+            className="self-center rounded-xl"
           />
           {node.data.target.fields.description && (
             <div className="bodyMD self-start">
               Source:
               <Link
                 href={node.data.target.fields.description.toString()}
-                className="ml-1 underline text-[#40AED7]"
+                className="ml-1 text-[#40AED7] underline"
               >
                 {node.data.target.fields.title.toString()}
               </Link>
@@ -55,13 +55,13 @@ const options = {
           )}
         </div>
       );
-    },
-  },
+    }
+  }
 };
 
 export default async function BlogPage({
   params,
-  searchParams,
+  searchParams
 }: {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ preview: string }>;
@@ -73,7 +73,7 @@ export default async function BlogPage({
 
   if (!blog) {
     return (
-      <div className="text-center mt-32 text-primary">Blog post not found</div>
+      <div className="text-primary mt-32 text-center">Blog post not found</div>
     );
   }
 
@@ -86,46 +86,42 @@ export default async function BlogPage({
   const description = blog.fields.description as unknown as Document;
 
   return (
-    <div className="w-full flex flex-col">
-      <div className="flex flex-col mt-28 w-full px-8 gap-4 md:px-64 max-w-7xl self-center">
+    <div className="flex w-full flex-col">
+      <div className="mt-28 flex w-full max-w-7xl flex-col gap-4 self-center px-8 md:px-64">
         {/* Back button for mobile */}
         <Link href="/blog">
-          <div className="inline-flex items-center py-2 cursor-pointer font-semibold md:hidden">
-            <ChevronLeftIcon className="h-6 w-6 mr-2" />
+          <div className="inline-flex cursor-pointer items-center py-2 font-semibold md:hidden">
+            <ChevronLeftIcon className="mr-2 h-6 w-6" />
             Go back
           </div>
         </Link>
 
         <ScrollProgressCircle />
 
-        <div className="flex flex-col gap-3  ">
+        <div className="flex flex-col gap-3">
           <Tag className="w-fit">{blog.fields.categoryTag?.toString()}</Tag>
-          <h2>{blog.fields.title?.toString()}</h2>
-            <div className="flex flex-row gap-2">
-              <p className="bodySM text-gray-800">
-                Edited:{" "}
-                {dayjs(blog.fields.editedDate?.toString()).format(
-                  "MMM D, YYYY"
-                )}
-              </p>
-              <div className="inline-block w-0.5 bg-gray-200"></div>
-              <p className="bodySM text-gray-800">
-                Posted:{" "}
-                {dayjs(blog.fields.postedDate?.toString()).format(
-                  "MMM D, YYYY"
-                )}
-              </p>
-              <div className="inline-block w-0.5 bg-gray-200"></div>
-              <p className="bodySM text-gray-800">
-                {blog.fields.readDuration?.toString()} mins read
-              </p>
-            </div>
-            <p className="bodySM text-gray-800 font-semibold mt-1">
-              Written by {blog.fields.author?.toString()}
+          <h2 className="text-primary">{blog.fields.title?.toString()}</h2>
+          <div className="flex flex-row gap-2">
+            <p className="bodySM text-gray-800">
+              Edited:{' '}
+              {dayjs(blog.fields.editedDate?.toString()).format('MMM D, YYYY')}
             </p>
+            <div className="inline-block w-0.5 bg-gray-200"></div>
+            <p className="bodySM text-gray-800">
+              Posted:{' '}
+              {dayjs(blog.fields.postedDate?.toString()).format('MMM D, YYYY')}
+            </p>
+            <div className="inline-block w-0.5 bg-gray-200"></div>
+            <p className="bodySM text-gray-800">
+              {blog.fields.readDuration?.toString()} mins read
+            </p>
+          </div>
+          <p className="bodySM mt-1 font-semibold text-gray-800">
+            Written by {blog.fields.author?.toString()}
+          </p>
         </div>
 
-        <div className="flex flex-col gap-2 items-center w-fit self-center">
+        <div className="flex w-fit flex-col items-center gap-2 self-center">
           <Image
             src={`https:${imageHeader}`}
             alt="Header Image"
@@ -138,7 +134,7 @@ export default async function BlogPage({
               Source:
               <Link
                 href={imageHeaderDescription.toString()}
-                className="ml-1 underline text-[#40AED7]"
+                className="ml-1 text-[#40AED7] underline"
               >
                 {imageHeaderTitle?.toString()}
               </Link>
@@ -150,7 +146,7 @@ export default async function BlogPage({
         </div>
       </div>
       <MoreBlogsSection currentBlogId={blog.fields.blogId.toString()} />
-      <ScrollUpButton className="fixed bottom-6 right-10" />
+      <ScrollUpButton className="fixed right-10 bottom-6" />
     </div>
   );
 }

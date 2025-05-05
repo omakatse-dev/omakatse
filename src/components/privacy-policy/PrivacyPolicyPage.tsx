@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage({ pp }: { pp: Entry<PrivacyPolicyType>
   const latestUpdate = dayjs(pp.sys.updatedAt);
   return (
     <div className="flex flex-col w-full md:px-64">
-      <h2 className="mb-2">Privacy Policy</h2>
+      <h2 className="mb-2 text-primary">Privacy Policy</h2>
       <p className="bodySM mb-6">
         Last updated: {latestUpdate.format("MMM D, YYYY")}
       </p>

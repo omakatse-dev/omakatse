@@ -1,12 +1,12 @@
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
-import { getOrdersByEmail } from "@/utils/APIs";
+import { getOrdersByEmail } from '@/utils/APIs';
 
-import { Claims, getSession } from "@auth0/nextjs-auth0";
-import MobilePastOrders from "@/components/account/history/MobilePastOrders";
-import PastOrdersTable from "@/components/account/history/PastOrdersTable";
-import Button from "@/components/common/Button";
-import Link from "next/link";
+import { Claims, getSession } from '@auth0/nextjs-auth0';
+import MobilePastOrders from '@/components/account/history/MobilePastOrders';
+import PastOrdersTable from '@/components/account/history/PastOrdersTable';
+import Button from '@/components/common/Button';
+import Link from 'next/link';
 
 export const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
@@ -26,7 +26,7 @@ export default async function AccountHistoryPage() {
 
   return (
     <>
-      <h2 className="hidden lg:block lg:mb-8">Payment History</h2>
+      <h2 className="text-primary hidden lg:mb-8 lg:block">Payment History</h2>
       {pastOrders?.length > 0 ? (
         <div>
           <MobilePastOrders pastOrders={pastOrders ?? []} />
@@ -39,7 +39,9 @@ export default async function AccountHistoryPage() {
             first subscription or purchase.
           </div>
           <Link href="/subscribe/step-1">
-            <Button className="w-full sm:w-fit mt-10">Build your box now</Button>
+            <Button className="mt-10 w-full sm:w-fit">
+              Build your box now
+            </Button>
           </Link>
         </>
       )}

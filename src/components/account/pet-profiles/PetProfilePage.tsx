@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import PetDetailsCard from "@/components/subscription/PetDetailsCard";
-import { petDetailsSchema } from "@/schemas/SubscriptionFormSchema";
-import { z } from "zod";
-import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
-import { Suspense } from "react";
-import { ContractType } from "@/types/Types";
-import Button from "@/components/common/Button";
-import Link from "next/link";
+import PetDetailsCard from '@/components/subscription/PetDetailsCard';
+import { petDetailsSchema } from '@/schemas/SubscriptionFormSchema';
+import { z } from 'zod';
+import AddPetCard from '@/components/account/pet-profiles/AddPetCard';
+import { Suspense } from 'react';
+import { ContractType } from '@/types/Types';
+import Button from '@/components/common/Button';
+import Link from 'next/link';
 type PetDetailsSchema = z.infer<typeof petDetailsSchema>;
 
 export default function PetProfilePage({
-  contracts,
+  contracts
 }: {
   contracts: ContractType[];
 }) {
@@ -44,10 +44,10 @@ export default function PetProfilePage({
 
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="hidden lg:block">Pet Profiles</h2>
+      <h2 className="text-primary hidden lg:block">Pet Profiles</h2>
       {contracts.length > 0 ? (
-        <div className="max-w-3xl flex flex-col gap-8">
-          <div className="bodyMD text-center sm:text-start sm:-mt-8">
+        <div className="flex max-w-3xl flex-col gap-8">
+          <div className="bodyMD text-center sm:-mt-8 sm:text-start">
             Here are your current pets that are subscribed to our box:
           </div>
           <Suspense fallback={<div>Loading...</div>}>
@@ -56,19 +56,19 @@ export default function PetProfilePage({
               return (
                 <div key={contract.contractId} className="flex flex-col gap-4">
                   <h4>Subscription {idx + 1} </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center">
+                  <div className="grid grid-cols-1 justify-center gap-8 sm:grid-cols-2">
                     {pets.map((pet: PetDetailsSchema, idx: number) => (
                       <PetDetailsCard
                         contractId={contract.contractId}
                         key={pet.name}
                         details={pet}
                         idx={idx}
-                        editMode={"edit-only"}
+                        editMode={'edit-only'}
                         petType={
-                          pet.type === "Cat" ? "catsDetails" : "dogsDetails"
+                          pet.type === 'Cat' ? 'catsDetails' : 'dogsDetails'
                         }
                         catCount={
-                          pets.filter((p: PetDetailsSchema) => p.type === "Cat")
+                          pets.filter((p: PetDetailsSchema) => p.type === 'Cat')
                             .length
                         }
                       />
