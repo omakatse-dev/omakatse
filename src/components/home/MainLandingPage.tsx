@@ -18,7 +18,7 @@ export default function MainLandingPage() {
             tailored for your furry family members
           </div>
           <Link href="/subscribe/step-1">
-            <Button variant="primary" className="w-full xl:w-fit">
+            <Button variant="primary" className="w-full md:w-fit">
               Build your box now
             </Button>
           </Link>
@@ -64,14 +64,16 @@ export default function MainLandingPage() {
         </div>
       </div>
 
-      <div className="flex w-full flex-col px-6 pb-10 text-center xl:flex-row xl:px-18 xl:pb-20">
+      <div className="flex w-full flex-col px-6 pb-10 text-center xl:flex-row md:px-12 xl:px-18 xl:pb-20">
+        <div className="w-full xl:w-1/2 flex justify-center">
         <Image
           src="assets/whoweare_petsphoto.svg"
           alt="Pets Photo"
           width={600}
           height={200}
-          className="xl:auto self-center xl:h-auto"
+          className="xl:auto xl:h-auto w-full"
         />
+        </div>
         <div className="w-full text-left xl:mb-20 xl:w-1/2 xl:pt-20 xl:pl-20">
           <h3 className="h1 mb-3 pt-10 text-gray-500 xl:mb-8 xl:block xl:pt-0">
             Who we are
@@ -80,7 +82,7 @@ export default function MainLandingPage() {
             We sniff out the good stuff so you don&apos;t have to.
           </h2>
           <Link href="/about">
-            <Button variant="primary" className="w-full xl:w-fit">
+            <Button variant="primary" className="w-full md:w-fit">
               Our story
             </Button>
           </Link>
