@@ -51,7 +51,7 @@ export default function page() {
               className="self-center rounded-3xl lg:w-700 lg:max-w-xl"
             />
           </div>
-          <div className="bg-yellow relative my-10 flex flex-col gap-4 rounded-4xl px-6 py-20 lg:mx-20 lg:gap-10 lg:px-40 lg:py-40">
+          <div className="bg-yellow relative my-10 flex flex-col gap-4 rounded-4xl px-6 py-20 lg:mx-12 lg:gap-10 lg:px-40 lg:py-40">
             <Image
               src="/assets/kumo_white.svg"
               alt="Kumo White"
