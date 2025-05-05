@@ -39,7 +39,7 @@ export default function MainLandingPage() {
           className="bg-yellow relative my-10 flex w-full flex-col rounded-4xl px-5 py-20 xl:px-40"
           style={{
             backgroundImage: "url('/assets/pattern.svg')",
-            backgroundSize: 'cover',
+            backgroundSize: '65%',
             backgroundBlendMode: 'soft-light',
           }}
         >
