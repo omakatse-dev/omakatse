@@ -78,13 +78,13 @@ export default function page() {
               className="absolute -right-6 -bottom-22 h-auto lg:-right-26 lg:-bottom-24 lg:w-58"
             />
           </div>
-          <div className="bg-white-100 flex flex-col gap-10 py-5 lg:flex-row-reverse lg:justify-center lg:gap-20 lg:py-20">
+          <div className="bg-white-100 flex flex-col gap-10 py-5 pb-20 lg:flex-row-reverse lg:justify-center lg:gap-20 lg:py-20">
             <div className="flex flex-col gap-5 lg:max-w-2xl">
               <h4 className="text-yellow"> Our Box </h4>
               <h3 className="text-primary">
                 {' '}
-                From play to snack time, it's everything your pet needs (and
-                secretly wants){' '}
+                From play to snack time, it&apos;s everything your pet needs
+                (and secretly wants){' '}
               </h3>
               <p className="bodyMD text-gray-800">
                 For your high standards of quality petcare, our customers will
