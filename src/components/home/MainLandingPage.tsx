@@ -6,8 +6,8 @@ import Link from 'next/link';
 export default function MainLandingPage() {
   return (
     <div className="mx-auto max-w-screen-2xl justify-items-center">
-      <div className="flex w-full flex-col-reverse px-6 py-5 text-center xl:flex-row xl:justify-between xl:px-18">
-        <div className="mb-12 w-full xl:mb-20 xl:w-1/2 xl:pt-20 xl:pl-20 xl:text-left">
+      <div className="flex w-full flex-col-reverse px-6 py-5 text-center xl:flex-row  xl:px-18">
+        <div className="w-full xl:pb-12 xl:w-1/2 xl:pt-12 xl:pl-12 xl:text-left">
           <div className="text-primary font-parkinsans mb-3 text-[2.5rem] leading-[1.1] font-bold xl:mb-5 xl:hidden">
             A one-stop subscription service
           </div>
@@ -23,42 +23,45 @@ export default function MainLandingPage() {
             </Button>
           </Link>
         </div>
+        <div className="xl:w-1/2 flex">
         <Image
           src="assets/OmakatseLandingFirst.svg"
           alt="Omakatse's Landing Page"
           width={600}
           height={200}
-          className="xl:auto self-center xl:h-auto"
+          className="self-center w-full"
         />
+        </div>
       </div>
 
-      <div className="w-full px-8 pb-10 xl:pb-0">
-      <div
-        className="flex flex-col relative bg-yellow rounded-4xl my-10 px-5 xl:px-40 py-20 w-full "
-        style={{
-          backgroundImage: "url('/assets/pattern.svg')",
-          backgroundSize: "auto",
-        }}
-      >
-        <Image
-          src="/assets/kumo_white.svg"
-          alt="Kumo White"
-          width={136.5}
-          height={121}
-          className="absolute xl:w-58 h-auto -top-12 -left-6 xl:-left-16 xl:-top-8"
-        />
-        <div className="text-gray-800 text-center font-parkinsans text-[2rem] md:text-6xl font-bold leading-[1.2]">
-          {" "}
-          A fun and unique way to experience Japan!
+      <div className="w-full px-8 pb-10 xl:px-12 xl:pb-0">
+        <div
+          className="bg-yellow relative my-10 flex w-full flex-col rounded-4xl px-5 py-20 xl:px-40"
+          style={{
+            backgroundImage: "url('/assets/pattern.svg')",
+            backgroundSize: 'cover',
+            backgroundBlendMode: 'soft-light',
+          }}
+        >
+          <Image
+            src="/assets/kumo_white.svg"
+            alt="Kumo White"
+            width={136.5}
+            height={121}
+            className="absolute -top-12 -left-6 h-auto xl:-top-28 xl:-left-10 xl:w-58"
+          />
+          <div className="font-parkinsans text-center text-[2rem] leading-[1.2] font-bold text-gray-800 md:text-6xl">
+            {' '}
+            A fun and unique way to experience Japan!
+          </div>
+          <Image
+            src="/assets/kumo_black.svg"
+            alt="Kumo White"
+            width={136.5}
+            height={121}
+            className="absolute -right-4 -bottom-12 h-auto xl:right-8 xl:-bottom-26 xl:w-58"
+          />
         </div>
-        <Image
-          src="/assets/kumo_black.svg"
-          alt="Kumo White"
-          width={136.5}
-          height={121}
-          className="absolute xl:w-58 h-auto -bottom-22 -right-8 xl:-bottom-24 xl:-right-26"
-        />
-      </div>
       </div>
 
       <div className="flex w-full flex-col px-6 pb-10 text-center xl:flex-row xl:px-18 xl:pb-20">

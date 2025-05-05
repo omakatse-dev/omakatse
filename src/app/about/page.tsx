@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function page() {
   return (
     <div className="bg-[url('/assets/pattern.svg')] bg-auto lg:bg-[length:50%_auto]">
-      <div className="mt-32 w-screen max-w-[120rem] px-8 lg:px-24">
+      <div className="mt-32 w-screen max-w-[120rem] px-4 lg:px-24">
         <div className="bg-yellow-light flex w-full flex-col rounded-3xl px-8 py-16 lg:flex-row-reverse lg:px-20 lg:pt-20">
           <div className="flex justify-center lg:w-1/2">
             <Image
@@ -25,25 +25,22 @@ export default function page() {
             <Button>Build your box now</Button>
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full px-2">
           <div className="bg-white-100 flex flex-col gap-8 py-10 lg:flex-row lg:justify-center lg:gap-20 lg:py-20">
             <div className="flex flex-col gap-5 lg:max-w-2xl">
-              <h4 className="text-yellow"> Our Founder </h4>
+              <h4 className="text-yellow"> Our Name </h4>
               <h3 className="text-primary">
                 {' '}
-                Omakatse&apos;s founder, Tee, is a second generation immigrant
-                that grew up in Canada.
+                A surprise selection of seasonal pet goodies, curated just for
+                your fur kids.
               </h3>
               <p className="bodyMD text-gray-800">
-                While growing up with her family&apos;s restaurant, an abandoned
-                primary cat started visiting them daily. As the family was
-                leaving on the last day of the restaurant, the same primary cat
-                chased them down the street. Seeing this, the family took her
-                in, joining the family dog, Casper, and that began a journey
-                into cat rescuing for Tee that is still going on 20 years later
-                today. The primary cat had four children, two of which are still
-                alive and well back in Canada at the ripe age of 20. They were
-                later joined by the family&apos;s second dog, Oscar.
+                OmaKatse originates from “Omakase” but with a ‘K’ for ‘kats and
+                kanines’. The name stands for “I leave it up to you” — a dining
+                style in Japan where meals are based on the chef’s seasonal
+                recommendation. With OmaKatse’s subscription box, you leave it
+                up to our team to curate the best of Japanese pet goods each
+                season for you and your fur-children to discover and enjoy.
               </p>
             </div>
             <Image
@@ -54,67 +51,7 @@ export default function page() {
               className="self-center rounded-3xl lg:w-700 lg:max-w-xl"
             />
           </div>
-
-          <div className="bg-white-100 flex flex-col gap-10 py-5 lg:flex-row-reverse lg:justify-center lg:gap-20 lg:py-20">
-            <div className="flex flex-col gap-5 lg:max-w-2xl">
-              <h4 className="text-yellow"> History </h4>
-              <h3 className="text-primary"> How It Started </h3>
-              <p className="bodyMD text-gray-800">
-                Throughout her student and adult life, Tee would volunteer at
-                local animal shelters in Canada. She is also an avid equestrian,
-                while being a big supporter of equine and farm animal welfare in
-                North America.
-                <br />
-                <br />
-                She relocated to Dubai with her Canadian tuxedo cat, Toby. On a
-                chance encounter in Dubai, she rescued her now Arabian Mau
-                family member, Olly, nursing him back to health. Since then, she
-                has been an active community member supporting cat welfare and
-                rescues, while also personally helping out around her local
-                community with feeding, trap & release, fostering and rescue
-                work.
-              </p>
-            </div>
-            <Image
-              src="/assets/AboutCat.svg"
-              alt="About"
-              width="518"
-              height="1"
-              className="self-center rounded-3xl lg:w-500 lg:max-w-xl"
-            />
-          </div>
-
-          <div className="bg-white-100 flex flex-col gap-10 py-5 lg:flex-row lg:justify-center lg:gap-20 lg:py-20">
-            <div className="flex flex-col gap-5 lg:max-w-2xl">
-              <h4 className="text-yellow"> Our Inspiration </h4>
-              <h3 className="text-primary">
-                {' '}
-                With Omakatse, Tee endeavours to introduce holistic pet products
-                from Japan that she has been using all these years as a
-                paw-rent.
-              </h3>
-              <p className="bodyMD text-gray-800">
-                During extensive stays in Japan due to work, she would always
-                appreciate the large varieties of Japanese pet products and
-                accessories. With numerous local brands developing ranges of
-                products with a story and motivation, it demonstrates the
-                Japanese culture of taking pet ownership seriously. To satisfy
-                the demands of pet owners in Japan, high quality ingredient
-                lists are provided, with a focus on natural and minimal
-                additives. By curating products directly from Japan, Tee hopes
-                to spread this philosophy in the UAE.
-              </p>
-            </div>
-            <Image
-              src="/assets/AboutCat.svg"
-              alt="About"
-              width="518"
-              height="1"
-              className="self-center rounded-3xl lg:w-500 lg:max-w-xl"
-            />{' '}
-          </div>
-
-          <div className="bg-yellow relative my-10 flex flex-col gap-4 rounded-4xl px-5 py-20 lg:mx-20 lg:gap-10 lg:px-40 lg:py-40">
+          <div className="bg-yellow relative my-10 flex flex-col gap-4 rounded-4xl px-6 py-20 lg:mx-20 lg:gap-10 lg:px-40 lg:py-40">
             <Image
               src="/assets/kumo_white.svg"
               alt="Kumo White"
@@ -122,55 +59,48 @@ export default function page() {
               height={121}
               className="absolute -top-12 -left-6 h-auto lg:-top-8 lg:-left-16 lg:w-58"
             />
-            <h4 className="text-center text-white"> Our Mission </h4>
+            <h4 className="text-center text-white"> Our Philosophy </h4>
             <h3 className="text-primary text-center font-bold">
-              {' '}
-              At Omakatse Pets, we believe that every cat and dog deserves a
-              forever home, and our purpose is to help these beautiful animals
-              in every way possible.{' '}
+              Natural, intentional, and thoughtfully made–just how we like it.
             </h3>
             <p className="bodyMD text-center text-gray-800">
-              We are committed to giving back to the felines and canines
-              community and work with our shelter partners to donate vital
-              supplies and engaging toys, feeders to donate pet food to strays,
-              as well as fund local pet adoption events, all to help those who
-              need it the most! Thank you for your support, and happy shopping!
+              We specialize in providing a wide selection of high-quality
+              Japanese pet products, supplies, snacks, and treats that are not
+              commonly found in the UAE. To meet the high standards of Japanese
+              paw-rents, every product we carry features high quality ingredient
+              lists, with a focus on natural and minimal additives.
             </p>
             <Image
               src="/assets/kumo_black.svg"
               alt="Kumo White"
               width={136.5}
               height={121}
-              className="absolute -right-8 -bottom-22 h-auto lg:-right-26 lg:-bottom-24 lg:w-58"
+              className="absolute -right-6 -bottom-22 h-auto lg:-right-26 lg:-bottom-24 lg:w-58"
             />
           </div>
-
-          <div className="bg-white-100 flex flex-col gap-10 py-5 lg:flex-row lg:justify-center lg:gap-20 lg:py-20">
+          <div className="bg-white-100 flex flex-col gap-10 py-5 lg:flex-row-reverse lg:justify-center lg:gap-20 lg:py-20">
             <div className="flex flex-col gap-5 lg:max-w-2xl">
-              <h4 className="text-yellow"> Our CEOs </h4>
-              <h3 className="text-primary"> Meet Toby & Olly</h3>
+              <h4 className="text-yellow"> Our Box </h4>
+              <h3 className="text-primary">
+                {' '}
+                From play to snack time, it's everything your pet needs (and
+                secretly wants){' '}
+              </h3>
               <p className="bodyMD text-gray-800">
-                At OmaKatse Pets, we speak meow and ruff. Every product on our
-                website has been tested and approved by Toby, Olly, or their
-                furry pals to ensure that we only sell high-quality product.
-                Toby and Olly, the website’s in-house Quality Check Meownager,
-                take their job very seriously. They even evaluate the product on
-                our social platforms, allowing you to learn what they think of
-                our offerings directly.
+                For your high standards of quality petcare, our customers will
+                find everything they need — including natural, additive-free
+                snacks and treats, human-grade ingredients, specialty care
+                products, and unique toys. Our marketplace also makes it easy to
+                reorder products your fur-children loved from the subscription
+                box.
               </p>
-              <Button
-                variant="primary"
-                className="w-full lg:w-fit lg:self-start"
-              >
-                Build your box now
-              </Button>
             </div>
             <Image
-              src="/assets/TobyDolly.svg"
-              alt="Tobby and Dolly"
+              src="/assets/our_box.svg"
+              alt="Our Box Image"
               width="518"
               height="1"
-              className="self-center rounded-3xl lg:w-400 lg:max-w-xl"
+              className="self-center rounded-3xl lg:w-500 lg:max-w-xl"
             />
           </div>
 
@@ -182,7 +112,7 @@ export default function page() {
               shortcuts. No compromises.{' '}
             </p>
             <div className="flex w-full justify-center">
-              <Button className="w-full" variant="primary">
+              <Button className="w-full lg:w-fit" variant="primary">
                 <Link href="/contact">Contact Us</Link>
               </Button>
             </div>

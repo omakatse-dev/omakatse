@@ -106,7 +106,7 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="fixed top-4 w-full px-6 xl:px-12 left-1/2 -translate-x-1/2 z-10">
+      <div className="fixed top-4 w-full px-2 xl:px-12 left-1/2 -translate-x-1/2 z-10">
         <div className="flex justify-between w-full bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full">
           <div className="xl:hidden flex justify-center gap-3">
             <button onClick={() => setIsOpen((prev) => !prev)}>
