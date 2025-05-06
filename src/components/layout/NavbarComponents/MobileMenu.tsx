@@ -1,18 +1,16 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import React, { Suspense } from "react";
-import Image from "next/image";
-import {
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
-import CatDropdown from "./CatDropdown";
-import DogDropdown from "./DogDropdown";
-import Button from "@/components/common/Button";
-import { useUIStore } from "@/stores/uiStore";
-import { useCartStore } from "@/stores/cartStore";
-import AccountDropdown from "./AccountDropdown";
+import Link from 'next/link';
+import React, { Suspense } from 'react';
+import Image from 'next/image';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { usePathname } from 'next/navigation';
+import CatDropdown from './CatDropdown';
+import DogDropdown from './DogDropdown';
+import Button from '@/components/common/Button';
+import { useUIStore } from '@/stores/uiStore';
+import { useCartStore } from '@/stores/cartStore';
+import AccountDropdown from './AccountDropdown';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -22,37 +20,37 @@ interface MobileMenuProps {
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   const pathname = usePathname();
   const { openCart } = useUIStore();
-    const cartItems = useCartStore((state) => state.items);
-  
+  const cartItems = useCartStore((state) => state.items);
+
   const links = [
     {
-      name: "About Us",
-      url: "/about",
+      name: 'About Us',
+      url: '/about'
     },
     {
-      name: "Blog",
-      url: "/blog",
+      name: 'Blog',
+      url: '/blog'
     },
     {
-      name: "Contact",
-      url: "/contact",
-    },
+      name: 'Contact',
+      url: '/contact'
+    }
   ];
 
   return (
     <div
-      className={`fixed xl:hidden w-screen h-screen flex flex-col bg-yellow inset-0 z-10 p-8 transition-all overflow-auto ${
-        !isOpen ? "-translate-y-full" : "-translate-y-0"
+      className={`bg-yellow fixed inset-0 z-10 flex h-screen w-screen flex-col overflow-auto p-8 transition-all xl:hidden ${
+        !isOpen ? '-translate-y-full' : '-translate-y-0'
       }`}
     >
-      <div className="flex justify-between pb-8 border-b-1 border-white">
+      <div className="flex justify-between border-b-1 border-white pb-8">
         <button onClick={() => setIsOpen((prev) => !prev)}>
-          <XMarkIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+          <XMarkIcon className="stroke-primary h-6 w-6 stroke-[2]" />
         </button>
         <Link
           onClick={() => setIsOpen((prev) => !prev)}
           href="/"
-          className="flex gap-1 items-center"
+          className="flex items-center gap-1"
         >
           <Image
             src="/assets/omakatsehorizontalblack.svg"
@@ -62,21 +60,21 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             className="cursor-pointer"
           />
         </Link>
-        <button onClick={openCart} className="cursor-pointer relative">
+        <button onClick={openCart} className="relative cursor-pointer">
           <Image
             src="/assets/Cart.svg"
             alt="Cart Icon"
             width={26}
             height={26}
             className="cursor-pointer"
-          />{" "}
+          />{' '}
           {cartItems.length > 0 && (
-            <div className="absolute top-3 -right-0 bg-red-500 rounded-full w-2 h-2" />
+            <div className="absolute top-3 -right-0 h-2 w-2 rounded-full bg-red-500" />
           )}
         </button>
       </div>
 
-      <div className="flex flex-col pt-8 gap-8 font-open-sans font-semibold pb-8 border-b-1 border-white text-2xl">
+      <div className="font-open-sans flex flex-col gap-8 border-b-1 border-white pt-8 pb-8 text-2xl font-semibold">
         <Suspense>
           <CatDropdown setIsOpen={setIsOpen} />
           <DogDropdown setIsOpen={setIsOpen} />
@@ -89,8 +87,8 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             key={link.name}
             className={`block pb-1 ${
               pathname === link.url
-                ? "border-b-2 w-fit border-black"
-                : "border-b-0"
+                ? 'w-fit border-b-2 border-black'
+                : 'border-b-0'
             }`}
           >
             {link.name}
@@ -98,12 +96,16 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
         ))}
       </div>
 
-      <div className="flex flex-col pt-8 font-open-sans font-semibold text-2xl">
+      <div className="font-open-sans flex flex-col pt-8 text-2xl font-semibold">
         <AccountDropdown setIsOpen={setIsOpen} />
       </div>
       <div className="mt-auto pt-8">
         <Button variant="primary" className="w-full">
-          <Link href="/subscribe/step-1" passHref>
+          <Link
+            href="/subscribe/step-1"
+            passHref
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
             Build your box now
           </Link>
         </Button>
