@@ -69,9 +69,7 @@ export default function Cart({
               })),
             ]
           : undefined,
-      duration: subscriptionItems[0].duration,
-    };
-
+          duration: subscriptionItems?.[0]?.duration || 'No Duration',    };
     try {
       const res = await createCart(
         formattedRegularItems.concat(formattedSubscriptionItems),

@@ -17,7 +17,6 @@ export default function SearchInput({
   useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
-      return () => clearTimeout(timeout);
     }
   }, [isOpen]);
 
