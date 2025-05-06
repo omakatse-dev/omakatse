@@ -12,6 +12,7 @@ import MobileTabs from '../common/MobileTabs';
 import SubCategoryDropdown from './SubCategoryDropdown';
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline';
 import MobileSortSideBar from './MobileSortSideBar';
+import { useSearchParams } from 'next/navigation';
 
 export default function Shopfront({
   products,
@@ -25,16 +26,23 @@ export default function Shopfront({
   const { getQueryParam, setQueryParam } = useQueryParams();
   console.log('here', getQueryParam('filter'));
   const TABS = Object.keys(categories);
-  const [selectedTab, setSelectedTab] = useState(
-    getQueryParam('tab') || TABS[0]
-  );
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab') || TABS[0];
+  const [selectedTab, setSelectedTab] = useState(tabParam);
+
+  useEffect(() => {
+    setSelectedTab(tabParam);
+  }, [tabParam]);
 
   const [showMobileSortSidebar, setShowMobileSortSidebar] = useState(false);
 
   const FILTERS = categories[selectedTab as keyof typeof categories];
-  const [selectedFilter, setSelectedFilter] = useState(
-    getQueryParam('filter') || FILTERS[0]
-  );
+  const filterParam = searchParams.get('filter') || FILTERS[0];
+  const [selectedFilter, setSelectedFilter] = useState(filterParam);
+
+  useEffect(() => {
+    setSelectedFilter(filterParam);
+  }, [filterParam]);
 
   const SORTING_OPTIONS = [
     'New Arrivals',

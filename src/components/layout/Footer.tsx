@@ -119,13 +119,13 @@ export default function Footer() {
             <p className="bodyLG text-gray-500 mb-4"> Cat </p>
             <div className="bodySM text-white flex flex-col text-left">
               {catLinks.map((link) => (
-                <a
+                <Link
                   href={link.url}
                   key={link.name}
                   className="py-2 text-sm lg:text-base"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -133,13 +133,13 @@ export default function Footer() {
             <p className="bodyLG text-gray-500 mb-4"> Dog </p>
             <div className="bodySM text-white flex flex-col text-left">
               {dogLinks.map((link) => (
-                <a
+                <Link
                   href={link.url}
                   key={link.name}
                   className="py-2 text-sm lg:text-base"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
