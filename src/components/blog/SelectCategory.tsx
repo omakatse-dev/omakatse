@@ -62,7 +62,7 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
       </div>
 
       {/* For md and above screens, show clickable categories */}
-      <div className="hidden md:flex md:flex-col space-y-2">
+      <div className="hidden md:flex md:flex-col space-y-2 w-[3rem]">
         {categories.map((category) => (
           <button
             key={category}
