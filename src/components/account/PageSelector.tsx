@@ -36,7 +36,7 @@ export default function PageSelector() {
 
   const [selectedPage, setSelectedPage] = useState(pathname.split("/")[2]);
   return (
-    <div className="hidden text-nowrap lg:flex flex-col gap-3 bodyMD sticky top-28 lg:top-36">
+    <div className="w-[12rem] hidden text-nowrap lg:flex flex-col gap-3 bodyMD sticky top-28 lg:top-36">
       {pages.map((page) => (
         <Link
           key={page.label}

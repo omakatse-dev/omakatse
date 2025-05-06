@@ -25,8 +25,8 @@ export default async function AccountHistoryPage() {
   const pastOrders = (await getOrdersByEmail(user.email)) || [];
 
   return (
-    <>
-      <h2 className="text-primary hidden lg:mb-8 lg:block">Payment History</h2>
+    <div className="flex flex-col gap-8 w-full">
+      <h2 className="text-primary hidden lg:block">Payment History</h2>
       {pastOrders?.length > 0 ? (
         <div>
           <MobilePastOrders pastOrders={pastOrders ?? []} />
@@ -39,12 +39,12 @@ export default async function AccountHistoryPage() {
             first subscription or purchase.
           </div>
           <Link href="/subscribe/step-1">
-            <Button className="mt-10 w-full sm:w-fit">
+            <Button className="w-full sm:w-fit">
               Build your box now
             </Button>
           </Link>
         </>
       )}
-    </>
+    </div>
   );
 }

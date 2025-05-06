@@ -65,7 +65,7 @@ export default function AddToCartSection({
     <div
       className={`flex flex-col md:flex-row p-6 gap-4 items-center md:justify-between md:px-12 md:py-4 bg-white w-full ${className}`}
     >
-      <div className="bodyMD"> {details.title} </div>
+      <div className="bodyMD hidden md:block"> {details.title} </div>
       {details.tags.includes("Box Exclusive") ? (
         <Button disabled>This is a box exclusive product</Button>
       ) : selectedVariant?.quantityAvailable &&

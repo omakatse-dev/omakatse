@@ -28,9 +28,9 @@ export default async function AccountReviewsPage() {
   const writtenReviews = await getReviewsByAuthor(user.email);
 
   return (
-    <div>
+    <div className="flex w-full flex-col gap-8">
       <h2 className="text-primary hidden lg:block">Reviews</h2>
-      <div className="flex max-w-7xl flex-col divide-y divide-gray-200 sm:mt-10">
+      <div className="flex max-w-7xl flex-col divide-y divide-gray-200">
         {regularItems?.length > 0 ? (
           regularItems?.map((item) => (
             <WriteReviewCard
@@ -42,7 +42,7 @@ export default async function AccountReviewsPage() {
             />
           ))
         ) : (
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8">
             <div className="bodyMD text-gray-800">
               No reviews yet. Start purchasing your first product to leave a
               review!

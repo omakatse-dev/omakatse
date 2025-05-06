@@ -43,7 +43,7 @@ export default function PetProfilePage({
   // ];
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-full">
       <h2 className="text-primary hidden lg:block">Pet Profiles</h2>
       {contracts.length > 0 ? (
         <div className="flex max-w-3xl flex-col gap-8">
