@@ -1,8 +1,8 @@
-import CounterButton from "@/components/common/CounterButton";
-import { CartItemType, useCartStore } from "@/stores/cartStore";
-import { formatPrice } from "@/utils/Utils";
-import { XCircleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import CounterButton from '@/components/common/CounterButton';
+import { CartItemType, useCartStore } from '@/stores/cartStore';
+import { formatPrice } from '@/utils/Utils';
+import { XCircleIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 export default function RegularCartItem({ item }: { item: CartItemType }) {
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
@@ -14,10 +14,10 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
     removeItem(item);
   };
   return (
-    <div className="w-full flex flex-row gap-5">
+    <div className="flex w-full flex-row gap-5">
       <div className="relative h-fit w-24 rounded-lg">
         <XCircleIcon
-          className="w-8 absolute -top-3 -left-3 text-primary fill-gray-50 cursor-pointer stroke-1.5"
+          className="text-primary stroke-1.5 absolute -top-3 -left-3 w-8 cursor-pointer fill-gray-50"
           onClick={handleRemoveItem}
         />
         <Image
@@ -25,10 +25,10 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
           alt={item.name}
           width={60}
           height={60}
-          className="w-full object-cover rounded-lg border-primary"
+          className="border-primary w-full rounded-lg object-cover"
         />
       </div>
-      <div className="flex flex-col gap-1 w-full">
+      <div className="flex w-full flex-col gap-1">
         <div className="bodyMD font-semibold">{item.name}</div>
         {item.options.length > 1 &&
           item.options.map((option) => (
@@ -36,7 +36,7 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
               {option.name}: {option.values?.[0]}
             </div>
           ))}
-        <div className="flex flex-row justify-between items-center mt-5 min-h-16">
+        <div className="mt-5 flex min-h-16 flex-row items-center justify-between">
           <CounterButton
             count={item.quantity}
             setCount={handleQuantityChange}
@@ -45,11 +45,16 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
           />
           <div className="bodyLG">
             {item.compareAtPrice && (
-              <div className="line-through text-gray-500">
-                AED {formatPrice(item.compareAtPrice)}
+              <div className="text-gray-500 line-through">
+                AED{' '}
+                {formatPrice(
+                  (Number(item.compareAtPrice) * item.quantity).toString()
+                )}
               </div>
             )}
-            <div>AED {formatPrice(item.price)}</div>
+            <div>
+              AED {formatPrice((Number(item.price) * item.quantity).toString())}
+            </div>
           </div>
         </div>
       </div>

@@ -22,7 +22,9 @@ export default function page() {
             <div className="text-primary font-parkinsans mb-10 text-4xl leading-[1.1] font-bold md:text-7xl">
               UAE&apos;s first curated pet experience
             </div>
-            <Button>Build your box now</Button>
+            <Button className="w-full xl:w-fit" variant="primary">
+              <Link href="/subscribe/step-1">Build your box now</Link>
+            </Button>
           </div>
         </div>
         <div className="w-full px-2">
@@ -48,7 +50,7 @@ export default function page() {
               alt="About Tee"
               width="518"
               height="1"
-              className="self-center rounded-3xl xl:w-700 max-w-xl w-full"
+              className="w-full max-w-xl self-center rounded-3xl xl:w-700"
             />
           </div>
           <div className="bg-yellow relative my-10 flex flex-col gap-4 rounded-4xl px-6 py-20 xl:mx-12 xl:gap-10 xl:px-40 xl:py-40">
@@ -100,7 +102,7 @@ export default function page() {
               alt="Our Box Image"
               width="518"
               height="1"
-              className="self-center rounded-3xl xl:w-500 max-w-xl w-full"
+              className="w-full max-w-xl self-center rounded-3xl xl:w-500"
             />
           </div>
 
