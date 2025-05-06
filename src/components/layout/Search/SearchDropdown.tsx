@@ -55,6 +55,7 @@ export default function SearchDropdown({
           value={searchKey}
           onChange={setSearchKey}
           handleClose={handleClose}
+          isOpen={isOpen}
         />
         {isLoading && <div>Searching...</div>}
         <div className="mt-8 flex w-full flex-col divide-y divide-gray-200">

@@ -1,40 +1,54 @@
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useEffect, useRef } from 'react'; // Added imports
 
 export default function SearchInput({
   value,
   onChange,
   handleClose,
+  isOpen
 }: {
   value: string;
   onChange: (newValue: string) => void;
   handleClose: () => void;
+  isOpen: boolean;
 }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+      return () => clearTimeout(timeout);
+    }
+  }, [isOpen]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
-      if (value.trim() === "") {
+      if (value.trim() === '') {
         return;
       }
       window.location.href = `/shop?searchKey=${value}`;
     }
   };
   return (
-    <div className="w-full flex justify-between gap-4">
+    <div className="flex w-full justify-between gap-4">
       <div className="flex w-full">
         <input
+          autoFocus
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
+          ref={inputRef}
           type="text"
           placeholder="What are you looking for?"
-          className="w-full border-secondary rounded-full p-3 placeholder:text-gray-500 focus:outline-none bg-white"
+          className="border-secondary w-full rounded-full bg-white p-3 placeholder:text-gray-500 focus:outline-none"
         />
-        <MagnifyingGlassIcon className="w-6 -ml-10 stroke-2" />
+        <MagnifyingGlassIcon className="-ml-10 w-6 stroke-2" />
       </div>
       <XMarkIcon
         className="w-6 cursor-pointer stroke-2"
         onClick={() => {
-          onChange("");
+          onChange('');
           handleClose();
         }}
       />
