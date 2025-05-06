@@ -61,13 +61,13 @@ function AccountDropdown({ setIsOpen }: AccountDropdownProps) {
                       </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         onClick={() => setIsOpen((prev) => !prev)}
                         href="/account/subscriptions"
                         className={`bodyLG ${pathName.startsWith("/account/subscriptions") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                       >
                         My Subscription
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link

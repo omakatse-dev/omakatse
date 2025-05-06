@@ -136,7 +136,7 @@ export default function NavBar() {
                   className="fixed mt-14 left-0 w-full opacity-100 transition-opacity duration-200 z-20"
                   ref={dropdownRef}
                 >
-                  <HoverOverCat />
+                  <HoverOverCat setIsCatHovering={setIsCatHovering}/>
                 </div>
               )}
             </div>
@@ -158,7 +158,7 @@ export default function NavBar() {
                   className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
                   ref={dropdownRef}
                 >
-                  <HoverOverDog />
+                  <HoverOverDog setIsDogHovering={setIsDogHovering} />
                 </div>
               )}
             </div>
@@ -214,7 +214,7 @@ export default function NavBar() {
                   className="fixed mt-24 right-0 w-fit opacity-100 transition-opacity duration-200 z-20"
                   ref={dropdownRef}
                 >
-                  <HoverOverProfile />
+                  <HoverOverProfile setIsProfileHovering={setIsProfileHovering}/>
                 </div>
               )}
               <button onClick={openCart} className="cursor-pointer relative">

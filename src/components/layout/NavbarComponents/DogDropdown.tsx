@@ -9,6 +9,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSearchParams, usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface DogDropdownProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,31 +52,31 @@ function DogDropdown({ setIsOpen }: DogDropdownProps) {
               <DisclosurePanel className="relative pl-5 mt-3">
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a
+                    <Link
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products?sort=New+Arrivals&tab=Treats"
                       className={`bodyLG ${tab === "Treats" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Treats
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products/?sort=New+Arrivals&tab=Care+Products"
                       className={`bodyLG ${tab === "Care Products" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Care Products
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       onClick={() => setIsOpen((prev) => !prev)}
                       href="/shop/dog-products/?sort=New+Arrivals&tab=Accessories"
                       className={`bodyLG ${tab === "Accessories" && pathName.startsWith("/shop/dog-products") ? "pb-1 border-b-2 border-black" : "border-b-0"}`}
                     >
                       Accessories
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </DisclosurePanel>
