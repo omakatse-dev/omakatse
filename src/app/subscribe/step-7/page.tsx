@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import Button from "@/components/common/Button";
-import ProgressBar from "@/components/subscription/ProgressBar";
-import TreatPreferenceCard from "@/components/subscription/TreatPreferenceCard";
-import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
-import { useRouter } from "next/navigation";
-import { subscriptionFormSchema } from "@/schemas/SubscriptionFormSchema";
-import { z } from "zod";
-import { useEffect, useState } from "react";
+import Button from '@/components/common/Button';
+import ProgressBar from '@/components/subscription/ProgressBar';
+import TreatPreferenceCard from '@/components/subscription/TreatPreferenceCard';
+import { useSubscriptionFormStore } from '@/stores/subscriptionFormStore';
+import { useRouter } from 'next/navigation';
+import { subscriptionFormSchema } from '@/schemas/SubscriptionFormSchema';
+import { z } from 'zod';
+import { useEffect, useState } from 'react';
 const _treatPreferenceSchema = subscriptionFormSchema.pick({
   catsDetails: true,
-  dogsDetails: true,
+  dogsDetails: true
 });
 
 export type TreatPreferenceSchema = z.infer<typeof _treatPreferenceSchema>;
@@ -32,35 +32,35 @@ export default function SubscriptionStepSevenPage() {
       setShowError(true);
       return;
     }
-    router.push("/subscribe/step-8");
+    router.push('/subscribe/step-8');
   };
 
   useEffect(() => {
     if (!hydrated) return;
     if (!petType) {
-      router.push("/subscribe/step-1");
+      router.push('/subscribe/step-1');
     }
     if (
-      (!storedDogCount && petType === "dog") ||
-      (!storedCatCount && petType === "cat") ||
-      (!storedDogCount && !storedCatCount && petType === "both")
+      (!storedDogCount && petType === 'dog') ||
+      (!storedCatCount && petType === 'cat') ||
+      (!storedDogCount && !storedCatCount && petType === 'both')
     ) {
-      router.push("/subscribe/step-2");
+      router.push('/subscribe/step-2');
     }
   }, [router, storedDogCount, storedCatCount, petType, hydrated]);
 
   return (
-    <div className="w-full px-8 pt-32 pb-20 bg-blue-pastel flex flex-col items-center gap-8">
+    <div className="bg-blue-pastel flex w-full flex-col items-center gap-8 px-8 pt-32 pb-20">
       <ProgressBar currentStep={7} totalSteps={9} className="max-w-sm" />
       <div className="flex flex-col items-center gap-2 text-center">
         <h3 className="font-bold">
           Fill in any treats and additional information
         </h3>
-        <div className="text-gray-800 bodyMD">
+        <div className="bodyMD text-gray-800">
           Add any must-knows or special notes for your pets.
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-3xl mx-auto">
+      <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
         {cats.map((cat, idx) => (
           <TreatPreferenceCard
             key={cat.name}
@@ -79,15 +79,18 @@ export default function SubscriptionStepSevenPage() {
           />
         ))}
       </div>
-      <div className="flex gap-5">
+      <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
         <Button
-          onClick={() => router.push("/subscribe/step-6")}
+          onClick={() => router.push('/subscribe/step-6')}
           variant="secondary"
           bgColor="bg-blue-pastel"
+          className="row-start-2 w-full sm:row-auto"
         >
           Previous
         </Button>
-        <Button onClick={submitHandler}>Next</Button>
+        <Button onClick={submitHandler} className="w-full">
+          Next
+        </Button>
       </div>
       {showError && (
         <div className="bodyMD text-red">

@@ -1,36 +1,36 @@
-import { Review } from "@/types/Types";
-import { StarIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
+import { Review } from '@/types/Types';
+import { StarIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
 
 export default function ReviewModal({
   review,
-  handleClose,
+  handleClose
 }: {
   review: Review;
   handleClose: () => void;
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-primary/50"
+      className="bg-primary/50 fixed inset-0 z-50 flex items-center justify-center px-8"
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-xl rounded-2xl bg-yellow-pastel px-16 py-8 gap-6 flex flex-col relative"
+        className="bg-yellow-pastel relative flex w-full max-w-xl flex-col gap-6 rounded-2xl px-4 py-8 md:px-16"
         onClick={(e) => e.stopPropagation()}
       >
         <XMarkIcon
-          className="absolute top-4 right-4 w-6 h-6 cursor-pointer stroke-2"
+          className="absolute top-4 right-4 h-6 w-6 cursor-pointer stroke-2"
           onClick={handleClose}
         />
-        <div className="w-full flex justify-between mt-7">
+        <div className="mt-7 flex w-full justify-between">
           <div className="flex">
             {Array.from({ length: review.rating }).map((_, index) => (
-              <StarIcon key={index} className="w-6 h-6 text-yellow" />
+              <StarIcon key={index} className="text-yellow h-6 w-6" />
             ))}
           </div>
           <div className="bodySM">{review.date}</div>
         </div>
-        <div className="bodyMD text-gray-800 font-semibold">
+        <div className="bodyMD font-semibold text-gray-800">
           {review.author}
         </div>
         <h4 className="font-bold">{review.title}</h4>
@@ -41,7 +41,7 @@ export default function ReviewModal({
             alt="Review Image"
             width={400}
             height={400}
-            className="rounded-2xl w-full"
+            className="w-full rounded-2xl"
           />
         )}
       </div>

@@ -61,14 +61,14 @@ export default function Tabs({
           
           {/* Top tab */}
           <div
-            className={`relative z-1 px-6 sm:px-10 py-4 rounded-full w-full h-full cursor-pointer text-xs lg:text-base
+            className={`relative z-1 px-4 sm:px-10 py-4 rounded-full w-full h-full cursor-pointer text-xs lg:text-base
               ${selectedTab === tab ? activeStyles : ""}`}
             onClick={() => onChange(tab)}
           >
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center w-full">
               {renderTabIcon(tab)}
-              <span>{tab}</span>
-            </div>
+              <span className="whitespace-nowrap overflow-hidden">{tab}</span>
+              </div>
           </div>
         </div>
       ))}
