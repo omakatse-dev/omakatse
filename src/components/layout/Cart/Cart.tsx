@@ -107,7 +107,7 @@ export default function Cart({
         {cartItems.length > 0 ? (
           <>
             <FreeShippingTracker amountMore={100 - totalPrice} />
-            <div className="flex flex-col gap-8 mt-8 w-full">
+            <div className="flex flex-col gap-8 mt-8 mb-24 w-full p-4 overflow-y-auto no-scrollbar">
               {regularItems.map((item) => (
                 <RegularCartItem key={item.id} item={item} />
               ))}
