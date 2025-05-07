@@ -1,14 +1,14 @@
-import { createPortal } from "react-dom";
-import Button from "../common/Button";
-import { removePet } from "@/utils/SubscriptionAPIs";
-import { useState } from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { createPortal } from 'react-dom';
+import Button from '../common/Button';
+import { removePet } from '@/utils/SubscriptionAPIs';
+import { useState } from 'react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function ConfirmRemovePetModal({
   name,
   close,
   contractId,
-  petIndex,
+  petIndex
 }: {
   name: string;
   close: () => void;
@@ -23,28 +23,32 @@ export default function ConfirmRemovePetModal({
   };
   return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black/60 z-20"
+      className="fixed inset-0 z-20 flex items-center justify-center bg-black/60"
       onClick={close}
     >
       <div
-        className="bg-yellow-pastel p-6 pt-12 sm:py-8 sm:px-12 rounded-2xl flex flex-col gap-6 sm:gap-8 max-w-72 sm:max-w-md text-center w-full relative"
+        className="bg-yellow-pastel relative flex w-full max-w-72 flex-col gap-6 rounded-2xl p-6 pt-12 text-center sm:max-w-lg sm:gap-8 sm:px-12 sm:py-8"
         onClick={(e) => e.stopPropagation()}
       >
         <XMarkIcon
-          className="absolute w-6 top-4 right-4 stroke-2 cursor-pointer"
+          className="absolute top-4 right-4 w-6 cursor-pointer stroke-2"
           onClick={close}
         />
         <h4>Are you sure you want to remove {name}?</h4>
-        <div className="flex flex-col sm:flex-row gap-2 justify-center w-full">
+        <div className="grid w-full grid-cols-1 justify-center gap-2 sm:grid-cols-2">
           <Button
             bgColor="bg-yellow-pastel"
-            className="w-1/2"
+            className="w-full"
             variant="secondary"
             onClick={close}
           >
             No
           </Button>
-          <Button className="w-1/2" onClick={handleRemovePet} loading={loading}>
+          <Button
+            className="w-full"
+            onClick={handleRemovePet}
+            loading={loading}
+          >
             Yes, remove
           </Button>
         </div>

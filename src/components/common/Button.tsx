@@ -25,7 +25,7 @@ export default function Button({
   bgColor = "",
 }: ButtonProps) {
   const primaryStyles =
-    "bg-white active:bg-yellow hover:bg-yellow-pastel disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:cursor-not-allowed";
+    "bg-white active:bg-yellow hover:bg-yellow-pastel disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400  disabled:cursor-not-allowed";
 
   const secondaryStyles =
     "hover:bg-white active:bg-gray-500 lg:active:text-white disabled:hover:bg-gray-200 disabled:hover:drop-shadow-none disabled:cursor-not-allowed " +
@@ -39,7 +39,7 @@ export default function Button({
       <button
         type={type}
         disabled={disabled || loading}
-        className={`absolute inset-0 rounded-full transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-active:translate-x-1 group-active:translate-y-1 group-active:bg-white border-1 ${
+        className={`absolute inset-0 rounded-full transition-all duration-300 ${!disabled && !loading ? "group-hover:translate-x-1 group-hover:translate-y-1 group-active:translate-x-1 group-active:translate-y-1 group-active:bg-white border-1"  : ''} ${
           variant === "primary" ? "bg-yellow" : "group-hover:bg-gray-500"
         }`}
         aria-hidden="true"
