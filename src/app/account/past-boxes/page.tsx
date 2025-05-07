@@ -40,7 +40,7 @@ export default async function PastBoxesPage() {
             No past boxes yet. Once you’ve built and received your first box,
             you’ll see it here!
           </div>
-          <Button className="w-full sm:w-fit">Build your box now</Button>
+          <Button className="w-full sm:w-fit">Build Your Box Now</Button>
         </>
       )}
     </div>

@@ -23,7 +23,7 @@ export default function page() {
               UAE&apos;s first curated pet experience
             </div>
             <Button className="w-full xl:w-fit" variant="primary">
-              <Link href="/subscribe/step-1">Build your box now</Link>
+              <Link href="/subscribe/step-1">Build Your Box Now</Link>
             </Button>
           </div>
         </div>

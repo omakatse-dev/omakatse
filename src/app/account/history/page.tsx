@@ -40,7 +40,7 @@ export default async function AccountHistoryPage() {
           </div>
           <Link href="/subscribe/step-1">
             <Button className="w-full sm:w-fit">
-              Build your box now
+              Build Your Box Now
             </Button>
           </Link>
         </>

@@ -63,7 +63,7 @@ export default function SubscriptionList() {
             your furry family members to something special every month.
           </div>
           <Link href="/subscribe/step-1">
-            <Button className="w-full sm:w-fit">Build your box now</Button>
+            <Button className="w-full sm:w-fit">Build Your Box Now</Button>
           </Link>
         </>
       )}

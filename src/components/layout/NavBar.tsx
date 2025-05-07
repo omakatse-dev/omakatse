@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import Button from "../common/Button";
-import MobileMenu from "./NavbarComponents/MobileMenu";
-import { useState } from "react";
+import Link from 'next/link';
+import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import Button from '../common/Button';
+import MobileMenu from './NavbarComponents/MobileMenu';
+import { useState } from 'react';
 import {
   MagnifyingGlassIcon,
   UserIcon,
   Bars3Icon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
-import SearchDropdown from "./Search/SearchDropdown";
-import Cart from "./Cart/Cart";
-import { useUIStore } from "@/stores/uiStore";
-import { useCartStore } from "@/stores/cartStore";
-import { getCartById } from "@/utils/APIs";
-import HoverOverCat from "./NavbarComponents/HoverOverCat";
-import HoverOverDog from "./NavbarComponents/HoverOverDog";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import HoverOverProfile from "./NavbarComponents/HoverOverProfile";
+  ChevronDownIcon
+} from '@heroicons/react/24/outline';
+import SearchDropdown from './Search/SearchDropdown';
+import Cart from './Cart/Cart';
+import { useUIStore } from '@/stores/uiStore';
+import { useCartStore } from '@/stores/cartStore';
+import { getCartById } from '@/utils/APIs';
+import HoverOverCat from './NavbarComponents/HoverOverCat';
+import HoverOverDog from './NavbarComponents/HoverOverDog';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import HoverOverProfile from './NavbarComponents/HoverOverProfile';
 
 export default function NavBar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -29,17 +29,17 @@ export default function NavBar() {
   const router = useRouter();
   const links = [
     {
-      name: "About Us",
-      url: "/about",
+      name: 'About Us',
+      url: '/about'
     },
     {
-      name: "Blog",
-      url: "/blog",
+      name: 'Blog',
+      url: '/blog'
     },
     {
-      name: "Contact",
-      url: "/contact",
-    },
+      name: 'Contact',
+      url: '/contact'
+    }
   ];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -70,12 +70,12 @@ export default function NavBar() {
 
   useEffect(() => {
     const checkCartStatus = async () => {
-      const cartId = localStorage.getItem("cartId");
+      const cartId = localStorage.getItem('cartId');
       if (cartId) {
         const res = await getCartById(cartId);
         if (!res.cart) {
           //successful checkout
-          localStorage.removeItem("cartId");
+          localStorage.removeItem('cartId');
           clearCart();
         }
       }
@@ -96,66 +96,66 @@ export default function NavBar() {
     }
 
     if (isCatHovering || isDogHovering || isProfileHovering) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isCatHovering || isDogHovering || isProfileHovering]);
 
   return (
     <>
-      <div className="fixed top-4 w-full px-2 xl:px-12 left-1/2 -translate-x-1/2 z-10">
-        <div className="flex justify-between w-full bg-yellow py-4 px-5 xl:py-4 xl:px-8 rounded-full">
-          <div className="xl:hidden flex justify-center gap-3">
+      <div className="fixed top-4 left-1/2 z-10 w-full -translate-x-1/2 px-2 xl:px-12">
+        <div className="bg-yellow flex w-full justify-between rounded-full px-5 py-4 xl:px-8 xl:py-4">
+          <div className="flex justify-center gap-3 xl:hidden">
             <button onClick={() => setIsOpen((prev) => !prev)}>
-              <Bars3Icon className="h-6 w-6 stroke-primary stroke-[2]" />
+              <Bars3Icon className="stroke-primary h-6 w-6 stroke-[2]" />
             </button>
             <button onClick={() => setShowSearchDropdown((prev) => !prev)}>
-              <MagnifyingGlassIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+              <MagnifyingGlassIcon className="stroke-primary h-6 w-6 stroke-[2]" />
             </button>
           </div>
 
-          <div className="hidden xl:flex items-center gap-x-8">
-            <div className="relative group">
+          <div className="hidden items-center gap-x-8 xl:flex">
+            <div className="group relative">
               <button
                 onClick={handleMouseOverCat}
-                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 cursor-pointer ${
-                  pathname.startsWith("/shop/cat-products")
-                    ? "border-b-2 border-black"
-                    : "border-b-0"
-                } ${isCatHovering ? "border-b-2 border-black" : ""}`}
+                className={`b-2 flex cursor-pointer gap-1 border-b-0 pb-1 font-medium ${
+                  pathname.startsWith('/shop/cat-products')
+                    ? 'border-b-2 border-black'
+                    : 'border-b-0'
+                } ${isCatHovering ? 'border-b-2 border-black' : ''}`}
               >
                 Cat
-                <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+                <ChevronDownIcon className="stroke-primary h-6 w-6 stroke-[2]" />
               </button>
               {/* Dropdown for Cat */}
               {isCatHovering && (
                 <div
-                  className="fixed mt-14 left-0 w-full opacity-100 transition-opacity duration-200 z-20"
+                  className="fixed left-0 z-20 mt-14 w-full opacity-100 transition-opacity duration-200"
                   ref={dropdownRef}
                 >
-                  <HoverOverCat setIsCatHovering={setIsCatHovering}/>
+                  <HoverOverCat setIsCatHovering={setIsCatHovering} />
                 </div>
               )}
             </div>
-            <div className="relative group">
+            <div className="group relative">
               <button
                 onClick={handleMouseOverDog}
-                className={`flex gap-1 b-2 border-b-0 font-medium pb-1 cursor-pointer ${
-                  pathname.startsWith("/shop/dog-products")
-                    ? "border-b-2 border-black"
-                    : "border-b-0"
-                } ${isDogHovering ? "border-b-2 border-black" : ""}`}
+                className={`b-2 flex cursor-pointer gap-1 border-b-0 pb-1 font-medium ${
+                  pathname.startsWith('/shop/dog-products')
+                    ? 'border-b-2 border-black'
+                    : 'border-b-0'
+                } ${isDogHovering ? 'border-b-2 border-black' : ''}`}
               >
                 Dog
-                <ChevronDownIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+                <ChevronDownIcon className="stroke-primary h-6 w-6 stroke-[2]" />
               </button>
               {/* Dropdown for Dog */}
               {isDogHovering && (
                 <div
-                  className="fixed mt-14 left-2 w-full opacity-100 transition-opacity duration-200 z-20"
+                  className="fixed left-2 z-20 mt-14 w-full opacity-100 transition-opacity duration-200"
                   ref={dropdownRef}
                 >
                   <HoverOverDog setIsDogHovering={setIsDogHovering} />
@@ -172,8 +172,8 @@ export default function NavBar() {
                 onMouseLeave={() => setIsHovering(null)}
                 className={`block pb-1 font-medium ${
                   pathname.startsWith(link.url) || isHovering === link.name
-                    ? "border-b-2 border-black"
-                    : "border-b-0"
+                    ? 'border-b-2 border-black'
+                    : 'border-b-0'
                 }`}
               >
                 {link.name}
@@ -187,37 +187,39 @@ export default function NavBar() {
               alt="Logo"
               width={192}
               height={52}
-              className="h-11 xl:h-[52px] w-auto cursor-pointer"
+              className="h-11 w-auto cursor-pointer xl:h-[52px]"
             />
           </Link>
 
-          <div className="hidden xl:flex gap-8">
-            <Button onClick={() => router.push("/subscribe/step-1")}>
-              Build your box now
+          <div className="hidden gap-8 xl:flex">
+            <Button onClick={() => router.push('/subscribe/step-1')}>
+              Build Your Box Now
             </Button>
             <div className="flex gap-5">
               <button
                 className="cursor-pointer"
                 onClick={() => setShowSearchDropdown((prev) => !prev)}
               >
-                <MagnifyingGlassIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+                <MagnifyingGlassIcon className="stroke-primary h-6 w-6 stroke-[2]" />
               </button>
               <button
                 onClick={() => setIsProfileHovering((prev) => !prev)}
-                className="flex items-center cursor-pointer"
+                className="flex cursor-pointer items-center"
               >
-                <UserIcon className="h-6 w-6 stroke-primary stroke-[2]" />
+                <UserIcon className="stroke-primary h-6 w-6 stroke-[2]" />
               </button>
               {/* Dropdown for Profile */}
               {isProfileHovering && (
                 <div
-                  className="fixed mt-24 right-0 w-fit opacity-100 transition-opacity duration-200 z-20"
+                  className="fixed right-0 z-20 mt-24 w-fit opacity-100 transition-opacity duration-200"
                   ref={dropdownRef}
                 >
-                  <HoverOverProfile setIsProfileHovering={setIsProfileHovering}/>
+                  <HoverOverProfile
+                    setIsProfileHovering={setIsProfileHovering}
+                  />
                 </div>
               )}
-              <button onClick={openCart} className="cursor-pointer relative">
+              <button onClick={openCart} className="relative cursor-pointer">
                 <Image
                   src="/assets/Cart.svg"
                   alt="Cart Icon"
@@ -226,23 +228,23 @@ export default function NavBar() {
                   className="cursor-pointer"
                 />
                 {cartItems.length > 0 && (
-                  <div className="absolute top-3 right-0 bg-red-500 rounded-full w-2 h-2" />
+                  <div className="absolute top-3 right-0 h-2 w-2 rounded-full bg-red-500" />
                 )}
               </button>
             </div>
           </div>
 
-          <div className="xl:hidden flex">
-            <button onClick={openCart} className="cursor-pointer relative">
+          <div className="flex xl:hidden">
+            <button onClick={openCart} className="relative cursor-pointer">
               <Image
                 src="/assets/Cart.svg"
                 alt="Cart Icon"
                 width={26}
                 height={26}
                 className="cursor-pointer"
-              />{" "}
+              />{' '}
               {cartItems.length > 0 && (
-                <div className="absolute top-2 -right-0 bg-red-500 rounded-full w-2 h-2" />
+                <div className="absolute top-2 -right-0 h-2 w-2 rounded-full bg-red-500" />
               )}
             </button>
           </div>

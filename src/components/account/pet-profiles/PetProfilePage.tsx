@@ -87,7 +87,7 @@ export default function PetProfilePage({
             pet profiles for your furry family members!
           </div>
           <Link href="/subscribe/step-1">
-            <Button className="w-full sm:w-fit">Build your box now</Button>
+            <Button className="w-full sm:w-fit">Build Your Box Now</Button>
           </Link>
         </>
       )}

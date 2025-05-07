@@ -12,7 +12,7 @@ export default function TnC() {
         <li>
           I agree that Personal Data relating to my product ratings and review,
           which may include my name, username, rating, review and country, may
-          be shared and/or disclosed by Sephora, including in any Sephora
+          be shared and/or disclosed by Omakatse, including in any Omakatse
           stores, on websites and/or on the mobile app, and with third parties,
           for administrative, fraud prevention, publicity and/or promotional
           purposes. Further details of which are set out in the Privacy Policy I

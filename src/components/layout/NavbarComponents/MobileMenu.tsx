@@ -106,7 +106,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             passHref
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            Build your box now
+            Build Your Box Now
           </Link>
         </Button>
       </div>
