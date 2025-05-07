@@ -189,7 +189,7 @@ export default function PetDetailsCard({
             </div>
           </div>
           {editMode !== 'none' && (
-            <div className="mt-8 flex w-full flex-col gap-2 sm:flex-row sm:justify-center">
+            <div className="mt-8 flex w-full flex-col gap-2 sm:flex-row sm:justify-center items-center">
               {editMode === 'all' && (
                 <Button
                   onClick={() => setShowConfirmationModal(true)}
