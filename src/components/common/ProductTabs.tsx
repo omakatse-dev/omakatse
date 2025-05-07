@@ -15,7 +15,7 @@ export default function ProductTabs({
 }) {
   const activeStyles = "bg-yellow border border-black";
   return (
-    <div className={`${className} flex gap-4 bodyMD`}>
+    <div className={`${className} flex flex-wrap gap-4 bodyMD`}>
       {tabs.map((tab) => (
         <div
           key={tab.name}

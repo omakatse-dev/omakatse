@@ -57,8 +57,8 @@ export default function SearchDropdown({
           handleClose={handleClose}
           isOpen={isOpen}
         />
-        {isLoading && <div>Searching...</div>}
         <div className="mt-8 flex w-full flex-col divide-y divide-gray-200">
+          {isLoading && <div>Searching...</div>}
           {searchResults.map((product) => (
             <ProductSearchResult key={product.id} product={product} />
           ))}
