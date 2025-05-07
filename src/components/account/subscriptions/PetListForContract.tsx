@@ -55,7 +55,7 @@ export default function PetListForContract() {
     return <div>Invalid pet data for this subscription.</div>;
   }
   return (
-    <div className="mt-8 flex flex-wrap gap-8 justify-center">
+    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
       {pets.length > 0 ? (
         pets.map((pet: PetDetailsSchema, idx: number) => (
           <div key={idx}>

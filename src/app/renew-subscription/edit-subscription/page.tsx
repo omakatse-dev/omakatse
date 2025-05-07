@@ -26,7 +26,7 @@ export default async function EditSubscriptionPage({
       <div className="bodyMD text-gray-800 mt-1 text-center">
         Let&apos;s double check on your pet details!{" "}
       </div>
-      <div>
+      <div className="w-full">
         <Suspense fallback={<div>Loading Subscription Details...</div>}>
           <PetListForContract />
         </Suspense>

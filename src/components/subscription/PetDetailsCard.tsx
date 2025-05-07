@@ -93,9 +93,9 @@ export default function PetDetailsCard({
                 : 0)) as keyof typeof variantMapping
           ]
         }
-        className="flex w-full flex-col items-center bg-white"
+        className="flex w-full md:h-full flex-col items-center bg-white"
       >
-        <div className="flex h-full w-full flex-col items-center justify-between">
+        <div className="flex md:h-full w-full flex-col justify-between">
           <div>
             <div className="flex items-center gap-4 sm:flex-col sm:gap-0">
               <Image
@@ -189,11 +189,11 @@ export default function PetDetailsCard({
             </div>
           </div>
           {editMode !== 'none' && (
-            <div className="mt-8 flex w-full flex-col gap-2 sm:flex-row sm:justify-center items-center">
+            <div className="mt-8 grid w-full grid-cols-1 items-center gap-2 sm:grid-cols-2 sm:justify-center">
               {editMode === 'all' && (
                 <Button
                   onClick={() => setShowConfirmationModal(true)}
-                  className="w-1/2"
+                  className="w-full"
                   disabled={petCount === 1}
                 >
                   Remove Pet
@@ -202,7 +202,7 @@ export default function PetDetailsCard({
               <Link
                 href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
               >
-                <Button>Edit Pet</Button>
+                <Button className="w-full">Edit Pet</Button>
               </Link>
             </div>
           )}
