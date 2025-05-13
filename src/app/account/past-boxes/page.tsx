@@ -17,7 +17,6 @@ const getUserProfileData = async (): Promise<Claims> => {
 export default async function PastBoxesPage() {
   const user = await getUserProfileData();
   const contracts = await getPastBoxesByEmail(user.email);
-  console.log(contracts);
 
   return (
     <div className="flex flex-col gap-8">

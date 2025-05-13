@@ -1,78 +1,79 @@
-import Tag from "@/components/common/Tag";
-import Pets from "../subscriptions/Pets";
-import { PastBoxDetailsType } from "@/types/Types";
-import { PetType } from "../subscriptions/SubscriptionCard";
-import ProgressBar from "@/components/subscription/ProgressBar";
-import BoxContent from "./BoxContent";
-import dayjs from "dayjs";
+import Tag from '@/components/common/Tag';
+import Pets from '../subscriptions/Pets';
+import { PastBoxDetailsType } from '@/types/Types';
+import { PetType } from '../subscriptions/SubscriptionCard';
+import ProgressBar from '@/components/subscription/ProgressBar';
+import BoxContent from './BoxContent';
+import dayjs from 'dayjs';
 
 export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
   const pets = JSON.parse(box.pets);
-  const dogs = pets.filter((pet: PetType) => pet.type === "Dog");
-  const cats = pets.filter((pet: PetType) => pet.type === "Cat");
+  const dogs = pets.filter((pet: PetType) => pet.type === 'Dog');
+  const cats = pets.filter((pet: PetType) => pet.type === 'Cat');
   // console.log(box.items);
   return (
-    <div className="border-primary rounded-2xl p-6 sm:p-8 max-w-4xl flex flex-col gap-8">
-      <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
+    <div className="border-primary flex max-w-4xl flex-col gap-8 rounded-2xl p-6 sm:p-8">
+      <div className="flex flex-col-reverse justify-between gap-4 md:flex-row">
         <Pets dogs={dogs} cats={cats} />
         <Tag className={`h-fit w-fit`}>SHIPPED</Tag>
       </div>
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
-          Box {box.number % box.planDuration} out of {box.planDuration}
+          Box {((box.number - 1) % box.planDuration) + 1} out of{' '}
+          {box.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
-          currentStep={box.number % box.planDuration}
+          currentStep={((box.number - 1) % box.planDuration) + 1}
           totalSteps={box.planDuration}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:border-r border-gray-200 md:pr-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">Box size</label>
-          <div className="bodyMD font-semibold mt-1">{box.size}</div>
+          <div className="bodyMD mt-1 font-semibold">{box.size}</div>
         </div>
-        <div className="md:border-r border-gray-200 md:pr-8">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">No. of Pets</label>
-          <div className="bodyMD font-semibold mt-1">
-            {dogs.length > 0 && `${dogs.length} dog(s)`}{" "}
+          <div className="bodyMD mt-1 font-semibold">
+            {dogs.length > 0 && `${dogs.length} dog(s)`}{' '}
             {cats.length > 0 && `${cats.length} cat(s)`}
           </div>
         </div>
         <div className="md:pr-8">
           <label className="bodySM text-gray-500">Next billing date</label>
-          <div className="bodyMD font-semibold mt-1">
-            {box.status === "active"
-              ? dayjs(box.nextBillingDate).format("MMMM DD, YYYY")
-              : "-"}
+          <div className="bodyMD mt-1 font-semibold">
+            {box.status === 'active'
+              ? dayjs(box.nextBillingDate).format('MMMM DD, YYYY')
+              : '-'}
           </div>
         </div>
-        <div className="md:border-r border-gray-200 md:pr-8">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">Ship to</label>
-          <div className="bodyMD font-semibold mt-1">{box.name}</div>
+          <div className="bodyMD mt-1 font-semibold">{box.name}</div>
         </div>
-        <div className="md:border-r border-gray-200 md:pr-8">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">Shipping address</label>
-          <div className="bodyMD font-semibold mt-1">{box.address}</div>
+          <div className="bodyMD mt-1 font-semibold">{box.address}</div>
         </div>
         <div className="md:pr-8">
           <label className="bodySM text-gray-500">Shipping method</label>
-          <div className="bodyMD font-semibold mt-1">Standard shipping</div>
+          <div className="bodyMD mt-1 font-semibold">Standard shipping</div>
         </div>
-        <div className="md:border-r border-gray-200 md:pr-8">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">Box plan</label>
-          <div className="bodyMD font-semibold mt-1">
+          <div className="bodyMD mt-1 font-semibold">
             {box.planDuration} months
           </div>
         </div>
-        <div className="md:border-r border-gray-200 md:pr-8">
+        <div className="border-gray-200 md:border-r md:pr-8">
           <label className="bodySM text-gray-500">Monthly payment</label>
-          <div className="bodyMD font-semibold mt-1">AED 25</div>
+          <div className="bodyMD mt-1 font-semibold">AED 25</div>
         </div>
         <div className="md:pr-8">
           <label className="bodySM text-gray-500">Next Renewal Date</label>
-          <div className="bodyMD font-semibold mt-1">
-            {dayjs(box.nextRenewalDate).format("MMMM DD, YYYY")}
+          <div className="bodyMD mt-1 font-semibold">
+            {dayjs(box.nextRenewalDate).format('MMMM DD, YYYY')}
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { PastBoxDetailsType } from "@/types/Types";
 
 export default function PastBoxPage({ box }: { box: PastBoxDetailsType }) {
   const router = useRouter();
+
   return (
     <div className="flex flex-col gap-8">
       <button
