@@ -93,9 +93,9 @@ export default function PetDetailsCard({
                 : 0)) as keyof typeof variantMapping
           ]
         }
-        className="flex w-full md:h-full flex-col items-center bg-white"
+        className="flex w-full flex-col items-center bg-white md:h-full"
       >
-        <div className="flex md:h-full w-full flex-col justify-between">
+        <div className="flex w-full flex-col justify-between md:h-full">
           <div>
             <div className="flex items-center gap-4 sm:flex-col sm:gap-0">
               <Image
@@ -134,7 +134,7 @@ export default function PetDetailsCard({
               </div>
               <div className="bodyMD text-gray-800">
                 <span>
-                  {details.gender === 'Girl' ? 'She' : 'He'} is allergic to:
+                  Allergies:
                 </span>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {details.allergies.true ? (
@@ -147,7 +147,7 @@ export default function PetDetailsCard({
                 </div>
               </div>
               <div className="bodyMD text-gray-800">
-                <span>{details.gender === 'Girl' ? 'She' : 'He'} likes:</span>
+                <span>Preferences:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {details.preferences.true ? (
                     details.preferences.preferences.map((pref) => (
@@ -180,7 +180,9 @@ export default function PetDetailsCard({
                 <span>Additional comments:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {details.treatFrequency.comments ? (
-                    <Tag>{details.treatFrequency.comments}</Tag>
+                    <Tag className="line-clamp-3">
+                      {details.treatFrequency.comments}
+                    </Tag>
                   ) : (
                     <Tag>None</Tag>
                   )}

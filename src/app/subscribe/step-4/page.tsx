@@ -76,11 +76,6 @@ export default function SubscriptionStepFourPage() {
         </div>
       </div>
       <form className="flex w-full flex-col items-center gap-8">
-        {showError && (
-          <div className="bodyMD text-red">
-            Please fill in all required fields for each pet before proceeding
-          </div>
-        )}
         {Array.from({ length: catCount }).map((_, idx) => (
           <SizeSelector
             key={idx}
@@ -114,6 +109,11 @@ export default function SubscriptionStepFourPage() {
             Next
           </Button>
         </div>
+        {showError && (
+          <div className="bodyMD text-red">
+            Please fill in all required fields for each pet before proceeding
+          </div>
+        )}
       </form>
     </div>
   );

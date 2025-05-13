@@ -48,7 +48,7 @@ export default function PetDetailsForm({
     name: (currentYear - i).toString(),
   }));
   const months = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
+    id: i + 1,
     name: (i + 1).toString(),
   }));
 
@@ -60,6 +60,7 @@ export default function PetDetailsForm({
   const {
     control,
     formState: { errors },
+    watch,
   } = useForm<InitialPetDetailsSchema>({
     resolver: zodResolver(initialPetDetailsSchema),
     defaultValues: {
@@ -70,6 +71,13 @@ export default function PetDetailsForm({
       birthdayMonth: storedData?.birthdayMonth,
     },
   });
+
+  const selectedYear = watch("birthdayYear");
+  const currentMonth = new Date().getMonth() + 1;
+  const availableMonths =
+    selectedYear === currentYear
+      ? months.filter((m) => m.id <= currentMonth)
+      : months;
 
   const setData = useSubscriptionFormStore((state) => state.setData);
 
@@ -176,7 +184,7 @@ export default function PetDetailsForm({
                       saveFieldToStore("gender", "Boy");
                     }}
                     active={field.value === "Boy"}
-                    className="w-1/2 "
+                    className="w-1/2"
                   >
                     Boy
                   </PillButton>
@@ -258,11 +266,11 @@ export default function PetDetailsForm({
                 render={({ field }) => (
                   <Selector
                     {...field}
-                    options={months}
+                    options={availableMonths}
                     placeholder="Month"
                     className="w-1/2 border-primary rounded-full"
                     value={
-                      months.find((month) => month.id === field.value) || null
+                      availableMonths.find((month) => month.id === field.value) || null
                     }
                     onChange={(option) => {
                       field.onChange(Number(option.name));
