@@ -100,7 +100,7 @@ export default function SubscriptionStepNinePage() {
         tabs={["Small Box", "Large Box"]}
         selectedTab={boxSize}
         onChange={(tab) => setBoxSize(tab)}
-        className="bg-gray-200"
+        className="bg-gray-200 w-full sm:w-fit"
       />
       <TipCard />
       <PlanSelector

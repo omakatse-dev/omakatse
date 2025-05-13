@@ -3,6 +3,7 @@ import PastBoxSummaryCard from '@/components/subscription/PastBoxSummaryCard';
 import { getPastBoxesByEmail } from '@/utils/SubscriptionAPIs';
 import { Claims, getSession } from '@auth0/nextjs-auth0';
 import Button from '@/components/common/Button';
+import Link from 'next/link';
 
 const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
@@ -40,7 +41,9 @@ export default async function PastBoxesPage() {
             No past boxes yet. Once you’ve built and received your first box,
             you’ll see it here!
           </div>
-          <Button className="w-full sm:w-fit">Build Your Box Now</Button>
+          <Link href="/subscribe/step-1" passHref>
+            <Button className="w-full sm:w-fit">Build Your Box Now</Button>
+          </Link>
         </>
       )}
     </div>

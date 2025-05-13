@@ -40,11 +40,11 @@ function Blog() {
           </div>
         </div>
 
-        <Button variant="primary" className="w-full lg:w-fit lg:self-center">
-          <Link href="/blog" passHref>
+        <Link className="w-full lg:w-fit lg:self-center" href="/blog" passHref>
+          <Button variant="primary">
             View more blogs
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
     </div>
   );

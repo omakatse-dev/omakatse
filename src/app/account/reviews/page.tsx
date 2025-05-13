@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 export const runtime = 'nodejs';
 
 import WriteReviewCard from '@/components/account/reviews/WriteReviewCard';
@@ -6,7 +7,7 @@ import { getFulfilledOrdersByEmail, getReviewsByAuthor } from '@/utils/APIs';
 
 import { Claims, getSession } from '@auth0/nextjs-auth0';
 import Button from '@/components/common/Button';
-import Link from 'next/link';
+
 const getUserProfileData = async (): Promise<Claims> => {
   const session = await getSession();
 
@@ -48,12 +49,12 @@ export default async function AccountReviewsPage() {
               review!
             </div>
             <div className="flex flex-col gap-2 sm:flex-row sm:gap-6">
-              <Link href="/shop/cat-products">
+              <a href="/shop/cat-products">
                 <Button className="w-full sm:w-fit">Shop Cat Products</Button>
-              </Link>
-              <Link href="/shop/dog-products">
+              </a>
+              <a href="/shop/dog-products">
                 <Button className="w-full sm:w-fit">Shop Dog Products</Button>
-              </Link>
+              </a>
             </div>
           </div>
         )}
