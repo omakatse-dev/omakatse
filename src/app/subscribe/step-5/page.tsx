@@ -9,7 +9,7 @@ import { subscriptionFormSchema } from '@/schemas/SubscriptionFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 const allergySchema = subscriptionFormSchema.pick({
   catsDetails: true,
   dogsDetails: true
@@ -30,23 +30,22 @@ export default function SubscriptionStepFivePage() {
     resolver: zodResolver(allergySchema)
   });
 
+  const [showError, setShowError] = useState(false);
+
   const submitHandler = () => {
     // Check if all pets have valid allergy selections
     const hasValidAllergies = [...cats, ...dogs].every((pet) => {
-      // If allergies are not set at all, invalid
       if (!pet.allergies) return false;
-
-      // If they said no to allergies, that's valid
       if (pet.allergies.true === false) return true;
-
-      // If they said yes, must have at least one allergy selected
       return pet.allergies.true === true && pet.allergies.allergies.length > 0;
     });
 
     if (!hasValidAllergies) {
+      setShowError(true);
       return;
     }
 
+    setShowError(false);
     router.push('/subscribe/step-6');
   };
 
@@ -81,6 +80,7 @@ export default function SubscriptionStepFivePage() {
             idx={idx}
             name={cat.name}
             fieldName={`catsDetails.${idx}.allergies`}
+            attemptedNext={showError}
           />
         ))}
         {dogs.map((dog, idx) => (
@@ -90,21 +90,29 @@ export default function SubscriptionStepFivePage() {
             name={dog.name}
             catCount={cats.length}
             fieldName={`dogsDetails.${idx}.allergies`}
+            attemptedNext={showError}
           />
         ))}
-        <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
-          <Button
-            onClick={() => router.push('/subscribe/step-4')}
-            variant="secondary"
-            type="button"
-            bgColor="bg-pink-pastel"
-            className="row-start-2 w-full sm:row-auto"
-          >
-            Previous
-          </Button>
-          <Button className="w-full" onClick={submitHandler}>
-            Next
-          </Button>
+        <div>
+          <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
+            <Button
+              onClick={() => router.push('/subscribe/step-4')}
+              variant="secondary"
+              type="button"
+              bgColor="bg-pink-pastel"
+              className="row-start-2 w-full sm:row-auto"
+            >
+              Previous
+            </Button>
+            <Button className="w-full" onClick={submitHandler}>
+              Next
+            </Button>
+          </div>
+          {showError && (
+            <p className="my-4 text-red text-center">
+              Please complete all required fields
+            </p>
+          )}
         </div>
       </form>
     </div>

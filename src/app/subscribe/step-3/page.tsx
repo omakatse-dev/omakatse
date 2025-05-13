@@ -76,11 +76,7 @@ export default function SubscriptionStepThreePage() {
           Tell us their names and a little about them.
         </div>
       </div>
-      {showError && (
-        <p className="bodyMD text-red-500">
-          Please fill in all required fields for each pet before proceeding
-        </p>
-      )}
+
       <div className="flex w-full flex-col gap-8 sm:w-fit">
         {Array.from({ length: storedCatCount }).map((_, idx) => (
           <PetDetailsForm petType="Cat" key={idx} idx={idx} />
@@ -108,6 +104,11 @@ export default function SubscriptionStepThreePage() {
           Next
         </Button>
       </div>
+      {showError && (
+        <p className="bodyMD text-red-500">
+          Please fill in all required fields for each pet before proceeding
+        </p>
+      )}
     </div>
   );
 }

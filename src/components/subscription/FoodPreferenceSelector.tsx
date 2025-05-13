@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CardButton from "../common/CardButton";
-import Input from "../common/Input";
 import Card from "../common/Card";
 import PillButton from "../common/PillButton";
 import { useSubscriptionFormStore } from "@/stores/subscriptionFormStore";
@@ -21,6 +20,7 @@ import dog1 from "../../../public/assets/Dog1.svg";
 import dog2 from "../../../public/assets/Dog2.svg";
 import dog3 from "../../../public/assets/Dog3.svg";
 import dog4 from "../../../public/assets/Dog4.svg";
+import Textfield from "../common/Textfield";
 
 type FoodPreferenceData = {
   true: boolean;
@@ -227,11 +227,11 @@ export default function FoodPreferenceSelector({
                   </CardButton>
                 ))}
               </div>
-              <div className="w-full sm:w-80">
+              <div className="w-full">
                 <div className="mt-8 bodyMD text-gray-800">
                   Other preferences (optional)
                 </div>
-                <Input
+                <Textfield
                   placeholder="Enter any other preferences"
                   className="mt-2 w-full"
                   value={preferencesData.preferences

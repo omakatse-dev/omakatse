@@ -19,7 +19,7 @@ export default function PillButton({
       type="button"
       className={`px-10 py-3 rounded-full cursor-pointer ${
         error ? "border-red border" : "border-primary"
-      } ${active && "bg-blue-light"} ${className}`}
+      } ${active ? "bg-blue-light" : "bg-white"} ${className}`}
     >
       {children}
     </button>
