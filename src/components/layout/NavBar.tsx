@@ -22,6 +22,7 @@ import HoverOverDog from './NavbarComponents/HoverOverDog';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import HoverOverProfile from './NavbarComponents/HoverOverProfile';
+import { useSubscriptionFormStore } from '@/stores/subscriptionFormStore';
 
 export default function NavBar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -51,6 +52,7 @@ export default function NavBar() {
   const [isDogHovering, setIsDogHovering] = useState(false);
   const [isProfileHovering, setIsProfileHovering] = useState(false);
   const [isHovering, setIsHovering] = useState<string | null>(null);
+  const clearData = useSubscriptionFormStore((state) => state.clearData);
 
   const handleMouseOverCat = () => {
     if (isDogHovering) {
@@ -77,6 +79,7 @@ export default function NavBar() {
           //successful checkout
           localStorage.removeItem('cartId');
           clearCart();
+          clearData();
         }
       }
     };
