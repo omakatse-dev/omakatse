@@ -10,7 +10,7 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
   const pets = JSON.parse(box.pets);
   const dogs = pets.filter((pet: PetType) => pet.type === 'Dog');
   const cats = pets.filter((pet: PetType) => pet.type === 'Cat');
-  // console.log(box.items);
+  console.log(box.status);
   return (
     <div className="border-primary flex max-w-4xl flex-col gap-8 rounded-2xl p-6 sm:p-8">
       <div className="flex flex-col-reverse justify-between gap-4 md:flex-row">
@@ -43,7 +43,7 @@ export default function PastBoxCard({ box }: { box: PastBoxDetailsType }) {
         <div className="md:pr-8">
           <label className="bodySM text-gray-500">Next billing date</label>
           <div className="bodyMD mt-1 font-semibold">
-            {box.status === 'active'
+            {box.status === 'ACTIVE'
               ? dayjs(box.nextBillingDate).format('MMMM DD, YYYY')
               : '-'}
           </div>

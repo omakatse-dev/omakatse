@@ -17,6 +17,7 @@ const getUserProfileData = async (): Promise<Claims> => {
 export default async function PastBoxesPage() {
   const user = await getUserProfileData();
   const contracts = await getPastBoxesByEmail(user.email);
+  console.log(contracts);
 
   return (
     <div className="flex flex-col gap-8">
@@ -27,9 +28,15 @@ export default async function PastBoxesPage() {
             <div key={contractId} className="flex flex-col gap-4">
               <h4>Subscription {idx + 1}</h4>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                {contracts[contractId].map((box: PastBoxType) => (
-                  <PastBoxSummaryCard key={box.boxId} box={box} />
-                ))}
+                {contracts[contractId].map((box: PastBoxType) =>
+                  box.boxId ? (
+                    <PastBoxSummaryCard key={box.boxId} box={box} />
+                  ) : (
+                    <div key={contractId}>
+                      Your box has not been processed yet.
+                    </div>
+                  )
+                )}
               </div>
             </div>
           ))}

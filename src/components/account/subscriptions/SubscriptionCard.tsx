@@ -22,7 +22,11 @@ export default function SubscriptionCard({
   const pets = JSON.parse(subscription.pets);
   const dogs = pets.filter((pet: PetType) => pet.type === 'Dog');
   const cats = pets.filter((pet: PetType) => pet.type === 'Cat');
-  console.log(cats);
+  console.log(
+    subscription.boxIds
+      ? subscription.boxIds?.split(',').length % subscription.planDuration
+      : 0
+  );
   const contractId = subscription.contractId;
 
   const router = useRouter();
@@ -42,23 +46,31 @@ export default function SubscriptionCard({
       <div className="flex flex-col items-center gap-2">
         <div className="bodyMD font-semibold text-gray-800">
           Box{' '}
-          {subscription.boxIds?.split(',').length % subscription.planDuration}{' '}
+          {subscription.boxIds
+            ? ((subscription.boxIds?.split(',').length - 1) %
+                subscription.planDuration) +
+              1
+            : 0}{' '}
           out of {subscription.planDuration}
         </div>
         <ProgressBar
           showSteps={false}
           currentStep={
-            subscription.boxIds?.split(',').length % subscription.planDuration
+            subscription.boxIds
+              ? ((subscription.boxIds?.split(',').length - 1) %
+                  subscription.planDuration) +
+                1
+              : 0
           }
           totalSteps={subscription.planDuration}
         />
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">Box size</label>
           <div className="bodyMD mt-1 font-semibold">{subscription.size}</div>
         </div>
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">No. of Pets</label>
           <div className="bodyMD mt-1 font-semibold">
             {dogs.length > 0 && `${dogs.length} dog(s)`}{' '}
@@ -71,11 +83,11 @@ export default function SubscriptionCard({
             {dayjs(subscription.nextBillingDate).format('MMMM DD, YYYY')}
           </div>
         </div>
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">Ship to</label>
           <div className="bodyMD mt-1 font-semibold">{subscription.name}</div>
         </div>
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">Shipping address</label>
           <div className="bodyMD mt-1 font-semibold">
             {subscription.address}
@@ -85,13 +97,13 @@ export default function SubscriptionCard({
           <label className="bodySM text-gray-500">Shipping method</label>
           <div className="bodyMD mt-1 font-semibold">Standard shipping</div>
         </div>
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">Box plan</label>
           <div className="bodyMD mt-1 font-semibold">
             {subscription.planDuration} months
           </div>
         </div>
-        <div className="border-gray-200 md:border-r pr-8">
+        <div className="border-gray-200 pr-8 md:border-r">
           <label className="bodySM text-gray-500">Monthly payment</label>
           <div className="bodyMD mt-1 font-semibold">AED 25</div>
         </div>
