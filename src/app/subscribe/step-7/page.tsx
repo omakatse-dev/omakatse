@@ -60,7 +60,7 @@ export default function SubscriptionStepSevenPage() {
           Add any must-knows or special notes for your pets.
         </div>
       </div>
-      <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
+      <div className="mx-auto w-full max-w-3xl flex flex-wrap justify-center gap-8">
         {cats.map((cat, idx) => (
           <TreatPreferenceCard
             key={cat.name}
@@ -69,6 +69,22 @@ export default function SubscriptionStepSevenPage() {
             name={cat.name}
           />
         ))}
+        {/* {cats.map((cat, idx) => (
+          <TreatPreferenceCard
+            key={cat.name}
+            petType="catsDetails"
+            petIndex={idx}
+            name={cat.name}
+          />
+        ))}
+        {cats.map((cat, idx) => (
+          <TreatPreferenceCard
+            key={cat.name}
+            petType="catsDetails"
+            petIndex={idx}
+            name={cat.name}
+          />
+        ))} */}
         {dogs.map((dog, idx) => (
           <TreatPreferenceCard
             key={dog.name}

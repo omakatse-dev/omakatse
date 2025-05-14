@@ -40,7 +40,23 @@ export default function SubscriptionStepEightPage() {
           Double check everything before we box up the joy.
         </div>
       </div>
-      <div className="grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
+      <div className="w-full max-w-3xl gap-8 flex flex-wrap justify-center">
+        {cats.map((cat, idx) => (
+          <PetDetailsCard
+            key={cat.name}
+            details={cat}
+            idx={idx}
+            petType="catsDetails"
+          />
+        ))}
+        {cats.map((cat, idx) => (
+          <PetDetailsCard
+            key={cat.name}
+            details={cat}
+            idx={idx}
+            petType="catsDetails"
+          />
+        ))}
         {cats.map((cat, idx) => (
           <PetDetailsCard
             key={cat.name}

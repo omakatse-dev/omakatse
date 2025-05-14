@@ -82,7 +82,7 @@ export default function TreatPreferenceCard({
 
   return (
     <Card
-      className="flex flex-col items-center w-full"
+      className="flex flex-col items-center w-full sm:w-[45%]"
       variant={variantMapping[(petIndex + catCount) as keyof typeof variantMapping]}
     >
       <div className="flex flex-col items-center w-full">

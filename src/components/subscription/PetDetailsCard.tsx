@@ -93,7 +93,7 @@ export default function PetDetailsCard({
                 : 0)) as keyof typeof variantMapping
           ]
         }
-        className="flex w-full flex-col items-center bg-white md:h-full"
+        className="flex w-full sm:w-[45%] flex-col items-center bg-white"
       >
         <div className="flex w-full flex-col justify-between md:h-full">
           <div>
