@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import PetListForContract from "@/components/account/subscriptions/PetListForContract";
 import AddPetCard from "@/components/account/pet-profiles/AddPetCard";
 import Button from "@/components/common/Button";
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
 
 export default async function EditSubscriptionPage({
   searchParams,
@@ -27,7 +28,7 @@ export default async function EditSubscriptionPage({
         Let&apos;s double check on your pet details!{" "}
       </div>
       <div className="w-full">
-        <Suspense fallback={<div>Loading Subscription Details...</div>}>
+        <Suspense fallback={<LoadingSkeleton />}>
           <PetListForContract />
         </Suspense>
       </div>

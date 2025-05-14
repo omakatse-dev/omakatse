@@ -56,7 +56,7 @@ export default function PetProfilePage({
               return (
                 <div key={contract.contractId} className="flex flex-col gap-4">
                   <h4>Subscription {idx + 1} </h4>
-                  <div className="grid grid-cols-1 justify-center gap-8 sm:grid-cols-2">
+                  <div className="justify-start gap-8 flex flex-wrap">
                     {pets.map((pet: PetDetailsSchema, idx: number) => (
                       <PetDetailsCard
                         contractId={contract.contractId}
