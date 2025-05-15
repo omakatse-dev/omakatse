@@ -1,6 +1,7 @@
 'use client';
 
 import ContinueModal from '@/components/subscription/ContinueModal';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // import ContinueModal from "@/components/subscription/ContinueModal";
@@ -14,26 +15,15 @@ export default function SubscribeLayout({
   children: React.ReactNode;
 }) {
   const [showContinueModal, setShowContinueModal] = useState<boolean>(false);
-
+  const currentPath = usePathname();
   useEffect(() => {
     // Get the previous path from sessionStorage when component mounts
     const prevPath = sessionStorage.getItem('previousPath');
     console.log('prevpath', prevPath);
-    if (!prevPath || !prevPath.includes('/subscribe')) {
+    if ((!prevPath || !prevPath.includes('/subscribe')) && currentPath !== '/subscribe/step-1') {
       setShowContinueModal(true);
     }
   }, []);
-
-  // const pathname = usePathname();
-  // const formData = useSubscriptionFormStore((state) => state);
-  // const hydrated = useSubscriptionFormStore((state) => state.hydrated);
-
-  // useEffect(() => {
-  //   console.log("do", window.history.state.previousPathname)
-  //   if (hydrated && !!formData.petType) {
-  //     setShowContinueModal(true);
-  //   }
-  // }, [formData.petType, hydrated]);
 
   return (
     <div className="flex w-screen flex-col items-center justify-center">
