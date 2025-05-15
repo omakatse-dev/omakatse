@@ -127,7 +127,7 @@ export default function AllergySelector({
 
   return (
     <Card
-      className="flex w-full flex-col items-center"
+      className="flex w-full flex-col items-center h-fit"
       variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
     >
       <div className="flex items-center justify-center gap-2 sm:flex-col sm:gap-0">
