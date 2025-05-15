@@ -41,7 +41,7 @@ function Blog() {
         </div>
 
         <Link className="w-full lg:w-fit lg:self-center" href="/blog" passHref>
-          <Button variant="primary">
+          <Button variant="primary" className='w-full'>
             View more blogs
           </Button>
         </Link>

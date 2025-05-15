@@ -172,7 +172,7 @@ export default function PetDetailsCard({
                       <Tag key={pref}>{pref}</Tag>
                     ))
                   ) : (
-                    <Tag>NA</Tag>
+                    <Tag>None</Tag>
                   )}
                 </div>
               </div>

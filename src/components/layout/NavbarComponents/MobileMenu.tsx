@@ -39,7 +39,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
 
   return (
     <div
-      className={`bg-yellow fixed inset-0 z-10 flex h-screen w-screen flex-col overflow-auto p-8 transition-all xl:hidden ${
+      className={`bg-yellow pb-32 fixed inset-0 z-10 flex h-screen w-screen flex-col overflow-auto p-8 transition-all xl:hidden ${
         !isOpen ? '-translate-y-full' : '-translate-y-0'
       }`}
     >

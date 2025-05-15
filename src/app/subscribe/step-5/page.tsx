@@ -93,7 +93,7 @@ export default function SubscriptionStepFivePage() {
             attemptedNext={showError}
           />
         ))}
-        <div className='w-full'>
+        <div className='w-full flex justify-center'>
           <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
             <Button
               onClick={() => router.push('/subscribe/step-4')}

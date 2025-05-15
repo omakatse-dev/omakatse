@@ -1,17 +1,17 @@
-"use client";
-import { uploadReviewImage } from "@/utils/APIs";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+'use client';
+import { uploadReviewImage } from '@/utils/APIs';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { PlusIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 interface UploadImageButtonProps {
   onChange?: (file: string) => void;
 }
 
 export default function UploadImageButton({
-  onChange,
+  onChange
 }: UploadImageButtonProps) {
   const [dragActive, setDragActive] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -19,33 +19,41 @@ export default function UploadImageButton({
 
   const { user } = useUser();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id")?.split("/").pop() || "";
+  const id = searchParams.get('id')?.split('/').pop() || '';
   const handleFile = useCallback(
     async (file: File) => {
-      if (file.type.startsWith("image/")) {
-        setIsUploading(true);
-        setPreview(URL.createObjectURL(file));
-        if (!user?.email) return;
+      if (file.type.startsWith('image/')) {
+        try {
+          setIsUploading(true);
+          setPreview(URL.createObjectURL(file));
+          if (!user?.email) return;
 
-        // Convert file to base64
-        const reader = new FileReader();
-        const base64String = await new Promise<string>((resolve) => {
-          reader.onload = () => {
-            const base64 = reader.result as string;
-            // Remove the data:image/xxx;base64, prefix
-            resolve(base64.split(",")[1]);
-          };
-          reader.readAsDataURL(file);
-        });
+          // Convert file to base64
+          const reader = new FileReader();
+          const base64String = await new Promise<string>((resolve) => {
+            reader.onload = () => {
+              const base64 = reader.result as string;
+              // Remove the data:image/xxx;base64, prefix
+              resolve(base64.split(',')[1]);
+            };
+            reader.readAsDataURL(file);
+          });
 
-        const res = await uploadReviewImage(
-          base64String,
-          id,
-          file.type.split("/")[1]
-        );
-        const url = "https://images.omakatsepets.com/" + res.fileName;
-        onChange?.(url);
-        setIsUploading(false);
+          const res = await uploadReviewImage(
+            base64String,
+            id,
+            file.type.split('/')[1]
+          );
+          const url = 'https://images.omakatsepets.com/' + res.fileName;
+          onChange?.(url);
+          setIsUploading(false);
+        } catch {
+          alert(
+            'Error uploading image, please make sure your image is less than 1MB'
+          );
+          setIsUploading(false);
+          setPreview(null);
+        }
       }
     },
     [onChange, id, user?.email]
@@ -54,9 +62,9 @@ export default function UploadImageButton({
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   };
@@ -93,13 +101,11 @@ export default function UploadImageButton({
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
-        className={`flex items-center justify-center w-fit border-primary bg-white rounded-2xl cursor-pointer transition-colors
-          ${
-            dragActive
-              ? "border-primary bg-primary/5"
-              : "border-gray-300 hover:border-primary"
-          }
-          ${preview ? "p-0" : "p-5"}`}
+        className={`border-primary flex w-fit cursor-pointer items-center justify-center rounded-2xl bg-white transition-colors ${
+          dragActive
+            ? 'border-primary bg-primary/5'
+            : 'hover:border-primary border-gray-300'
+        } ${preview ? 'p-0' : 'p-5'}`}
       >
         {preview ? (
           <Image
@@ -107,12 +113,12 @@ export default function UploadImageButton({
             alt="Preview"
             width={128}
             height={128}
-            className="w-full h-full object-cover rounded-2xl"
+            className="h-full w-full rounded-2xl object-cover"
           />
         ) : (
           <div className="flex items-center gap-3">
-            <PlusIcon className="w-6 h-6" />
-            <p className="bodyXS text-gray-500 text-center">
+            <PlusIcon className="h-6 w-6" />
+            <p className="bodyXS text-center text-gray-500">
               Click here or drag and drop an image to upload
             </p>
           </div>
