@@ -32,6 +32,7 @@
     "react-hook-form": "^7.54.2",
     "react-medium-image-zoom": "^5.2.14",
     "react-modal": "^3.16.3",
+    "react-zoom-pan-pinch": "^3.7.0",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
