@@ -31,6 +31,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
 }) => {
   const imageRef = useRef<HTMLDivElement | null>(null);
   const [isZoomed, setIsZoomed] = React.useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const nextImage = () => {
     setSelectedIndex((selectedIndex + 1) % images.length);
   };
@@ -49,6 +50,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     dragStart.current = { x: e.clientX, y: e.clientY };
     setMouseMoved(false);
+    setIsDragging(true);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -94,15 +96,25 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
               initialPositionY={100}
               ref={transformComponentRef}
               panning={{ disabled: !isZoomed }}
-              // wheel={{ disabled: true }}
+              doubleClick={{ disabled: true }}
+              zoomAnimation ={{ disabled: true }}
+              wheel={{ disabled: true }}
             >
               {({ zoomIn, zoomOut }) => (
                 <TransformComponent>
                   <div
-                    className={isZoomed ? "cursor-grab" : "cursor-zoom-in"}
-
+                    className={
+                      !isZoomed
+                        ? 'cursor-zoom-in'
+                        : isDragging
+                          ? 'cursor-grabbing'
+                          : 'cursor-grab'
+                    }
                     onMouseDown={handleMouseDown}
                     onMouseMove={handleMouseMove}
+                    onMouseUp={() => {
+                      setIsDragging(false);
+                    }}
                     onClickCapture={() => {
                       if (mouseMoved) return;
 
