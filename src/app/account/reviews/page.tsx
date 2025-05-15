@@ -26,6 +26,7 @@ export default async function AccountReviewsPage() {
   const regularItems = items.filter(
     (item) => !item.name.includes('Subscription')
   );
+  console.log(regularItems)
   const writtenReviews = await getReviewsByAuthor(user.email);
 
   return (
@@ -33,7 +34,7 @@ export default async function AccountReviewsPage() {
       <h2 className="text-primary hidden lg:block">Reviews</h2>
       <div className="flex max-w-7xl flex-col divide-y divide-gray-200">
         {regularItems?.length > 0 ? (
-          regularItems?.map((item) => (
+          [...regularItems].reverse().map((item) => (
             <WriteReviewCard
               key={item.id}
               details={item}
