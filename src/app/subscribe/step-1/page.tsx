@@ -34,7 +34,7 @@ export default function SubscriptionStepOnePage() {
       petType: existingData
     }
   });
-
+  
   const setData = useSubscriptionFormStore((state) => state.setData);
 
   const onSubmit = (data: PetTypeSchema) => {
@@ -61,13 +61,15 @@ export default function SubscriptionStepOnePage() {
         </div>
       </div>
       <div className="w-full md:max-w-4xl">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center gap-8"
-      >
-        <PetSelector control={control} />
-        <Button type="submit" className="w-full md:w-fit">Next</Button>
-      </form>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center gap-8"
+        >
+          <PetSelector control={control} />
+          <Button type="submit" className="w-full md:w-fit">
+            Next
+          </Button>
+        </form>
       </div>
       {errors.petType && (
         <div className="bodyMD text-red">Please select pet type.</div>

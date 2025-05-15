@@ -9,6 +9,15 @@ type SubscriptionFormState = Partial<SubscriptionFormType> & {
   clearData: () => void;
 };
 
+const initialState = {
+  petType: undefined,
+  catCount: undefined,
+  dogCount: undefined,
+  dogsDetails: undefined,
+  catsDetails: undefined,
+  hydrated: false
+};
+
 export const useSubscriptionFormStore = create<SubscriptionFormState>()(
   persist(
     (set) => ({
@@ -16,7 +25,7 @@ export const useSubscriptionFormStore = create<SubscriptionFormState>()(
       hydrated: false,
       setHydrated: () => set({ hydrated: true }),
       clearData: () => {
-        set({});
+        set(initialState);
         localStorage.removeItem("subscription-storage");
       },
     }),

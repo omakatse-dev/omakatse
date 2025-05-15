@@ -4,6 +4,7 @@ import './globals.css';
 import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import PathTracker from '@/components/PathTracker';
 
 export const metadata: Metadata = {
   title: 'Omakatse',
@@ -33,6 +34,7 @@ export default function RootLayout({
         <body
           className={`${openSans.variable} ${parkinsans.variable} flex min-h-screen flex-col overflow-auto overflow-x-hidden bg-gray-50 antialiased`}
         >
+          <PathTracker />
           <NavBar />
           <div className="flex flex-grow justify-center">{children}</div>
           <Footer />
