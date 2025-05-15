@@ -67,10 +67,9 @@ export default function Page({
   );
 
   return (
-    <div className="relative flex w-full flex-col max-w-7xl items-center md:flex-row md:gap-20 md:px-64 md:mr-60">
-
+    <div className="relative flex w-full max-w-5xl flex-col items-center justify-between md:flex-row md:gap-20">
       {/* Desktop Sidebar Navigation */}
-      <div className="sticky top-40 mt-6 hidden flex-col gap-4 self-start md:flex w-fit">
+      <div className="sticky top-40 mt-6 hidden w-fit flex-col gap-4 self-start md:flex">
         {categories.map((category) => (
           <button
             key={category.toString()}
@@ -132,14 +131,14 @@ export default function Page({
       </Disclosure>
 
       {/* FAQ List */}
-      <div className="mt-6 mb-32 flex w-full md:w-fit flex-col items-center gap-8">
+      <div className="mt-6 mb-32 flex w-full max-w-[800px] flex-col items-center gap-8">
         {Object.entries(groupedFaqs).map(([category, faqList]) => (
           <div
             key={category}
             ref={(el: HTMLDivElement | null) => {
               categoryRefs.current[category] = el;
             }}
-            className="flex w-full max-w-3xl flex-col justify-center rounded-xl bg-white p-6 drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] md:rounded-[1.25rem]"
+            className="flex w-full max-w-4xl flex-col justify-center rounded-xl bg-white p-6 drop-shadow-[4px_4px_0px_rgba(228,223,209,1)] md:rounded-[1.25rem]"
           >
             <p className="bodyXL mb-4 text-gray-500">{category}</p>
 
