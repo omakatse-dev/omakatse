@@ -34,11 +34,11 @@ export default function SubscriptionStepOnePage() {
       petType: existingData
     }
   });
-  
+
   const setData = useSubscriptionFormStore((state) => state.setData);
 
   const onSubmit = (data: PetTypeSchema) => {
-    console.log('step 1 data', data);
+    localStorage.setItem('latestStep', 'step-2');
     if (data.petType === 'dog') {
       setData({ catCount: 0 });
     }

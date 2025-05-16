@@ -46,6 +46,7 @@ export default function SubscriptionStepThreePage() {
 
   const handleNext = () => {
     if (isFormValid()) {
+      localStorage.setItem('latestStep', 'step-4');
       router.push('/subscribe/step-4');
     } else {
       setShowError(true);

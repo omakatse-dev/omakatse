@@ -1,7 +1,7 @@
 'use client';
 
 import ContinueModal from '@/components/subscription/ContinueModal';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // import ContinueModal from "@/components/subscription/ContinueModal";
@@ -16,12 +16,23 @@ export default function SubscribeLayout({
 }) {
   const [showContinueModal, setShowContinueModal] = useState<boolean>(false);
   const currentPath = usePathname();
+  const router = useRouter();
+
   useEffect(() => {
     // Get the previous path from sessionStorage when component mounts
     const prevPath = sessionStorage.getItem('previousPath');
-    console.log('prevpath', prevPath);
-    if ((!prevPath || !prevPath.includes('/subscribe')) && currentPath !== '/subscribe/step-1') {
+    if (
+      (!prevPath || !prevPath.includes('/subscribe')) &&
+      currentPath !== '/subscribe/step-1'
+    ) {
       setShowContinueModal(true);
+    }
+    // if prevPath !include subscribe, fast forward to latest step
+    if (!prevPath?.includes('/subscribe')) {
+      const latestStep = localStorage.getItem('latestStep');
+      if (latestStep) {
+        router.push(`/subscribe/${latestStep}`);
+      }
     }
   }, []);
 

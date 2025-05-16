@@ -71,7 +71,10 @@ export default function SubscriptionStepEightPage() {
         </Button>
         <Button
           className="w-full"
-          onClick={() => router.push('/subscribe/step-9')}
+          onClick={() => {
+            localStorage.setItem('latestStep', 'step-9');
+            router.push('/subscribe/step-9');
+          }}
         >
           Next
         </Button>

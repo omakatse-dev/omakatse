@@ -46,6 +46,7 @@ export default function SubscriptionStepFivePage() {
     }
 
     setShowError(false);
+    localStorage.setItem('latestStep', 'step-6');
     router.push('/subscribe/step-6');
   };
 

@@ -43,13 +43,12 @@ export default function SubscriptionStepFourPage() {
         dogs?.every((dog) => dog.size)) ||
       (petType === 'dog' && dogs?.every((dog) => dog.size)) ||
       (petType === 'cat' && cats?.every((cat) => cat.size));
-
     if (!allPetsHaveSize) {
       setShowError(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     router.push('/subscribe/step-5');
+    localStorage.setItem('latestStep', 'step-5');
   };
 
   useEffect(() => {

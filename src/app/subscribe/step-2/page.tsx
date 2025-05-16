@@ -63,6 +63,7 @@ export default function SubscriptionStepTwoPage() {
 
   const onSubmit = (data: PetCountSchema) => {
     // reduce cat details array if cat count is longer than array
+    localStorage.setItem('latestStep', 'step-3');
     const catCount = useSubscriptionFormStore.getState().catCount;
     const catDetails = useSubscriptionFormStore.getState().catsDetails;
     if (catCount && catDetails) {

@@ -78,6 +78,7 @@ export default function NavBar() {
         if (!res.cart) {
           //successful checkout
           localStorage.removeItem('cartId');
+          localStorage.removeItem('latestStep');
           clearCart();
           clearData();
         }
