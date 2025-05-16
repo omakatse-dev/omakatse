@@ -22,7 +22,7 @@ function ChooseYourPlan() {
           />
         </div>
 
-        <div className="flex w-full max-w-lg flex-col gap-8 px-10 md:max-w-screen-xl lg:flex-row">
+        <div className="flex w-full max-w-lg md:max-w-none flex-col gap-8 px-10 lg:flex-row">
           <PricingCard
             title="1 Month"
             price={prices[selectedTab as 'Small Box' | 'Large Box'][0]}
@@ -52,7 +52,7 @@ function ChooseYourPlan() {
         <div className='px-10 w-full flex justify-center'>
           <Button
             variant="primary"
-            className="w-full max-w-lg sm:w-fit lg:self-center"
+            className="w-full lg:w-fit lg:self-center"
           >
             <Link href="/subscribe/step-1" passHref>
               Build Your Box Now

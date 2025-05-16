@@ -68,7 +68,7 @@ export default function PetProfilePage({
                           pet.type === 'Cat' ? 'catsDetails' : 'dogsDetails'
                         }
                         catCount={
-                          pets.filter((p: PetDetailsSchema) => p.type === 'Cat')
+                          pets.filter((p: PetDetailsSchema) => p.type === 'Dog')
                             .length
                         }
                       />

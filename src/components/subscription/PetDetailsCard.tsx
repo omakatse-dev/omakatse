@@ -85,15 +85,8 @@ export default function PetDetailsCard({
   return (
     <>
       <Card
-        variant={
-          variantMapping[
-            (idx +
-              (details.type === 'Dog'
-                ? catCount
-                : 0)) as keyof typeof variantMapping
-          ]
-        }
-        className="flex w-full sm:w-[45%] max-w-md flex-col items-center bg-white"
+        variant={variantMapping[idx as keyof typeof variantMapping]}
+        className="flex w-full max-w-md flex-col items-center bg-white sm:w-[45%]"
       >
         <div className="flex w-full flex-col justify-between md:h-full">
           <div>
@@ -102,7 +95,7 @@ export default function PetDetailsCard({
                 alt={`${details.name} ${idx + 1}`}
                 src={
                   petType === 'catsDetails'
-                    ? catMapping[idx as keyof typeof catMapping]
+                    ? catMapping[(idx - catCount) as keyof typeof catMapping]
                     : dogMapping[idx as keyof typeof dogMapping]
                 }
                 width={100}
@@ -133,9 +126,7 @@ export default function PetDetailsCard({
                 </div>
               </div>
               <div className="bodyMD text-gray-800">
-                <span>
-                  Allergies:
-                </span>
+                <span>Allergies:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {details.allergies.true ? (
                     details.allergies.allergies.map((allergy) => (
@@ -161,7 +152,10 @@ export default function PetDetailsCard({
               <div className="bodyMD text-gray-800">
                 <span>Treat frequency:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
-                  <Tag>{details.treatFrequency.frequency.charAt(0).toUpperCase() + details.treatFrequency.frequency.slice(1)}</Tag>
+                  <Tag>
+                    {details.treatFrequency.frequency.charAt(0).toUpperCase() +
+                      details.treatFrequency.frequency.slice(1)}
+                  </Tag>
                 </div>
               </div>
               <div className="bodyMD text-gray-800">
@@ -191,7 +185,7 @@ export default function PetDetailsCard({
             </div>
           </div>
           {editMode !== 'none' && (
-            <div className="mt-8 w-full  items-center gap-2  sm:justify-center flex flex-col">
+            <div className="mt-8 flex w-full flex-col items-center gap-2 sm:justify-center">
               {editMode === 'all' && (
                 <Button
                   onClick={() => setShowConfirmationModal(true)}
@@ -203,7 +197,7 @@ export default function PetDetailsCard({
               )}
               <Link
                 href={`/account/pet-profiles/edit-pet?contractId=${contractId}&petIndex=${idx}`}
-                className='self-center w-full'
+                className="w-full self-center"
               >
                 <Button className="w-full">Edit Pet</Button>
               </Link>

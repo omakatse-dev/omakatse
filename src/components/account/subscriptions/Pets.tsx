@@ -1,18 +1,18 @@
-import { PetType } from "./SubscriptionCard";
-import Image from "next/image";
+import { PetType } from './SubscriptionCard';
+import Image from 'next/image';
 
-import cat1 from "../../../../public/assets/Cat1.svg";
-import cat2 from "../../../../public/assets/Cat2.svg";
-import cat3 from "../../../../public/assets/Cat3.svg";
-import cat4 from "../../../../public/assets/Cat4.svg";
-import dog1 from "../../../../public/assets/Dog1.svg";
-import dog2 from "../../../../public/assets/Dog2.svg";
-import dog3 from "../../../../public/assets/Dog3.svg";
-import dog4 from "../../../../public/assets/Dog4.svg";
+import cat1 from '../../../../public/assets/Cat1.svg';
+import cat2 from '../../../../public/assets/Cat2.svg';
+import cat3 from '../../../../public/assets/Cat3.svg';
+import cat4 from '../../../../public/assets/Cat4.svg';
+import dog1 from '../../../../public/assets/Dog1.svg';
+import dog2 from '../../../../public/assets/Dog2.svg';
+import dog3 from '../../../../public/assets/Dog3.svg';
+import dog4 from '../../../../public/assets/Dog4.svg';
 
 export default function Pets({
   cats,
-  dogs,
+  dogs
 }: {
   cats: PetType[];
   dogs: PetType[];
@@ -21,23 +21,31 @@ export default function Pets({
   const dogImages = [dog1, dog2, dog3, dog4];
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      {cats.map((cat, index) => (
-        <div
-          key={cat.name}
-          className="gap-2 flex flex-row md:flex-col items-center w-fit"
-        >
-          <Image src={catImages[index]} alt={`Cat ${cat.name}`} className="w-15 md:w-25" />
-          <h4>{cat.name}</h4>
-        </div>
-      ))}
+    <div className="flex flex-col gap-4 md:flex-row">
       {dogs.map((dog, index) => (
         <div
           key={dog.name}
-          className="gap-2 flex flex-row md:flex-col items-center w-fit"
+          className="flex w-fit flex-row items-center gap-2 md:flex-col"
         >
-          <Image src={dogImages[index]} alt={`Dog ${dog.name}`} className="w-15 md:w-25" />
+          <Image
+            src={dogImages[index]}
+            alt={`Dog ${dog.name}`}
+            className="w-15 md:w-25"
+          />
           <h4>{dog.name}</h4>
+        </div>
+      ))}
+      {cats.map((cat, index) => (
+        <div
+          key={cat.name}
+          className="flex w-fit flex-row items-center gap-2 md:flex-col"
+        >
+          <Image
+            src={catImages[index]}
+            alt={`Cat ${cat.name}`}
+            className="w-15 md:w-25"
+          />
+          <h4>{cat.name}</h4>
         </div>
       ))}
     </div>
