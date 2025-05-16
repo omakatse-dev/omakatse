@@ -382,7 +382,7 @@ export const uploadReviewImage = async (
   fileType: string
 ) => {
   const res = await fetch(
-    "https://omakatse-review-image-uploader.matthew-3c3.workers.dev/",
+    "https://review-image-uploader.lingering-frog-7352.workers.dev/",
     {
       method: "POST",
       headers: {
@@ -392,7 +392,7 @@ export const uploadReviewImage = async (
         image: image,
         id: id,
         fileType: fileType,
-      }),
+    }),
     }
   );
   console.log(res)

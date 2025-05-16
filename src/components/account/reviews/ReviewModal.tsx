@@ -41,7 +41,7 @@ export default function ReviewModal({
             alt="Review Image"
             width={400}
             height={400}
-            className="w-full rounded-2xl"
+            className="w-full rounded-2xl max-h-[200px] sm:max-h-[400px] object-contain"
           />
         )}
       </div>

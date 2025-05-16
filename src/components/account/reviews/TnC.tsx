@@ -7,7 +7,7 @@ export default function TnC() {
         <li>Minimum review length is 20 characters</li>
         <li>All fields must not contain special characters or emojis</li>
         <li>All fields must not contain inappropriate language</li>
-        <li>Images must be less than 1MB</li>
+        <li>Images must be less than 10MB</li>
       </ul>
       <ul className="list-outside list-disc">
         <li>

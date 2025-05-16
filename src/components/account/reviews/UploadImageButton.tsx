@@ -5,6 +5,8 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
+import { heicTo } from "heic-to";
+
 
 interface UploadImageButtonProps {
   onChange?: (file: string) => void;
@@ -24,11 +26,28 @@ export default function UploadImageButton({
   const id = searchParams.get('id')?.split('/').pop() || '';
   const handleFile = useCallback(
     async (file: File) => {
-      if (file.type.startsWith('image/')) {
-        try {
-          setIsUploading(true);
-          setLoading?.(true);
-          setPreview(URL.createObjectURL(file));
+      try {
+        setIsUploading(true);
+        setLoading?.(true);
+        
+        let processedFile = file;
+        let fileType = file.type;
+
+        // Check if the file is a HEIC image
+        if (file.type === 'image/heic' || file.type === 'image/heif') {
+          const pngBlob = await heicTo({
+            blob: file,
+            type: "image/png",
+          });
+          
+          processedFile = new File([pngBlob], file.name.replace(/\.(heic|HEIC)$/, '.png'), {
+            type: 'image/png'
+          });
+          fileType = 'image/png';
+        }
+
+        if (fileType.startsWith('image/')) {
+          setPreview(URL.createObjectURL(processedFile));
           if (!user?.email) return;
 
           // Convert file to base64
@@ -39,26 +58,26 @@ export default function UploadImageButton({
               // Remove the data:image/xxx;base64, prefix
               resolve(base64.split(',')[1]);
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(processedFile);
           });
 
           const res = await uploadReviewImage(
             base64String,
             id,
-            file.type.split('/')[1]
+            fileType.split('/')[1]
           );
           const url = 'https://images.omakatsepets.com/' + res.fileName;
           onChange?.(url);
-          setIsUploading(false);
-          setLoading?.(false);
-        } catch {
-          alert(
-            'Error uploading image, please make sure your image is less than 1MB'
-          );
-          setIsUploading(false);
-          setPreview(null);
-          setLoading?.(false);
         }
+      } catch (error) {
+        console.log('error uploading image', error);
+        alert(
+          'Error uploading image, please make sure your image is less than 10MB'
+        );
+        setPreview(null);
+      } finally {
+        setIsUploading(false);
+        setLoading?.(false);
       }
     },
     [onChange, id, user?.email]
@@ -95,7 +114,7 @@ export default function UploadImageButton({
     <div className="relative">
       <input
         type="file"
-        accept="image/*"
+        accept="image/*,.heic,.HEIC"
         onChange={handleChange}
         className="hidden"
         id="image-upload"
