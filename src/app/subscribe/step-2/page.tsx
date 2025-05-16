@@ -13,10 +13,25 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useEffect } from 'react';
 
-const petCountSchema = subscriptionFormSchema.pick({
-  dogCount: true,
-  catCount: true
-});
+const petCountSchema = subscriptionFormSchema
+  .pick({
+    dogCount: true,
+    catCount: true
+  })
+  .refine(
+    (data) => {
+      const petType = useSubscriptionFormStore.getState().petType;
+      if (petType === 'both') {
+        return data.dogCount > 0 && data.catCount > 0;
+      }
+      return true;
+    },
+    {
+      message:
+        'When selecting both pets, you must have at least one dog and one cat',
+      path: ['catCount', 'dogCount']
+    }
+  );
 
 export type PetCountSchema = z.infer<typeof petCountSchema>;
 
