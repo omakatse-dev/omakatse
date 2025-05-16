@@ -8,10 +8,12 @@ import { useCallback, useState } from 'react';
 
 interface UploadImageButtonProps {
   onChange?: (file: string) => void;
+  setLoading?: (loading: boolean) => void;
 }
 
 export default function UploadImageButton({
-  onChange
+  onChange,
+  setLoading
 }: UploadImageButtonProps) {
   const [dragActive, setDragActive] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -25,6 +27,7 @@ export default function UploadImageButton({
       if (file.type.startsWith('image/')) {
         try {
           setIsUploading(true);
+          setLoading?.(true);
           setPreview(URL.createObjectURL(file));
           if (!user?.email) return;
 
@@ -47,12 +50,14 @@ export default function UploadImageButton({
           const url = 'https://images.omakatsepets.com/' + res.fileName;
           onChange?.(url);
           setIsUploading(false);
+          setLoading?.(false);
         } catch {
           alert(
             'Error uploading image, please make sure your image is less than 1MB'
           );
           setIsUploading(false);
           setPreview(null);
+          setLoading?.(false);
         }
       }
     },
@@ -119,7 +124,7 @@ export default function UploadImageButton({
           <div className="flex items-center gap-3">
             <PlusIcon className="h-6 w-6" />
             <p className="bodyXS text-center text-gray-500">
-              Click here or drag and drop an image to upload
+              Click here or drag and drop an image to upload (Max 1MB)
             </p>
           </div>
         )}

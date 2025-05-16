@@ -36,6 +36,7 @@ export default function ReviewForm() {
   const price = searchParams.get("price") || "";
   const [isUploadingReview, setIsUploadingReview] = useState(false);
   const [isReviewSubmitted, setIsReviewSubmitted] = useState(false);
+  const [imageUploading, setImageUploading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -129,12 +130,12 @@ export default function ReviewForm() {
             <p className="text-red">Please rate this product</p>
           )}
         </div>
-        <UploadImageButton onChange={(file) => setValue("image", file)} />
+        <UploadImageButton setLoading={setImageUploading} onChange={(file) => setValue("image", file)} />
         <TnC />
         <Button
           type="submit"
           className="w-full sm:w-fit"
-          disabled={isUploadingReview}
+          disabled={isUploadingReview || imageUploading}
         >
           {isUploadingReview ? "Submitting..." : "Submit"}
         </Button>
