@@ -49,7 +49,6 @@ export default function SubscriptionStepThreePage() {
       router.push('/subscribe/step-4');
     } else {
       setShowError(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

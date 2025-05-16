@@ -142,7 +142,7 @@ export default function PetDetailsCard({
                       <Tag key={allergy}>{allergy}</Tag>
                     ))
                   ) : (
-                    <Tag>NA</Tag>
+                    <Tag>None</Tag>
                   )}
                 </div>
               </div>
@@ -154,14 +154,14 @@ export default function PetDetailsCard({
                       <Tag key={pref}>{pref}</Tag>
                     ))
                   ) : (
-                    <Tag>NA</Tag>
+                    <Tag>None</Tag>
                   )}
                 </div>
               </div>
               <div className="bodyMD text-gray-800">
                 <span>Treat frequency:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
-                  <Tag>{details.treatFrequency.frequency}</Tag>
+                  <Tag>{details.treatFrequency.frequency.charAt(0).toUpperCase() + details.treatFrequency.frequency.slice(1)}</Tag>
                 </div>
               </div>
               <div className="bodyMD text-gray-800">
