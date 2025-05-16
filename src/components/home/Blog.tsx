@@ -28,7 +28,7 @@ function Blog() {
 
   return (
     <div className="justify-items-center bg-gray-50">
-      <div className="flex w-full max-w-screen-2xl flex-col gap-8 px-6 py-10 lg:gap-15 lg:px-12 lg:py-20">
+      <div className="flex w-full max-w-lg md:max-w-screen-2xl flex-col gap-8 px-10 py-10 lg:gap-15 lg:py-20">
         <h2 className="text-primary text-center">Omakatse&apos;s blog</h2>
 
         <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">

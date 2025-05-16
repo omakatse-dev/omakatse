@@ -112,7 +112,7 @@ export default function ContactForm() {
         {errors.message && <p className="text-red">{errors.message.message}</p>}
       </div>
       <div>
-      <Button type="submit" disabled={status !== "idle"}>
+      <Button type="submit" disabled={status !== "idle"} className="w-full sm:w-fit">
         {status === "loading"
           ? "Sending..."
           : status === "success"

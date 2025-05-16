@@ -17,7 +17,7 @@ const HowItWorksCard: React.FC<HowItWorksCardProps> = ({
   description
 }) => {
   return (
-    <div className="relative mt-10">
+    <div className="relative mt-10 ">
       <div className="text-pink font-parkinsans absolute -top-10 left-1/2 z-1 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border-1 border-gray-200 bg-white text-3xl font-bold">
         {step}
       </div>

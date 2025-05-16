@@ -80,7 +80,7 @@ export default function ReviewCard({ review }: { review: Review }) {
               onClick={() => setIsModalOpen(false)}
               className="text-primary border-primary absolute -top-4 -right-4 rounded-full bg-white p-2"
             >
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6 cursor-pointer" />
             </button>
           </div>
         </div>

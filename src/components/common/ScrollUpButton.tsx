@@ -13,7 +13,7 @@ export default function ScrollUpButton({ className }: { className?: string }) {
     <div>
       <button
         onClick={scrollToTop}
-        className={`${className} p-4 rounded-full bg-yellow shadow-xl cursor-pointer`}
+        className={`${className} p-4 rounded-full bg-yellow shadow-xl cursor-pointer z-10`}
       >
         <ArrowUpIcon className="w-6" />
       </button>

@@ -69,7 +69,7 @@ export default function Page({
 
             {/* Blog Grid */}
             {currentBlogs.length > 0 ? (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 w-full">
                 {currentBlogs.map((blog) => (
                   <BlogCard key={blog.fields.blogId.toString()} blog={blog} />
                 ))}

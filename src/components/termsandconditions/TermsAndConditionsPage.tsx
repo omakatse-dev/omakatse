@@ -42,7 +42,7 @@ export default function Page({ tac }: { tac: Entry<TermsAndConditionsType> }) {
     .termsAndConditions as unknown as Document;
   const latestUpdate = dayjs(tac.sys.updatedAt);
   return (
-    <div className="flex w-full flex-col md:px-64">
+    <div className="flex w-full flex-col max-w-2xl">
       <h2 className="text-primary mb-2">Terms and Conditions</h2>
       <p className="bodySM mb-6">
         Last updated: {latestUpdate.format('MMM D, YYYY')}
