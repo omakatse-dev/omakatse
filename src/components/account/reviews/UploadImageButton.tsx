@@ -143,7 +143,7 @@ export default function UploadImageButton({
           <div className="flex items-center gap-3">
             <PlusIcon className="h-6 w-6" />
             <p className="bodyXS text-center text-gray-500">
-              Click here or drag and drop an image to upload (Max 1MB)
+              Click here or drag and drop an image to upload (Max 10MB)
             </p>
           </div>
         )}

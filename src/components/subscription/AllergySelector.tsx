@@ -165,9 +165,13 @@ export default function AllergySelector({
           No
         </PillButton>
       </div>
-      {attemptedNext && showError && (
+      <div className="overflow-hidden transition-[max-height,opacity] duration-200 ease-in-out" 
+           style={{ 
+             maxHeight: (attemptedNext && showError) ? '50px' : '0',
+             opacity: (attemptedNext && showError) ? 1 : 0 
+           }}>
         <p className="text-red my-4">Please select or input any allergies</p>
-      )}
+      </div>
       {allergiesData?.true && (
         <>
           <div className="mt-4 grid w-full grid-cols-1 gap-6 sm:grid-cols-4">
