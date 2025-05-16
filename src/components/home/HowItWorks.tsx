@@ -6,7 +6,7 @@ import HowItWorksCard from './HowItWorksCard';
 function HowItWorks() {
   return (
     <div className="bg-pink-pastel justify-items-center">
-      <div className="flex flex-col py-10 lg:py-20 w-full max-w-lg md:max-w-screen-xl px-10">
+      <div className="flex flex-col py-10 lg:py-20 w-full max-w-lg lg:max-w-none px-10">
         <h2 className="text-primary mb-5 flex place-content-center text-3xl">
           How it works
         </h2>

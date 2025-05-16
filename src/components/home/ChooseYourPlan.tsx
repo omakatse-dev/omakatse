@@ -10,7 +10,7 @@ function ChooseYourPlan() {
 
   return (
     <div className="justify-items-center bg-gray-200">
-      <div className="flex w-full max-w-lg flex-col items-center gap-8 py-15 sm:max-w-screen-2xl lg:gap-10 lg:py-20">
+      <div className="flex w-full max-w-lg lg:max-w-none flex-col items-center gap-8 py-15  lg:gap-10 lg:py-20">
         <h2 className="text-primary text-center">Choose your plan</h2>
 
         <div className="w-full rounded-[2.5rem] px-10 sm:w-fit">
@@ -22,7 +22,7 @@ function ChooseYourPlan() {
           />
         </div>
 
-        <div className="flex w-full max-w-lg md:max-w-none flex-col gap-8 px-10 lg:flex-row">
+        <div className="flex w-full max-w-lg sm:max-w-none flex-col gap-8 px-10 lg:flex-row">
           <PricingCard
             title="1 Month"
             price={prices[selectedTab as 'Small Box' | 'Large Box'][0]}
