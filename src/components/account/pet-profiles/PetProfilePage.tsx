@@ -47,7 +47,7 @@ export default function PetProfilePage({
       <h2 className="text-primary hidden lg:block">Pet Profiles</h2>
       {contracts.length > 0 ? (
         <div className="flex max-w-3xl flex-col gap-8">
-          <div className="bodyMD text-center sm:-mt-8 sm:text-start">
+          <div className="bodyMD text-center sm:-mt-4 sm:text-start">
             Here are your current pets that are subscribed to our box:
           </div>
           <Suspense fallback={<div>Loading...</div>}>
