@@ -87,6 +87,7 @@ export default function SubscriptionStepSixPage() {
               name={cat.name}
               petType="catsDetails"
               petIndex={idx}
+              showValidationError={showError}
             />
           ))}
           {dogs.map((dog, idx) => (
@@ -96,6 +97,7 @@ export default function SubscriptionStepSixPage() {
               petType="dogsDetails"
               petIndex={idx}
               catCount={cats.length}
+              showValidationError={showError}
             />
           ))}
         </div>
@@ -108,14 +110,14 @@ export default function SubscriptionStepSixPage() {
             className="row-start-2 w-full sm:row-auto"
           >
             Previous
-        </Button>
+          </Button>
           <Button onClick={submitHandler} className="w-full">
             Next
           </Button>
         </div>
         {showError && (
           <div className="bodyMD text-red">
-            Please fill in all required fields for each pet before proceeding
+            Please complete all required fields
           </div>
         )}
       </form>

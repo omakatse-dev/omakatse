@@ -111,7 +111,7 @@ export default function SizeSelector({
               <CardButton
                 onClick={() => selectSizeHandler(field, 'skinny')}
                 active={field.value === 'skinny'}
-                className="flex w-full items-center justify-center sm:flex-col gap-x-6"
+                className="flex w-full items-center justify-center gap-x-4 sm:flex-col"
               >
                 <Image
                   src={type === 'Cat' ? cat : dog}
@@ -125,14 +125,14 @@ export default function SizeSelector({
               <CardButton
                 onClick={() => selectSizeHandler(field, 'just right')}
                 active={field.value === 'just right'}
-                className="flex w-full items-center justify-center sm:flex-col gap-x-4"
+                className="flex w-full items-center justify-center gap-x-2 sm:flex-col"
               >
                 <Image
                   src={type === 'Cat' ? cat : dog}
                   alt="Just Right"
                   width={100}
                   height={100}
-                  className="scale-90"
+                  className="scale-80"
                 />
                 <div className="w-fit sm:w-full">Medium</div>
               </CardButton>
@@ -146,7 +146,7 @@ export default function SizeSelector({
                   alt="Chubby"
                   width={100}
                   height={100}
-                  className="scale-120"
+                  className=""
                 />
 
                 <div className="w-fit sm:w-full">Large</div>

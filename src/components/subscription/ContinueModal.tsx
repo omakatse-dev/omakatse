@@ -9,6 +9,7 @@ export default function ContinueModal({ close }: { close: () => void }) {
   const restartHandler = () => {
     clearData();
     close();
+    localStorage.removeItem('latestStep');
     router.push('/subscribe/step-1');
     // Force a page reload to clear any cached state
     // window.location.reload();

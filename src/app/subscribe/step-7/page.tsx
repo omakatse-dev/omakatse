@@ -24,14 +24,32 @@ export default function SubscriptionStepSevenPage() {
   const storedDogCount = useSubscriptionFormStore((state) => state.dogCount);
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const hydrated = useSubscriptionFormStore((state) => state.hydrated);
+  const [_, setMissingPets] = useState<string[]>([]);
+  const [showValidation, setShowValidation] = useState(false);
 
   const submitHandler = () => {
-    const catTreats = cats.every((cat) => cat.treatFrequency);
-    const dogTreats = dogs.every((dog) => dog.treatFrequency);
-    if (!catTreats || !dogTreats) {
+    setShowValidation(true);
+
+    const missingTreats: string[] = [];
+
+    cats.forEach((cat) => {
+      if (!cat.treatFrequency) {
+        missingTreats.push(cat.name);
+      }
+    });
+
+    dogs.forEach((dog) => {
+      if (!dog.treatFrequency) {
+        missingTreats.push(dog.name);
+      }
+    });
+
+    if (missingTreats.length > 0) {
+      setMissingPets(missingTreats);
       setShowError(true);
       return;
     }
+
     localStorage.setItem('latestStep', 'step-8');
     router.push('/subscribe/step-8');
   };
@@ -61,31 +79,16 @@ export default function SubscriptionStepSevenPage() {
           Add any must-knows or special notes for your pets.
         </div>
       </div>
-      <div className="mx-auto w-full max-w-3xl flex flex-wrap justify-center gap-8">
+      <div className="mx-auto flex w-full max-w-3xl flex-wrap justify-center gap-8">
         {cats.map((cat, idx) => (
           <TreatPreferenceCard
             key={cat.name}
             petType="catsDetails"
             petIndex={idx}
             name={cat.name}
+            showValidation={showValidation}
           />
         ))}
-        {/* {cats.map((cat, idx) => (
-          <TreatPreferenceCard
-            key={cat.name}
-            petType="catsDetails"
-            petIndex={idx}
-            name={cat.name}
-          />
-        ))}
-        {cats.map((cat, idx) => (
-          <TreatPreferenceCard
-            key={cat.name}
-            petType="catsDetails"
-            petIndex={idx}
-            name={cat.name}
-          />
-        ))} */}
         {dogs.map((dog, idx) => (
           <TreatPreferenceCard
             key={dog.name}
@@ -93,27 +96,30 @@ export default function SubscriptionStepSevenPage() {
             petIndex={idx}
             name={dog.name}
             catCount={cats.length}
+            showValidation={showValidation}
           />
         ))}
       </div>
-      <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
-        <Button
-          onClick={() => router.push('/subscribe/step-6')}
-          variant="secondary"
-          bgColor="bg-blue-pastel"
-          className="row-start-2 w-full sm:row-auto"
-        >
-          Previous
-        </Button>
-        <Button onClick={submitHandler} className="w-full">
-          Next
-        </Button>
-      </div>
-      {showError && (
-        <div className="bodyMD text-red">
-          Please fill in all required fields for each pet before proceeding
+      <div className='flex flex-col w-full gap-2'>
+        <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
+          <Button
+            onClick={() => router.push('/subscribe/step-6')}
+            variant="secondary"
+            bgColor="bg-blue-pastel"
+            className="row-start-2 w-full sm:row-auto"
+          >
+            Previous
+          </Button>
+          <Button onClick={submitHandler} className="w-full">
+            Next
+          </Button>
         </div>
-      )}
+        {showError && (
+          <div className="bodyMD text-red text-center">
+            Please complete all required fields
+          </div>
+        )}
+      </div>
     </div>
   );
 }

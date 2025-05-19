@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CardButton from '../common/CardButton';
 import Card from '../common/Card';
 import PillButton from '../common/PillButton';
@@ -101,14 +101,15 @@ export default function FoodPreferenceSelector({
   name,
   petType,
   petIndex,
-  catCount = 0
+  catCount = 0,
+  showValidationError = false
 }: {
   name: string;
   petType: 'catsDetails' | 'dogsDetails';
   petIndex: number;
   catCount?: number;
+  showValidationError?: boolean;
 }) {
-  const [showError, setShowError] = useState(false);
   const petDetails = useSubscriptionFormStore(
     (state) => state[petType]?.[Number(petIndex)]
   );
@@ -121,7 +122,6 @@ export default function FoodPreferenceSelector({
     (preferencesData.true && preferencesData.preferences.length > 0);
 
   const updateFoodPreferences = (newFoodPreferences: FoodPreferenceData) => {
-    setShowError(false); // Reset error when making changes
     const pets = useSubscriptionFormStore.getState()[petType] || [];
     const newPets = [...pets];
     newPets[Number(petIndex)] = {
@@ -130,13 +130,6 @@ export default function FoodPreferenceSelector({
     };
     setData({ [petType]: newPets });
   };
-
-  // Show error if Yes is selected but no preferences are chosen
-  useEffect(() => {
-    if (preferencesData?.true && preferencesData.preferences.length === 0) {
-      setShowError(true);
-    }
-  }, [preferencesData]);
 
   const options = petType === 'catsDetails' ? CAT_OPTIONS : DOG_OPTIONS;
 
@@ -168,7 +161,6 @@ export default function FoodPreferenceSelector({
             active={preferencesData?.true === true}
             onClick={() => {
               updateFoodPreferences({ preferences: [], true: true });
-              setShowError(true); // Show error when Yes is selected
             }}
             className="w-1/2 sm:w-fit"
           >
@@ -190,7 +182,7 @@ export default function FoodPreferenceSelector({
         </div>
         {preferencesData?.true && (
           <>
-            {showError && !hasValidPreferences && (
+            {showValidationError && !hasValidPreferences && (
               <p className="my-4 text-red">
                 Please select or input any preference
               </p>

@@ -106,7 +106,7 @@ export default function SubscriptionStepThreePage() {
       </div>
       {showError && (
         <p className="bodyMD text-red-500 text-center">
-          Please fill in all required fields for each pet before proceeding
+          Please complete all required fields
         </p>
       )}
     </div>

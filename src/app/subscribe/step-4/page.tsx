@@ -110,7 +110,7 @@ export default function SubscriptionStepFourPage() {
         </div>
         {showError && (
           <div className="bodyMD text-red">
-            Please fill in all required fields for each pet before proceeding
+            Please complete all required fiellds
           </div>
         )}
       </form>
