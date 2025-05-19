@@ -183,7 +183,7 @@ export default function FoodPreferenceSelector({
         {preferencesData?.true && (
           <>
             {showValidationError && !hasValidPreferences && (
-              <p className="my-4 text-red">
+              <p className="text-red my-4">
                 Please select or input any preference
               </p>
             )}
@@ -206,16 +206,18 @@ export default function FoodPreferenceSelector({
                         preferences
                       });
                     }}
-                    className="flex w-full items-center justify-center gap-2 sm:flex-col"
+                    className="flex w-full items-center justify-center gap-3 sm:flex-col"
                   >
-                    <Image
-                      src={option.image}
-                      alt={option.name}
-                      width={24}
-                      height={24}
-                      className="h-12 w-12 sm:h-24 sm:w-24"
-                    />
-                    <div>{option.name}</div>
+                    <div className='w-1/2 flex justify-end'>
+                      <Image
+                        src={option.image}
+                        alt={option.name}
+                        width={24}
+                        height={24}
+                        className="h-12 w-12 sm:h-24 sm:w-24"
+                      />
+                    </div>
+                    <div className='w-1/2 flex justify-start sm:justify-center'>{option.name}</div>
                   </CardButton>
                 ))}
               </div>

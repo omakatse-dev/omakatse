@@ -119,15 +119,14 @@ export default function AllergySelector({
     petType === 'catsDetails' ? [...CAT_ALLERGIES] : [...DOG_ALLERGIES];
 
   // Validation logic
-  const noSelection = allergiesData === undefined;
   const yesButNoAllergies =
     allergiesData?.true && allergiesData.allergies.length === 0;
 
-  const showError = attemptedNext && (noSelection || yesButNoAllergies);
+  const showError = attemptedNext && yesButNoAllergies;
 
   return (
     <Card
-      className="flex w-full flex-col items-center h-fit"
+      className="flex h-fit w-full flex-col items-center"
       variant={variantMapping[(idx + catCount) as keyof typeof variantMapping]}
     >
       <div className="flex items-center justify-center gap-2 sm:flex-col sm:gap-0">
@@ -165,11 +164,13 @@ export default function AllergySelector({
           No
         </PillButton>
       </div>
-      <div className="overflow-hidden transition-[max-height,opacity] duration-200 ease-in-out" 
-           style={{ 
-             maxHeight: (attemptedNext && showError) ? '50px' : '0',
-             opacity: (attemptedNext && showError) ? 1 : 0 
-           }}>
+      <div
+        className="overflow-hidden transition-[max-height,opacity] duration-200 ease-in-out"
+        style={{
+          maxHeight: attemptedNext && showError ? '50px' : '0',
+          opacity: attemptedNext && showError ? 1 : 0
+        }}
+      >
         <p className="text-red my-4">Please select or input any allergies</p>
       </div>
       {allergiesData?.true && (
@@ -177,7 +178,7 @@ export default function AllergySelector({
           <div className="mt-4 grid w-full grid-cols-1 gap-6 sm:grid-cols-4">
             {allergies.map((allergy) => (
               <CardButton
-                className="flex w-full items-center justify-center gap-2 sm:flex-col"
+                className="flex w-full items-center justify-center gap-3 sm:flex-col"
                 key={allergy}
                 active={allergiesData.allergies.includes(allergy)}
                 onClick={() => {
@@ -187,14 +188,16 @@ export default function AllergySelector({
                   updateAllergies({ ...allergiesData, allergies });
                 }}
               >
-                <Image
-                  src={allergyImageMapping[allergy]}
-                  alt={allergy}
-                  width={24}
-                  height={24}
-                  className="h-12 w-12 sm:h-24 sm:w-24"
-                />
-                <div>{allergy}</div>
+                <div className='w-1/2 flex justify-end'>
+                  <Image
+                    src={allergyImageMapping[allergy]}
+                    alt={allergy}
+                    width={24}
+                    height={24}
+                    className="h-12 w-12 sm:h-24 sm:w-24"
+                  />
+                </div>
+                <div className='w-1/2 flex justify-start sm:justify-center'>{allergy}</div>
               </CardButton>
             ))}
           </div>

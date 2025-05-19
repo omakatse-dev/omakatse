@@ -25,10 +25,10 @@ export default function SubscriptionStepSevenPage() {
   const storedCatCount = useSubscriptionFormStore((state) => state.catCount);
   const hydrated = useSubscriptionFormStore((state) => state.hydrated);
   const [_, setMissingPets] = useState<string[]>([]);
-  const [showValidation, setShowValidation] = useState(false);
+  // const [showValidation, setShowValidation] = useState(false);
 
   const submitHandler = () => {
-    setShowValidation(true);
+    // setShowValidation(true);
 
     const missingTreats: string[] = [];
 
@@ -86,7 +86,7 @@ export default function SubscriptionStepSevenPage() {
             petType="catsDetails"
             petIndex={idx}
             name={cat.name}
-            showValidation={showValidation}
+            // showValidation={showValidation}
           />
         ))}
         {dogs.map((dog, idx) => (
@@ -96,7 +96,7 @@ export default function SubscriptionStepSevenPage() {
             petIndex={idx}
             name={dog.name}
             catCount={cats.length}
-            showValidation={showValidation}
+            // showValidation={showValidation}
           />
         ))}
       </div>

@@ -54,7 +54,7 @@ export default function TreatPreferenceCard({
   petType,
   petIndex,
   catCount = 0,
-  showValidation = false,
+  // showValidation = false,
 }: Props) {
   const options = [
     { id: 0, name: "None (No treats or snacks)", frequency: "none" },
@@ -125,11 +125,11 @@ export default function TreatPreferenceCard({
               })
             }
           />
-          {showValidation && !treatFrequency?.frequency && (
+          {/* {showValidation && !treatFrequency?.frequency && (
             <div className="text-red text-sm mt-1">
               Please select an option
             </div>
-          )}
+          )} */}
         </div>
         <TreatPreferenceSelector
           preferences={treatFrequency?.preferences || []}
