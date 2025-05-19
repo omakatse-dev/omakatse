@@ -100,7 +100,7 @@ export default function SubscriptionStepSevenPage() {
           />
         ))}
       </div>
-      <div className='flex flex-col w-full gap-2'>
+      <div className='flex flex-col w-full gap-2 items-center'>
         <div className="grid w-full grid-cols-1 gap-5 sm:w-fit sm:grid-cols-2">
           <Button
             onClick={() => router.push('/subscribe/step-6')}
