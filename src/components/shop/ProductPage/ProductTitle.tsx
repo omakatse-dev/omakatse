@@ -63,7 +63,6 @@ export default function ProductTitle({
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
-    console.log(selectedOptions);
     const item = useCartStore
       .getState()
       .items.find((item) => item.id === selectedVariant?.id);
@@ -99,7 +98,6 @@ export default function ProductTitle({
   const getTagColor = (tag: string) => {
     return tagColorMapping[tag as keyof typeof tagColorMapping] || 'bg-pink';
   };
-  console.log(selectedVariant?.quantityAvailable);
   return (
     <>
       <div className={`flex flex-col px-6 md:w-1/2 md:p-0 w-full ${className}`}>

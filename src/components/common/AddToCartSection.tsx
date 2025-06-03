@@ -40,9 +40,8 @@ export default function AddToCartSection({
 
   const addToCartHandler = () => {
     // if item is already in cart, update the quantity
-    console.log(selectedVariant);
-    const items = useCartStore.getState().items;
-    console.log(items);
+    // const items = useCartStore.getState().items;
+    // console.log(items);
     const item = useCartStore
       .getState()
       .items.find((item) => item.id === selectedVariant?.id);

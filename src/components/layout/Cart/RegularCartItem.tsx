@@ -41,9 +41,9 @@ export default function RegularCartItem({ item }: { item: CartItemType }) {
             count={item.quantity}
             setCount={handleQuantityChange}
             min={1}
-            className="max-w-40"
+            className="max-w-32 sm:max-w-40"
           />
-          <div className="bodyLG">
+          <div className="bodyLG text-center">
             {item.compareAtPrice && (
               <div className="text-gray-500 line-through">
                 AED{' '}

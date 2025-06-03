@@ -20,7 +20,6 @@ function EditPetPage() {
   useEffect(() => {
     const fetchPetDetails = async () => {
       const petDetails = await getPetsByContractId(contractId);
-      console.log(petDetails);
       setExistingDetails(JSON.parse(petDetails[0].pets)[petIndex]);
     };
     fetchPetDetails();

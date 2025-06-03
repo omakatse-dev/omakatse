@@ -30,7 +30,7 @@ export default function Cart({
   const regularItems = cartItems.filter(
     (item) => !item.name.includes("Subscription")
   );
-  const createCartHandler = async () => {
+const createCartHandler = async () => {
     const formattedRegularItems = regularItems.map((item) => ({
       merchandiseId: item.id,
       quantity: item.quantity,

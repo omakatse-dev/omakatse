@@ -59,8 +59,8 @@ export default function ContactForm() {
 
   const onSubmit = async (data: ContactFormData) => {
     setStatus("loading");
-    const res = await sendContactForm(data);
-    console.log(res);
+    await sendContactForm(data);
+    
     setStatus("success");
     setTimeout(() => {
       setStatus("idle");

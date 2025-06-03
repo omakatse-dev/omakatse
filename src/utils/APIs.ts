@@ -395,7 +395,6 @@ export const uploadReviewImage = async (
     }),
     }
   );
-  console.log(res)
   const data = await res.json();
   if (!res.ok) {
     throw new Error("Error uploading image" + data.msg);
@@ -495,7 +494,6 @@ export const getContracts = async () => {
       }
     }`;
   const res = await adminClient.request(query);
-  console.log(res.errors?.graphQLErrors);
   return res.data;
 };
 
@@ -575,9 +573,7 @@ export const createCustomer = async (email: string) => {
     }
   `;
   const response = await adminClient.request(mutation);
-  console.log("Shopify GraphQL Response:", response.errors?.graphQLErrors);
   const customerCreateResult = response?.data?.customerCreate;
-  console.log("Customer Creation Result:", customerCreateResult);
 
   if (customerCreateResult && customerCreateResult.customer) {
     return {

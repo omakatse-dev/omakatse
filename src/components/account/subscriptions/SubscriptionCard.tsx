@@ -22,11 +22,7 @@ export default function SubscriptionCard({
   const pets = JSON.parse(subscription.pets);
   const dogs = pets.filter((pet: PetType) => pet.type === 'Dog');
   const cats = pets.filter((pet: PetType) => pet.type === 'Cat');
-  console.log(
-    subscription.boxIds
-      ? subscription.boxIds?.split(',').length % subscription.planDuration
-      : 0
-  );
+  
   const contractId = subscription.contractId;
 
   const router = useRouter();

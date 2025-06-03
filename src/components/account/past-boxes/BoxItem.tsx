@@ -24,7 +24,6 @@ export default function BoxItem({
       const res = await getProductByVariantId(
         "gid://shopify/ProductVariant/" + item.variantId
       );
-      console.log(res.node.product.tags);
       setProduct(res.node);
       const reviews = await getReviewByProductID(
         res.node.product.id.split("/").pop() || ""
@@ -34,7 +33,6 @@ export default function BoxItem({
           (acc: number, review: Review) => acc + review.rating,
           0
         ) / reviews.reviews.length;
-      console.log(rating);
       if (isNaN(rating)) {
         setRatings(0);
       } else {

@@ -36,8 +36,6 @@ const MoreBlogsSection: React.FC<MoreBlogsSectionProps> = ({
 
       try {
         const allBlogPosts = await getAllBlogPosts();
-        console.log(allBlogPosts);
-        console.log(currentBlogId);
         if (allBlogPosts && allBlogPosts.items) {
           const otherBlogs = allBlogPosts.items.filter(
             (blog) => blog.fields.blogId.toString() !== currentBlogId

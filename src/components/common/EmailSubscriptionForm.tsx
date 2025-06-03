@@ -20,8 +20,7 @@ export default function EmailSubscriptionForm() {
     setIsLoading(true);
     setMessage("");
     try {
-      const result = await createCustomer(email);
-      console.log(result);
+      await createCustomer(email);
       setMessage("Thank you for subscribing!");
       setEmail("");
       setIsSubscribed(true);

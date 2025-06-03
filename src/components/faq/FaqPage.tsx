@@ -69,7 +69,7 @@ export default function Page({
   return (
     <div className="relative flex w-full max-w-5xl flex-col items-center justify-between md:flex-row md:gap-20">
       {/* Desktop Sidebar Navigation */}
-      <div className="sticky top-40 mt-6 hidden w-fit flex-col gap-4 self-start md:flex">
+      <div className="sticky top-40 mt-6 mb-8 hidden w-fit flex-col gap-4 self-start md:flex">
         {categories.map((category) => (
           <button
             key={category.toString()}
@@ -131,7 +131,7 @@ export default function Page({
       </Disclosure>
 
       {/* FAQ List */}
-      <div className="mt-6 mb-32 flex w-full max-w-[800px] flex-col items-center gap-8">
+      <div className="mt-6 flex w-full max-w-[800px] flex-col items-center gap-8">
         {Object.entries(groupedFaqs).map(([category, faqList]) => (
           <div
             key={category}

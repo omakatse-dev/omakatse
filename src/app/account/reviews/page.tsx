@@ -26,7 +26,6 @@ export default async function AccountReviewsPage() {
   const regularItems = items.filter(
     (item) => !item.name.includes('Subscription')
   );
-  console.log(regularItems)
   const writtenReviews = await getReviewsByAuthor(user.email);
 
   return (
